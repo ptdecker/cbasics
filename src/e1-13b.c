@@ -1,3 +1,7 @@
+/*
+ * Print a horizontal histogram of word lengths
+ */
+
 #include <stdio.h>
 
 #define MAXLEN   70  /* maximum word length to keep track of */
@@ -7,142 +11,161 @@
 #define COUNTWRD  2  /* counting word lengths state */
 #define CONTRACT  3  /* handling a contraction state */
 
-/* print a horizontal histogram of word lengths */
+int main() {
 
-main() {
+    /* initialize word length array */
 
-	int c, over, nc, i, j, state, max, scale, width;
-	int nlen[MAXLEN];
+    int nlen[MAXLEN];
+    for (int i = 0; i < MAXLEN; ++i) {
+	nlen[i] = 0;
+    }
 
-	/* initialize word length array */
+    /* count word lengths using a finite state machine */
 
-	for (i = 0; i < MAXLEN; ++i)
-		nlen[i] = 0;
+    int c;
+    int nc = 0;
+    int over = 0;
+    int state = NONWORD;
+    
+    while (1) {
 
-	/* count word lengths using a finite state machine */
+	/* get character or EOF */
 
-	nc = over = 0;
-	state = NONWORD;
-	while (1) {
+	c = getchar();
 
-		/* get character or EOF */
+	/* convert uppercase characters to lowercase */
 
-		c = getchar();
-
-		/* convert uppercase characters to lowercase */
-
-		if ('A' <= c && c <= 'Z')
-			c = c - 'A' + 'a';
-
-		/* handle state transitions */
-
-		if (c == EOF)
-			state = EOF;
-		else if (state == NONWORD && 'a' <= c && c <= 'z')
-			state = COUNTLTR;
-		else if (state == NONWORD && (c < 'a' || 'z' < c))
-			state = NONWORD;
-		else if (state == COUNTLTR && 'a' <= c && c <= 'z')
-			state = COUNTLTR;
-		else if (state == COUNTWRD && 'a' <= c && c <= 'z')
-			state = COUNTLTR;
-		else if (state == CONTRACT && 'a' <= c && c <= 'z')
-			state = COUNTLTR;
-		else if (state == COUNTLTR && (c < 'a' || 'z' < c))
-			state = COUNTWRD;
-		else if (state == CONTRACT && (c < 'a' || 'z' < c))
-			state = COUNTWRD;
-		else if (state == COUNTLTR && c == '\'')
-			state = CONTRACT;
-		else if (state == COUNTWRD && (c < 'a' || 'z' < c))
-			state = NONWORD;
-
-		/* handle current state */
-
-		if (state == COUNTLTR)
-			++nc;
-		else if (state == COUNTWRD || state == EOF) {
-			if (nc <= MAXLEN)
-				++nlen[(nc-1)];
-			else
-				++over;
-			nc = 0;
-			if (state == EOF)
-				break;
-		}
-
+	if ('A' <= c && c <= 'Z') {
+	    c = c - 'A' + 'a';
 	}
 
-	/* determine maximum words (including overflow) */
+	/* handle state transitions */
 
-	max = 0;
-	for (i = 0; i < MAXLEN; ++i)
-		if (nlen[i] > max)
-			max = nlen[i];
-	if (over > max)
-		max = over;
-
-	/* determine scale */
-
-	scale = 1;
-	if (max > MAXBAR) {
-		scale = (max / MAXBAR);
-		if (max / scale > MAXBAR)
-			++scale;
+        if (c == EOF) {
+	    state = EOF;
+	} else if (state == NONWORD && 'a' <= c && c <= 'z') {
+	    state = COUNTLTR;
+	} else if (state == NONWORD && (c < 'a' || 'z' < c)) {
+	    state = NONWORD;
+	} else if (state == COUNTLTR && 'a' <= c && c <= 'z') {
+	    state = COUNTLTR;
+	} else if (state == COUNTWRD && 'a' <= c && c <= 'z') {
+	    state = COUNTLTR;
+	} else if (state == CONTRACT && 'a' <= c && c <= 'z') {
+	    state = COUNTLTR;
+        } else if (state == COUNTLTR && (c < 'a' || 'z' < c)) {
+	    state = COUNTWRD;
+	} else if (state == CONTRACT && (c < 'a' || 'z' < c)) {
+	    state = COUNTWRD;
+	} else if (state == COUNTLTR && c == '\'') {
+	    state = CONTRACT;
+	} else if (state == COUNTWRD && (c < 'a' || 'z' < c)) {
+	    state = NONWORD;
 	}
 
-	/* Find width */
+	/* handle current state */
 
-	if (over > 0)
-		width = MAXLEN;
-	else {
-		width = 0;
-		for (j = 0; j < MAXLEN; ++j)
-			if (nlen[j] > 0)
-				width = (j + 1);
+	if (state == COUNTLTR) {
+	    ++nc;
+	} else if (state == COUNTWRD || state == EOF) {
+	    if (nc <= MAXLEN) {
+		++nlen[(nc-1)];
+	    } else {
+		++over;
+	    }
+	    nc = 0;
+	    if (state == EOF) {
+		break;
+	    }
 	}
 
+    }
+
+    /* determine maximum words (including overflow) */
+
+    int max = 0;
+    for (int i = 0; i < MAXLEN; ++i) {
+	if (nlen[i] > max) {
+	    max = nlen[i];
+	}
+    }
+    if (over > max) {
+	max = over;
+    }
+
+    /* determine scale */
+
+    int scale = 1;
+    if (max > MAXBAR) {
+	scale = (max / MAXBAR);
+	if (max / scale > MAXBAR) {
+	    ++scale;
+	}
+    }
+
+    /* Find width */
+
+    int width = 0;
+    if (over > 0) {
+	width = MAXLEN;
+    } else {
+	for (int j = 0; j < MAXLEN; ++j) {
+	    if (nlen[j] > 0) {
+		width = (j + 1);
+	    }
+        }
+    }
 
      /* Print scaled vertical histogram */
 
-	for (i = (max / scale) - 1; i >= 0; --i) {
-		for (j = 0; j < width; ++j)
-			if (i < (nlen[j] / scale))
-				printf("*");
-			else
-				printf(" ");
-		if (i < (over / scale))
-			printf("*");
-		else
-			printf(" ");
-		printf("\n");
+    for (int i = (max / scale) - 1; i >= 0; --i) {
+	for (int j = 0; j < width; ++j) {
+	    if (i < (nlen[j] / scale)) {
+		printf("*");
+	    } else {
+		printf(" ");
+	    }
+        }
+	if (i < (over / scale)) {
+	    printf("*");
+	} else {
+	    printf(" ");
 	}
+	printf("\n");
+    }
 
      /* Print vertical axis labels */
 
-	for (i = 1; i <= width; ++i)
-		printf("%d", (i / 10) % 10);
-	if (over > 0)
-		printf("%d", (MAXLEN / 10) % 10);
-	printf("\n");
+    for (int i = 1; i <= width; ++i) {
+	printf("%d", (i / 10) % 10);
+    }
+    if (over > 0) {
+	printf("%d", (MAXLEN / 10) % 10);
+    }
+    printf("\n");
 
-	for (i = 1; i <= width; ++i)
-		printf("%d", i % 10);
-	if (over > 0)
-		printf("%d", MAXLEN % 10);
-	printf("\n");
+    for (int i = 1; i <= width; ++i) {
+	printf("%d", i % 10);
+    }
+    if (over > 0) {
+	printf("%d", MAXLEN % 10);
+    }
+    printf("\n");
 
-	for (i = 1; i <= width; ++i)
-		printf(" ");
-	if (over > 0)
-		printf("+");
-	printf("\n");
+    for (int i = 1; i <= width; ++i) {
+	printf(" ");
+    }
+    if (over > 0) {
+	printf("+");
+    }
+    printf("\n");
 
-	/* print scale (with proper pluralization) */
+    /* print scale (with proper pluralization) */
 
-	printf("\n'*' = %d word", scale);
-	if (scale > 1)
-		printf("s");
-	printf("\n");
+    printf("\n'*' = %d word", scale);
+    if (scale > 1) {
+	printf("s");
+    }
+    printf("\n");
 
 }

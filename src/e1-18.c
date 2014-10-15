@@ -1,3 +1,7 @@
+/*
+ * Remove trailing blanks and tabs from each line of inputh (up to MAXLINE characters)
+ */
+
 #include <stdio.h>
 
 #define MAXLINE 1000 /* Note: MAXLINE includes terminating newline and null characters */
@@ -6,16 +10,18 @@
 
 int getbigline(char line[], int maxline);
 
-/* Remove trailing blanks and tabs from each line of inputh (up to MAXLINE characters) */
+/* Main */
 
-main() {
+int main() {
 
-	char	line[MAXLINE];
+	char line[MAXLINE];
+
 	int	len = 0;
-
-	while ((len = getbigline(line, MAXLINE)) > 0)
-		if (len > BIGLINE)
+	while ((len = getbigline(line, MAXLINE)) > 0) {
+		if (len > MAXLINE) {
 			printf("%s", line);
+		}
+	}
 }
 
 /* getbigline: read an aribitrarily long line placing as much as
@@ -24,18 +30,19 @@ main() {
 
 int getbigline(char s[], int lim) {
 
-	int c, len, slen;
+	int c;
+	int len = 0;
+	int slen = 0;
 
-	len = slen = 0;
 	while ((c = getchar()) != EOF && c != '\n') {
-		if (slen < (lim - 2))
+		if (slen < (lim - 2)) {
 			s[slen++] = c;
+		}
 		++len;
 	}
 
 	s[slen++] = '\n';
 	s[slen] = '\0';
 
-	return len;
-	
+	return len;	
 }

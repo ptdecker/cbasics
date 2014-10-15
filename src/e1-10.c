@@ -1,26 +1,23 @@
+/*
+ * Show tabs, backspaces, and backslashes
+ */
+
 #include <stdio.h>
 
-/* replace tabs, backspaces, and backslashes with '\t', '\b', '\\' */
-
-main () {
+int main () {
 
    int c;
 
    while ((c = getchar()) != EOF) {
-
       if (c == '\t') {
-          putchar('\\');
-          putchar('t');
+          printf("\\t");
       } else if (c == '\b') {
-          putchar('\\');
-          putchar('b');
+          printf("\\b");
       } else if (c == '\\') {
-          putchar('\\');
-          putchar('\\');
+          printf("\\\\");
       } else {
           putchar(c);
       }
-
    }
 
 }

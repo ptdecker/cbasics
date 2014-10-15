@@ -1,18 +1,18 @@
+/*
+ * Colapse two or more blanks with a single blank
+ */
+
 #include <stdio.h>
 
-/* replace two or more blanks with a single blank */
+#define IN  1 /* inside a set of blanks */
+#define OUT 0 /* outside a set of blanks */
 
-main () {
-
-   #define IN  1 /* inside a set of blanks */
-   #define OUT 0 /* outside a set of blanks */
+int main () {
 
    int c;
-   int state;
+   int state = OUT;
 
-   state = OUT;
    while ((c = getchar()) != EOF) {
-
       if (c != ' ') {
          state = OUT;
          putchar(c);

@@ -1,13 +1,16 @@
+/*
+ * Print Fahrenheit-Celsius table using a function
+ */
+
 #include <stdio.h>
 
 /* Function prototypes */
 
 int ftoc(int ftemp);
 
-/* print Fahrenheit-Celsius table
-   for fahr = 0, 20, ..., 300 */
+/* Main */
 
-void main() {
+int main() {
 
 	int fahr;
 	int lower = 0;   /* lower limit of temperature table */
@@ -22,7 +25,5 @@ void main() {
 /* Fahrenheit-Celsius conversion */
 
 int ftoc(int ftemp) {
-
 	return 5 * (ftemp - 32) / 9;
-
 }
