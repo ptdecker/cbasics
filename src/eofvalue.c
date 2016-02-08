@@ -1,5 +1,5 @@
 /*
- * Determine the value of EOF 
+ * Determine the value of EOF
  */
 
 #include <stdio.h>

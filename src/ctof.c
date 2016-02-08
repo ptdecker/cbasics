@@ -5,19 +5,19 @@
 
 #include <stdio.h>
 
-int main() {
+ int main() {
 
-   double fahr;
-   double celsius;
-   int    lower =   0;  // lower limit of temperature table
-   int    upper = 300;  // upper limit
-   int    step  =  20;  // step size
+  double fahr;
+  double celsius;
+    int    lower =   0;  // lower limit of temperature table
+    int    upper = 300;  // upper limit
+    int    step  =  20;  // step size
 
-   celsius = lower;
-   printf("Celsius\t\tFahrenheit\n");
-   while (celsius <= upper) {
-      fahr = (9.0 * celsius) / 5.0 + 32.0;
-      printf("%3.0f\t\t%6.1f\n", celsius, fahr);
-      celsius = celsius + step;
-   }
-}
+    celsius = lower;
+    printf("Celsius\t\tFahrenheit\n");
+    while (celsius <= upper) {
+        fahr = (9.0 * celsius) / 5.0 + 32.0;
+        printf("%3.0f\t\t%6.1f\n", celsius, fahr);
+        celsius = celsius + step;
+    }
+ }

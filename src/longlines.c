@@ -15,14 +15,13 @@ int getbigline(char line[], int maxline);
 
 int main() {
 
-	char line[MAXLINE];
+    char line[MAXLINE];
 
-	int	len = 0;
-	while ((len = getbigline(line, MAXLINE)) > 0) {
-		if (len > BIGLINE) {
-			printf("%s", line);
-		}
-	}
+    int len = 0;
+    while ((len = getbigline(line, MAXLINE)) > 0)
+        if (len > BIGLINE)
+            printf("%s", line);
+
 }
 
 /* getbigline: read an aribitrarily long line placing as much as
@@ -31,19 +30,18 @@ int main() {
 
 int getbigline(char s[], int lim) {
 
-	int c;
-	int len = 0;
-	int slen = 0;
+    int c;
+    int len = 0;
+    int slen = 0;
 
-	while ((c = getchar()) != EOF && c != '\n') {
-		if (slen < (lim - 2)) {
-			s[slen++] = c;
-		}
-		++len;
-	}
+    while ((c = getchar()) != EOF && c != '\n') {
+        if (slen < (lim - 2))
+            s[slen++] = c;
+        ++len;
+    }
 
-	s[slen++] = '\n';
-	s[slen] = '\0';
+    s[slen++] = '\n';
+    s[slen] = '\0';
 
-	return len;	
+    return len;
 }

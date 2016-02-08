@@ -1,21 +1,29 @@
+/*
+ * testupcase.c
+ *
+ * Tests an approach to converting uppercase characters to lowercase
+ */
+
 #include <stdio.h>
 
-main() {
+int main() {
 
-	int i, c;
+    int i, c;
 
-	for (i = 32; i < 127; ++i) {
-		c = i;
+    i = 0;
+    for (c = 32; c < 127; ++c) {
+        i++;
 
-		/* convert uppercase to lowercase */
+        /* convert uppercase to lowercase */
 
-		if ('A' <= c && c <= 'Z')
-			c = c - 'A' + 'a';
+        if ('A' <= c && c <= 'Z')
+            c = c - 'A' + 'a';
 
 
-		putchar(c);
-		if (i % 16 == 0)
-			putchar('\n');
-	}
+        putchar(c);
+        if (i % 16 == 0)
+            putchar('\n');
+    }
 
+    putchar('\n');
 }

@@ -6,12 +6,12 @@
 
 int main() {
 
-   int c;
-   int blanks = 0;
-   int tabs = 0;
-   int nl = 0;
+    int c;
+    int blanks = 0;
+    int tabs   = 0;
+    int nl     = 0;
 
-   while ((c = getchar()) != EOF) {
+    while ((c = getchar()) != EOF) {
         if (c == ' ') {
             ++blanks;
         } else if (c == '\t') {
@@ -19,8 +19,7 @@ int main() {
         } else if (c == '\n') {
             ++nl;
         }
-   }
- 
-   printf("%d blanks, %d tabs, %d newlines\n", blanks, tabs, nl);
+    }
 
+    printf("%d blanks, %d tabs, %d newlines\n", blanks, tabs, nl);
 }

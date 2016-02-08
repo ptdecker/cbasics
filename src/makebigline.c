@@ -2,14 +2,14 @@
 
 #define BIGSIZE 3000
 
-main() {
+int main() {
 
-	int i;
+    int i;
 
-	for(i = 0; i < BIGSIZE; ++i)
-		putchar(i % 10 + '0');
+    for(i = 0; i < BIGSIZE; ++i)
+        putchar(i % 10 + '0');
 
-	putchar('\n');
+    putchar('\n');
 
 }
 
