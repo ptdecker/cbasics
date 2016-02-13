@@ -3,6 +3,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define IN  1 /* inside a set of blanks */
 #define OUT 0 /* outside a set of blanks */
@@ -13,13 +14,14 @@ int main () {
     int state = OUT;
 
     while ((c = getchar()) != EOF) {
-        if (c != ' ') {
+        if (c != (int)' ')
             state = OUT;
-            putchar(c);
-        } else if (state != IN) {
+        else if (state != IN)
             state = IN;
-            putchar(c);
-        }
+        else
+            continue;
+        (void)putchar(c);
     }
 
+    exit(EXIT_SUCCESS);
 }

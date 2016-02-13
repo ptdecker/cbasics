@@ -3,12 +3,32 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAXLINE 1000 /* Note: MAXLINE includes terminating newline and null characters */
+#define MAXLINE 1000 // Note: MAXLINE includes terminating newline and null characters
 
-/* Functional prototypes */
+/* getbigline: read an aribitrarily long line placing as much as
+ * possible into 's' and returning the full length
+ */
 
-int getbigline(char line[], int maxline);
+static int getbigline(char s[], int lim) {
+
+    int c;
+    int len = 0;
+    int slen = 0;
+
+    while ((c = getchar()) != EOF && c != (int)'\n') {
+        if (slen < (lim - 2)) {
+            s[slen++] = (char)c;
+        }
+        ++len;
+    }
+
+    s[slen++] = '\n';
+    s[slen] = '\0';
+
+    return len;
+}
 
 /* Main */
 
@@ -22,27 +42,7 @@ int main() {
             printf("%s", line);
         }
     }
+
+    exit(EXIT_SUCCESS);
 }
 
-/* getbigline: read an aribitrarily long line placing as much as
- * possible into 's' and returning the full length
- */
-
-int getbigline(char s[], int lim) {
-
-    int c;
-    int len = 0;
-    int slen = 0;
-
-    while ((c = getchar()) != EOF && c != '\n') {
-        if (slen < (lim - 2)) {
-            s[slen++] = c;
-        }
-        ++len;
-    }
-
-    s[slen++] = '\n';
-    s[slen] = '\0';
-
-    return len;
-}

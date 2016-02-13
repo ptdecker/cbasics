@@ -3,21 +3,22 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main () {
 
-   int c;
+    int c;
 
-   while ((c = getchar()) != EOF) {
-        if (c == '\t') {
+    while ((c = getchar()) != EOF)
+        if (c == (int)'\t')
             printf("\\t");
-        } else if (c == '\b') {
+        else if (c == (int)'\b')
             printf("\\b");
-        } else if (c == '\\') {
+        else if (c == (int)'\\')
             printf("\\\\");
-        } else {
-            putchar(c);
-        }
-    }
+        else
+            (void)putchar(c);
+
+    exit(EXIT_SUCCESS);
 
 }

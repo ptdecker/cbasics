@@ -3,10 +3,13 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-/* Function prototypes */
+/* Fahrenheit-Celsius conversion */
 
-int ftoc(int ftemp);
+static int ftoc(int ftemp) {
+    return 5 * (ftemp - 32) / 9;
+}
 
 /* Main */
 
@@ -20,10 +23,6 @@ int main() {
     for (fahr = lower; fahr <= upper; fahr += step)
         printf("%d\t%d\n", fahr, ftoc(fahr));
 
+    exit(EXIT_SUCCESS);
 }
 
-/* Fahrenheit-Celsius conversion */
-
-int ftoc(int ftemp) {
-    return 5 * (ftemp - 32) / 9;
-}

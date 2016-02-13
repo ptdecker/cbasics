@@ -3,6 +3,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     int result;
@@ -10,4 +11,5 @@ int main() {
         printf("%d\n", result);
     }
     printf("EOF is '%d'\n", result);
+    exit(EXIT_SUCCESS);
 }
