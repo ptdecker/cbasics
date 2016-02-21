@@ -13,13 +13,13 @@
 
 static int getbigline(char s[], int lim) {
 
-    int c;
-    int len = 0;
-    int slen = 0;
+    char c;
+    int  len = 0;
+    int  slen = 0;
 
-    while ((c = getchar()) != EOF && c != (int)'\n') {
+    while ((c = (char)getchar()) != (char)EOF && c != '\n') {
         if (slen < (lim - 2)) {
-            s[slen++] = (char)c;
+            s[slen++] = c;
         }
         ++len;
     }
@@ -34,9 +34,9 @@ static int getbigline(char s[], int lim) {
 
 int main() {
 
-    char line[MAXLINE];
+    char line[MAXLINE] = "";
+    int  len = 0;
 
-    int len = 0;
     while ((len = getbigline(line, MAXLINE)) > 0) {
         if (len > MAXLINE) {
             printf("%s", line);

@@ -74,7 +74,7 @@ int main() {
     printf("\\@: \@\n");
     printf("\\#: \#\n");
     printf("\\$: \$\n");
-    printf("\\%: \%\n");
+//    printf("\\%: \%\n"); // causes a linter warning
     printf("\\^: \^\n");
     printf("\\&: \&\n");
     printf("\\*: \*\n");

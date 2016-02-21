@@ -10,8 +10,9 @@
 #define STEP   20  // step size
 
 int main() {
+    int fahr;
     printf("Fahrenheit\tCelsius\n");
-    for (int fahr = UPPER; fahr >= LOWER; fahr -= STEP) {
+    for (fahr = UPPER; fahr >= LOWER; fahr -= STEP) {
         printf("%3d\t\t%6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
     }
     exit(EXIT_SUCCESS);

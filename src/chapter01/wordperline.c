@@ -1,30 +1,31 @@
 /*
- * Count words
+ * Output one word per line
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define IN  1  /* inside a word */
 #define OUT 0  /* outside a word */
 
 int main() {
 
-    int c;             // current character
-    int inorout = OUT; // are we inside or outside of a word
-    int words   = 0;   // number of words
+    char c;             // current character
+    int  inorout = OUT; // are we inside or outside of a word
 
-    while ((c = getchar()) != EOF) {
+    while ((c = (char)getchar()) != (char)EOF) {
         if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) {
-            if (inorout == OUT) {
+            if (inorout == OUT)
                 inorout = IN;
-                words++;
-            }
+            (void)putchar(c);
         } else if ((c == ' ') || (c == '\n')) {
+            if (inorout == IN)
+                (void)putchar('\n');
             inorout = OUT;
         } else {
             // Ignore everything else (punctuation, special characters, etc)
         }
     }
 
-    printf("%d\n", words);
+    exit(EXIT_SUCCESS);
 }

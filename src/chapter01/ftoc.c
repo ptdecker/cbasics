@@ -3,6 +3,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 
@@ -13,11 +14,12 @@ int main() {
     int    step  =  20;
 
     printf("Fahrenheit\tCelsius\n");
-    fahr = lower;
-    while (fahr <= upper) {
+    fahr = (double)lower;
+    while (fahr <= (double)upper) {
         celsius = (5.0 / 9.0) * (fahr - 32.0);
         printf("%3.0f\t\t%6.1f\n", fahr, celsius);
         fahr = fahr + step;
     }
 
+    exit(EXIT_SUCCESS);
 }

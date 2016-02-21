@@ -3,6 +3,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAXLINE 1000 /* Note: MAXLINE includes terminating newline and null characters */
 
@@ -10,12 +11,13 @@
  * possible into 's' and returning the full length
  */
 
-int getbigline(char s[], int lim) {
-    int c;
-    int len = 0;
-    int slen = 0;
+static int getbigline(char s[], int lim) {
 
-    while ((c = getchar()) != EOF && c != '\n') {
+    char c;
+    int  len = 0;
+    int  slen = 0;
+
+    while ((c = (char)getchar()) != (char)EOF && c != '\n') {
         if (slen < (lim - 2))
             s[slen++] = c;
         ++len;
@@ -27,12 +29,16 @@ int getbigline(char s[], int lim) {
     return len;
 }
 
-/* reverse: reverses a line
+/*
+ * reverse: reverses a line
  */
 
-void reverse(char s[], int length) {
+static void reverse(char s[], int length) {
+
     char temp;
-    for (int i = 0; i < (length - i - 1); i++) {
+    int i;
+
+    for (i = 0; i < (length - i - 1); i++) {
         temp = s[i];
         s[i] = s[length - i - 1];
         s[length - i - 1] = temp;
@@ -43,14 +49,15 @@ void reverse(char s[], int length) {
 
 int main() {
 
-    char line[MAXLINE];
-
+    char line[MAXLINE] = "";
     int len = 0;
+
     while ((len = getbigline(line, MAXLINE)) > 0) {
         reverse(line, len);
         printf("%s", line);
     }
 
+    exit(EXIT_SUCCESS);
 }
 
 

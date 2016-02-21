@@ -1,11 +1,15 @@
 /*
- * Print a horizontal histogram of word lengths
+ * Print a vertical histogram of word lengths
+ *
+ * Utilizes a finite state machine to count words
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-#define MAXLEN   18  /* maximum word length to keep track of */
-#define MAXBAR   60  /* maximum bar width */
+#define MAXLEN   70  /* maximum word length to keep track of */
+#define MAXBAR   16  /* maximum bar width */
 #define NONWORD   0  /* "not in a word" state */
 #define COUNTLTR  1  /* counting letters in a word state */
 #define COUNTWRD  2  /* counting word lengths state */
@@ -13,26 +17,25 @@
 
 int main() {
 
-    int j;
+    int  i;
+    int  j;
+    char c;
+    int  nc = 0;
+    int  over = 0;
+    int  state = NONWORD;
+    int  nlen[MAXLEN];
+    int  max = 0;
+    int  scale = 1;
+    int  width = 0;
 
-    /* initialize word length array */
-
-    int nlen[MAXLEN];
-    for (int i = 0; i < MAXLEN; ++i)
+    for (i = 0; i < MAXLEN; ++i)
         nlen[i] = 0;
 
-    /* count word lengths using a finite state machine */
-
-    int c;
-    int nc = 0;
-    int over = 0;
-    int state = NONWORD;
-
-    while (1) {
+    while (true) {
 
         /* get character or EOF */
 
-        c = getchar();
+        c = (char)getchar();
 
         /* convert uppercase characters to lowercase */
 
@@ -41,7 +44,7 @@ int main() {
 
         /* handle state transitions */
 
-        if (c == EOF) {
+        if (c == (char)EOF) {
             state = EOF;
         } else if (state == NONWORD && 'a' <= c && c <= 'z') {
             state = COUNTLTR;
@@ -81,8 +84,7 @@ int main() {
 
     /* determine maximum words (including overflow) */
 
-    int max = 0;
-    for (int i = 0; i < MAXLEN; ++i)
+    for (i = 0; i < MAXLEN; ++i)
         if (nlen[i] > max)
             max = nlen[i];
     if (over > max)
@@ -90,34 +92,61 @@ int main() {
 
     /* determine scale */
 
-    int scale = 1;
     if (max > MAXBAR) {
         scale = (max / MAXBAR);
         if (max / scale > MAXBAR)
-            ++scale;
+           ++scale;
     }
 
-    /* print a scaled value-labled horizontal histogram */
+    /* Find width */
 
-    for (int i = 0; i < MAXLEN; ++i) {
-        printf(" %2d: ", (i + 1));
-        for (int j = 0; j < (nlen[i] / scale); ++j)
-            putchar('*');
-        printf(" (%d)\n", nlen[i]);
+    if (over > 0)
+        width = MAXLEN;
+    else
+        for (j = 0; j < MAXLEN; ++j)
+            if (nlen[j] > 0)
+                width = (j + 1);
+
+     /* Print scaled vertical histogram */
+
+    for (i = (max / scale) - 1; i >= 0; --i) {
+        for (j = 0; j < width; ++j)
+            if (i < (nlen[j] / scale))
+                (void)putchar('*');
+            else
+                (void)putchar(' ');
+        if (i < (over / scale))
+            (void)putchar('*');
+        else
+            (void)putchar(' ');
     }
 
-    /* print overflow scaled histogram bar */
+     /* Print vertical axis labels */
 
-    printf("%2d+: ", (MAXLEN + 1));
-    for (int i = 0; i < (over / scale); ++i)
-        putchar('*');
-    printf(" (%d)\n", over);
+    for (i = 1; i <= width; ++i)
+        printf("%d", (i / 10) % 10);
+    if (over > 0)
+        printf("%d", (MAXLEN / 10) % 10);
+    (void)putchar('\n');
+
+    for (i = 1; i <= width; ++i)
+        printf("%d", i % 10);
+    if (over > 0)
+        printf("%d", MAXLEN % 10);
+    (void)putchar('\n');
+
+    for (i = 1; i <= width; ++i)
+        (void)putchar(' ');
+    if (over > 0)
+        (void)putchar('+');
+    (void)putchar('\n');
 
     /* print scale (with proper pluralization) */
 
     printf("\n'*' = %d word", scale);
     if (scale > 1)
-        putchar('s');
-    putchar('\n');
+        (void)putchar('s');
+    (void)putchar('\n');
 
+    exit(EXIT_SUCCESS);
 }
