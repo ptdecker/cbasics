@@ -24,6 +24,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 1-17 - longlines.c:          Prints lines longer than 80 characters
 1-18 - cleantrailsnblanks.c: Cleans out trailing blanks and tabs. Eliminates blank lines.
 1-19 - reverse.c:            Reverses all input one line at a time
+1-20 - detab.c:              Replace tabs with blank spaces
 
 ##Extras
 
