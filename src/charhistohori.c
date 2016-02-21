@@ -2,10 +2,10 @@
  * Print a horizontal histogram of letter frequencies
  */
 
-#include <stdio.h>
+# include <stdio.h>
 
-#define MAXBAR  60 /* maximum bar width */
-#define NUMLTRS 26 /* number of letters (english) */
+# define MAXBAR  60 /* maximum bar width */
+# define NUMLTRS 26 /* number of letters (english) */
 
 int main() {
 

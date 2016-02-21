@@ -4,7 +4,7 @@ cbasics
 Kernighan and Ritchie The C Programming Language Code Examples
 
 1-01 - helloworld.c:         Hello World
-1-02 - n/a
+1-02 - escapechars.c:        All escape characters
 1-03 - ftoc.c:               Fahrenheit-Celsius
 1-04 - ctof.c:               Celsius-Fahrenheit
 1-05 - ftoc-reverse.c:       Fahrenheit-Celsius in Reverse
@@ -23,11 +23,14 @@ Kernighan and Ritchie The C Programming Language Code Examples
 1-16 - longestline.c:        Print arbitrarily long lines
 1-17 - longlines.c:          Prints lines longer than 80 characters
 1-18 - cleantrailsnblanks.c: Cleans out trailing blanks and tabs. Eliminates blank lines.
+1-19 - reverse.c:            Reverses all input one line at a time
 
 ##Extras
 
-makebigline.c:  Outputs a 3001 character text line
-testupcase.c:   Tests a technique to convert uppercase ASCII letters to lowercase
+makebigline.c: Outputs a 3001 character text line
+testupcase.c:  Tests a technique to convert uppercase ASCII letters to lowercase
+saveasascii.c: Strips input of everything except regular values
+size.c:        Counts the number of characters in the input
 
 ##Test Files
 
