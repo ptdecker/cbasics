@@ -36,6 +36,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 1-19 - reverse.c:            Reverses all input one line at a time
 * 1-20 - detab.c:              Replace tabs with blank spaces
 * 1-21 - entab.c:              Replaces converts spaces to tabs according to tab stops
+* 1-22 - fold.c:               Folds long lines to a specified width
 
 ##Extras
 

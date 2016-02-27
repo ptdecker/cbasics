@@ -11,24 +11,33 @@
 int main() {
 
     char c;
-    int  ns = -1;
-    int  numtabs;
-    int  extraspace;
+    int  pos;
+    int  numtabs   = 0;
+    int  numspaces = 0;
 
-    while ((c = (char)getchar()) != (char)EOF)
-        if ((c == ' ') && (ns > 0))
-            ns++;
-        else if (c == ' ')
-            ns = 1;
-        else if (ns > 0) {
-            for (numtabs = ns / TABSTOP; numtabs > 0; numtabs--)
+    for (pos = 1; (c = (char)getchar()) != (char)EOF; pos++) {
+        if (c == ' ') {
+            if (pos % TABSTOP != 0)
+                numspaces++;
+            else {
+                numspaces = 0;
+                numtabs++;
+            }
+        } else {
+            for ( ; numtabs > 0; numtabs--)
                 (void)putchar('\t');
-            for (extraspace = ns % TABSTOP; extraspace > 0; extraspace--)
-                (void)putchar(' ');
-            ns = -1;
+            if (c == '\t')
+                numspaces = 0;
+            else
+                for ( ; numspaces > 0; numspaces--)
+                    (void)putchar(' ');
             (void)putchar(c);
-        } else
-            (void)putchar(c);
+            if (c == '\n')
+                pos = 0;
+            else if (c == '\t')
+                pos = pos + (TABSTOP - (pos - 1) % TABSTOP) - 1;
+        }
+    }
 
     exit(EXIT_SUCCESS);
 }
