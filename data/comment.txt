@@ -1,0 +1,21 @@
+/*
+ * This is a block comment that should be removed from the resulting file
+ */
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#define IN  1  /* this is a block comment on a line */
+
+int main() {
+
+    char c = 'x';    // line comment
+
+    (void)putchar('"');                     // that quote should not be picked up
+    printf("/* this is not a comment */");
+    printf("// neither is this");
+    printf("\" what happens here");         // the quoted string should be preserved
+    (void)putchar(c);
+
+    exit(EXIT_SUCCESS);
+}

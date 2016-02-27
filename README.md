@@ -37,6 +37,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 1-20 - detab.c:              Replace tabs with blank spaces
 * 1-21 - entab.c:              Replaces converts spaces to tabs according to tab stops
 * 1-22 - fold.c:               Folds long lines to a specified width
+* 1-23 - nocomment.c:          Removes all comments from a 'C' program
 
 ##Extras
 
