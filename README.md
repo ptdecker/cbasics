@@ -37,7 +37,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 1-20 - detab.c:              Replace tabs with blank spaces
 * 1-21 - entab.c:              Replaces converts spaces to tabs according to tab stops
 * 1-22 - fold.c:               Folds long lines to a specified width
-* 1-23 - nocomment.c:          Removes all comments from a 'C' program
+* 1-23 - nocomment.c:          Removes all comments from a C program
+* 1-24 - minilint.c:           Performs rudementary syntax checks on a C program
 
 ##Extras
 
@@ -58,3 +59,5 @@ The following test data files are provided to support testing the excercises:
 * test1.txt         - Increasing number of characters per line with variations at the end
 * zero.txt          - A totally empty file (no data)
 * extraspecials.txt - Contains extra spaces, backslashes, tabs, and backspace characters
+* comment.txt       - A C program containing test scenarios for 'nocomment.c'
+* linttest.txt      - Test file for 'minilint.c'

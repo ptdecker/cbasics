@@ -1,0 +1,6 @@
+"((())"
+'('
+())
+[[]
+'''
+"unterminated quoted string
