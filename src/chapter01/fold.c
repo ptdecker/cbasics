@@ -85,10 +85,10 @@ int main() {
     int pos = 0;
 
     while ((c = getchar()) != EOF) {
-        line[pos] = (char)c;
-        if ((char)c == '\t') {
+        line[pos] = c;
+        if (c == '\t') {
             pos = expandtab(pos);
-        } else if ((char)c == '\n') {
+        } else if (c == '\n') {
             printline(pos);
             pos = 0;
         } else if (++pos >= LINEWIDTH) {

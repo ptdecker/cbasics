@@ -24,11 +24,11 @@ int main() {
 
     /* count letter frequencies (case insensitive) */
 
-    while ((c = (char)getchar()) != (char)EOF)
+    while ((c = getchar()) != EOF)
         if ('a' <= c && c <= 'z')
-            ++nltrs[(int)(c - 'a')];
+            ++nltrs[c - 'a'];
         else if ('A' <= c && c <= 'Z')
-            ++nltrs[(int)(c - 'A')];
+            ++nltrs[c - 'A'];
 
     /* find maximum letter count */
 
@@ -58,7 +58,7 @@ int main() {
     /* print axis labels */
 
     for (i = 0; i < MAXLTRS; ++i)
-        (void)putchar((char)i + 'A');
+        (void)putchar(i + 'A');
     (void)putchar('\n');
 
     /* print scale */

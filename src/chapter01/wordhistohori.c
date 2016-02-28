@@ -33,7 +33,7 @@ int main() {
 
         /* get character or EOF */
 
-        c = (char)getchar();
+        c = getchar();
 
         /* convert uppercase characters to lowercase */
 
@@ -42,7 +42,7 @@ int main() {
 
         /* handle state transitions */
 
-        if (c == (char)EOF) {
+        if (c == EOF) {
             state = EOF;
         } else if (state == NONWORD && 'a' <= c && c <= 'z') {
             state = COUNTLTR;

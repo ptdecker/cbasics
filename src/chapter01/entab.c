@@ -15,7 +15,7 @@ int main() {
     int  numtabs   = 0;
     int  numspaces = 0;
 
-    for (pos = 1; (c = (char)getchar()) != (char)EOF; pos++) {
+    for (pos = 1; (c = getchar()) != EOF; pos++) {
         if (c == ' ') {
             if (pos % TABSTOP != 0)
                 numspaces++;

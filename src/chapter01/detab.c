@@ -13,7 +13,7 @@ int main() {
     int pos = 1;
     int nb;
 
-    while ((c = (char)getchar()) != (char)EOF) {
+    while ((c = getchar()) != EOF) {
         if (c == '\t')
             for (nb = TABSTOP - (pos - 1) % TABSTOP; nb > 0; nb--, pos++)
                 (void)putchar(' ');

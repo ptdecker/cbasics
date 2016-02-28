@@ -15,7 +15,7 @@ static int getbigline(char s[], int lim) {
     char c;
     int  len = 0;
     int  slen = 0;
-    while ((c = (char)getchar()) != (char)EOF && c != '\n') {
+    while ((c = getchar()) != EOF && c != '\n') {
         if (slen < (lim - 2)) {
             s[slen++] = c;
         }

@@ -13,7 +13,7 @@ int main() {
     char c;             // current character
     int  inorout = OUT; // are we inside or outside of a word
 
-    while ((c = (char)getchar()) != (char)EOF) {
+    while ((c = getchar()) != EOF) {
         if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) {
             if (inorout == OUT)
                 inorout = IN;

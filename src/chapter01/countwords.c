@@ -14,7 +14,7 @@ int main() {
     int  inorout = OUT; // are we inside or outside of a word
     int  words   = 0;   // number of words
 
-    while ((c = (char)getchar()) != (char)EOF) {
+    while ((c = getchar()) != EOF) {
         if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z'))) {
             if (inorout == OUT) {
                 inorout = IN;

@@ -14,7 +14,7 @@ int main () {
     int state = OUT;
 
     while ((c = getchar()) != EOF) {
-        if (c != (int)' ')
+        if (c != ' ')
             state = OUT;
         else if (state != IN)
             state = IN;

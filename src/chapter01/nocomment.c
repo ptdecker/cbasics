@@ -15,7 +15,7 @@
 // Globals to track prior, current, and next characters
 // read from the input stream
 
-static char prior = (char)'\0';
+static char prior = '\0';
 static char current;
 static char next;
 
@@ -27,7 +27,7 @@ static char next;
 static void eatchar() {
     prior = current;
     current = next;
-    next = (char)getchar();
+    next = getchar();
 }
 
 /* Main */
@@ -37,12 +37,12 @@ int main() {
     int commtype = NOCOMM;  // Comment state
     bool inquote = false;   // Inside a quoted string state
 
-    current = (char)getchar();
-    while (current != (char)EOF) {
+    current = getchar();
+    while (current != EOF) {
 
         // Get look-ahead character
 
-        next = (char)getchar();
+        next = getchar();
 
         // Perform lexical evaluation to determine state
 

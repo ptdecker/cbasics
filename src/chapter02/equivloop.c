@@ -18,9 +18,9 @@ static int getbigline(char s[], int lim) {
         c = getchar();
         if (c == EOF)
             break;
-        s[i] = (char)c;
+        s[i] = c;
         i++;
-        if ((char)c == '\n')
+        if (c == '\n')
             break;
     }
     s[i] = '\0';

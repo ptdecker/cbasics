@@ -16,11 +16,11 @@ int main() {
     int nl     = 0;
 
     while ((c = getchar()) != EOF)
-        if (c == (int)' ')
+        if (c == ' ')
             ++blanks;
-        else if (c == (int)'\t')
+        else if (c == '\t')
             ++tabs;
-        else if (c == (int)'\n')
+        else if (c == '\n')
             ++nl;
 
     printf("%d blanks, %d tabs, %d newlines\n", blanks, tabs, nl);
