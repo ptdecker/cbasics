@@ -43,6 +43,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 ### Chapter 2
 
 * 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
+* 2-02 - equivloop.c:          For-loop equivalent withouth using logical operators
 
 ##Extras
 
