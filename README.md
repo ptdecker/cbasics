@@ -40,6 +40,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 1-23 - nocomment.c:          Removes all comments from a C program
 * 1-24 - minilint.c:           Performs rudementary syntax checks on a C program
 
+### Chapter 2
+
+* 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
+
 ##Extras
 
 * makebigline.c: Outputs a 3001 character text line
