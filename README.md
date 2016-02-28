@@ -44,6 +44,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
 * 2-02 - equivloop.c:          For-loop equivalent withouth using logical operators
+* 2-03 - htoi.c                Implements htoi(s) hexadecimal to integer converter
 
 ##Extras
 
