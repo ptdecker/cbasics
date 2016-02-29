@@ -3,11 +3,8 @@ Worked Excercises from _The C Programming Language_, by Brian W. Kernignham and 
 
 This repository contains solutions to the examples presented in the classic book
 [_The C Programming Language_](https://en.wikipedia.org/wiki/The_C_Programming_Language), by [Brian W. Kerningham](https://en.wikipedia.org/wiki/Brian_Kernighan) and [Dennis M. Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie).  In many cases they
-have been written to utilize [C99](https://en.wikipedia.org/wiki/C99) features. In addition, most have
-been checked using a linter for safe practicies such as explicitly type casting *int* to *char* and
-so own. Solutions for any given chapter attempt to only use featured introduced up to that point in
-the book. So, the 'enhanced' folder contain rewritten versions of excercises from prior
-chapters to utilize nicer features of the language.
+have been written to utilize [C99](https://en.wikipedia.org/wiki/C99) features. Solutions for any given chapter attempt to only use featured introduced up to that point in
+the book.
 
 Kernighan and Ritchie The C Programming Language Code Examples
 
@@ -44,7 +41,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
 * 2-02 - equivloop.c:          For-loop equivalent withouth using logical operators
-* 2-03 - htoi.c                Implements htoi(s) hexadecimal to integer converter
+* 2-03 - htoi.c:               Implements htoi() hexadecimal to integer converter
+* 2-04 - squeeze.c:            Implements squeze() which removes multiple chars from a string
 
 ##Extras
 
