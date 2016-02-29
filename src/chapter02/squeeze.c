@@ -59,7 +59,7 @@ int main() {
     printf("Removing all 's' from \"This string contains a bunch of 's' characters\"\n\nResult: \"%s\"\n", string1);
 
     squeeze(string2, "aeiou");
-    printf("\nNow, remvoing all vowels from \"This string contains a bunch of 's' characters\"\n\nResult: \"%s\"\n", string2);
+    printf("\nNow, remvoing all lowercase vowels from \"This string contains a bunch of 's' characters\"\n\nResult: \"%s\"\n", string2);
 
     exit(EXIT_SUCCESS);
 }
