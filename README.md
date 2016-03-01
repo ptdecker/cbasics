@@ -45,6 +45,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 2-04 - squeeze.c:            Implements squeze() which removes multiple chars from a string
 * 2-05 - any.c:                Implements any() which returns the position of a search char
 * 2-06 - setbits.c:            Implements setbits() which sets bits based upon a pattern
+* 2-07 - invert.c:             Implements invert() which inverts the bits starting at a position
 
 ##Extras
 
