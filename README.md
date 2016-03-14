@@ -46,6 +46,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 2-05 - any.c:                Implements any() which returns the position of a search char
 * 2-06 - setbits.c:            Implements setbits() which sets bits based upon a pattern
 * 2-07 - invert.c:             Implements invert() which inverts the bits starting at a position
+* 2-08 - rightrot.c:           Implements rightrot() which returns the value of a rotated integer
 
 ##Extras
 
