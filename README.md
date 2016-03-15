@@ -47,6 +47,12 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 2-06 - setbits.c:            Implements setbits() which sets bits based upon a pattern
 * 2-07 - invert.c:             Implements invert() which inverts the bits starting at a position
 * 2-08 - rightrot.c:           Implements rightrot() which returns the value of a rotated integer
+* 2-09 - fastbitcount.c:       Implements a faster bitcount() using a two's complement property
+* 2-10 - lower.c:              Implements a lower() using a trinary conditional
+
+### Chapter 3
+
+
 
 ##Extras
 
