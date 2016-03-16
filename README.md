@@ -52,7 +52,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 ### Chapter 3
 
-
+# 3-01 - binsearch.c:          Implements a binary search with only one test inside the main loop
+# 3-02 - escape.c:             Tools to handle escape characters (bi-directionally)
 
 ##Extras
 
