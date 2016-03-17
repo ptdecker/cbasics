@@ -1,7 +1,7 @@
 /*
  * expand
  *
- * Expands regex style ranges such as "a-z"
+ * Expands regex style range shorthand such as "a-z" into the full string
  *
  * NOTE: The solution provided in Tondo and Gimpel's "The C Answer Book" is provided in the end
  *       comments.  While this is a much shorter and clever solution, it does not handle ranges
@@ -16,7 +16,7 @@
 #define MAXSTRING 256
 
 static void expand(char source[], char target[]) {
-	
+
 	int i, j;                            // loop indexes
 	int buffer[3] = {'\0', '\0', '\0'};  // a buffer used to track up to three characters of input
 	int bufflen = 0;                     // number of characters in the buffer
@@ -98,3 +98,21 @@ int main(void) {
 	
 	exit(EXIT_SUCCESS);
 }
+
+/*
+ * Solution from "The C Answer Book"
+ *
+ * void expand(char s1[], char s2[]) {
+ *     char c;
+ *     int  i, j;
+ *     i = j = 0;
+ *     while ((c = s1[i++]) != '\0') // fetch a char from s1
+ *         if (s1[i] == '-' && s1[i+1] >= c) {
+ *             i++;
+ *             while (c < s1[i])
+ *                 s2[j++] = c++; // expand shorthand
+ *         } else
+ *             s2[j++] = c; // copy the character
+ *     s2[j] = '\0';
+ * }
+ */
