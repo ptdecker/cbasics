@@ -1,18 +1,18 @@
 BIN = ../../bin
 ODIR = ../../obj
-SUBDIRS = rpncalc
+SUBDIRS = 
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = strrindex.o
+_OBJ = makebigline.o saveasascii.o size.o testupcase.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: strrindex
+all: makebigline saveasascii size testupcase
 	@for i in $(SUBDIRS); do \
 		echo "make all in $$i..."; \
 		cd $$i; \
@@ -23,9 +23,17 @@ all: strrindex
 clean:
 	rm -f $(ODIR)/*.o
 
-strrindex: $(OBJ)
+makebigline: $(ODIR)/makebigline.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
-	$(LINT) $(LINTFLAGS) $@.c
+
+saveasascii: $(ODIR)/saveasascii.o
+	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
+
+size: $(ODIR)/size.o
+	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
+
+testupcase: $(ODIR)/testupcase.o
+	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $<

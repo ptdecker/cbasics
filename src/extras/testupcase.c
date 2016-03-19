@@ -5,8 +5,9 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
+int main(void) {
 
     int i, c;
 
@@ -20,10 +21,12 @@ int main() {
             c = c - 'A' + 'a';
 
 
-        putchar(c);
+        (void)putchar(c);
         if (i % 16 == 0)
-            putchar('\n');
+            (void)putchar('\n');
     }
 
-    putchar('\n');
+    (void)putchar('\n');
+
+    exit(EXIT_SUCCESS);
 }

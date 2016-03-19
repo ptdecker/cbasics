@@ -8,13 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
 
     int c;
 
     while ((c = getchar()) != EOF)
         if (c < 128)
-            putchar(c);
+            (void)putchar(c);
 
     exit(EXIT_SUCCESS);
 }

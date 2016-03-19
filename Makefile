@@ -8,6 +8,7 @@ all:
 		echo "make all in $$i..."; \
 		cd $$i; \
 		make all; \
+		cd ..; \
 	done
 
 clean:

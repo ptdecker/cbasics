@@ -1,16 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define BIGSIZE 3000
 
-int main() {
+int main(void) {
 
     int i;
 
     for(i = 0; i < BIGSIZE; ++i)
-        putchar(i % 10 + '0');
+        (void)putchar(i % 10 + '0');
 
-    putchar('\n');
+    (void)putchar('\n');
 
+    exit(EXIT_SUCCESS);
 }
 
 
