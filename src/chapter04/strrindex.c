@@ -42,7 +42,7 @@ static int strrindex(char s[], char t[]) {
 	int j;
 	int k;
 
-	for (i = (int)strlen(s) - (int)strlen(t); s[i] >= 0; i--) {
+	for (i = (int)(strlen(s) - strlen(t)); s[i] >= 0; i--) {
 		for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
 			; // Empty
 		if (k > 0 && t[k] == '\0')
