@@ -14,7 +14,7 @@ static char lower(char c) {
 }
 
 
-int main() {
+int main(void) {
 
     (void)putchar(lower('T'));
     (void)putchar(lower('t'));

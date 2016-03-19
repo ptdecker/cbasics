@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
     printf("\\a: \a\n");
 //    printf("\\b: \b\n"); // chapter one control character
     printf("\\c: \c\n");

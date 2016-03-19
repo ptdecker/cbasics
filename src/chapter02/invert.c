@@ -27,10 +27,10 @@ static void printbits(unsigned x) {
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
 
- int main() {
+int main(void) {
     printbits(0xA5A5);
     (void)putchar('\n');
     printbits(invert(0xA5A5, 7, 5));
     (void)putchar('\n');
     exit(EXIT_SUCCESS);
- }
+}

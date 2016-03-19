@@ -24,7 +24,7 @@ static char next;
  * Helper function to eat a character from the stream
  */
 
-static void eatchar() {
+static void eatchar(void) {
     prior = current;
     current = next;
     next = getchar();
@@ -32,7 +32,7 @@ static void eatchar() {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     int commtype = NOCOMM;  // Comment state
     bool inquote = false;   // Inside a quoted string state

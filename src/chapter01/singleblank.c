@@ -8,7 +8,7 @@
 #define IN  1 /* inside a set of blanks */
 #define OUT 0 /* outside a set of blanks */
 
-int main () {
+int main(void) {
 
     int c;
     int state = OUT;

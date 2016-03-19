@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
     int result;
     while ((result = getchar()) != EOF) {
         printf("%d\n", result);

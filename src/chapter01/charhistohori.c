@@ -8,7 +8,7 @@
 #define MAXBAR  60 /* maximum bar width */
 #define NUMLTRS 26 /* number of letters (english) */
 
-int main() {
+int main(void) {
 
     char c;
     int  i;

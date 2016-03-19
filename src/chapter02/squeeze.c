@@ -50,7 +50,7 @@ static void squeeze(char s[], char delete[]) {
 
 
 
-int main() {
+int main(void) {
 
     char string1[] = "This string contains a bunch of 's' characters";
     char string2[] = "This string contains a bunch of 's' characters";

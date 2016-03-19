@@ -37,7 +37,7 @@ static void copy(char to[], char from[]) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     char line[MAXLINE] = "";
     char longest[MAXLINE] = "";

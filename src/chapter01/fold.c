@@ -79,7 +79,7 @@ static int squish(int pos) {
     return i;
 }
 
-int main() {
+int main(void) {
 
     int c;
     int pos = 0;

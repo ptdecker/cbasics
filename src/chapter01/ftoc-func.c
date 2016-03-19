@@ -13,7 +13,7 @@ static int ftoc(int ftemp) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     int fahr;
     int lower = 0;   /* lower limit of temperature table */

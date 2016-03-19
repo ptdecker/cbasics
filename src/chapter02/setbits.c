@@ -28,8 +28,8 @@ static void printbits(unsigned x) {
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
 
- int main() {
+int main(void) {
     printbits(setbits(0xFFFF, 7, 3, 0x0000));
     (void)putchar('\n');
     exit(EXIT_SUCCESS);
- }
+}

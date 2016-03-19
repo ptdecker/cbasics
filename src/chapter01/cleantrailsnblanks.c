@@ -32,7 +32,7 @@ static int getbigline(char s[], int lim) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     char line[MAXLINE] = "";
     int  len = 0;

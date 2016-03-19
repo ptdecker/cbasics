@@ -8,7 +8,7 @@
 
 #define TABSTOP 4
 
-int main() {
+int main(void) {
 
     char c;
     int  pos;

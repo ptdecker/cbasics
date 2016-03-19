@@ -8,7 +8,7 @@
 #define IN  1  /* inside a word */
 #define OUT 0  /* outside a word */
 
-int main() {
+int main(void) {
 
     char c;             // current character
     int  inorout = OUT; // are we inside or outside of a word

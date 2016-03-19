@@ -42,7 +42,7 @@ static unsigned int htoi(char s[]) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
 
     printf("FFFF converts to %u\n",   htoi("FFFF"));

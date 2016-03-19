@@ -15,7 +15,7 @@
 #define COUNTWRD  2  /* counting word lengths state */
 #define CONTRACT  3  /* handling a contraction state */
 
-int main() {
+int main(void) {
 
     int  i, j;
     char c;

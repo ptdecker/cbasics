@@ -9,7 +9,7 @@
 #define UPPER 300  // upper limit
 #define STEP   20  // step size
 
-int main() {
+int main(void) {
     int fahr;
     printf("Fahrenheit\tCelsius\n");
     for (fahr = UPPER; fahr >= LOWER; fahr -= STEP) {

@@ -40,7 +40,7 @@ static void copy(char to[], char from[]) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     int len;
     int max = 0;

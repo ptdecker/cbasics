@@ -8,7 +8,7 @@
 #include <float.h>
 #include <stdbool.h>
 
-int main() {
+int main(void) {
 
     // Integers fom headers
 

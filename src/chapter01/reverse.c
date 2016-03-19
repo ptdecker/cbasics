@@ -47,7 +47,7 @@ static void reverse(char s[], int length) {
 
 /* Main */
 
-int main() {
+int main(void) {
 
     char line[MAXLINE] = "";
     int len = 0;

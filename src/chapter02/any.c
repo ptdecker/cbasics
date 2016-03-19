@@ -27,7 +27,7 @@ static int any(char s[], char c[]) {
     return -1;
 }
 
-int main() {
+int main(void) {
 
     char string1[] = "This string contains a bunch of 's' characters";
     int  pos;
