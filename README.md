@@ -59,6 +59,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 3-05 - itob.c:               Implements itob() that converst a number to a string of a particular base
 * 3-06 - itoaw.c:              Implements itoaw() that cconvers number to string of a minimum width
 
+### Chapter 4
+
+* 4-01 - strrindex.c:          Returns the position of the rightmost occurance of text in a string
+
 ##Extras
 
 * makebigline.c: Outputs a 3001 character text line
