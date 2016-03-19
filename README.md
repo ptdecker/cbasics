@@ -55,6 +55,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 3-01 - binsearch.c:          Implements a binary search with only one test inside the main loop
 * 3-02 - escape.c:             Tools to handle escape characters (bi-directionally)
 * 3-03 - expand.c:             Expands regex style string ranges (e.g. 'a-z')
+* 3-04 - itoa.c:               Version of itoa() that handles the largest negative integer
+* 3-05 - itob.c:               Implements itob() that converst a number to a string of a particular base
+* 3-06 - itoaw.c:              Implements itoaw() that cconvers number to string of a minimum width
 
 ##Extras
 
