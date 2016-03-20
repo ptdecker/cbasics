@@ -6,13 +6,13 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = strrindex.o
+_OBJ = strrindex.o atof.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: strrindex
+all: atof strrindex
 	@for i in $(SUBDIRS); do \
 		echo "make all in $$i..."; \
 		cd $$i; \
@@ -22,6 +22,9 @@ all: strrindex
 
 clean:
 	rm -f $(ODIR)/*.o
+
+atof: $(ODIR)/atof.o
+	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
 
 strrindex: $(ODIR)/strrindex.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
