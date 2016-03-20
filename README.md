@@ -63,7 +63,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 4-01 - strrindex.c:          Returns the position of the rightmost occurance of text in a string
 * 4-02 - atof.c:               Implements atof() string to double converter with scientific notation support
-* 4-03 - rpncalc4-03\*.:       RPN Calculator supporting modulus and negative number support
+* 4-03 - rpncalc4-03\*.c:      RPN Calculator supporting modulus and negative number support
+* 4-04 - rpncalc4-04\*.c:      RPN Calculator (rpncalc2) extended to include stack inspection and manipulation
 
 ##Extras
 

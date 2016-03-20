@@ -1,33 +1,25 @@
-BIN = ../../bin
-ODIR = ../../obj
-SUBDIRS = rpncalc4-03 rpncalc4-04
+BIN = ../../../bin
+ODIR = ../../../obj
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = strrindex.o atof.o
+_OBJ = rpncalc2.o lexer.o dastack.o castack.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: atof strrindex
-	@for i in $(SUBDIRS); do \
-		echo "make all in $$i..."; \
-		cd $$i; \
-		make all; \
-		cd ..; \
-	done
+all: rpncalc2
 
 clean:
 	rm -f $(ODIR)/*.o
 
-atof: $(ODIR)/atof.o
+rpncalc2: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
+	$(LINT) $(LINTFLAGS) $@.c
 
-strrindex: $(ODIR)/strrindex.o
-	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $<
