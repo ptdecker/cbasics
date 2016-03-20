@@ -62,13 +62,15 @@ Kernighan and Ritchie The C Programming Language Code Examples
 ### Chapter 4
 
 * 4-01 - strrindex.c:          Returns the position of the rightmost occurance of text in a string
+* 4-03 - rpncalc4-03\*.:       RPN Calculator supporting modulus and negative number support
 
 ##Extras
 
 * makebigline.c: Outputs a 3001 character text line
-* testupcase.c:  Tests a technique to convert uppercase ASCII letters to lowercase
+* rpncalc\*.c:   Unadulterted (pre-exercise) RPN Calculator
 * saveasascii.c: Strips input of everything except regular values
 * size.c:        Counts the number of characters in the input
+* testupcase.c:  Tests a technique to convert uppercase ASCII letters to lowercase
 
 ##Test Files
 
@@ -97,4 +99,4 @@ These solutions are copyright under the terms of the GNU GENERAL PUBLIC LICENSE 
 
 * In addition, some of the solutions presented draw from Tondo and Gimpel's most helpful "The C Answer Book." In several cases, I worked out my own solutions then found better optimizations and cleaner ways of handling things based upon Tondo and Gimpel's work. This work is a bit dated and even in the places where their solutions were drawn from the code presented here has been updated closer to the c99 standard. In addition, many suggestions driven by the 'splint' linter have been incorporated causing further shift away from "The C Answer Book." THe Tondo and Gimple book I drew from has a copyright of 1989. I have not researched if it has been renewed or expired.
 
-Finally, by definition, the code presented here draws from, and directly answers the excercises presented within, Kernighan's and Ritchie's fundamental "The C Programing Language, 2nd Edition." This foundational work from 1988 (2nd edition) and 1978 (1st edition) remains to this day one of the best guides to the C language.
+* Finally, by definition, the code presented here draws from, and directly answers the excercises presented within, Kernighan's and Ritchie's fundamental "The C Programing Language, 2nd Edition." This foundational work from 1988 (2nd edition) and 1978 (1st edition) remains to this day one of the best guides to the C language.
