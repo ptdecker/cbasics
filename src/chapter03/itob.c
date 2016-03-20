@@ -1,5 +1,8 @@
 /*
  * itob: converts an integer to a variable base character string representation
+ * 
+ * "Portions of this work are derived from The Standard C Library, copyright (c) 1992
+ * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
  */
 
 #include <stdlib.h>

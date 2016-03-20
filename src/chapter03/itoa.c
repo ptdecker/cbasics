@@ -1,5 +1,8 @@
 /*
  * itoa: converts an integer to a character string
+ *
+ * "Portions of this work are derived from The Standard C Library, copyright (c) 1992
+ * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
  */
 
 #include <stdlib.h>

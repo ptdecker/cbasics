@@ -84,3 +84,13 @@ The following test data files are provided to support testing the excercises:
 * extraspecials.txt - Contains extra spaces, backslashes, tabs, and backspace characters
 * comment.txt       - A C program containing test scenarios for 'nocomment.c'
 * linttest.txt      - Test file for 'minilint.c'
+
+##License
+
+These solutions are copyright under the terms of the GNU GENERAL PUBLIC LICENSE v3 (see LICENSE) with the following exceptions:
+
+* The code used to implement the 'strlen()' function in selected exercises, including but possibly not limited to: itoa.c, itoaw.c, and itob.c are highly based upon the P.J. Plauger's wonderful work "The Standard C Library".  As such, per the terms outlined in the preface of this work (p. xii), I include the following verbiage:  "Portions of this work are derived from The Standard C Library, copyright (c) 1992 by P.J. Plauger, published by Prentice-Hall, and are used with permission."
+
+* In addition, some of the solutions presented draw from Tondo and Gimpel's most helpful "The C Answer Book." In several cases, I worked out my own solutions then found better optimizations and cleaner ways of handling things based upon Tondo and Gimpel's work. This work is a bit dated and even in the places where their solutions were drawn from the code presented here has been updated closer to the c99 standard. In addition, many suggestions driven by the 'splint' linter have been incorporated causing further shift away from "The C Answer Book." THe Tondo and Gimple book I drew from has a copyright of 1989. I have not researched if it has been renewed or expired.
+
+Finally, by definition, the code presented here draws from, and directly answers the excercises presented within, Kernighan's and Ritchie's fundamental "The C Programing Language, 2nd Edition." This foundational work from 1988 (2nd edition) and 1978 (1st edition) remains to this day one of the best guides to the C language.
