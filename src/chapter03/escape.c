@@ -8,8 +8,8 @@
 #include <stdio.h>
 
 static void escape(char source[], char target[]) {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	for (i = 0, j = 0; source[i] != '\0'; i++)
     	switch (source[i]) {
         	case '\a':  // Alarm (Beep, bell character) (\a)
@@ -63,8 +63,8 @@ static void escape(char source[], char target[]) {
 } // escape()
 
 static void unescape(char source[], char target[]) {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	for (i = 0, j = 0; source[i] != '\0'; i++) {
 		if (source[i] != '\\')
 			target[j++] = source[i];

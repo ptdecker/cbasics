@@ -37,8 +37,8 @@ static void ungetch(char ch) {
 
 char getop(char s[]) {
 
-	int i;
-	char c;
+	size_t i;
+	char   c;
 
 	// Get next character eating whitespace in the process
 

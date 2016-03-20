@@ -17,15 +17,16 @@
 
 int main(void) {
 
-    int  i, j;
-    char c;
-    int  nc = 0;
-    int  over = 0;
-    int  state = NONWORD;
-    int  nlen[MAXLEN];
-    int  max = 0;
-    int  scale = 1;
-
+    size_t i;
+    int    j;
+    char   c;
+    size_t nc    = 0;
+    int    over  = 0;
+    int    state = NONWORD;
+    int    max   = 0;
+    int    scale = 1;
+    int    nlen[MAXLEN];
+ 
     for (i = 0; i < MAXLEN; ++i)
         nlen[i] = 0;
 
@@ -99,7 +100,7 @@ int main(void) {
     /* print a scaled value-labled horizontal histogram */
 
     for (i = 0; i < MAXLEN; ++i) {
-        printf(" %2d: ", (i + 1));
+        printf(" %2u: ", (unsigned)(i + 1));
         for (j = 0; j < (nlen[i] / scale); ++j)
             (void)putchar('*');
         printf(" (%d)\n", nlen[i]);
@@ -108,7 +109,7 @@ int main(void) {
     /* print overflow scaled histogram bar */
 
     printf("%2d+: ", (MAXLEN + 1));
-    for (i = 0; i < (over / scale); ++i)
+    for (i = 0; i < (size_t)(over / scale); ++i)
         (void)putchar('*');
     printf(" (%d)\n", over);
 

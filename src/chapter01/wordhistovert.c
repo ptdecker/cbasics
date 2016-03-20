@@ -17,16 +17,16 @@
 
 int main(void) {
 
-    int  i;
-    int  j;
-    char c;
-    int  nc = 0;
-    int  over = 0;
-    int  state = NONWORD;
-    int  nlen[MAXLEN];
-    int  max = 0;
-    int  scale = 1;
-    int  width = 0;
+    size_t i;
+    int    j;
+    char   c;
+    size_t nc    = 0;
+    int    over  = 0;
+    int    state = NONWORD;
+    int    max   = 0;
+    int    scale = 1;
+    int    width = 0;
+    int    nlen[MAXLEN];
 
     for (i = 0; i < MAXLEN; ++i)
         nlen[i] = 0;
@@ -109,33 +109,34 @@ int main(void) {
 
      /* Print scaled vertical histogram */
 
-    for (i = (max / scale) - 1; i >= 0; --i) {
+    for (i = (size_t)(max / scale); i > 0; --i) {
         for (j = 0; j < width; ++j)
-            if (i < (nlen[j] / scale))
+            if (i <= (size_t)(nlen[j] / scale))
                 (void)putchar('*');
             else
                 (void)putchar(' ');
-        if (i < (over / scale))
+        if (i <= (size_t)(over / scale))
             (void)putchar('*');
         else
             (void)putchar(' ');
+        (void)putchar('\n');
     }
 
      /* Print vertical axis labels */
 
-    for (i = 1; i <= width; ++i)
-        printf("%d", (i / 10) % 10);
+    for (i = 1; i <= (size_t)width; ++i)
+        printf("%u", ((unsigned)i / 10) % 10);
     if (over > 0)
         printf("%d", (MAXLEN / 10) % 10);
     (void)putchar('\n');
 
-    for (i = 1; i <= width; ++i)
-        printf("%d", i % 10);
+    for (i = 1; i <= (size_t)width; ++i)
+        printf("%u", (unsigned)i % 10);
     if (over > 0)
         printf("%d", MAXLEN % 10);
     (void)putchar('\n');
 
-    for (i = 1; i <= width; ++i)
+    for (i = 1; i <= (size_t)width; ++i)
         (void)putchar(' ');
     if (over > 0)
         (void)putchar('+');

@@ -7,8 +7,8 @@
 
 #define MAXSTACK 100 // Maximum depth of stack
 
-static int  cstackptr = 0;    // Stack pointer--next free stack position
-static char cstack[MAXSTACK]; // Array-based stack of char-typed values
+static size_t cstackptr = 0;    // Stack pointer--next free stack position
+static char   cstack[MAXSTACK]; // Array-based stack of char-typed values
 
 /*
  * capush(): Push a char-type value onto the top of the stack
@@ -36,7 +36,7 @@ char capop(void) {
  * casize(): Returns the size of the stack
  */
 
-static int casize(void) {
+static size_t casize(void) {
 	return cstackptr;
 }
 

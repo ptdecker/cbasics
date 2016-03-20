@@ -5,43 +5,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXLINE 1000 /* Note: MAXLINE includes terminating newline and null characters */
+#define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 
 /* getbigline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length
  */
 
-static int getbigline(char s[], int lim) {
+static size_t getbigline(char s[], size_t lim) {
 
-    char c;
-    int  len = 0;
-    int  slen = 0;
+    char   c;
+    size_t i = 0;
 
-    while ((c = getchar()) != EOF && c != '\n') {
-        if (slen < (lim - 2))
-            s[slen++] = c;
-        ++len;
-    }
+    while (--lim > 0 && (c = (char)getchar()) != (char)EOF && c != '\n')
+        s[i++] = c;
+    if (c == '\n')
+        s[i++] = c;
+    s[i] = '\0';
 
-    s[slen++] = '\n';
-    s[slen] = '\0';
-
-    return len;
+    return i;
 }
 
 /*
  * reverse: reverses a line
  */
 
-static void reverse(char s[], int length) {
+static void reverse(char s[]) {
 
-    char temp;
-    int i;
+    size_t i = 0;
+    size_t j = 0;
+    char   temp;
 
-    for (i = 0; i < (length - i - 1); i++) {
-        temp = s[i];
-        s[i] = s[length - i - 1];
-        s[length - i - 1] = temp;
+    // Find end of string
+    while (s[i] != '\0')
+        ++i;
+    --i;
+
+    // Leave terminating newline in place if they exist
+    if (i > 0 && s[i] == '\n')
+        --i;
+
+    // Bail out if there is nothing left to do (one or zero characters)
+    // NOTE: If we don't do this, we will segment fault
+    if (i < 1)
+        return;
+
+    // Reverse remaining in place
+    while (j < i) {
+        temp = s[j];
+        s[j] = s[i];
+        s[i] = temp;
+        i--;
+        j++;
     }
 }
 
@@ -49,15 +63,12 @@ static void reverse(char s[], int length) {
 
 int main(void) {
 
-    char line[MAXLINE] = "";
-    int len = 0;
+    char   line[MAXLINE] = "";
 
-    while ((len = getbigline(line, MAXLINE)) > 0) {
-        reverse(line, len);
-        printf("%s", line);
+    while (getbigline(line, MAXLINE) > 0) {
+        reverse(line);
+        printf("%s\n", line);
     }
 
     exit(EXIT_SUCCESS);
 }
-
-

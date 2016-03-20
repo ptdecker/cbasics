@@ -10,12 +10,12 @@
 
 int main(void) {
 
-    char c;
-    int  i;
-    int  j;
-    int  nltrs[NUMLTRS];
-    int  max = 0;
-    int  scale = 1;
+    char   c;
+    size_t i;
+    int    j;
+    int    nltrs[NUMLTRS];
+    int    max   = 0;
+    int    scale = 1;
 
     /* initialize letter count array */
 
@@ -47,7 +47,7 @@ int main(void) {
     /* print a value-labled scalled horizontal histogram */
 
     for (i = 0; i < NUMLTRS; ++i) {
-        printf(" %c: ", 'A' + i);
+        printf(" %c: ", 'A' + (char)i);
         for (j = 0; j < (nltrs[i] / scale); ++j)
             (void)putchar('*');
         printf(" (%d)\n", nltrs[i]);

@@ -23,9 +23,8 @@ all: strrindex
 clean:
 	rm -f $(ODIR)/*.o
 
-strrindex: $(OBJ)
+strrindex: $(ODIR)/strrindex.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
-	$(LINT) $(LINTFLAGS) $@.c
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $<

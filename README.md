@@ -85,6 +85,10 @@ The following test data files are provided to support testing the excercises:
 * comment.txt       - A C program containing test scenarios for 'nocomment.c'
 * linttest.txt      - Test file for 'minilint.c'
 
+##Style
+
+See *STYLE.md* for notes on overall style and approach to the code I'm presenting.
+
 ##License
 
 These solutions are copyright under the terms of the GNU GENERAL PUBLIC LICENSE v3 (see LICENSE) with the following exceptions:

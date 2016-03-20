@@ -34,7 +34,7 @@ static void eatchar(void) {
 
 int main(void) {
 
-    int commtype  = NOCOMM;  // Comment state
+    int  commtype = NOCOMM;  // Comment state
     bool indquote = false;   // Inside a double quoted string state
     bool insquote = false;   // Inside a single quoted string state
 

@@ -6,7 +6,7 @@
 
 #define MAXSTACK 100 // Maximum depth of stack
 
-static int    dstackptr = 0;    // Stack pointer--next free stack position
+static size_t dstackptr = 0;    // Stack pointer--next free stack position
 static double dstack[MAXSTACK]; // Array-based stack of double-typed values
 
 /*

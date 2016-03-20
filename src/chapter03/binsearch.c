@@ -11,13 +11,13 @@
 
 #define KEY_NOT_FOUND EOF
 
-static int binary_search(int x, int v[], int n) {
+static int binary_search(int x, int v[], size_t n) {
 
-	unsigned low  = 0;
-	unsigned high = (unsigned)n - 1;
+	size_t low  = 0;
+	size_t high = n - 1;
 
 	while (low < high) {
-    	unsigned mid = (low + high) >> 1;
+    	size_t mid = (low + high) >> 1;
     	if (v[mid] < x)
         	low  = mid + 1;
       	else
@@ -29,10 +29,10 @@ static int binary_search(int x, int v[], int n) {
 
 int main(void) {
 
-	int sorted[] = {13, 24, 34, 46, 52, 63, 77, 89, 91, 100};
-	int len = 10;
-	int index;
-	int key;
+	int    sorted[] = {13, 24, 34, 46, 52, 63, 77, 89, 91, 100};
+	size_t len = 10;
+	size_t index;
+	int    key;
 
 	printf("Array: ");
 	for (index = 0; index < len; index++)

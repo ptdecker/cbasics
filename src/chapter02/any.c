@@ -16,13 +16,13 @@
 
 static int any(char s[], char c[]) {
 
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     for (i = 0; s[i] != '\0'; i++)
         for (j = 0; c[j] != '\0'; j++)
             if (s[i] == c[j])
-                return i;
+                return (int)i;
 
     return -1;
 }

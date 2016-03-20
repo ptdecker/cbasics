@@ -15,8 +15,8 @@
 
 static void squeezechar(char s[], char c) {
 
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     for (i = 0, j = 0; s[i] != '\0'; i++)
         if (s[i] != c)
@@ -31,10 +31,10 @@ static void squeezechar(char s[], char c) {
 
 static void squeeze(char s[], char delete[]) {
 
-    int i;
-    int j;
-    int k;
-    bool keep;
+    size_t i;
+    size_t j;
+    size_t k;
+    bool   keep;
 
     for (i = 0, j = 0; s[i] != '\0'; i++) {
         keep = true;

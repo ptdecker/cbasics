@@ -22,11 +22,11 @@
  * Source: "The Standard C Library", P.J. Plauger, p.403
  */
 
-static int strlen(const char *s) {
+static size_t strlen(const char *s) {
 	const char *sc;
 	for (sc = s; *sc != '\0'; ++sc)
 		; // Empty
-	return (sc - s);
+	return (size_t)(sc - s);
 }
 
 /*
@@ -35,9 +35,9 @@ static int strlen(const char *s) {
 
 static void reverse(char s[]) {
 
-	int c;
-	int i;
-	int j;
+	char   c;
+	size_t i;
+	size_t j;
 
 	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
 		c    = s[i];
@@ -53,8 +53,8 @@ static void reverse(char s[]) {
 
 static void itoa(int n, char s[]) {
 
-	int i = 0;
-	int sign;
+	size_t i = 0;
+	int    sign;
 
 	// Save the sign and make it positive if its negative
 	sign = n;

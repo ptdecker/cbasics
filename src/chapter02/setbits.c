@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-static unsigned setbits(unsigned x, unsigned     p, unsigned n, unsigned y) {
+static unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y) {
     unsigned adjusted;  // Adjusted position (accounting for size)
     unsigned mask;      // Mask [of sze n]
     adjusted = (p + 1 - n);

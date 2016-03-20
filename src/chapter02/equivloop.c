@@ -11,19 +11,17 @@
  * getline(): read a line into s, return length
  */
 
-static int getbigline(char s[], int lim) {
-    int c = 0;
-    int i = 0;
-    while (i < lim - 1) {
-        c = getchar();
-        if (c == EOF)
-            break;
-        s[i] = c;
-        i++;
-        if (c == '\n')
-            break;
-    }
+static size_t getbigline(char s[], size_t lim) {
+
+    char   c;
+    size_t i = 0;
+
+    while (--lim > 0 && (c = (char)getchar()) != (char)EOF && c != '\n')
+        s[i++] = c;
+    if (c == '\n')
+        s[i++] = c;
     s[i] = '\0';
+
     return i;
 }
 
@@ -32,7 +30,7 @@ static int getbigline(char s[], int lim) {
  */
 
 static void copy(char to[], char from[]) {
-    int i = 0;
+    size_t i = 0;
     while ((to[i] = from[i]) != '\0') {
         ++i;
     }
@@ -42,10 +40,10 @@ static void copy(char to[], char from[]) {
 
 int main(void) {
 
-    int len;
-    int max = 0;
-    char line[MAXLINE] = "";
-    char longest[MAXLINE] = "";
+    size_t len;
+    size_t max = 0;
+    char   line[MAXLINE] = "";
+    char   longest[MAXLINE] = "";
 
     while ((len = getbigline(line, MAXLINE)) > 0)
         if (len > max) {

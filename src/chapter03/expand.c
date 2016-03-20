@@ -17,9 +17,10 @@
 
 static void expand(char source[], char target[]) {
 
-	int i, j;                            // loop indexes
-	int buffer[3] = {'\0', '\0', '\0'};  // a buffer used to track up to three characters of input
-	int bufflen = 0;                     // number of characters in the buffer
+	size_t i;
+	size_t j;                            // loop indexes
+	int    buffer[3] = {'\0', '\0', '\0'};  // a buffer used to track up to three characters of input
+	size_t bufflen = 0;                     // number of characters in the buffer
 
 	// Spin through our input array
 	for (i = 0, j = 0; source[i] != '\0'; i++) {

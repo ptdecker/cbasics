@@ -10,12 +10,12 @@
 
 int main(void) {
 
-    char c;
-    int  i;
-    int  j;
-    int  nltrs[MAXLTRS];
-    int max = 0;
-    int scale = 1;
+    char   c;
+    size_t i;
+    int    j;
+    int    nltrs[MAXLTRS];
+    int    max   = 0;
+    int    scale = 1;
 
     /* initialize letter count array */
 
@@ -46,9 +46,9 @@ int main(void) {
 
     /* print vertical histogram */
 
-    for (i = (max / scale) - 1; i >= 0; --i) {
+    for (i = (size_t)(max / scale); i > 0; --i) {
         for (j = 0; j < MAXLTRS; ++j)
-            if (i < (nltrs[j] / scale))
+            if (i <= (size_t)(nltrs[j] / scale))
                 (void)putchar('*');
             else
                 (void)putchar(' ');
@@ -58,7 +58,7 @@ int main(void) {
     /* print axis labels */
 
     for (i = 0; i < MAXLTRS; ++i)
-        (void)putchar(i + 'A');
+        (void)putchar((char)i + 'A');
     (void)putchar('\n');
 
     /* print scale */

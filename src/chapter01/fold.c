@@ -20,8 +20,8 @@ static char line[LINEWIDTH];
  * Prints the line until 'pos' column is reached
  */
 
-static void printline(int pos) {
-    int i;
+static void printline(size_t pos) {
+    size_t i;
     for (i = 0; i < pos; i++)
         (void)putchar(line[i]);
     if (pos > 0)
@@ -33,7 +33,7 @@ static void printline(int pos) {
  * Expands a tab into TABSIZE number of blanks
  */
 
-static int expandtab(int pos) {
+static size_t expandtab(size_t pos) {
     line[pos] = ' ';
     for (++pos; pos < LINEWIDTH && pos % TABSIZE != 0; pos++)
         line[pos] = ' ';
@@ -51,7 +51,7 @@ static int expandtab(int pos) {
  * the line looking for the first space character and returns its position
  */
 
-static int findblank(int pos) {
+static size_t findblank(size_t pos) {
     while (pos > 0 && line[pos] != ' ')
         pos--;
     if (pos == 0)
@@ -67,10 +67,10 @@ static int findblank(int pos) {
  * leaving any text after 'pos' still in the buffer.
  */
 
-static int squish(int pos) {
-    int i = 0;
-    int j;
-    if (pos <= 0 || pos >= LINEWIDTH)
+static size_t squish(size_t pos) {
+    size_t i = 0;
+    size_t j;
+    if (pos == 0 || pos >= LINEWIDTH)
         return 0;
     for (j = pos; j < LINEWIDTH; ++j) {
         line[i] = line[j];
@@ -81,8 +81,8 @@ static int squish(int pos) {
 
 int main(void) {
 
-    int c;
-    int pos = 0;
+    int    c;
+    size_t pos = 0;
 
     while ((c = getchar()) != EOF) {
         line[pos] = c;

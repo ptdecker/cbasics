@@ -18,15 +18,15 @@
 
 static int strindex(char s[], char t[]) {
 
-	int i;
-	int j;
-	int k;
+	size_t i;
+	size_t j;
+	size_t k;
 
 	for (i = 0; s[i] != '\0'; i++) {
 		for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
 			; // Empty
 		if (k > 0 && t[k] == '\0')
-			return i;
+			return (int)i;
 	}
 
 	return NOT_FOUND;
@@ -34,19 +34,23 @@ static int strindex(char s[], char t[]) {
 
 /*
  * strrindex(): Returns index of rightmost 't' inside 's' or -1 if not found
+ *
+ * Note: The (i - 1) expression is used to adjust for counting down on an unsigned
+ * type (size_t) which cannot go negative so the traditional test of "i >= 0" for
+ * completion will not work.
  */
 
 static int strrindex(char s[], char t[]) {
 
-	int i;
-	int j;
-	int k;
+	size_t i;
+	size_t j;
+	size_t k;
 
-	for (i = (int)(strlen(s) - strlen(t)); s[i] >= 0; i--) {
-		for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
+	for (i = (strlen(s) - strlen(t) + 1); i > 0; i--) {
+		for (j = (i - 1), k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
 			; // Empty
 		if (k > 0 && t[k] == '\0')
-			return i;
+			return (int)(i - 1);
 	}
 
 	return NOT_FOUND;
