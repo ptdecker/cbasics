@@ -2,6 +2,9 @@
 * A basic reverse polish-notation calculator
 */
 
+//TODO: Consider implementing this using GMP (GNU Muliple Precision Aritmetic Library
+//TODO: Provide Stirling's Approximation for large factorials
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -64,6 +67,7 @@ int main() {
 				if (dasize() < 2)
 					printf("Less than two items are on the stack\n");
 				else {
+					//TODO: Check floating-point library state
 					if (fabs(dapeek() - 0) < DBL_EPSILON)
 						printf("Error: Attempted to divide by zero.\n");
 					else {
@@ -76,6 +80,7 @@ int main() {
 				if (dasize() < 2)
 					printf("Less than two items are on the stack\n");
 				else {
+					//TODO: Check floating-point library state
 					if (fabs(dapeek() - 0) < DBL_EPSILON)
 						printf("Error: Attempted to divide by zero.\n");
 					else {

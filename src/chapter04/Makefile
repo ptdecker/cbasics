@@ -1,6 +1,6 @@
 BIN = ../../bin
 ODIR = ../../obj
-SUBDIRS = rpncalc4-03 rpncalc4-04
+SUBDIRS = rpncalc4-03 rpncalc4-04 rpncalc4-05
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
@@ -18,6 +18,7 @@ all: atof strrindex
 		cd $$i; \
 		make all; \
 		cd ..; \
+		rm -f $(ODIR)/*.o; \
 	done
 
 clean:
