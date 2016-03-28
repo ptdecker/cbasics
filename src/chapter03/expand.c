@@ -8,9 +8,9 @@
  *       that are decending such as "z-a". The solution below does handle these.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define MAXSTRING 256

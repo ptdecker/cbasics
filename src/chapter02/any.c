@@ -5,9 +5,9 @@
  * If none of the characters in the other string are found, it returns '-1'.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /*
  * any(): Returns the first location in string s[] where any of the characters in string c[]

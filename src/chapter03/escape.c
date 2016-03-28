@@ -4,8 +4,8 @@
  * Converts special characters in a string to and from escape sequences
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static void escape(char source[], char target[]) {
 	size_t i;

@@ -5,11 +5,11 @@
 * The buffer is implemented as a stack
 */
 
-#include <stdio.h>
+#include <ctype.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 #define MAXSTR   100
 #define MAXSTACK 100 // Maximum depth of buffer (stack)

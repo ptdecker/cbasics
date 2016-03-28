@@ -5,9 +5,9 @@
  * starting at position p, have been set to the right most bits in another value.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y) {
     unsigned adjusted;  // Adjusted position (accounting for size)

@@ -5,12 +5,12 @@
 //TODO: Consider implementing this using GMP (GNU Muliple Precision Aritmetic Library
 //TODO: Provide Stirling's Approximation for large factorials
 
+#include <ctype.h>
+#include <float.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <float.h>
 #include <string.h>
-#include <ctype.h>
 
 #define MAXOP   100 // Maximum size of operand and operators
 #define MAXVARS  26 // Maximum number of variables (26 letters)

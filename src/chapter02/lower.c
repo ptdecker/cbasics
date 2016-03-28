@@ -2,8 +2,8 @@
  * lower()
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
  * lower(): Converts a character to lower space

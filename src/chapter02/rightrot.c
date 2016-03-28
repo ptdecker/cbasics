@@ -8,9 +8,9 @@
  *       right most bit becomes the left most bit in the result.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /*
  * wordlength(): Helper fuction to determine the word length of the host

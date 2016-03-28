@@ -6,9 +6,9 @@
  *       able to figure this one out from scratch myself.
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #define LINEWIDTH  20
 #define TABSIZE    4

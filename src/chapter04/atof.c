@@ -2,9 +2,9 @@
 * atof(): Converts a string to a double with scientific notation support
 */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /*
  * atof(): Converts a string to a double with scientific notation

@@ -2,10 +2,10 @@
  * Hexidecimal to integer converter (good to 32 bits)
  */
 
+#include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <ctype.h>
 
 static unsigned int htoi(char s[]) {
 

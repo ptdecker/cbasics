@@ -5,9 +5,9 @@
  * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAXSTRING 256
 

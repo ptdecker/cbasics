@@ -4,9 +4,9 @@
 * A trivial lexer that gets and operator or operand from standard input
 */
 
-#include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 
 #define NUMBER '0'

@@ -41,9 +41,9 @@
  * 
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define FAST 1  // Comment out to compile the slow version
 

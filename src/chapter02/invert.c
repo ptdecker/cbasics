@@ -4,9 +4,9 @@
  * Inverts the bits starting at a specified position
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static unsigned invert(unsigned x, unsigned  p, unsigned n) {
     unsigned adjusted;  // Adjusted position (accounting for size)

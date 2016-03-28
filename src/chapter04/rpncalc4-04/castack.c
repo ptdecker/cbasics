@@ -2,8 +2,8 @@
 * Array-based char-type (floating point) stack (last in, first out "LIFO")
 */
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #define MAXSTACK 100 // Maximum depth of stack
 

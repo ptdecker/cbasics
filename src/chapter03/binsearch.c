@@ -6,8 +6,8 @@
  * 	- http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define KEY_NOT_FOUND EOF
 

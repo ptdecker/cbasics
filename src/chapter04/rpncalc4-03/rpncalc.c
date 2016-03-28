@@ -2,10 +2,10 @@
 * A basic reverse polish-notation calculator
 */
 
+#include <float.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <float.h>
 
 #define MAXOP  100 // Maximum size of operand and operators
 #define NUMBER '0' // Signal for a NUMBER

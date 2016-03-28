@@ -2,11 +2,11 @@
  * Print the limits of the standard C type
  */
 
+#include <float.h>
+#include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
-#include <float.h>
-#include <stdbool.h>
 
 int main(void) {
 
