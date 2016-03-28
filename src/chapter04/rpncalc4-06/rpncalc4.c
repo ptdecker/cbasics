@@ -10,10 +10,12 @@
 #include <math.h>
 #include <float.h>
 #include <string.h>
+#include <ctype.h>
 
-#define MAXOP  100 // Maximum size of operand and operators
-#define NUMBER '0' // Signal for a NUMBER
-#define NAME   'n' // Signal for a NAME
+#define MAXOP   100 // Maximum size of operand and operators
+#define MAXVARS  26 // Maximum number of variables (26 letters)
+#define NUMBER  '0' // Signal for a NUMBER
+#define NAME    'n' // Signal for a NAME
 
 // External declarations
 
@@ -134,13 +136,26 @@ static void mathfun(char s[]) {
 
 int main() {
 
+	double vars[MAXVARS];        // Variables
+	size_t i;                    // Array indexes
 	char   operator[MAXOP] = ""; // Operator
 	char   optype;               // Operator type
 	double operand;              // Temporary operand
+	double lastvalue = 0;        // Last calculated value
 	char   lastop = '\0';        // Last operand
+
+	// Clear variables
+
+	for(i = 0; i < MAXVARS; i++)
+		vars[i] = 0.0L;
+
+	// Display title and initial prompt
 
 	printf("RPN Calculator (use 'Ctrl-D' or enter \"quit\" to exit)\n\n");
 	printf("> ");
+
+	// Start the REPL (read, evaluate, and print loop)
+
 	while ((optype = getop(operator)) != (char)EOF) {
 		switch(optype) {
 			case NUMBER:
@@ -200,29 +215,44 @@ int main() {
 			case 'e':
 				dapush(2.71828183L);
 				break;
-			case 'P':
+			case 'p':
 				if (dasize() > 0)
 					printf("%.8g\n", dapeek());
 				break;
-			case 'D':
+			case 'd':
 				dadup();
 				break;
-			case 'S':
+			case 's':
 				daswap();
 				break;
-			case 'L':
+			case 'l':
 				dalist();
 				break;
-			case 'C':
+			case 'c':
 				daclear();
 				break;
 			case '\n':
-				if (lastop != 'P' && lastop != 'L' && dasize() > 0)
-					printf("%.8g\n", dapeek());
+				lastvalue = dapeek();
+				if (lastop != 'p' && lastop != 'l' && dasize() > 0)
+					printf("%.8g\n", lastvalue);
 				printf("> ");
 				break;
+			case '=':
+				(void)dapop();  // gets rid of extra push on the stack
+				if (isupper(lastop))
+					vars[(size_t)(lastop - 'A')] = dapop();
+				else
+					printf("No variable name on stack\n");
+				break;
+			case 'v':
+				dapush(lastvalue);
+				break;
 			default:
-				printf("Error: Unknown command '%s'\n", operator);
+				if (isupper(optype))
+					// the value we push will be immediately popped if the next command is '='
+					dapush(vars[(size_t)(optype - 'A')]);
+				else
+					printf("Error: Unknown command '%s'\n", operator);
 		} // switch
 		lastop = optype;
 	} // while
