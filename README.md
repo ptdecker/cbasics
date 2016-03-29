@@ -68,6 +68,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 4-05 - rpncalc4-05\*.c:      RPN Calculator (rpncalc3) extended to support math functions
 * 4-06 - rpncalc4-06\*.c:      RPN Calculator (rpncalc4) extended to support variables
 * 4-07 - ungets.c:             Implements ungets() that returns a whole string to the input buffer
+* 4-08 - singlegetch.c:        Implements getch() and ungetch() that support just a single char buffer
+* 4-09 - ungetseof.c:          Implements getch(), ungetch(), and ungets() in a maner supporting EOF
+* 4-10 - rpncalc4-10\*.c:      RPN Calculator (rpncalc5) based upon whole line handling
 
 ##Extras
 
