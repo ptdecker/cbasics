@@ -32,6 +32,7 @@ binsearch: $(ODIR)/binsearch.o
 # ignore linting on this one.
 escape:
 	$(CC) $(CFLAGS) escape.c -o $(BIN)/$@
+	rm -r $(BIN)/escape.dSYM
 
 expand: $(ODIR)/expand.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@

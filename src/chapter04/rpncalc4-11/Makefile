@@ -5,18 +5,18 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = rpncalc0.o lexer.o dastack.o castack.o
+_OBJ = rpncalc6.o lexer.o dastack.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: rpncalc0
+all: rpncalc6
 
 clean:
 	rm -f $(ODIR)/*.o
 
-rpncalc0: $(OBJ)
+rpncalc6: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
 	$(LINT) $(LINTFLAGS) $@.c
 

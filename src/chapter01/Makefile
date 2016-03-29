@@ -60,6 +60,7 @@ eofvalue: $(ODIR)/eofvalue.o
 # all sorts of warnings that are okay to ignore. And, splint hates it too.
 escapechars:
 	$(CC) -std=c99 -w -g -I. escapechars.c -o $(BIN)/$@
+	rm -r $(BIN)/escapechars.dSYM
 
 fold: $(ODIR)/fold.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@

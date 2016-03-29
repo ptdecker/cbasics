@@ -13,6 +13,8 @@ Style and Approach Notes
 
 * I love state machines so several of my solution approaches leverage them. One example is *minilint.c* in from chapter one. (T&G) does not go this route so my solutions to these exercises vary significantly from the ones offered by this source.
 
+* Following Plauger's advice, standard library #includes are ordered alphabetically
+
 ## Source
 
 (K&R) "The C Programming Language, 2nd Edition", Brian W. Kernighan, Dennis M. Ritchie.

@@ -63,19 +63,20 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 4-01 - strrindex.c:          Returns the position of the rightmost occurance of text in a string
 * 4-02 - atof.c:               Implements atof() string to double converter with scientific notation support
-* 4-03 - rpncalc4-03\*.c:      RPN Calculator supporting modulus and negative number support
-* 4-04 - rpncalc4-04\*.c:      RPN Calculator (rpncalc2) extended to include stack inspection and manipulation
-* 4-05 - rpncalc4-05\*.c:      RPN Calculator (rpncalc3) extended to support math functions
-* 4-06 - rpncalc4-06\*.c:      RPN Calculator (rpncalc4) extended to support variables
+* 4-03 - rpncalc4-03/*.c:      RPN Calculator supporting modulus and negative number support
+* 4-04 - rpncalc4-04/*.c:      RPN Calculator (rpncalc2) extended to include stack inspection and manipulation
+* 4-05 - rpncalc4-05/*.c:      RPN Calculator (rpncalc3) extended to support math functions
+* 4-06 - rpncalc4-06/*.c:      RPN Calculator (rpncalc4) extended to support variables
 * 4-07 - ungets.c:             Implements ungets() that returns a whole string to the input buffer
 * 4-08 - singlegetch.c:        Implements getch() and ungetch() that support just a single char buffer
 * 4-09 - ungetseof.c:          Implements getch(), ungetch(), and ungets() in a maner supporting EOF
-* 4-10 - rpncalc4-10\*.c:      RPN Calculator (rpncalc5) based upon whole line handling
+* 4-10 - rpncalc4-10/*.c:      RPN Calculator (rpncalc5) based upon whole line handling
+* 4-11 - rpncalc4-11/*.c:      RPN calculator (rpncacl6) that uses 'static' to negate needing ungetch()
 
 ##Extras
 
 * makebigline.c: Outputs a 3001 character text line
-* rpncalc\*.c:   Unadulterted (pre-exercise) RPN Calculator
+* rpncalc/*.c:   Unadulterted (pre-exercise) RPN Calculator (rpncalc0)
 * saveasascii.c: Strips input of everything except regular values
 * size.c:        Counts the number of characters in the input
 * testupcase.c:  Tests a technique to convert uppercase ASCII letters to lowercase
