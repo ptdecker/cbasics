@@ -8,7 +8,7 @@ the book.
 
 Kernighan and Ritchie The C Programming Language Code Examples
 
-### Chapter 1
+### Chapter 1 - "A Tutorial Introduction"
 
 * 1-01 - helloworld.c:         Hello World
 * 1-02 - escapechars.c:        All escape characters
@@ -37,7 +37,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 1-23 - nocomment.c:          Removes all comments from a C program
 * 1-24 - minilint.c:           Performs rudementary syntax checks on a C program
 
-### Chapter 2
+### Chapter 2 - "Types, Operators, and Expressions"
 
 * 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
 * 2-02 - equivloop.c:          For-loop equivalent withouth using logical operators
@@ -50,7 +50,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 2-09 - fastbitcount.c:       Implements a faster bitcount() using a two's complement property
 * 2-10 - lower.c:              Implements a lower() using a trinary conditional
 
-### Chapter 3
+### Chapter 3 - "Control Flow"
 
 * 3-01 - binsearch.c:          Implements a binary search with only one test inside the main loop
 * 3-02 - escape.c:             Tools to handle escape characters (bi-directionally)
@@ -59,7 +59,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 3-05 - itob.c:               Implements itob() that converst a number to a string of a particular base
 * 3-06 - itoaw.c:              Implements itoaw() that cconvers number to string of a minimum width
 
-### Chapter 4
+### Chapter 4 - "Functions and Program Structure"
 
 * 4-01 - strrindex.c:          Returns the position of the rightmost occurance of text in a string
 * 4-02 - atof.c:               Implements atof() string to double converter with scientific notation support
@@ -76,6 +76,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 4-13 - reverserecursive.c:   A recursive implementation of reverse()
 * 4-14 - swapmacro.c:          A version of reverse() that uses a macro for swaping two values
 
+### Chapter 5 - "Pointers and Arrays"
+
+* 5-01 - getint.c:             Implements getint() that returns an integer 
+
 ##Extras
 
 * makebigline.c: Outputs a 3001 character text line
@@ -89,15 +93,21 @@ Kernighan and Ritchie The C Programming Language Code Examples
 The following test data files are provided to support testing the excercises:
 
 * bigline.txt       - One really big single line of text (3001 chars)
+* bignegative.txt   - A big (out of range) negative integer
+* comment.txt       - A C program containing test scenarios for 'nocomment.c'
 * empty.txt         - One empty line (just a '\n')
 * extraspecials.txt - Contains embedded backspace, tabs, and backslashes
 * huckfinn.txt      - Project Gutenberg copy of Adventures of Huckleberry Finn by Mark Twain
+* integer.txt       - An integer
+* largestnegint.txt - Largest negative integer (per typelimits.c)
+* largestposint.txt - Largest positive integer (per typelimits.c)
+* linttest.txt      - Test file for 'minilint.c'
+* negativeint.txt   - A negative integer (with some whitespace)
+* notanum.txt       - Not a number
 * oneline.txt       - One line of text but with no terminating newline ('\n')
 * test1.txt         - Increasing number of characters per line with variations at the end
 * zero.txt          - A totally empty file (no data)
 * extraspecials.txt - Contains extra spaces, backslashes, tabs, and backspace characters
-* comment.txt       - A C program containing test scenarios for 'nocomment.c'
-* linttest.txt      - Test file for 'minilint.c'
 
 ##Style
 

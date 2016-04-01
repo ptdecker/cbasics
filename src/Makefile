@@ -4,7 +4,7 @@
 #      http://www.eecs.wsu.edu/~cs224/notes/makefile.html
 
 ODIR = ../obj
-SUBDIRS = chapter01 chapter02 chapter03 chapter04 extras
+SUBDIRS = chapter01 chapter02 chapter03 chapter04 chapter05 extras
 
 .PHONY: all clean
 
