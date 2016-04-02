@@ -80,6 +80,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 5-01 - getint.c:             Implements getint() that returns an integer (w/limit checks)
 * 5-02 - getfloat.c:           Implements getfloat() that returns a floating point
+* 5-03 - strcat.c:             Implements pointer version of strcat()
+* 5-04 - strend.c:             Implements strend() that returns true if one string is at the end of another
 
 ##Extras
 

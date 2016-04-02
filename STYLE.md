@@ -1,6 +1,8 @@
 Style and Approach Notes
 ===
 
+* The vast majority of these exercise solutions do not represent safe coding practicies with respect to buffer overflow protection. Most string operations are open ended. The solutions were kept this way to be consistent with the K&R lessons but proper considerations should be made towards fixing this before usage in production systems.
+
 * Per Plauger, _size_t_ is used as the type for all array index. Refere to Plauger p.219 for an excellent discussion as to why this is done as opposed to the _int_ type used in most examples from (K&R) and (T&G).
 
 * _main(void)_ is always used when arguments passed to the program are not used. None of the primary reference sources [(K&R), (T&G), nor (Plauger)] use this practice, but it is good as an indicator that these are ignored.
