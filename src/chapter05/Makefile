@@ -6,13 +6,13 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = getint.o
+_OBJ = getfloat.o getint.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: getint
+all: getint getfloat
 	@for i in $(SUBDIRS); do \
 		echo "make all in $$i..."; \
 		cd $$i; \
@@ -23,6 +23,9 @@ all: getint
 
 clean:
 	rm -f $(ODIR)/*.o
+
+getfloat: $(ODIR)/getfloat.o
+	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
 
 getint: $(ODIR)/getint.o
 	$(CC) $(CFLAGS) $^ -o $(BIN)/$@

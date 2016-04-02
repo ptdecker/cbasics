@@ -1,12 +1,12 @@
 /*
-* getint.c: Implements getint() that returns an integer from the input string
+* getint.c: Implements getfloat() that returns a floating point from the input string
 *
-* NOTE: Also includes ability to sense integer number range limit overflows which the K&R
-*       text does not call for but could be most helpful.
+* NOTE: In addition, scientific notation is supported in the solution.
 */
 
 #include <ctype.h>
-#include <limits.h>
+#include <float.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,20 +38,19 @@ static void ungetch(char c) {
 }
 
 /*
- * getint(): gets an integer from the input string
+ * getint(): gets a double floating point from the input string
  *
  * Returns:  EOF     if end of file
  *           0       if next input was not a number
  *           +       if input was a valid number
- *           INT_MAX if postive out of range was sensed
- *           INT_MIN if negative out of range was sensed
  */
 
-static int getint(int *pn) {
+static int getdouble(double *pn) {
 
 	int c;
 	int sign;
-	int prior = 0;
+	double power = 1.0L;
+	int sciexp = 1;
 
 	// Skip white space
 
@@ -71,6 +70,7 @@ static int getint(int *pn) {
 
 	sign = (c == (int)'-') ? -1 : 1;
 
+
 	// And move on to the next character if we had a sign at all
 
 	if (c == (int)'+' || c == (int)'-') {
@@ -84,24 +84,49 @@ static int getint(int *pn) {
 			ungetch((sign < 0) ? '-' : '+');
 			return 0;
 		}
-
 	}
 
-	// Finally, read in the number itself
+	// Read in the natural number portion
 
-	*pn = 0;
-	for (*pn = 0; isdigit(c); c = getch()) {
-		prior = *pn;
-		*pn = 10 * *pn + (c - (int)'0');
-		// *pn should by definition be greater than prior, if we went negative than we overflowed
-		if (*pn < prior) {
-			return (sign > 0) ? INT_MAX : INT_MIN;
+	for (*pn = 0; isdigit(c); c = getch())
+		*pn = 10L * *pn + (double)(c - (int)'0');
+
+
+	// Read the fractional portion first skipping the '.' then proceeding if applicable
+
+	if (c == '.') {
+		c = getch();
+		if (c == EOF)
+			return c;
+		for (power = 1L; isdigit(c); c = getch()) {
+			*pn = 10L * *pn + (double)(c - (int)'0');
+			power *= 10L;
 		}
 	}
 
 	// Finish off by applying the sign we saved earlier
 
-	*pn *= sign;
+	*pn = sign * *pn / power;
+
+	// Read the scientific notation portion if present
+	if (c == 'e' || c == 'E') {
+		c = getch();
+		if (c == EOF)
+			return c;
+		sign = (c == '-') ? -1 : 1;
+		if (c == '+' || c == '-')
+			c = getch();
+		if (c == EOF)
+			return c;
+		for (sciexp = 0; isdigit(c); c = getch())
+			sciexp = 10 * sciexp + (int)(c - '0');
+		if (sign == 1)
+			while (sciexp-- > 0)
+				*pn *= 10;
+		else
+			while (sciexp-- > 0)
+				*pn /= 10;
+	}
 
 	// So long as last thing we read was EOF, return the last thing we
 	// read back to the input buffer so we can deal with it next however
@@ -114,25 +139,21 @@ static int getint(int *pn) {
 }
 
 int main(void) {
-	int mynum = 0;
-	switch (getint(&mynum)) {
-		case EOF:
-			printf("Reached end of file--no number found\n");
-			break;
-		case 0:
-			printf("Next thing (besides whitespace) is not a number\n");
-			break;
-		case INT_MIN:
-			printf("Negative range error\n");
-			break;
-		case INT_MAX:
-			printf("Positive range error\n");
-			break;
-		default:
-			printf("Number found: %d\n", mynum);
-			break;
-	}
+
+	double mynum = 0L;
+	int errcode = 0;
+
+	errcode = getdouble(&mynum);
+
+	if (errcode == EOF)
+		printf("Reached end of file--no number found\n");
+	else if (errcode == 0)
+		printf("Next thing (besides whitespace) is not a number\n");
+	else
+		printf("Number found: %g\n", mynum);
+
 	if (bufferptr > 0)
 		printf("Input buffer contains: '%s'\n", buffer);
+
 	exit(EXIT_SUCCESS);
 }

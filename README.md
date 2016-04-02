@@ -78,7 +78,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 ### Chapter 5 - "Pointers and Arrays"
 
-* 5-01 - getint.c:             Implements getint() that returns an integer 
+* 5-01 - getint.c:             Implements getint() that returns an integer (w/limit checks)
+* 5-02 - getfloat.c:           Implements getfloat() that returns a floating point
 
 ##Extras
 
@@ -90,7 +91,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 ##Test Files
 
-The following test data files are provided to support testing the excercises:
+The following test data files are provided to support manually testing the exercises. Specifically, the ones that draw from standard input can be manually tested with these.
 
 * bigline.txt       - One really big single line of text (3001 chars)
 * bignegative.txt   - A big (out of range) negative integer
@@ -98,6 +99,8 @@ The following test data files are provided to support testing the excercises:
 * empty.txt         - One empty line (just a '\n')
 * extraspecials.txt - Contains embedded backspace, tabs, and backslashes
 * huckfinn.txt      - Project Gutenberg copy of Adventures of Huckleberry Finn by Mark Twain
+* float.txt         - A floater
+* floatexp.txt      - A float with exponent.
 * integer.txt       - An integer
 * largestnegint.txt - Largest negative integer (per typelimits.c)
 * largestposint.txt - Largest positive integer (per typelimits.c)

@@ -13,7 +13,7 @@
 static double myatof(char s[]) {
 
 	double val;
-	double power  = 1;
+	double power  = 1.0L;
 	int    sciexp = 1;
 	size_t i;
 	int    sign;
@@ -36,7 +36,7 @@ static double myatof(char s[]) {
 	// Read the fractional portion first skipping the '.' then proceeding if applicable
 	if (s[i] == '.') {
 		i++;
-		for (power = 1; isdigit(s[i]); i++) {
+		for (power = 1L; isdigit(s[i]); i++) {
 			val = 10L * val + (double)(s[i] - '0');
 			power *= 10L;
 		}
