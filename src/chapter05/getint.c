@@ -5,6 +5,10 @@
 *       text does not call for but could be most helpful.
 */
 
+//TODO: I don't really like how this approach handles EOF. For an input file that just has a number with
+//      no end of line, just EOF, it returns an EOF status so no real way to know if a valid number
+//      was found.
+
 #include <ctype.h>
 #include <limits.h>
 #include <stdio.h>
@@ -21,20 +25,20 @@ static char   buffer[MAXSTACK]; // Array-based buffer of char-typed values
  * getch(): gets a character from the buffer
  */
 
-static char getch(void) {
-	return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
+static int getch(void) {
+	return (bufferptr > 0) ? (int)buffer[--bufferptr] : getchar();
 }
 
 /*
  * ungetch(): ungets a character from the buffer
  */
 
-static void ungetch(char c) {
+static void ungetch(int c) {
 	if (bufferptr >= MAXSTACK) {
 		printf("ungetch(): buffer overflow\n");
 		exit(EXIT_FAILURE);
 	} else
-		buffer[bufferptr++] = c;
+		buffer[bufferptr++] = (char)c;
 }
 
 /*
@@ -117,7 +121,7 @@ int main(void) {
 	int mynum = 0;
 	switch (getint(&mynum)) {
 		case EOF:
-			printf("Reached end of file--no number found\n");
+			printf("Reached end of file, number is: %d\n", mynum);
 			break;
 		case 0:
 			printf("Next thing (besides whitespace) is not a number\n");

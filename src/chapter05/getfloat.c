@@ -146,7 +146,7 @@ int main(void) {
 	errcode = getdouble(&mynum);
 
 	if (errcode == EOF)
-		printf("Reached end of file--no number found\n");
+		printf("Reached end of file--number returned is: %g\n", mynum);
 	else if (errcode == 0)
 		printf("Next thing (besides whitespace) is not a number\n");
 	else
