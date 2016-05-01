@@ -59,6 +59,6 @@ int main(void) {
         reverse(line);
         printf("%s", line);
     }
-    (voic)putchar('\n');
+    (void)putchar('\n');
     exit(EXIT_SUCCESS);
 }

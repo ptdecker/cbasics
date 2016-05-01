@@ -9,11 +9,10 @@
 
 static unsigned int htoi(char s[]) {
 
-    int  hexdigit = 0;
-    int  i = 0;
-    int  clower;
-    bool inhex = true;
-    unsigned int n = 0;
+    int      hexdigit = 0;
+    int      i        = 0;
+    bool     inhex    = true;
+    unsigned n        = 0;
 
     // Skip leading '0x' or '0X' if it is present
 
@@ -26,7 +25,7 @@ static unsigned int htoi(char s[]) {
     // Convert remaining hex characters
 
     for ( ; inhex; i++) {
-        clower = tolower(s[i]);
+        int clower = tolower(s[i]);
         if (isdigit(clower))
             hexdigit = s[i] - '0';
         else if ('a' <= clower && clower <= 'f')

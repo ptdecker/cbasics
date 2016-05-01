@@ -30,10 +30,11 @@ static size_t getbigline(char s[], size_t lim) {
  */
 
 static void copy(char to[], char from[]) {
+
     size_t i = 0;
-    while ((to[i] = from[i]) != '\0') {
+
+    while ((to[i] = from[i]) != '\0')
         ++i;
-    }
 }
 
 /* Main */
@@ -50,6 +51,7 @@ int main(void) {
             max = len;
             copy(longest, line);
         }
+
     if (max > 0)
         printf("%s", longest);
 

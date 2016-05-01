@@ -17,11 +17,13 @@
  */
 
 static unsigned wordlength(void) {
+
     unsigned i;
-    unsigned v;
-    v = (unsigned)~0x00;
+    unsigned v = (unsigned)~0x00;
+
     for(i = 1; (v = v >> 1) > 0; i++)
         ;
+
     return i;
 }
 
@@ -30,6 +32,7 @@ static unsigned wordlength(void) {
  */
 
 static int rightrot(int x, unsigned n) {
+
     unsigned rbit; // Rightmost bit
 
     while (n-- > 0) {
@@ -37,6 +40,7 @@ static int rightrot(int x, unsigned n) {
         x = (int)((unsigned)x >> 1);
         x = (int)((unsigned)x | rbit);
     }
+
     return x;
 }
 
@@ -45,8 +49,11 @@ static int rightrot(int x, unsigned n) {
  */
 
 static void printbits(unsigned x) {
+
     unsigned i;
+
     printf("0b");
+
     for(i = (unsigned)(8 * sizeof(int)); i > 0; i--)
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }

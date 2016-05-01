@@ -28,10 +28,11 @@ static size_t getbigline(char s[], size_t lim) {
 /* copy: copy 'from' into 'to'; assume to is big enough */
 
 static void copy(char to[], char from[]) {
+
     size_t i = 0;
-    while ((to[i] = from[i]) != '\0') {
+
+    while ((to[i] = from[i]) != '\0')
         ++i;
-    }
 }
 
 /* Main */

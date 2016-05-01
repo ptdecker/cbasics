@@ -18,7 +18,7 @@
 static void expand(char source[], char target[]) {
 
 	size_t i;
-	size_t j;                            // loop indexes
+	size_t j;                               // loop indexes
 	int    buffer[3] = {'\0', '\0', '\0'};  // a buffer used to track up to three characters of input
 	size_t bufflen = 0;                     // number of characters in the buffer
 
