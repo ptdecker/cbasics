@@ -1,5 +1,7 @@
 /*
  * squeeze.c
+ *
+ * Pointer version
  */
 
 #include <stdbool.h>
@@ -13,39 +15,35 @@
  *       and squeeze() is ther alternate version suggested by the excercises.
  */
 
-static void squeezechar(char s[], char c) {
+static void squeezechar(char *s, char c) {
 
-    size_t i;
-    size_t j;
+    char *squeezed = s;
 
-    for (i = 0, j = 0; s[i] != '\0'; i++)
-        if (s[i] != c)
-            s[j++] = s[i];
+    for ( ; *s != '\0'; s++)
+        if (*s != c)
+            *squeezed++ = *s;
 
-    s[j] = '\0';
+    *squeezed = '\0';
 }
 
 /*
  * squeeze(): Deletes all characters contained in delete[] from s[]
  */
 
-static void squeeze(char s[], char delete[]) {
+static void squeeze(char *s, char *delete) {
 
-    size_t i;
-    size_t j;
+    char *squeezed  = s;
 
-    for (i = 0, j = 0; s[i] != '\0'; i++) {
-
-        size_t k;
-        bool   keep;
-        
-        for (keep = true, k = 0; delete[k] != '\0' && keep; k++)
-            keep = (s[i] != delete[k]);
+    for ( ; *s != '\0'; s++) {
+        char *deletendx = delete;
+        bool  keep;
+        for (keep = true, deletendx = delete; *deletendx != '\0' && keep; deletendx++)
+            keep = (*s != *deletendx);
         if (keep)
-            s[j++] = s[i];
+            *squeezed++ = *s;
     }
 
-    s[j] = '\0';
+    *squeezed = '\0';
 }
 
 

@@ -40,7 +40,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 ### Chapter 2 - "Types, Operators, and Expressions"
 
 * 2-01 - typelimits.c:         Prints the ranges of each of the numeric types
-* 2-02 - equivloop.c:          For-loop equivalent withouth using logical operators
+* 2-02 - equivloop.c:          For-loop equivalent to longestline without using logical operators
 * 2-03 - htoi.c:               Implements htoi() hexadecimal to integer converter
 * 2-04 - squeeze.c:            Implements squeze() which removes multiple chars from a string
 * 2-05 - any.c:                Implements any() which returns the position of a search char
@@ -82,6 +82,24 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-02 - getfloat.c:           Implements getfloat() that returns a floating point
 * 5-03 - strcat.c:             Implements pointer version of strcat()
 * 5-04 - strend.c:             Implements strend() that returns true if one string is at the end of another
+* 5-05 - strnfunc/             Implements library versions of library functions:
+  * strncpy.c:                   strncpy()
+  * strnncat.c:                  strncat()
+  * strncmp.c:                   strncmp()
+* 5-06 - pointers/             Implements a pointer version of:
+  * anyp.c:					     anyp()
+  * atofp.c:                     atof()
+  * cleantrailsnblanksp.c:       cleantrailsnblanks()
+  * escapep.c:                   escape()
+  * expandp.c:                   expand()
+  * htoip.c:                     htoi()
+  * itoawp.c:                    itoaw()
+  * itobp.c:                     itob()
+  * longestlinep.c:              longestline()
+  * reversep.c:                  reverse()
+  * reverserecursivep.c:         reverserecursive()
+  * squeezep.c:                  squeeze()
+* 
 
 ##Extras
 

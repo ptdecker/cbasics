@@ -35,11 +35,11 @@ static size_t strlen(const char *s) {
 
 static void reverse(char s[]) {
 
-	char   c;
 	size_t i;
 	size_t j;
 
 	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+		char c;
 		c    = s[i];
 		s[i] = s[j];
 		s[j] = c;

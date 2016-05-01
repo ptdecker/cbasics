@@ -1,6 +1,8 @@
 /*
  * Reverses input lines one at a time (using a recursive approach)
  *
+ * Pointer version
+ *
  * Note: "The C Answers" book does this with one less parameter passed to
  *       reversesub(). This approach certainly works but in my opinion is
  *       not as immediately understandable by a maintainer. Further, this
@@ -18,27 +20,27 @@
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char s[], size_t lim) {
-    char   c;
-    size_t i = 0;
+static size_t getbigline(char *s, size_t lim) {
+    char c;
+    char *sindex = s;
     while (--lim > 0 && (c = (char)getchar()) != (char)EOF && c != '\n')
-        s[i++] = c;
+        *sindex++ = c;
     if (c == '\n')
-        s[i++] = c;
-    s[i] = '\0';
-    return i;
+        *sindex++ = c;
+    *sindex = '\0';
+    return (size_t)(sindex - s);
 }
 
 /*
  * reversesub: reverses part of an array
  */
 
-static void reversesub(char s[], size_t start, size_t end) {
-    if (start < end) {
-        char temp = s[end];
-        s[end] = s[start];
-        s[start] = temp;
-        reversesub(s, ++start, --end);
+static void reversesub(char *s, char *send) {
+    if (s < send) {
+        char temp = *send;
+        *send--   = *s;
+        *s++      =  temp;
+        reversesub(s, send);
     }
 }
 
@@ -46,9 +48,9 @@ static void reversesub(char s[], size_t start, size_t end) {
  * reverse: reverses a line
  */
 
-static void reverse(char s[]) {
-    size_t i = (strlen(s) - 1);
-    reversesub(s, 0, (s[i] == '\n') ? --i : i);
+static void reverse(char *s) {
+    char *send = s + strlen(s) - 1;
+    reversesub(s, (*send == '\n') ? --send : send);
 }
 
 /* Main */
@@ -59,6 +61,6 @@ int main(void) {
         reverse(line);
         printf("%s", line);
     }
-    (voic)putchar('\n');
+    (void)putchar('\n');
     exit(EXIT_SUCCESS);
 }

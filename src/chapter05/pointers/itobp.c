@@ -1,5 +1,7 @@
 /*
  * itob: converts an integer to a variable base character string representation
+ *
+ * Pointer version
  * 
  * "Portions of this work are derived from The Standard C Library, copyright (c) 1992
  * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
@@ -33,41 +35,37 @@ static size_t strlen(const char *s) {
  * reverse(): reverse string 's' in place
  */
 
-static void reverse(char s[]) {
-
-	size_t i;
-	size_t j;
-
-	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
-		int c;
-		c    = s[i];
-		s[i] = s[j];
-		s[j] = c;
+static void reverse(char *s) {
+	char *j = s + strlen(s) - 1;
+	while (s < j) {
+		char  c;
+		c    = *s;
+		*s++ = *j;
+		*j-- =  c;
 	}
-
 }
 
 /*
  * iotb(): converts integer 'n' into a base 'b' string 's[]'
  */
 
-static void itob(int n, char s[], int b) {
+static void itob(int n, char *s, int b) {
 
-	size_t i    = 0;
-	int    sign = n; // Save the sign and make it positive if its negative
+	char *sindex = s;
+	int   sign   = n;  // Save the sign and make it positive if its negative
 
 	// generate digits in reverse order
 	do {
-		int d = abs(n % b);                                      // gets the next digit
-		s[i++] = (d <= 9) ? (char)d + '0' : (char)d + 'A' - 10;  // save it as a char--letters if num > 9
-	} while ((n /= b) != 0);                                     // and deletes it from the number
+		int d = abs(n % b);                                         // gets the next digit
+		*sindex++ = (d <= 9) ? (char)d + '0' : (char)d + 'A' - 10;  // save it as a char--letters if num > 9
+	} while ((n /= b) != 0);                                        // and deletes it from the number
 
 	// set the sign of the string (again in reverse)
 	if (sign < 0)
-		s[i++] = '-';
+		*sindex++ = '-';
 
 	// termerate the string
-	s[i] = '\0';
+	*sindex = '\0';
 
 	// and reverse the string back
 	reverse(s);

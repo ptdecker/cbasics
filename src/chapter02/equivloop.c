@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXLINE 1000 /* Note: MAXLINE includes terminating newline and null characters */
+#define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 
 /*
  * getline(): read a line into s, return length

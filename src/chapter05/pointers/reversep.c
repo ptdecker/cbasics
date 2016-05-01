@@ -1,9 +1,12 @@
 /*
  * Reverses input lines one at a time
+ *
+ * Pointer version
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 
@@ -11,49 +14,38 @@
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char s[], size_t lim) {
+static size_t getbigline(char *s, size_t lim) {
 
-    char   c;
-    size_t i = 0;
+    char c;
+    char *sindex = s;
 
     while (--lim > 0 && (c = (char)getchar()) != (char)EOF && c != '\n')
-        s[i++] = c;
+        *sindex++ = c;
     if (c == '\n')
-        s[i++] = c;
-    s[i] = '\0';
+        *sindex++ = c;
+    *sindex = '\0';
 
-    return i;
+    return (size_t)(sindex - s);
 }
 
 /*
  * reverse: reverses a line
  */
 
-static void reverse(char s[]) {
+static void reverse(char *s) {
 
-    size_t i = 0;
-    size_t j = 0;
-
-    // Find end of string
-    while (s[i] != '\0')
-        ++i;
-    --i; // don't count the terminal character in the length
+    char *send   = s + strlen(s) - 1;
 
     // Leave terminating newline in place if they exist
-    if (i > 0 && s[i] == '\n')
-        --i;
-
-    // Bail out if there is nothing left to do (one or zero characters)
-    // NOTE: If we don't do this, we will segment fault
-    if (i < 1)
-        return;
+    if (*send == '\n')
+        --send;
 
     // Reverse remaining in place
-    while (j < i) {
-        char   temp;
-        temp   = s[j];
-        s[j++] = s[i];
-        s[i--] = temp;
+    while (s < send) {
+        char temp;
+        temp    = *s;
+        *s++    = *send;
+        *send-- = temp;
     }
 }
 

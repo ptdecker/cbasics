@@ -1,6 +1,8 @@
 /*
- * itoa: converts an integer to a character string
+ * itoa: converts an integer to a character string padded to a specific width
  *
+ * Pointer version
+ * 
  * "Portions of this work are derived from The Standard C Library, copyright (c) 1992
  * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
  */
@@ -33,43 +35,44 @@ static size_t strlen(const char *s) {
  * reverse(): reverse string 's' in place
  */
 
-static void reverse(char s[]) {
-
-	size_t i;
-	size_t j;
-
-	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
-		char c;
-		c    = s[i];
-		s[i] = s[j];
-		s[j] = c;
+static void reverse(char *s) {
+	char *j = s + strlen(s) - 1;
+	while (s < j) {
+		char  c;
+		c    = *s;
+		*s++ = *j;
+		*j-- =  c;
 	}
-
 }
 
 /*
  * iota(): converts integer 'n' into a string 's[]' of minimum width 'w'
  */
 
-static void itoa(int n, char s[]) {
+static void itoa(int n, char *s, int w) {
 
-	size_t i = 0;
-	int    sign;
+	char *sindex = s;
+	char *send   = s + w;
+	int   sign   = n;
 
 	// Save the sign and make it positive if its negative
 	sign = n;
 
 	// generate digits in reverse order
 	do {
-		s[i++] = (char)abs(n % 10) + '0'; // gets the next digit
+		*sindex++ = (char)abs(n % 10) + '0'; // gets the next digit
 	} while ((n /= 10) != 0);             // and deletes it from the number
 
 	// set the sign of the string (again in reverse)
 	if (sign < 0)
-		s[i++] = '-';
+		*sindex++ = '-';
+
+	// if needed, add spaces to reach minimum width
+	while (sindex < send)
+		*sindex++ = ' ';
 
 	// termerate the string
-	s[i] = '\0';
+	*sindex = '\0';
 
 	// and reverse the string back
 	reverse(s);
@@ -77,19 +80,20 @@ static void itoa(int n, char s[]) {
 
 int main(void) {
 	int n;
+	int w = 12;
 	char s[MAXSTRING] = "";
 
 	n = -234;
-	itoa(n, s);
-	printf("Number %d converted to a string is: \"%s\"\n", n, s);
+	itoa(n, s, w);
+	printf("Number %d converted to a string of width %d is: \"%s\"\n", n, w, s);
 
 	n = 1043;
-	itoa(n, s);
-	printf("Number %d converted to a string is: \"%s\"\n", n, s);
+	itoa(n, s, w);
+	printf("Number %d converted to a string of width %d is: \"%s\"\n", n, w, s);
 
 	n = INT_MIN;
-	itoa(n, s);
-	printf("Number %d converted to a string is: \"%s\"\n", n, s);
+	itoa(n, s, w);
+	printf("Number %d converted to a string of width %d is: \"%s\"\n", n, w, s);
 
 	exit(EXIT_SUCCESS);
 }

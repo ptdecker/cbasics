@@ -1,5 +1,5 @@
 /*
- * any.c
+ * anyp.c  (pointer based version of 'any.c')
  *
  * Returns the first location in a string where any character from another string occurs.
  * If none of the characters in the other string are found, it returns '-1'.
@@ -16,16 +16,14 @@
  *        occur.  Returns -1 if no characters in c[] are found within s[]
  */
 
-static int any(char s[], char c[]) {
-
-    size_t i;
-    size_t j;
-
-    for (i = 0; s[i] != '\0'; i++)
-        for (j = 0; c[j] != '\0'; j++)
-            if (s[i] == c[j])
-                return (int)i;
-
+static int any(char *s, char *c) {
+    char *sindex = s;
+    while (*sindex != '\0') {
+        char *cindex = c;
+        while (*cindex != '\0')
+            if (*sindex++ == *cindex++)
+                return (int)(sindex - s - 1);
+    }
     return NOTFOUND;
 }
 

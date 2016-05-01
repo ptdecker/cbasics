@@ -1,5 +1,7 @@
 /*
  * Display length of longest line
+ *
+ * NOTE: Pointeer version
  */
 
 #include <stdio.h>
@@ -11,34 +13,32 @@
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char s[], size_t lim) {
+static size_t getbigline(char *s, size_t lim) {
 
-    char   c;
-    size_t i = 0;
+    char c;
+    char *start = s;
 
     while (--lim > 0 && (c = (char)getchar()) != (char)EOF && c != '\n')
-        s[i++] = c;
+        *s++ = c;
     if (c == '\n')
-        s[i++] = c;
-    s[i] = '\0';
+        *s++ = c;
+    *s = '\0';
 
-    return i;
+    return (size_t)(s - start);
 }
 
 /* copy: copy 'from' into 'to'; assume to is big enough */
 
-static void copy(char to[], char from[]) {
-    size_t i = 0;
-    while ((to[i] = from[i]) != '\0') {
-        ++i;
-    }
+static void copy(char *to, char *from) {
+    while ((*to++ = *from++) != '\0')
+        ; // Empty
 }
 
 /* Main */
 
 int main(void) {
 
-    char   line[MAXLINE]    = "";
+    char   line[MAXLINE]   = "";
     char   longest[MAXLINE] = "";
     int    nl     = 0;
     size_t len    = 0;

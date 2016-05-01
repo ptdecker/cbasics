@@ -46,7 +46,7 @@ static double myatof(char s[]) {
 	val = sign * val / power;
 
 	// Read the scientific notation if present
-	if (s[i] == 'e' || s[i] == 'E') {
+	if (toupper(s[i]) == 'E') {
 		i++;
 		sign = (s[i] == '-') ? -1 : 1;
 		if (s[i] == '+' || s[i] == '-')
