@@ -17,13 +17,17 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: $(_BIN) escapep
 	@for i in $(SUBDIRS); do \
-		echo "make all in $$i..."; \
 		cd $$i; \
 		make all; \
 		cd ..; \
 	done
 
 clean:
+	@for i in $(SUBDIRS); do \
+		cd $$i; \
+		make clean; \
+		cd ..; \
+	done
 	rm -rv $(ODIR) $(_BIN) escapep
 
 anyp: $(ODIR)/anyp.o

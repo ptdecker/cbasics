@@ -84,7 +84,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-04 - strend.c:             Implements strend() that returns true if one string is at the end of another
 * 5-05 - strnfunc/             Implements library versions of library functions:
   * strncpy.c:                   strncpy()
-  * strnncat.c:                  strncat()
+  * strncat.c:                   strncat()
   * strncmp.c:                   strncmp()
 * 5-06 - pointers/             Implements a pointer version of:
   * anyp.c:					     anyp()

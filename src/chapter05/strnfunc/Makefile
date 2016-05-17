@@ -1,13 +1,13 @@
-BIN = ../../bin
+BIN = ../../../bin
 ODIR = obj
-SUBDIRS = pointers strnfunc
+SUBDIRS = 
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = getfloat.o getint.o strcat.o
-_BIN = getfloat getint strcat
+_OBJ = strncat.o
+_BIN = strncat
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -28,15 +28,7 @@ clean:
 	done
 	rm -rv $(ODIR) $(_BIN)
 
-getfloat: $(ODIR)/getfloat.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-getint: $(ODIR)/getint.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-strcat: $(ODIR)/strcat.o
+strncat: $(ODIR)/strncat.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

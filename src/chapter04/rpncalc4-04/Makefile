@@ -1,26 +1,38 @@
 BIN = ../../../bin
-ODIR = ../../../obj
+ODIR = obj
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
 _OBJ = rpncalc2.o lexer.o dastack.o castack.o
+_BIN = rpncalc2
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 .PHONY: all clean
 
-all: rpncalc2
+all: $(_BIN)
+	@for i in $(SUBDIRS); do \
+		cd $$i; \
+		make all; \
+		cd ..; \
+	done
 
 clean:
-	rm -f $(ODIR)/*.o
+	@for i in $(SUBDIRS); do \
+		cd $$i; \
+		make clean; \
+		cd ..; \
+	done
+	rm -rv $(ODIR) $(_BIN)
 
 rpncalc2: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $(BIN)/$@
+	$(CC) $(CFLAGS) $^ -o $@
 	$(LINT) $(LINTFLAGS) $@.c
-
+	cp -v $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
+	mkdir -pv $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

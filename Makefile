@@ -12,4 +12,9 @@ all:
 	done
 
 clean:
+	@for i in $(SUBDIRS); do \
+		cd $$i; \
+		make clean; \
+		cd ..; \
+	done
 	rm -f $(ODIR)/*.o
