@@ -5,7 +5,6 @@ SUBDIRS = src
 
 all:
 	@for i in $(SUBDIRS); do \
-		echo "make all in $$i..."; \
 		cd $$i; \
 		make all; \
 		cd ..; \
@@ -17,4 +16,3 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -f $(ODIR)/*.o

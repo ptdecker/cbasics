@@ -71,7 +71,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 4-08 - singlegetch.c:        Implements getch() and ungetch() that support just a single char buffer
 * 4-09 - ungetseof.c:          Implements getch(), ungetch(), and ungets() in a maner supporting EOF
 * 4-10 - rpncalc4-10/*.c:      RPN Calculator (rpncalc5) based upon whole line handling
-* 4-11 - rpncalc4-11/*.c:      RPN calculator (rpncacl6) that uses 'static' to negate needing ungetch()
+* 4-11 - rpncalc4-11/*.c:      RPN calculator (rpncalc6) that uses 'static' to negate needing ungetch()
 * 4-12 - itoarecursive.c:      A recursive implementation of itoa()
 * 4-13 - reverserecursive.c:   A recursive implementation of reverse()
 * 4-14 - swapmacro.c:          A version of reverse() that uses a macro for swaping two values

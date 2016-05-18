@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = strncat.o
-_BIN = strncat
+_OBJ = strncat.o strncopy.o strncmp.o
+_BIN = strncat strncopy strncmp
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -29,6 +29,14 @@ clean:
 	rm -rv $(ODIR) $(_BIN)
 
 strncat: $(ODIR)/strncat.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+strncopy: $(ODIR)/strncopy.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+strncmp: $(ODIR)/strncmp.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
