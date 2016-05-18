@@ -99,7 +99,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * reversep.c:                  reverse()
   * reverserecursivep.c:         reverserecursive()
   * squeezep.c:                  squeeze()
-* 
+* 5-07 - readlines.c           Supports array of pointer exercise (plus qsort and rudimentary 'alloc()' tests
 
 ##Extras
 
@@ -125,6 +125,7 @@ The following test data files are provided to support manually testing the exerc
 * largestnegint.txt - Largest negative integer (per typelimits.c)
 * largestposint.txt - Largest positive integer (per typelimits.c)
 * linttest.txt      - Test file for 'minilint.c'
+* names.txt         - Twenty (20) random names
 * negativeint.txt   - A negative integer (with some whitespace)
 * notanum.txt       - Not a number
 * oneline.txt       - One line of text but with no terminating newline ('\n')
