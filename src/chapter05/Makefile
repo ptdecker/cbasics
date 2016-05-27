@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = getfloat.o getint.o strcat.o readline.o
-_BIN = getfloat getint strcat readline
+_OBJ = getfloat.o getint.o strcat.o readline.o readline2.o
+_BIN = getfloat getint strcat readline readline2
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -41,6 +41,10 @@ strcat: $(ODIR)/strcat.o
 	cp -v $@ $(BIN)/$@
 
 readline: $(ODIR)/readline.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+readline2: $(ODIR)/readline2.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

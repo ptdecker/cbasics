@@ -99,7 +99,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * reversep.c:                  reverse()
   * reverserecursivep.c:         reverserecursive()
   * squeezep.c:                  squeeze()
-* 5-07 - readlines.c           Supports array of pointer exercise (plus qsort and rudimentary 'alloc()' tests
+* 5-07                         Supports array of pointer exercise (plus qsort and rudimentary 'alloc()' tests
+  * readline.c                   First version of readline that uses alloc() (c.f. section 5.6)
+  * readline2.c                  Alternate version for exercise 5-07. Compare timings with 'readline.c'
 
 ##Extras
 

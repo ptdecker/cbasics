@@ -1,5 +1,8 @@
 /*
 * Exercise 5-07: Speed comparision of 'readline' variations
+*
+* Version that stores in an array provided by readline.
+* Timing compared: readline2 is 7.5% faster than readline.
 */
 
 // Library includes
@@ -13,26 +16,11 @@
 
 #define ALLOCSIZE 100000  // Maximum available storage (simulated)
 #define MAXLEN      1000  // Maximum length of any input line
-#define MAXLINES    5000  // Maximum number of lines to be stored
+#define MAXLINES     100  // Maximum number of lines
 
 // Globals
 
-static char allocbuf[ALLOCSIZE]; // Storage for alloc
-static char *allocp = allocbuf;  // Next free position in alloc
-
 char *lineptr[MAXLINES];         // Pointers to text lines
-
-/*
- * alloc(): rudimentary storage allocator
- */
-
-static char *alloc(int n) {
-	if (allocbuf + ALLOCSIZE - allocp >= n) { // it fits
-		allocp += n;
-		return allocp - n; // old p
-	}
-	return 0; // not enough room
-}
 
 /* getbigline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length
@@ -101,19 +89,22 @@ void writelines(char *lineptr[], int nlines) {
  * readlines1(): read input lines
  */
 
-int  readlines(char *lineptr[], int maxlines) {
+int  readlines(char *lineptr[], char *linestore, int maxlines) {
+
 	int   len;
 	int   nlines = 0;
-	char *p;
 	char  line[MAXLEN];
+	char *p = linestore;
+	char *linestop = line + ALLOCSIZE;
 
 	while ((len = getbigline(line, MAXLEN)) > 0)
-		if (nlines >= maxlines || (p = alloc(len)) == NULL)
+		if (nlines >= maxlines || p + len > linestop)
 			return -1;
 		else {
 			line[len - 1] = '\0';  // Delete newline
 			strcpy(p, line);
 			lineptr[nlines++] = p;
+			p += len;
 		}
 
 	return nlines;
@@ -124,9 +115,10 @@ int main(void) {
 
 	int     nlines;
 	clock_t start;
+	char    linestore[ALLOCSIZE];
 
 	start = clock();
-	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+	if ((nlines = readlines(lineptr, linestore, MAXLINES)) >= 0) {
 		myqsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
 		printf("Run time: %lu clock ticks\n", (clock() - start));
