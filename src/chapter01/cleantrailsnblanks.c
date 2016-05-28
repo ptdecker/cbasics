@@ -11,7 +11,7 @@
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char s[], size_t lim) {
+size_t getbigline(char s[], size_t lim) {
 
     char   c;
     size_t i = 0;
@@ -32,11 +32,9 @@ int main(void) {
     char   line[MAXLINE] = "";
     size_t len = 0;
 
-    while ((len = getbigline(line, MAXLINE)) > 0) {
-        if (len > MAXLINE) {
+    while ((len = getbigline(line, MAXLINE)) > 0)
+        if (len > MAXLINE)
             printf("%s", line);
-        }
-    }
 
     exit(EXIT_SUCCESS);
 }

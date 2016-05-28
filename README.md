@@ -102,6 +102,8 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-07                         Supports array of pointer exercise (plus qsort and rudimentary 'alloc()' tests
   * readline.c                   First version of readline that uses alloc() (c.f. section 5.6)
   * readline2.c                  Alternate version for exercise 5-07. Compare timings with 'readline.c'
+* 5-08 - datetools.c           Adds error checking to day_of_year() and month_day()
+
 
 ##Extras
 
