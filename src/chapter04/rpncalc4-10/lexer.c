@@ -4,6 +4,13 @@
 * A trivial lexer that gets and operator or operand from standard input
 */
 
+// The following definition change is needed to allow the use of getline() in this
+// example without having to call it something else.
+// c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
+
+#undef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -20,7 +27,7 @@ static char   line[MAXLINE] = "";
  * getline(): gets a whole line into string 's' and returns the length
  */
 
-static size_t getbigline(char s[], int maxlen) {
+static size_t getline(char s[], int maxlen) {
 
 	int    c;
 	size_t i = 0;
@@ -50,7 +57,7 @@ char getop(char s[]) {
 	// Read the next line of input
 
 	if (line[lineindex] == '\0') {
-		if (getbigline(line, MAXLINE) == 0)
+		if (getline(line, MAXLINE) == 0)
 			return EOF;
 		else
 			lineindex = 0;

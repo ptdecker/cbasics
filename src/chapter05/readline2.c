@@ -5,6 +5,13 @@
 * Timing compared: readline2 is 7.5% faster than readline.
 */
 
+// The following definition change is needed to allow the use of getline() in this
+// example without having to call it something else.
+// c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
+
+#undef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+
 // Library includes
 
 #include <stdio.h>
@@ -26,7 +33,7 @@ char *lineptr[MAXLINES];         // Pointers to text lines
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char *s, size_t lim) {
+static size_t getline(char *s, size_t lim) {
 
     char c;
     char *sindex = s;
@@ -97,7 +104,7 @@ int  readlines(char *lineptr[], char *linestore, int maxlines) {
 	char *p = linestore;
 	char *linestop = line + ALLOCSIZE;
 
-	while ((len = getbigline(line, MAXLEN)) > 0)
+	while ((len = getline(line, MAXLEN)) > 0)
 		if (nlines >= maxlines || p + len > linestop)
 			return -1;
 		else {

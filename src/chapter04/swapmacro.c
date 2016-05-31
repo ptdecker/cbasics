@@ -2,6 +2,13 @@
 * Reverses input lines one at a time
 */
 
+// The following definition change is needed to allow the use of getline() in this
+// example without having to call it something else.
+// c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
+
+#undef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,7 +31,7 @@
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char s[], size_t lim) {
+static size_t getline(char s[], size_t lim) {
 
     char   c;
     size_t i = 0;
@@ -75,7 +82,7 @@ int main(void) {
 
     char   line[MAXLINE] = "";
 
-    while (getbigline(line, MAXLINE) > 0) {
+    while (getline(line, MAXLINE) > 0) {
         reverse(line);
         printf("%s\n", line);
     }

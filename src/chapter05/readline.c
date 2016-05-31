@@ -2,7 +2,14 @@
 * Exercise 5-07: Speed comparision of 'readline' variations
 */
 
-// Library includes
+// The following definition change is needed to allow the use of getline() in this
+// example without having to call it something else.
+// c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
+
+#undef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200112L
+
+// Standard library includes
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,7 +45,7 @@ static char *alloc(int n) {
  * possible into 's' and returning the full length
  */
 
-static size_t getbigline(char *s, size_t lim) {
+static size_t getline(char *s, size_t lim) {
 
     char c;
     char *sindex = s;
@@ -107,7 +114,7 @@ int  readlines(char *lineptr[], int maxlines) {
 	char *p;
 	char  line[MAXLEN];
 
-	while ((len = getbigline(line, MAXLEN)) > 0)
+	while ((len = getline(line, MAXLEN)) > 0)
 		if (nlines >= maxlines || (p = alloc(len)) == NULL)
 			return -1;
 		else {
