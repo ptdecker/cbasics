@@ -71,7 +71,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 4-08 - singlegetch.c:        Implements getch() and ungetch() that support just a single char buffer
 * 4-09 - ungetseof.c:          Implements getch(), ungetch(), and ungets() in a maner supporting EOF
 * 4-10 - rpncalc4-10/*.c:      RPN Calculator (rpncalc5) based upon whole line handling
-* 4-11 - rpncalc4-11/*.c:      RPN calculator (rpncalc6) that uses 'static' to negate needing ungetch()
+* 4-11 - rpncalc4-11/*.c:      RPN Calculator (rpncalc6) that uses 'static' to negate needing ungetch()
 * 4-12 - itoarecursive.c:      A recursive implementation of itoa()
 * 4-13 - reverserecursive.c:   A recursive implementation of reverse()
 * 4-14 - swapmacro.c:          A version of reverse() that uses a macro for swaping two values
@@ -87,7 +87,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * strncat.c:                   strncat()
   * strncmp.c:                   strncmp()
 * 5-06 - pointers/             Implements a pointer version of:
-  * anyp.c:					     anyp()
+  * anyp.c:					             anyp()
   * atofp.c:                     atof()
   * cleantrailsnblanksp.c:       cleantrailsnblanks()
   * escapep.c:                   escape()
@@ -103,10 +103,12 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * readline.c                   First version of readline that uses alloc() (c.f. section 5.6)
   * readline2.c                  Alternate version for exercise 5-07. Compare timings with 'readline.c'
 * 5-08 - datetools.c           Adds error checking to day_of_year() and month_day()
-
+* 5-09 - datetoolsp.c          Implements day_of_year() and month_day() using pointers, added month_name()
+* 5-10 - expr/*.c:             Command line version of RPN Calculator ("expr")
 
 ##Extras
 
+* echoargs.c:    Echos passed arguments
 * makebigline.c: Outputs a 3001 character text line
 * rpncalc/*.c:   Unadulterted (pre-exercise) RPN Calculator (rpncalc0)
 * saveasascii.c: Strips input of everything except regular values

@@ -1,13 +1,12 @@
-BIN = ../../bin
+BIN = ../../../bin
 ODIR = obj
-SUBDIRS = rpncalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = echoargs.o makebigline.o saveasascii.o size.o testupcase.o
-_BIN = echoargs makebigline saveasascii size testupcase
+_OBJ = expr.o lexer.o castack.o dastack.o
+_BIN = expr
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -28,24 +27,9 @@ clean:
 	done
 	rm -rv $(ODIR) $(_BIN)
 
-echoargs: $(ODIR)/echoargs.o
+expr: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-makebigline: $(ODIR)/makebigline.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-saveasascii: $(ODIR)/saveasascii.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-size: $(ODIR)/size.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
-testupcase: $(ODIR)/testupcase.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(LINT) $(LINTFLAGS) $@.c
 	cp -v $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)

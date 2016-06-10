@@ -1,13 +1,13 @@
 BIN = ../../bin
 ODIR = obj
-SUBDIRS = pointers strnfunc
+SUBDIRS = expr pointers strnfunc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = datetools.o getfloat.o getint.o strcat.o readline.o readline2.o
-_BIN = datetools getfloat getint strcat readline readline2
+_OBJ = datetools.o datetoolsp.o getfloat.o getint.o strcat.o readline.o readline2.o
+_BIN = datetools datetoolsp getfloat getint strcat readline readline2
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -29,6 +29,10 @@ clean:
 	rm -rv $(ODIR) $(_BIN)
 
 datetools: $(ODIR)/datetools.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+datetoolsp: $(ODIR)/datetoolsp.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
