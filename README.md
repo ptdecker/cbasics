@@ -105,6 +105,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-08 - datetools.c           Adds error checking to day_of_year() and month_day()
 * 5-09 - datetoolsp.c          Implements day_of_year() and month_day() using pointers, added month_name()
 * 5-10 - expr/*.c:             Command line version of RPN Calculator ("expr")
+* 5-11
+  * detab2.c:                  Replace tabs with blank spaces using a passed set of tab stops
+  * entab2.c:                  Replaces converts spaces to tabs according to tab stops using a passed set of tab stops
+          
 
 ##Extras
 
@@ -135,9 +139,10 @@ The following test data files are provided to support manually testing the exerc
 * negativeint.txt   - A negative integer (with some whitespace)
 * notanum.txt       - Not a number
 * oneline.txt       - One line of text but with no terminating newline ('\n')
+* tabfun.txt        - Tab test file
+* tabs.txt          - Basic tabs followed by 'x' chars
 * test1.txt         - Increasing number of characters per line with variations at the end
 * zero.txt          - A totally empty file (no data)
-* extraspecials.txt - Contains extra spaces, backslashes, tabs, and backspace characters
 
 ##Style
 
