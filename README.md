@@ -108,6 +108,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-11
   * detab2.c:                  Replace tabs with blank spaces using a passed set of tab stops
   * entab2.c:                  Replaces converts spaces to tabs according to tab stops using a passed set of tab stops
+* 5-12
+  * detab3.c:                  Replace tabs with blank spaces using command switches to set intervals
+  * entab3.c:                  Replaces converts spaces to tabs using command switches to set intervals
           
 
 ##Extras
@@ -139,7 +142,8 @@ The following test data files are provided to support manually testing the exerc
 * negativeint.txt   - A negative integer (with some whitespace)
 * notanum.txt       - Not a number
 * oneline.txt       - One line of text but with no terminating newline ('\n')
-* tabfun.txt        - Tab test file
+* tabfun1.txt       - Tab test file of diagonal 'x's using spaces and tabs assuming a tab spacing of 4
+* tabfun2.txt       - Tab test file of diagonal 'x's using spaces only
 * tabs.txt          - Basic tabs followed by 'x' chars
 * test1.txt         - Increasing number of characters per line with variations at the end
 * zero.txt          - A totally empty file (no data)
