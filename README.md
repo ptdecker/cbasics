@@ -111,6 +111,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-12
   * detab3.c:                  Replace tabs with blank spaces using command switches to set intervals
   * entab3.c:                  Replaces converts spaces to tabs using command switches to set intervals
+* 5-13 - tail2.c               Displays the specified number of lines from the end of a file
           
 
 ##Extras

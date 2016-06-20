@@ -41,7 +41,7 @@ static char *alloc(int n) {
 	return 0; // not enough room
 }
 
-/* getbigline: read an aribitrarily long line placing as much as
+/* getline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length
  */
 

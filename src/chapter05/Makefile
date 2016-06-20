@@ -7,8 +7,9 @@ LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
 _OBJ = datetools.o datetoolsp.o detab2.o detab3.o entab2.o entab3.o getfloat.o getint.o strcat.o \
-       readline.o readline2.o
-_BIN = datetools datetoolsp detab2 entab2 detab3 entab3 getfloat getint strcat readline readline2
+       readline.o readline2.o tail2.o
+_BIN = datetools datetoolsp detab2 entab2 detab3 entab3 getfloat getint strcat readline readline2 \
+       tail2
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -61,15 +62,19 @@ getint: $(ODIR)/getint.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
-strcat: $(ODIR)/strcat.o
-	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
-
 readline: $(ODIR)/readline.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
 readline2: $(ODIR)/readline2.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+strcat: $(ODIR)/strcat.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+tail2: $(ODIR)/tail2.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
