@@ -7,6 +7,7 @@ char *alloc(int n);
 	[5] readline.c
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 
 int any(char s[], char c[]);
 int any(char *s,  char *c);
@@ -50,9 +51,6 @@ size_t casize(void);
 	[4] rpncalc4-06/castack.c
 	[5] expr/castack.c
 	[-] rpncalc/castack.c
-
-static int charcmp(const char *s, const char *t);
-	[5] sort2.c
 
 void copy(char to[], char from[]);
 void copy(char *to,  char *from);
@@ -158,6 +156,13 @@ size_t expandtab(size_t pos);
 size_t findblank(size_t pos);
 	[1] fold.c
 
+int foldcmp(const char *s, const char *t);
+	[5] sort2.c
+	[5] sort3.c
+
+int folddircmp(const char *s, const char *t) 
+	[5] sort3.c
+
 int ftoc(int ftemp);
 	[1] ftoc-func.c
 
@@ -198,6 +203,7 @@ size_t getline(char  *s, size_t lim);
 	[5] readline2.c
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 	[5] tail2.c
 
 getop(char s[]);
@@ -270,10 +276,12 @@ void myqsort(char *v[], int left, int right);
 void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 
 numcmp(char *s1, char *s2);
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 
 void printbits(unsigned x);
 	[2] fastbitcount.c
@@ -289,6 +297,7 @@ int readlines(char *lineptr[], int maxlines);
 	[5] readline2.c
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 
 void reverse(char s[]);
 void reverse(char *s);
@@ -368,6 +377,7 @@ void swap(char *v[], int i, int j);
 void swap(void *v[], int i, int j)
 	[5] sort1.c
 	[5] sort2.c
+	[5] sort3.c
 
 void unescape(char source[], char target[]);
 void unescape(char *source,  char *target);
@@ -402,6 +412,5 @@ void writelines(char *lineptr[], int nlines);
 void writelines(char *lineptr[], int nlines, bool descend);
 	[5] sort1.c
 	[5] sort2.c
-
-
+	[5] sort3.c
 

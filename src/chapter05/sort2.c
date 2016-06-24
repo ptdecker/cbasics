@@ -129,7 +129,7 @@ static int numcmp(const char *s1, const char *s2) {
  * charcmp(): compares strings ignoring case in the process
  */
 
-static int charcmp(const char *s, const char *t) {
+static int foldcmp(const char *s, const char *t) {
 
 	for ( ; tolower(*s) == tolower(*t); s++, t++)
 		if (*s == '\0')
@@ -193,6 +193,11 @@ int main(int argc, char *argv[]) {
 					break;
 			}
 
+    if (argc == 0) {
+    	printf("usage: sort -nrf [FILE]\n");
+    	exit(EXIT_FAILURE);
+    }
+
 	// Read in the lines into memory
 
 	if ((nlines = readlines(lineptr, MAXLINES)) < 0) {
@@ -214,7 +219,7 @@ int main(int argc, char *argv[]) {
 				(void **) lineptr,
 				0,
 				nlines - 1,
-				(int (*)(void*, void*))charcmp
+				(int (*)(void*, void*))foldcmp
 			);
 	else
 		myqsort(

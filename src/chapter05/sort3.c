@@ -1,5 +1,5 @@
 /*
- * sort1:  Sorts input lines supporting reverse and numeric ordering using '-r' and '-n' switches
+ * sort2:  Sorts input lines supporting reverse and numeric ordering using '-r', '-n', and '-f' switches
  */
 
 // The following definition change is needed to allow the use of getline() in this
@@ -9,6 +9,7 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -125,6 +126,74 @@ static int numcmp(const char *s1, const char *s2) {
 }
 
 /*
+ * foldcmp(): compares strings ignoring case in the process
+ */
+
+static int foldcmp(const char *s, const char *t) {
+
+	for ( ; tolower(*s) == tolower(*t); s++, t++)
+		if (*s == '\0')
+			return 0;
+
+	return tolower(*s) - tolower(*t);
+}
+
+/*
+ * dircmp(): compares strings in directory order
+ */
+
+static int dircmp(const char *s, const char *t) {
+
+	char a;
+	char b;
+
+	do {
+
+		while (!isalnum(*s) && *s != ' ' && *s != '\0')
+			s++;
+		while (!isalnum(*t) && *t != ' ' && *t != '\0')
+			t++;
+
+		a = *s++;
+		b = *t++;
+
+		if (a == '\0' && b == '\0')
+			return 0;
+
+	} while (a == b);
+
+	return a - b;
+
+}
+/*
+ * folddircmp(): compares strings in directory order
+ */
+
+static int folddircmp(const char *s, const char *t) {
+
+	char a;
+	char b;
+
+	do {
+
+		while (!isalnum(*s) && *s != ' ' && *s != '\0')
+			s++;
+		while (!isalnum(*t) && *t != ' ' && *t != '\0')
+			t++;
+
+		a = tolower(*s++);
+		b = tolower(*t++);
+
+		if (a == '\0' && b == '\0')
+			return 0;
+
+	} while (a == b);
+
+	return a - b;
+
+}
+
+/*
  * qsort(): sort v[left]...v[right] into increasing order
  */
 
@@ -156,6 +225,8 @@ int main(int argc, char *argv[]) {
 	int  nlines;          // Number of input lines to read
 	bool numeric = false; // 'true' if numeric sort
 	bool descend = false; // 'true' if descending output
+	bool fold    = false; // 'true' if case insensitive sort
+	bool dir     = false; // 'true' if directory order sort
 	char c;
 
 	// Evaluate arguments
@@ -169,6 +240,12 @@ int main(int argc, char *argv[]) {
 				case 'r':
 					descend = true;
 					break;
+				case 'f':
+					fold = true;
+					break;
+				case 'd':
+					dir = true;
+					break;
 				default:
 					printf("sort: illegal option %c\n", c);
 					exit(EXIT_FAILURE);
@@ -176,7 +253,7 @@ int main(int argc, char *argv[]) {
 			}
 
     if (argc == 0) {
-    	printf("usage: sort -nr [FILE]\n");
+    	printf("usage: sort -dnfr [FILE]\n");
     	exit(EXIT_FAILURE);
     }
 
@@ -189,12 +266,41 @@ int main(int argc, char *argv[]) {
 
 	// Sort
 
-	myqsort(
-			(void **) lineptr,
-			0,
-			nlines - 1,
-			(int (*)(void*, void*))(numeric ? numcmp : strcmp)
-		); 
+	if (numeric)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))numcmp
+			);
+	else if (fold && dir)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))folddircmp
+			);
+	else if (fold)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))foldcmp
+			);
+	else if (dir)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))dircmp
+			);
+	else
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))strcmp
+			);
 
 	// Write out the results
 
