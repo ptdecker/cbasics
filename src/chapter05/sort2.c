@@ -1,5 +1,5 @@
 /*
- * sort1:  Sorts input lines supporting reverse and numeric ordering using '-r' and '-n' switches
+ * sort2:  Sorts input lines supporting reverse and numeric ordering using '-r', '-n', and '-f' switches
  */
 
 // The following definition change is needed to allow the use of getline() in this
@@ -9,6 +9,7 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -125,6 +126,19 @@ static int numcmp(const char *s1, const char *s2) {
 }
 
 /*
+ * charcmp(): compares strings ignoring case in the process
+ */
+
+static int charcmp(const char *s, const char *t) {
+
+	for ( ; tolower(*s) == tolower(*t); s++, t++)
+		if (*s == '\0')
+			return 0;
+
+	return tolower(*s) - tolower(*t);
+}
+
+/*
  * qsort(): sort v[left]...v[right] into increasing order
  */
 
@@ -156,6 +170,7 @@ int main(int argc, char *argv[]) {
 	int  nlines;          // Number of input lines to read
 	bool numeric = false; // 'true' if numeric sort
 	bool descend = false; // 'true' if descending output
+	bool fold    = false; // 'true' if case insensitive sort
 	char c;
 
 	// Evaluate arguments
@@ -168,6 +183,9 @@ int main(int argc, char *argv[]) {
 					break;
 				case 'r':
 					descend = true;
+					break;
+				case 'f':
+					fold = true;
 					break;
 				default:
 					printf("sort: illegal option %c\n", c);
@@ -184,12 +202,27 @@ int main(int argc, char *argv[]) {
 
 	// Sort
 
-	myqsort(
-			(void **) lineptr,
-			0,
-			nlines - 1,
-			(int (*)(void*, void*))(numeric ? numcmp : strcmp)
-		); 
+	if (numeric)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))numcmp
+			);
+	else if (fold)
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))charcmp
+			);
+	else
+		myqsort(
+				(void **) lineptr,
+				0,
+				nlines - 1,
+				(int (*)(void*, void*))strcmp
+			);
 
 	// Write out the results
 
