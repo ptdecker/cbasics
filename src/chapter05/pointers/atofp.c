@@ -12,7 +12,7 @@
  * atofp(): Converts a string to a double with scientific notation
  */
 
-static double myatofp(char *s) {
+static double myatof(char *s) {
 
 	double val     = 0L;
 	double power   = 1L;
@@ -70,17 +70,17 @@ int main(void) {
 
 	//NOTE: '%.16g' sweeps under the rug the ugliness of floating point conversions.
 	//To have some fun, kick it up to '%.52g'
-	printf("String \"20\" converted to a double is: %.16g\n", myatofp("20"));
-	printf("String \"+20\" converted to a double is: %.16g\n", myatofp("+20"));
-	printf("String \"20.76\" converted to a double is: %.16g\n", myatofp("20.76"));
-	printf("String \"0\" converted to a double is: %.16g\n", myatofp("0"));
-	printf("String \"0.12875\" converted to a double is: %.16g\n", myatofp("0.12875"));
-	printf("String \".6666785\" converted to a double is: %.16g\n", myatofp(".6666785"));
-	printf("String \"-1234\" converted to a double is: %.16g\n", myatofp("-1234"));
-	printf("String \"-1234.323\" converted to a double is: %.16g\n", myatofp("-1234.323"));
-	printf("String \"-43e-2\" converted to a double is: %.16g\n", myatofp("43e-2"));
-	printf("String \"-.1282e4\" converted to a double is: %.16g\n", myatofp("-.1282e4"));
-	printf("String \"+67.345e+2\" converted to a double is: %.16g\n", myatofp("+67.345e+2"));
+	printf("String \"20\" converted to a double is: %.16g\n", myatof("20"));
+	printf("String \"+20\" converted to a double is: %.16g\n", myatof("+20"));
+	printf("String \"20.76\" converted to a double is: %.16g\n", myatof("20.76"));
+	printf("String \"0\" converted to a double is: %.16g\n", myatof("0"));
+	printf("String \"0.12875\" converted to a double is: %.16g\n", myatof("0.12875"));
+	printf("String \".6666785\" converted to a double is: %.16g\n", myatof(".6666785"));
+	printf("String \"-1234\" converted to a double is: %.16g\n", myatof("-1234"));
+	printf("String \"-1234.323\" converted to a double is: %.16g\n", myatof("-1234.323"));
+	printf("String \"-43e-2\" converted to a double is: %.16g\n", myatof("43e-2"));
+	printf("String \"-.1282e4\" converted to a double is: %.16g\n", myatof("-.1282e4"));
+	printf("String \"+67.345e+2\" converted to a double is: %.16g\n", myatof("+67.345e+2"));
 
 	exit(EXIT_SUCCESS);
 }

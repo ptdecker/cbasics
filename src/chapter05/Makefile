@@ -6,10 +6,10 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = datetools.o datetoolsp.o detab2.o detab3.o entab2.o entab3.o getfloat.o getint.o strcat.o \
-       readline.o readline2.o tail2.o
-_BIN = datetools datetoolsp detab2 entab2 detab3 entab3 getfloat getint strcat readline readline2 \
-       tail2
+_OBJ = datetools.o datetoolsp.o detab2.o detab3.o entab2.o entab3.o getfloat.o getint.o \
+       readline.o readline2.o sort1.o strcat.o tail2.o
+_BIN = datetools datetoolsp detab2 entab2 detab3 entab3 getfloat getint  readline readline2 \
+       sort1 strcat tail2
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -67,6 +67,10 @@ readline: $(ODIR)/readline.o
 	cp -v $@ $(BIN)/$@
 
 readline2: $(ODIR)/readline2.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+sort1: $(ODIR)/sort1.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

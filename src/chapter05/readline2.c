@@ -104,15 +104,15 @@ int  readlines(char *lineptr[], char *linestore, int maxlines) {
 	char *p = linestore;
 	char *linestop = line + ALLOCSIZE;
 
-	while ((len = getline(line, MAXLEN)) > 0)
+	while ((len = getline(line, MAXLEN)) > 0) {
 		if (nlines >= maxlines || p + len > linestop)
 			return -1;
-		else {
-			line[len - 1] = '\0';  // Delete newline
-			strcpy(p, line);
-			lineptr[nlines++] = p;
-			p += len;
-		}
+
+		line[len - 1] = '\0';  // Delete newline
+		strcpy(p, line);
+		lineptr[nlines++] = p;
+		p += len;
+	}
 
 	return nlines;
 }
