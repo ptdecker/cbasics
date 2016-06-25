@@ -8,6 +8,7 @@ char *alloc(int n);
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
 int any(char s[], char c[]);
 int any(char *s,  char *c);
@@ -138,6 +139,7 @@ void entab(char *tab);
 	[5] entab3.c
 
 void error(char *s);
+	[5] sort4.c
 	[5] tail2.c
 
 void escape(char source[], char target[]);
@@ -159,9 +161,11 @@ size_t findblank(size_t pos);
 int foldcmp(const char *s, const char *t);
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
 int folddircmp(const char *s, const char *t) 
 	[5] sort3.c
+	[5] sort4.c
 
 int ftoc(int ftemp);
 	[1] ftoc-func.c
@@ -204,9 +208,10 @@ size_t getline(char  *s, size_t lim);
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 	[5] tail2.c
 
-getop(char s[]);
+char getop(char s[]);
 	[4] rpncalc4-03/lexer.c
 	[4] rpncalc4-04/lexer.c
 	[4] rpncalc4-05/lexer.c
@@ -277,11 +282,13 @@ void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
-numcmp(char *s1, char *s2);
+int numcmp(char *s1, char *s2);
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
 void printbits(unsigned x);
 	[2] fastbitcount.c
@@ -292,12 +299,16 @@ void printbits(unsigned x);
 void printline(size_t pos);
 	[1] fold.c
 
+void readargs(int argc, char *argv[]);
+	[5] sort4.c
+
 int readlines(char *lineptr[], int maxlines);
 	[5] readline.c
 	[5] readline2.c
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
 void reverse(char s[]);
 void reverse(char *s);
@@ -378,6 +389,7 @@ void swap(void *v[], int i, int j)
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
+	[5] sort4.c
 
 void unescape(char source[], char target[]);
 void unescape(char *source,  char *target);
@@ -413,4 +425,4 @@ void writelines(char *lineptr[], int nlines, bool descend);
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
-
+	[5] sort4.c

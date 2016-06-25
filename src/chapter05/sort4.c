@@ -1,5 +1,6 @@
 /*
- * sort3:  Sorts input lines supporting reverse and numeric ordering using '-r', '-n', '-f', and '-d' switches
+ * sort4:  Sorts input lines supporting reverse and numeric ordering using '-r', '-n', '-f', and '-d' switches
+ *         plus being able to sort on a field range defined by '-pos' to '+pos'.
  */
 
 // The following definition change is needed to allow the use of getline() in this
@@ -25,7 +26,14 @@
 
 static char allocbuf[ALLOCSIZE]; // Storage for alloc
 static char *allocp = allocbuf;  // Next free position in alloc
-char *lineptr[MAXLINES];  // Pointers to text lines
+
+char *lineptr[MAXLINES]; // Pointers to text lines
+int   pos1;              // Starting position of sort field
+int   pos2;              // Ending position of sort field
+bool  numeric = false;   // 'true' if numeric sort
+bool  descend = false;   // 'true' if descending output
+bool  fold    = false;   // 'true' if case insensitive sort
+bool  dir     = false;   // 'true' if directory order sort
 
 /*
  * alloc(): rudimentary storage allocator
@@ -98,6 +106,39 @@ static void writelines(char *lineptr[], int nlines, bool descend) {
 }
 
 /*
+ * error(): print error messages
+ */
+
+static void error(char *s) {
+	printf("%s\n", s);
+	exit(EXIT_FAILURE);
+}
+
+/*
+ * substr(): get a substring of s and put it into str
+ */
+
+static void substr(const char *s, char *str) {
+
+	int i;
+	int j;
+	int len;
+
+	len = strlen(s);
+
+	if (0 < pos2 && pos2 < len)
+		len = pos2;
+	else if (0 < pos2 && len < pos2)
+		error("substr: string is too short");
+
+	for (j = 0, i = pos1; i < len; i++, j++)
+		str[j] = str[i];
+
+	str[j] = '\0';
+
+}
+
+/*
  * swap(): interchanges v[i] and v[j]
  */
 
@@ -114,8 +155,16 @@ static void swap(void *v[], int i, int j) {
 
 static int numcmp(const char *s1, const char *s2) {
 
-	double v1 = atof(s1);
-	double v2 = atof(s2);
+	double v1;
+	double v2;
+	char   str[1000];
+
+	substr(s1, str);
+	v1 = atof(s1);
+
+	substr(s2, str);
+	v2 = atof(s2);
+
 
 	if (v1 < v2)
 		return -1;
@@ -131,11 +180,20 @@ static int numcmp(const char *s1, const char *s2) {
 
 static int foldcmp(const char *s, const char *t) {
 
-	for ( ; tolower(*s) == tolower(*t); s++, t++)
-		if (*s == '\0')
+	int  i = pos1;
+	int  j = pos1;
+	int  endpos;
+
+	if (pos2 > 0)
+		endpos = pos2;
+	else if ((endpos = strlen(s)) > strlen(t))
+		endpos = strlen(t);
+
+	for ( ; tolower(s[i]) == tolower(t[j]) && i < endpos && j < endpos; i++, j++)
+		if (s[i] == '\0')
 			return 0;
 
-	return tolower(*s) - tolower(*t);
+	return tolower(s[i]) - tolower(t[j]);
 }
 
 /*
@@ -146,25 +204,34 @@ static int dircmp(const char *s, const char *t) {
 
 	char a;
 	char b;
+	int  i = pos1;
+	int  j = pos1;
+	int  endpos;
+
+	if (pos2 > 0)
+		endpos = pos2;
+	else if ((endpos = strlen(s)) > strlen(t))
+		endpos = strlen(t);
 
 	do {
 
-		while (!isalnum(*s) && *s != ' ' && *s != '\0')
-			s++;
-		while (!isalnum(*t) && *t != ' ' && *t != '\0')
-			t++;
+		while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
+			i++;
+		while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
+			j++;
 
-		a = *s++;
-		b = *t++;
+		a = s[i++];
+		b = t[j++];
 
 		if (a == '\0' && b == '\0')
 			return 0;
 
-	} while (a == b);
+	} while (a == b && i < endpos && j < endpos);
 
 	return a - b;
 
 }
+
 /*
  * folddircmp(): compares strings in directory order
  */
@@ -172,22 +239,30 @@ static int dircmp(const char *s, const char *t) {
 static int folddircmp(const char *s, const char *t) {
 
 	char a;
+	int  i = pos1;
+	int  j = pos1;
+	int  endpos;
+
+	if (pos2 > 0)
+		endpos = pos2;
+	else if ((endpos = strlen(s)) > strlen(t))
+		endpos = strlen(t);
 	char b;
 
 	do {
 
-		while (!isalnum(*s) && *s != ' ' && *s != '\0')
-			s++;
-		while (!isalnum(*t) && *t != ' ' && *t != '\0')
-			t++;
+		while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
+			i++;
+		while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
+			j++;
 
-		a = tolower(*s++);
-		b = tolower(*t++);
+		a = tolower(s[i++]);
+		b = tolower(t[j++]);
 
 		if (a == '\0' && b == '\0')
 			return 0;
 
-	} while (a == b);
+	} while (a == b && i < endpos && j < endpos);
 
 	return a - b;
 
@@ -217,45 +292,55 @@ static void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 }
 
 /*
+ * readargs(): read arguments
+ */
+
+static void readargs(int argc, char *argv[]) {
+
+	int c;
+
+	while (--argc > 0 && ((c = (*++argv)[0]) == '-' || c == '+'))
+		if (c == '-' && !isdigit(*(argv[0]+1)))
+			while ((c = *++argv[0]) != '\0')
+				switch (c) {
+					case 'n':
+						numeric = true;
+						break;
+					case 'r':
+						descend = true;
+						break;
+					case 'f':
+						fold = true;
+						break;
+					case 'd':
+						dir = true;
+						break;
+					default:
+						printf("sort: illegal option %c\n", c);
+						exit(EXIT_FAILURE);
+						break;
+				}
+		else if (c == '-')
+			pos2 = atoi(argv[0]+1);
+		else if ((pos1 = atoi(argv[0]+1)) < 0)
+	    	error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
+
+    if ((argc == 0) || (pos1 > pos2))
+	    error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
+
+}
+
+/*
  * Main
  */
 
 int main(int argc, char *argv[]) {
 
 	int  nlines;          // Number of input lines to read
-	bool numeric = false; // 'true' if numeric sort
-	bool descend = false; // 'true' if descending output
-	bool fold    = false; // 'true' if case insensitive sort
-	bool dir     = false; // 'true' if directory order sort
-	char c;
 
 	// Evaluate arguments
 
-	while (--argc > 0 && (*++argv)[0] == '-')
-		while ((c = *++argv[0]) != '\0')
-			switch (c) {
-				case 'n':
-					numeric = true;
-					break;
-				case 'r':
-					descend = true;
-					break;
-				case 'f':
-					fold = true;
-					break;
-				case 'd':
-					dir = true;
-					break;
-				default:
-					printf("sort: illegal option %c\n", c);
-					exit(EXIT_FAILURE);
-					break;
-			}
-
-    if (argc == 0) {
-    	printf("usage: sort -dnfr [FILE]\n");
-    	exit(EXIT_FAILURE);
-    }
+	readargs(argc, argv);
 
 	// Read in the lines into memory
 

@@ -114,7 +114,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-13 - tail2.c               Displays the specified number of lines from the end of a file
 * 5-14 - sort1.c               Sorts input lines supporting reverse and numeric ordering using '-r' and '-n' switches
 * 5-15 - sort2.c               Extends sort1.c to also support '-f' switch to fold upper and lower case          
-* 5-16 - sort3.c               Extends sort2.c to also support '-d' switch to sort by 'directory order'          
+* 5-16 - sort3.c               Extends sort2.c to also support '-d' switch to sort by 'directory order'
+* 5-17 - sort4.c               Extends sort3.c to also support for searching a fixed position field ('+pos1', '-pos1')
+* 5-18 - dcl.c                 Parses a C language pointer declaration
 
 ##Extras
 
