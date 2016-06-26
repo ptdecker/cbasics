@@ -117,6 +117,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-16 - sort3.c               Extends sort2.c to also support '-d' switch to sort by 'directory order'
 * 5-17 - sort4.c               Extends sort3.c to also support for searching a fixed position field ('+pos1', '-pos1')
 * 5-18 - dcl.c                 Parses a C language pointer declaration (with some error handling)
+* 5-19 - undcl.c               Converts (sort of) natural language into a C language pointer declaration
 
 ##Extras
 

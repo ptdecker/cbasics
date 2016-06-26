@@ -150,6 +150,7 @@ void error(char *s);
 
 void errmsg(char *msg);
 	[5] dcl.c
+	[5] undcl.c
 
 void escape(char source[], char target[]);
 void escape(char *source,  char *target);
@@ -191,6 +192,7 @@ char getch(void);
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c
+	[5] undcl.c
 	[-] rpncalc/lexer.c
 
 int getdouble(double *pn);
@@ -233,6 +235,7 @@ char getop(char s[]);
 
 int gettoken(void);
 	[5] dcl.c
+	[5] undcl.c
 
 unsigned int htoi(char s[]);
 unsigned int htoi(char *s);
@@ -296,6 +299,9 @@ void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 	[5] sort2.c
 	[5] sort3.c
 	[5] sort4.c
+
+int nexttoken(void);
+	[5] undcl.c
 
 int numcmp(char *s1, char *s2);
 	[5] sort1.c
@@ -421,6 +427,7 @@ static void ungetch(char ch);
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c
+	[5] undcl.c
 	[-] rpncalc/lexer.c
 
 void ungets(char s[]);
