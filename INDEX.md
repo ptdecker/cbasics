@@ -122,13 +122,19 @@ void daswap(void);
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
 
-int day_of_year(int year, int month, int day)
+int day_of_year(int year, int month, int day);
 	[5] datetools.c
 	[5] datetoolsp.c
+
+void dcl(void);
+	[5] dcl.c
 
 void detab(char *tabstop);
 	[5] detab2.c
 	[5] detab3.c
+
+void dirdcl(void);
+	[5] dcl.c
 
 void eatchar(void);
 	[1] minilint.c
@@ -141,6 +147,9 @@ void entab(char *tab);
 void error(char *s);
 	[5] sort4.c
 	[5] tail2.c
+
+void errmsg(char *msg);
+	[5] dcl.c
 
 void escape(char source[], char target[]);
 void escape(char *source,  char *target);
@@ -178,6 +187,7 @@ char getch(void);
 	[4] singlegetch.c
 	[4] ungets.c
 	[4] ungetseof.c
+	[5] dcl.c
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c
@@ -220,6 +230,9 @@ char getop(char s[]);
 	[4] rpncalc4-11/lexer.c
 	[5] expr/lexer.c
 	[-] rpncalc/lexer.c
+
+int gettoken(void);
+	[5] dcl.c
 
 unsigned int htoi(char s[]);
 unsigned int htoi(char *s);
@@ -404,6 +417,7 @@ static void ungetch(char ch);
 	[4] singlegetch.c
 	[4] ungets.c
 	[4] ungetseof.c
+	[5] dcl.c
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c

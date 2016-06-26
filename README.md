@@ -116,7 +116,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-15 - sort2.c               Extends sort1.c to also support '-f' switch to fold upper and lower case          
 * 5-16 - sort3.c               Extends sort2.c to also support '-d' switch to sort by 'directory order'
 * 5-17 - sort4.c               Extends sort3.c to also support for searching a fixed position field ('+pos1', '-pos1')
-* 5-18 - dcl.c                 Parses a C language pointer declaration
+* 5-18 - dcl.c                 Parses a C language pointer declaration (with some error handling)
 
 ##Extras
 
@@ -134,6 +134,7 @@ The following test data files are provided to support manually testing the exerc
 * bigline.txt       - One really big single line of text (3001 chars)
 * bignegative.txt   - A big (out of range) negative integer
 * comment.txt       - A C program containing test scenarios for 'nocomment.c'
+* dcl.txt           - Tst file for 'dcl.c'
 * empty.txt         - One empty line (just a '\n')
 * extraspecials.txt - Contains embedded backspace, tabs, and backslashes
 * huckfinn.txt      - Project Gutenberg copy of Adventures of Huckleberry Finn by Mark Twain
