@@ -128,6 +128,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * echoargs.c:    Echos passed arguments
 * makebigline.c: Outputs a 3001 character text line
+* points.c:      Implements 'points' examples from 6.1 and 6.2 of "structures" chapter
 * rpncalc/*.c:   Unadulterted (pre-exercise) RPN Calculator (rpncalc0)
 * saveasascii.c: Strips input of everything except regular values
 * size.c:        Counts the number of characters in the input

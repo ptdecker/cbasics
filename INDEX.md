@@ -3,6 +3,9 @@ Index of Functions and Macros
 
 Provides a index of all the functions and macros implemented in one form or another by these exercises. The number in brackets indicates chapter number associated with the exercise that implemented the designated function or macro ('[-]' indicates extras not specifically called out as exercises).  When multiple implementations are implemented for a function, in some cases the implementation may vary where the chapters illustrated new concepts implemented in the fuction and macro.  As such, the last implementation (with the exception of extras indicated by [-]) usually represents the most advanced implementation of the function or macro.  For some functions, more than one signature is listed.  This occurs in the case where pointer-based versions of the signatures were illustrated later and the two signatures are equivalent.  If the signatures are not equivalent, the implmentations are listed separately.
 
+struct point addpoint(struct point p1, const struct point p2);
+	[-] points.c
+
 char *alloc(int n);
 	[5] readline.c
 	[5] sort1.c
@@ -28,6 +31,9 @@ bool caempty(void);
 	[4] rpncalc4-06/castack.c
 	[5] expr/castack.c
 	[-] rpncalc/castack.c
+
+static struct rect canonrect(const struct rect r);
+	[-] points.c
 
 char capop(void);
 	[4] rpncalc4-03/castack.c
@@ -280,11 +286,20 @@ void itob(int n, char *s, int b);
 char lower(char c);
 	[2] lower.c
 
+struct point makepoint(const int x, const int y);
+	[-] points.c
+
 void mathfun(char s[]);
 	[4] rpncacl4-05/rpncalc3.c
 	[4] rpncacl4-06/rpncalc4.c
 	[4] rpncacl4-10/rpncalc5.c
 	[4] rpncacl4-11/rpncalc6.c
+
+#define max(a, b)
+	[-] points.c
+
+#define min(a, b)
+	[-] points.c
 
 void month_day(int year, int yearday, int *pmonth, int *pday);
 	[5] datetoolsp.c
@@ -317,6 +332,9 @@ int numcmp(char *s1, char *s2);
 	[5] sort3.c
 	[5] sort4.c
 
+double origindist(const struct point pt);
+	[-] points.c
+
 void parmdcl(void);
 	[5] dcl2.c
 
@@ -328,6 +346,9 @@ void printbits(unsigned x);
 
 void printline(size_t pos);
 	[1] fold.c
+
+bool ptinrect(const struct point p, struct rect r);
+	[-] points.c
 
 void readargs(int argc, char *argv[]);
 	[5] sort4.c
@@ -367,7 +388,7 @@ int scompar(const void *str1, const void *str2);
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 	[2] setbits.c
 
-settabs(int argc, char *argv[], char *tabstop);
+void settabs(int argc, char *argv[], char *tabstop);
 	[5] detab2.c
 	[5] detab3.c
 	[5] entab2.c
@@ -395,7 +416,7 @@ void strncat(char *leftstr, char *rightstr, size_t rcount);
 int strncmp(char *s1, char *s2, size_t count) 
 	[5] strnfunc/strncmp.c
 
-static void strncopy(char *dest, char *source, size_t count);
+void strncopy(char *dest, char *source, size_t count);
 	[5] strnfunc/strncopy.c
 
 void squeezechar(char s[], char c);

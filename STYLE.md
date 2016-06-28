@@ -9,13 +9,15 @@ Style and Approach Notes
 
 * Similarly, functions that return a value which is subsequently ignored are also cast as type _void_ (cast into the void so to speak) to indicate that their return value is deliberately being ignored. This keeps splint happy too.
 
-* The _bool_ type supported by the c99 standard library _stdbool.h_ is utilized for clarity.
+* The _bool_ type supported by the c99 standard library _stdbool.h_ is utilized for clarity.  K&R represents boolean values as either integers (0 for 'false') or an enumeration where the false value ("FALSE" or "NO") is zero so that conditionals that test for a boolean value work out.
 
 * I try to make a clearer distinction between when I use _char_ vs _int_ even though during (K&R) times they were interchangable. I'm a bit loose about it and as such have _+charint_ enabled on *splint* so that it doesn't continually complain to me when I got lazy and tired of explicit type casing between the two.
 
 * I love state machines so several of my solution approaches leverage them. One example is *minilint.c* in from chapter one. (T&G) does not go this route so my solutions to these exercises vary significantly from the ones offered by this source.
 
-* Following Plauger's advice, standard library #includes are ordered alphabetically
+* I prefer using the "is" prefix for functions that return a boolean after performing a logic test, e.g. "isleap()" for testing if an integer representing a year is a leap year or not.  K&R does not use this style.  To keep consistency with the book, I retained the function name 'ptinrect' in points.c as opposed to "isptinrect" which I would have preferred.
+
+* Following Plauger's advice, standard library #includes are ordered alphabetically.
 
 ## Source
 

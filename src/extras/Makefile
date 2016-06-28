@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
 DEPS =
-_OBJ = echoargs.o makebigline.o saveasascii.o size.o testupcase.o
-_BIN = echoargs makebigline saveasascii size testupcase
+_OBJ = echoargs.o makebigline.o points.o saveasascii.o size.o testupcase.o
+_BIN = echoargs makebigline points saveasascii size testupcase
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -33,6 +33,10 @@ echoargs: $(ODIR)/echoargs.o
 	cp -v $@ $(BIN)/$@
 
 makebigline: $(ODIR)/makebigline.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+points: $(ODIR)/points.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
