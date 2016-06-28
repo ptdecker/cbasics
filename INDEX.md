@@ -128,6 +128,10 @@ int day_of_year(int year, int month, int day);
 
 void dcl(void);
 	[5] dcl.c
+	[5] dcl2.c
+
+void dclspec(void);
+	[5] dcl2.c
 
 void detab(char *tabstop);
 	[5] detab2.c
@@ -135,6 +139,7 @@ void detab(char *tabstop);
 
 void dirdcl(void);
 	[5] dcl.c
+	[5] dcl2.c
 
 void eatchar(void);
 	[1] minilint.c
@@ -150,6 +155,7 @@ void error(char *s);
 
 void errmsg(char *msg);
 	[5] dcl.c
+	[5] dcl2.c
 	[5] undcl.c
 
 void escape(char source[], char target[]);
@@ -189,6 +195,7 @@ char getch(void);
 	[4] ungets.c
 	[4] ungetseof.c
 	[5] dcl.c
+	[5] dcl2.c
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c
@@ -235,6 +242,7 @@ char getop(char s[]);
 
 int gettoken(void);
 	[5] dcl.c
+	[5] dcl2.c
 	[5] undcl.c
 
 unsigned int htoi(char s[]);
@@ -309,6 +317,9 @@ int numcmp(char *s1, char *s2);
 	[5] sort3.c
 	[5] sort4.c
 
+void parmdcl(void);
+	[5] dcl2.c
+
 void printbits(unsigned x);
 	[2] fastbitcount.c
 	[2] invert.c
@@ -349,6 +360,9 @@ void reversesub(char *s, size_t start, size_t end)
 
 int rightrot(int x, unsigned n);
 	[2] rightrot.c
+
+int scompar(const void *str1, const void *str2);
+	[5] dcl2.c
 
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 	[2] setbits.c
@@ -410,12 +424,18 @@ void swap(void *v[], int i, int j)
 	[5] sort3.c
 	[5] sort4.c
 
+bool typequal(void);
+	[5] dcl2.c
+
+bool typespec(void);
+	[5] dcl2.c
+
 void unescape(char source[], char target[]);
 void unescape(char *source,  char *target);
 	[3] escape.c
 	[3] pointers/escapep.c
 
-static void ungetch(char ch);
+void ungetch(char ch);
 	[4] rpncalc4-03/lexer.c
 	[4] rpncalc4-04/lexer.c
 	[4] rpncalc4-05/lexer.c
@@ -424,6 +444,7 @@ static void ungetch(char ch);
 	[4] ungets.c
 	[4] ungetseof.c
 	[5] dcl.c
+	[5] dcl2.c
 	[5] expr/lexer.c
 	[5] getfloat.c
 	[5] getint.c

@@ -129,6 +129,92 @@ int gettoken(void) {
 }
 
 /*
+ * scompar(): implements strcmp in a way that is type compatible with bsearch
+ */
+
+int scompar(const void *str1, const void *str2) {
+	return strcmp(str1, str2);
+}
+
+/*
+ * typequal(): returns true if a token is a type-qualifier
+ */
+
+bool typequal(void) {
+
+	static char *typeq[] = {
+		"const",
+		"volatile"
+	};
+	char *pt = token;
+
+	return (bsearch(&pt, typeq, sizeof(typeq)/sizeof(char *), sizeof(char *), scompar) != NULL);
+}
+
+/*
+ * typespec(): returns true if a token is a type-specifier
+ */
+
+bool typespec(void) {
+
+	static char *types[] = {
+		"char",
+		"int",
+		"void",
+		"short",
+		"int",
+		"long",
+		"float",
+		"double",
+		"signed",
+		"unsigned"
+	};
+	char *pt = token;
+
+	return (bsearch(&pt, types, sizeof(types)/sizeof(char *), sizeof(char *), scompar) != NULL);
+}
+
+/*
+ * dclspec(): interpret a declaration specification
+ */
+
+void dclspec(void) {
+
+	char temp[MAXTOKEN];
+
+
+	temp[0] = '\0';
+	gettoken();
+	do {
+		if (tokentype != NAME) {
+			prevtoken = true;
+			dcl();
+		} else if (typespec() || typequal()) {
+			strcat(temp, " ");
+			strcat(temp, token);
+			gettoken();
+		} else
+			errmsg("unknown type in parameter list\n");
+
+	} while (tokentype != ',' && tokentype != ')');
+	strcat(out, temp);
+	if (tokentype == ',')
+		strcat(out, ",");
+}
+
+/*
+ * parmdl(): parse a parameter declaration
+ */
+
+void parmdcl(void) {
+	do {
+		dclspec();
+	} while (tokentype == ',');
+	if (tokentype != ')')
+		errmsg("missing ')' in parameter declaration\n");
+}
+
+/*
  * dirdcl(): parse a direct declarator
  */
 
@@ -140,15 +226,21 @@ void dirdcl(void) {
 		dcl();
 		if (tokentype != ')')
 			errmsg("error: missing ')'\n");
-	} else if (tokentype == NAME)
-		strcpy(name, token);
-	else
-		errmsg("error: expected name or (dcl)\n");
+	} else if (tokentype == NAME) {
+		if (name[0] == '\0')
+			strcpy(name, token);
+	} else {
+		prevtoken = true;
+	}
 
-	while ((type = gettoken()) == PARENS || type == BRACKETS)
+	while ((type = gettoken()) == PARENS || type == BRACKETS || type == '(')
 		if (type == PARENS)
 			strcat(out, " function returning");
-		else {
+		else if (type == '(') {
+			strcat(out, " function expecting");
+			parmdcl();
+			strcat(out, " and returning");
+		} else {
 			strcat(out, " array");
 			strcat(out, token);
 			strcat(out, " of");

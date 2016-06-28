@@ -118,6 +118,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-17 - sort4.c               Extends sort3.c to also support for searching a fixed position field ('+pos1', '-pos1')
 * 5-18 - dcl.c                 Parses a C language pointer declaration (with some error handling)
 * 5-19 - undcl.c               Converts (sort of) natural language into a C language pointer declaration
+* 5-20 - dcl2.c                Extends dcl.c to support function argument types, qualifiers like const, etc
 
 ##Extras
 
