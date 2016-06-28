@@ -120,6 +120,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 5-19 - undcl.c               Converts (sort of) natural language into a C language pointer declaration
 * 5-20 - dcl2.c                Extends dcl.c to support function argument types, qualifiers like const, etc
 
+### Chapter 6 - "Structures"
+
+* 6-01 - getword.c             Gets next word or character handling underscore, string constants, comments, and preprocessor control lines
+
 ##Extras
 
 * echoargs.c:    Echos passed arguments
