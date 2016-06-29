@@ -51,11 +51,13 @@ static int getch(void) {
  */
 
 static void ungetch(int c) {
+
 	if (bufferptr >= MAXSTACK) {
 		printf("ungetch(): buffer overflow\n");
 		exit(EXIT_FAILURE);
-	} else
-		buffer[bufferptr++] = (char)c;
+	}
+	
+	buffer[bufferptr++] = (char)c;
 }
 
 /*

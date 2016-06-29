@@ -57,11 +57,13 @@ static int getch(void) {
  */
 
 static void ungetch(int c) {
+
 	if (bufferptr >= MAXSTACK) {
 		printf("ungetch(): buffer overflow\n");
 		exit(EXIT_FAILURE);
-	} else
-		buffer[bufferptr++] = (char)c;
+	}
+
+	buffer[bufferptr++] = (char)c;
 }
 
 /*
@@ -138,6 +140,8 @@ int scompar(const void *str1, const void *str2) {
 
 /*
  * typequal(): returns true if a token is a type-qualifier
+ *
+ * NOTE: since we are using bsearch to search typeq[], typeq[]'s' values must be in ascending order
  */
 
 bool typequal(void) {
@@ -153,21 +157,22 @@ bool typequal(void) {
 
 /*
  * typespec(): returns true if a token is a type-specifier
+ *
+ * NOTE: since we are using bsearch to search types[], types[]'s' values must be in ascending order
  */
 
 bool typespec(void) {
 
 	static char *types[] = {
 		"char",
-		"int",
-		"void",
-		"short",
+		"double",
+		"float",
 		"int",
 		"long",
-		"float",
-		"double",
+		"short",
 		"signed",
-		"unsigned"
+		"unsigned",
+		"void"
 	};
 	char *pt = token;
 

@@ -27,10 +27,12 @@ static char getch(void) {
  */
 
 static void ungetch(char c) {
+
 	if (buffer != '\0') {
 		printf("ungetch(): buffer overflow\n");
 		exit(EXIT_FAILURE);
 	}
+	
 	buffer = c;
 }
 

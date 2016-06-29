@@ -122,7 +122,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 ### Chapter 6 - "Structures"
 
-* 6-01 - getword.c             Gets next word or character handling underscore, string constants, comments, and preprocessor control lines
+* 6-01 - getword.c             Gets next key word or character handling underscore, string constants, comments, and preprocessor control lines
 
 ##Extras
 
@@ -140,7 +140,7 @@ The following test data files are provided to support manually testing the exerc
 
 * bigline.txt       - One really big single line of text (3001 chars)
 * bignegative.txt   - A big (out of range) negative integer
-* comment.txt       - A C program containing test scenarios for 'nocomment.c'
+* comment.txt       - A C program containing test scenarios for 'nocomment.c' and 'getword.c'
 * dcl.txt           - Tst file for 'dcl.c'
 * empty.txt         - One empty line (just a '\n')
 * extraspecials.txt - Contains embedded backspace, tabs, and backslashes
