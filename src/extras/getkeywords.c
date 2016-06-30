@@ -9,9 +9,8 @@
 
 // Definitinos
 
-#define MAXSTACK    10  // Maximum characters parser can undo
-#define MAXWORDSIZE 50  // Maximum number of characters in a word
-
+#define MAXSTACK      10  // Maximum characters parser can undo
+#define MAXWORDSIZE   50  // Maximum number of characters in a word
 #define KEY_NOT_FOUND EOF
 
 // Globals

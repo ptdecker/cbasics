@@ -11,13 +11,54 @@
 
 // Definitinos
 
-#define MAXSTACK    10  // Maximum characters parser can undo
-#define MAXWORDSIZE 50  // Maximum number of characters in a word
+#define MAXSTACK    10    // Maximum characters parser can undo
+#define MAXWORDSIZE 50    // Maximum number of characters in a word
+#define KEY_NOT_FOUND EOF
 
 // Globals
 
 static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
 static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+
+static struct key {
+ 	char *word;
+ 	int   count;
+ } keytab[] = {
+ 	{"auto",     0 },
+ 	{"break",    0 },
+ 	{"case",     0 },
+ 	{"char",     0 },
+ 	{"const",    0 },
+ 	{"continue", 0 },
+ 	{"default",  0 },
+ 	{"do",       0 },
+ 	{"double",   0 },
+ 	{"else",     0 },
+ 	{"enum",     0 },
+ 	{"extern",   0 },
+ 	{"float",    0 },
+ 	{"for",      0 },
+ 	{"goto",     0 },
+ 	{"if",       0 },
+ 	{"int",      0 },
+ 	{"long",     0 },
+ 	{"register", 0 },
+ 	{"return",   0 },
+ 	{"short",    0 },
+ 	{"signed",   0 },
+ 	{"sizeof",   0 },
+ 	{"static",   0 },
+ 	{"struct",   0 },
+ 	{"switch",   0 },
+ 	{"typedef",  0 },
+ 	{"union",    0 },
+ 	{"unsigned", 0 },
+ 	{"void",     0 },
+ 	{"volatile", 0 },
+ 	{"while",    0 },
+ };
+
+static const size_t numkeys = (size_t)(sizeof keytab / sizeof(struct key));
 
 // Structures
 
@@ -132,10 +173,15 @@ static int compare(char *s, struct tnode *p, int num, bool *found) {
 	int i;
 	char *t = p->word;
 
+	// If all characters in the two strings match, return zero; otherwise,
+	// exit loop with 'i' indicating how many characters we looked at before
+	// finding a difference
 	for (i = 0; *s == *t; i++, s++, t++)
 		if (*s == '\0')
 			return 0;
 
+	// If the number of matching characters is greater or equal to the 
+	// number we're looking for then update the found indicator
 	if (i >= num) {
 		*found = true;
 		p->match = true;
@@ -191,7 +237,7 @@ static struct tnode *addtree(struct tnode *p, char *w, int num, bool *found) {
 		p->match = *found;
 		p->right = NULL;
 		p->left  = NULL;
-	} else if ((cond = compare(w, p, num, found)) > 0)
+	} else if ((cond = compare(w, p, num, found)) < 0)
 		p->left  = addtree(p->left, w, num, found);
 	else if (cond > 0)
 		p->right = addtree(p->right, w, num, found);
@@ -215,6 +261,31 @@ static void treeprint(struct tnode *p) {
 }
 
 /*
+ * binsearch(): find word in tab[0]...tab[n-1]
+ */
+
+static struct key *binsearch(char *word, struct key tab[], size_t n) {
+
+	struct key *low  = &tab[0];
+	struct key *high = &tab[n];
+	int    cond = 0;
+
+	while (low < high) {
+		struct key *mid = low + (high - low) / 2;
+		cond = strcmp(word, mid->word);
+		if (cond < 0)
+			high = mid;
+		else if (cond > 0)
+			low = mid + 1;
+		else
+			return mid;
+
+	}
+
+	return NULL;
+};
+
+/*
  * main:  a little test program for getword()
  */
 
@@ -226,7 +297,7 @@ int main(int argc, char *argv[])  {
 	bool          found = false;
 
 	while (getword(word, MAXWORDSIZE) != EOF) {
-		if (isalpha(word[0]) && (int)strlen(word) >= num)
+		if (isalpha(word[0]) && (int)strlen(word) >= num && binsearch(word, keytab, numkeys) == NULL)
 			root = addtree(root, word, num, &found);
 		found = false;
 	}
