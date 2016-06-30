@@ -4,10 +4,10 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
-_OBJ = getword.o
-_BIN = getword
+_OBJ = getvars.o getword.o
+_BIN = getvars getword
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -27,6 +27,10 @@ clean:
 		cd ..; \
 	done
 	rm -rv $(ODIR) $(_BIN)
+
+getvars: $(ODIR)/getvars.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
 
 getword: $(ODIR)/getword.o
 	$(CC) $(CFLAGS) $^ -o $@

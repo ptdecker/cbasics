@@ -4,7 +4,7 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
 _OBJ = any.o equivloop.o fastbitcount.o htoi.o invert.o lower.o rightrot.o setbits.o squeeze.o typelimits.o
 _BIN = any equivloop fastbitcount htoi invert lower rightrot setbits squeeze typelimits

@@ -4,7 +4,7 @@ SUBDIRS = rpncalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -temptrans 
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
 _OBJ = echoargs.o getkeywords.o makebigline.o points.o saveasascii.o size.o testupcase.o
 _BIN = echoargs getkeywords makebigline points saveasascii size testupcase

@@ -4,7 +4,7 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
 _OBJ = charhistohori.o charhistovert.o cleantrailsnblanks.o countchar.o countwords.o ctof.o \
        detab.o entab.o eofvalue.o fold.o ftoc-func.o ftoc-reverse.o ftoc.o helloworld.o     \

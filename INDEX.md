@@ -21,6 +21,9 @@ int any(char *s,  char *c);
 int binary_search(int x, int v[], size_t n);
 	[3] binsearch.c
 
+struct key *binsearch(char *word, struct key tab[], size_t n)
+	[-] getkeywords.c
+
 unsigned bitcount(int x);
 	[2] fastbitcount.c
 
@@ -58,6 +61,10 @@ size_t casize(void);
 	[4] rpncalc4-06/castack.c
 	[5] expr/castack.c
 	[-] rpncalc/castack.c
+
+char comment(void);
+	[6] getword.c
+	[-] getkeywords.c
 
 void copy(char to[], char from[]);
 void copy(char *to,  char *from);
@@ -206,7 +213,9 @@ char getch(void);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] getword.c
 	[-] rpncalc/lexer.c
+	[-] getkeywords.c
 
 int getdouble(double *pn);
 	[5] getfloat.c
@@ -250,6 +259,10 @@ int gettoken(void);
 	[5] dcl.c
 	[5] dcl2.c
 	[5] undcl.c
+
+char getword(char *word, int lim);
+	[6] getword.c
+	[-] getkeywords.c
 
 unsigned int htoi(char s[]);
 unsigned int htoi(char *s);
@@ -470,7 +483,9 @@ void ungetch(char ch);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] getword.c
 	[-] rpncalc/lexer.c
+	[-] getkeywords.c
 
 void ungets(char s[]);
 	[4] ungets.c

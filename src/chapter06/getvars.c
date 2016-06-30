@@ -1,11 +1,13 @@
 /*
-* getword(): get next word or character from input making sure to properly handle underscores, string
-*            constants, comments, and pre-processor control lines
+* getvars(): gets the variables from a C program
 */
 
+
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Definitinos
 
@@ -16,6 +18,15 @@
 
 static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
 static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+
+// Structures
+
+struct tnode {
+	char *word;          // Points to the text stored in the node
+	bool match;          // Indicates if a match was found
+	struct tnode *left;  // Left child
+	struct tnode *right; // Right child
+};
 
 /*
  * getch(): gets a character from the buffer
@@ -44,9 +55,7 @@ static void ungetch(char c) {
  */
 
 static char comment(void) {
-
-	int c;
-
+	char c;
 	while ((c = getch()) != EOF)
 		if (c == '*') {
 			if ((c = getch()) == '/')
@@ -115,56 +124,114 @@ static char getword(char *word, int lim) {
 }
 
 /*
+ * compare()  compare words and update p->match
+ */
+
+static int compare(char *s, struct tnode *p, int num, bool *found) {
+
+	int i;
+	char *t = p->word;
+
+	for (i = 0; *s == *t; i++, s++, t++)
+		if (*s == '\0')
+			return 0;
+
+	if (i >= num) {
+		*found = true;
+		p->match = true;
+	}
+
+	return *s - *t;
+}
+
+/*
+ * talloc(): make a tnode
+ */
+
+static struct tnode *talloc(void) {
+
+	struct tnode *p = (struct tnode *)malloc(sizeof(struct tnode));
+
+	if (p == NULL) {
+		printf("Error: ran out of memory");
+		exit(EXIT_FAILURE);
+	}
+
+	return p;
+} 
+
+/*
+ * strdup(): make a duplicate copy of s
+ */
+
+static char *mystrdup(char *s) {
+
+	char *p = (char *)malloc(strlen(s) + 1);
+
+	if (p == NULL) {
+		printf("Error: ran out of memory");
+		exit(EXIT_FAILURE);
+	}
+
+	strcpy(p, s);
+	return p;
+}
+
+/*
+ * addtree(): add a node to our tree
+ */
+
+static struct tnode *addtree(struct tnode *p, char *w, int num, bool *found) {
+
+	int cond;
+
+	if (p == NULL) {
+		p = talloc();
+		p->word  = mystrdup(w);
+		p->match = *found;
+		p->right = NULL;
+		p->left  = NULL;
+	} else if ((cond = compare(w, p, num, found)) > 0)
+		p->left  = addtree(p->left, w, num, found);
+	else if (cond > 0)
+		p->right = addtree(p->right, w, num, found);
+
+	return p;
+}
+
+/*
+ * treeprint: traverse the tree in order and print node if p->match is true
+ */
+
+static void treeprint(struct tnode *p) {
+
+	if (p != NULL) {
+		treeprint(p->left);
+		if (p->match)
+			printf("%s\n", p->word);
+		treeprint(p->right);
+	}
+
+}
+
+/*
  * main:  a little test program for getword()
  */
 
-int main(void) {
+int main(int argc, char *argv[])  {
 
-	char nextword[MAXWORDSIZE] = "";
-	int  nextchar;
+	struct tnode *root = NULL;
+	int           num = (--argc == 1 && *(++argv)[0] == '-') ? atoi(argv[0] + 1) : 6;
+	char          word[MAXWORDSIZE] = "";
+	bool          found = false;
 
-	while ((nextchar = getword(nextword, MAXWORDSIZE)) != EOF)
-		if (isalnum(nextword[0]))
-			printf("%s\n", nextword);
+	while (getword(word, MAXWORDSIZE) != EOF) {
+		if (isalpha(word[0]) && (int)strlen(word) >= num)
+			root = addtree(root, word, num, &found);
+		found = false;
+	}
+
+	treeprint(root);
 
 	exit(EXIT_SUCCESS);
 }
-
-/* 
- * Below is a version of getword() that returns just words without the guard against underscores, string
- * constants, comments, and pre-processor control lines.  This might come in handy for other purposes where
- * one wants to pull just words out of stdin.
-
-static char getword(char *word, int lim) {
-
-	int   c;
-	char *w = word;
-
-	// Eat white space
-	while (isspace(c = getch()))
-		;
-
-	// Add character to the word buffer if we are not yet at EOF
-	if (c != EOF)
-		*w++ = c;
-
-	// If the character is not an word, then return it to the caller along with an empty word buffer
-	if (!isalpha(c)) {
-		*w = '\0';
-		return c;
-	}
-
-	// Otherwise, read in characters until we have completed our word or our buffer limit is reached
-	for ( ; --lim > 0; w++)
-		if (!isalnum(*w = getch())) {
-			ungetch(*w);
-			break;
-		}
-
-	// Terminate our word buffer and return the first character
-	*w = '\0';
-	return word[0];
-
-}
-
- */

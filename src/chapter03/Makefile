@@ -4,7 +4,7 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
 _OBJ = binsearch.o expand.o itoa.o itoaw.o itob.o
 _BIN = binsearch expand itoa itoaw itob

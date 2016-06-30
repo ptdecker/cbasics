@@ -63,29 +63,29 @@ static const size_t numkeys = (size_t)(sizeof keytab / sizeof(struct key));
  * getch(): gets a character from the buffer
  */
 
-static int getch(void) {
-	return (bufferptr > 0) ? (int)buffer[--bufferptr] : getchar();
+static char getch(void) {
+	return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
 }
 
 /*
  * ungetch(): ungets a character from the buffer
  */
 
-static void ungetch(int c) {
+static void ungetch(char c) {
 
 	if (bufferptr >= MAXSTACK) {
 		printf("ungetch(): buffer overflow\n");
 		exit(EXIT_FAILURE);
 	}
 	
-	buffer[bufferptr++] = (char)c;
+	buffer[bufferptr++] = c;
 }
 
 /*
  * comment(): skip over a comment and return a character
  */
 
-static int comment(void) {
+static char comment(void) {
 	int c;
 	while ((c = getch()) != EOF)
 		if (c == '*') {
@@ -104,10 +104,10 @@ static int comment(void) {
  *            which would be '\0' or NULL if no word is returned.
  */
 
-static int getword(char *word, int lim) {
+static char getword(char *word, int lim) {
 
-	int   c;
-	int   d;
+	char  c;
+	char  d;
 	char *w = word;
 
 	// Eat white space
@@ -158,7 +158,6 @@ static int getword(char *word, int lim) {
  * binsearch(): find word in tab[0]...tab[n-1]
  */
 
-/*@null@*/
 static struct key *binsearch(char *word, struct key tab[], size_t n) {
 
 	struct key *low  = &tab[0];

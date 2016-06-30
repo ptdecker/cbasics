@@ -4,7 +4,7 @@ SUBDIRS = expr pointers strnfunc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
 _OBJ = datetools.o datetoolsp.o dcl.o dcl2.o detab2.o detab3.o entab2.o entab3.o getfloat.o getint.o \
        readline.o readline2.o sort1.o sort2.o sort3.o sort4.o strcat.o tail2.o undcl.o

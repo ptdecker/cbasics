@@ -123,6 +123,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 ### Chapter 6 - "Structures"
 
 * 6-01 - getword.c             Gets next key word or character handling underscore, string constants, comments, and preprocessor control lines
+* 6-02 - getvars.c             Prints variable names in a C program that are identical in the first 'X' characters (6 by default)
 
 ##Extras
 
