@@ -126,7 +126,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 ##Extras
 
+In many cases these are programs outlined in K&R which are useful or interesting but were not carried forward into an exercise. The other cases are test programs or experiments.
+
 * echoargs.c:    Echos passed arguments
+* getkeywords.c: Implements getkeywords program from section 6.3
 * makebigline.c: Outputs a 3001 character text line
 * points.c:      Implements 'points' examples from 6.1 and 6.2 of "structures" chapter
 * rpncalc/*.c:   Unadulterted (pre-exercise) RPN Calculator (rpncalc0)

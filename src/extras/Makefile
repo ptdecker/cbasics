@@ -4,10 +4,10 @@ SUBDIRS = rpncalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -temptrans 
 DEPS =
-_OBJ = echoargs.o makebigline.o points.o saveasascii.o size.o testupcase.o
-_BIN = echoargs makebigline points saveasascii size testupcase
+_OBJ = echoargs.o getkeywords.o makebigline.o points.o saveasascii.o size.o testupcase.o
+_BIN = echoargs getkeywords makebigline points saveasascii size testupcase
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -29,6 +29,10 @@ clean:
 	rm -rv $(ODIR) $(_BIN)
 
 echoargs: $(ODIR)/echoargs.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+getkeywords: $(ODIR)/getkeywords.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

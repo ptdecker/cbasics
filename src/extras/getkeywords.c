@@ -1,21 +1,63 @@
 /*
-* getword(): get next word or character from input making sure to properly handle underscores, string
-*            constants, comments, and pre-processor control lines
+ * getkeywords: counts the number of key words utilized within a C program
 */
 
 #include <ctype.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 // Definitinos
 
 #define MAXSTACK    10  // Maximum characters parser can undo
 #define MAXWORDSIZE 50  // Maximum number of characters in a word
 
+#define KEY_NOT_FOUND EOF
+
 // Globals
 
 static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
 static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+
+static struct key {
+ 	char *word;
+ 	int   count;
+ } keytab[] = {
+ 	{"auto",     0 },
+ 	{"break",    0 },
+ 	{"case",     0 },
+ 	{"char",     0 },
+ 	{"const",    0 },
+ 	{"continue", 0 },
+ 	{"default",  0 },
+ 	{"do",       0 },
+ 	{"double",   0 },
+ 	{"else",     0 },
+ 	{"enum",     0 },
+ 	{"extern",   0 },
+ 	{"float",    0 },
+ 	{"for",      0 },
+ 	{"goto",     0 },
+ 	{"if",       0 },
+ 	{"int",      0 },
+ 	{"long",     0 },
+ 	{"register", 0 },
+ 	{"return",   0 },
+ 	{"short",    0 },
+ 	{"signed",   0 },
+ 	{"sizeof",   0 },
+ 	{"static",   0 },
+ 	{"struct",   0 },
+ 	{"switch",   0 },
+ 	{"typedef",  0 },
+ 	{"union",    0 },
+ 	{"unsigned", 0 },
+ 	{"void",     0 },
+ 	{"volatile", 0 },
+ 	{"while",    0 },
+ };
+
+static const size_t numkeys = (size_t)(sizeof keytab / sizeof(struct key));
 
 /*
  * getch(): gets a character from the buffer
@@ -113,56 +155,43 @@ static int getword(char *word, int lim) {
 }
 
 /*
- * main:  a little test program for getword()
+ * binsearch(): find word in tab[0]...tab[n-1]
  */
+
+/*@null@*/
+static struct key *binsearch(char *word, struct key tab[], size_t n) {
+
+	struct key *low  = &tab[0];
+	struct key *high = &tab[n];
+	int    cond = 0;
+
+	while (low < high) {
+		struct key *mid = low + (high - low) / 2;
+		cond = strcmp(word, mid->word);
+		if (cond < 0)
+			high = mid;
+		else if (cond > 0)
+			low = mid + 1;
+		else
+			return mid;
+
+	}
+
+	return NULL;
+};
 
 int main(void) {
 
-	char nextword[MAXWORDSIZE] = "";
-	int  nextchar;
+	char word[MAXWORDSIZE] = "";
+	struct key *p;
 
-	while ((nextchar = getword(nextword, MAXWORDSIZE)) != EOF)
-		if (isalnum(nextword[0]))
-			printf("%s\n", nextword);
+	while (getword(word, MAXWORDSIZE) != EOF)
+		if (isalpha(word[0]) && (p = binsearch(word, keytab, numkeys)) != NULL)
+			p->count++;
+
+	for (p = keytab; p < keytab + numkeys; p++)
+		if (p->count > 0)
+			printf("%4d %s\n", p->count, p->word);
 
 	exit(EXIT_SUCCESS);
 }
-
-/* 
- * Below is a version of getword() that returns just words without the guard against underscores, string
- * constants, comments, and pre-processor control lines.  This might come in handy for other purposes where
- * one wants to pull just words out of stdin.
-
-static char getword(char *word, int lim) {
-
-	int   c;
-	char *w = word;
-
-	// Eat white space
-	while (isspace(c = getch()))
-		;
-
-	// Add character to the word buffer if we are not yet at EOF
-	if (c != EOF)
-		*w++ = c;
-
-	// If the character is not an word, then return it to the caller along with an empty word buffer
-	if (!isalpha(c)) {
-		*w = '\0';
-		return c;
-	}
-
-	// Otherwise, read in characters until we have completed our word or our buffer limit is reached
-	for ( ; --lim > 0; w++)
-		if (!isalnum(*w = getch())) {
-			ungetch(*w);
-			break;
-		}
-
-	// Terminate our word buffer and return the first character
-	*w = '\0';
-	return word[0];
-
-}
-
- */
