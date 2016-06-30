@@ -11,9 +11,10 @@
 
 // Definitinos
 
-#define MAXSTACK    10    // Maximum characters parser can undo
-#define MAXWORDSIZE 50    // Maximum number of characters in a word
+#define MAXSTACK      10    // Maximum characters parser can undo
+#define MAXWORDSIZE   50    // Maximum number of characters in a word
 #define KEY_NOT_FOUND EOF
+#define NOTFOUND      -1
 
 // Globals
 
@@ -25,6 +26,7 @@ static struct key {
  	int   count;
  } keytab[] = {
  	{"auto",     0 },
+ 	{"bool",     0 },
  	{"break",    0 },
  	{"case",     0 },
  	{"char",     0 },
@@ -36,6 +38,7 @@ static struct key {
  	{"else",     0 },
  	{"enum",     0 },
  	{"extern",   0 },
+ 	{"false",    0 },
  	{"float",    0 },
  	{"for",      0 },
  	{"goto",     0 },
@@ -50,6 +53,7 @@ static struct key {
  	{"static",   0 },
  	{"struct",   0 },
  	{"switch",   0 },
+ 	{"true",     0 },
  	{"typedef",  0 },
  	{"union",    0 },
  	{"unsigned", 0 },
@@ -128,10 +132,11 @@ static char getword(char *word, int lim) {
 	if (c != EOF)
 		*w++ = c;
 
-	// Handle text allowing for underscores and pre-processor control lines
-	if (isalpha(c) || c == '_' || c == '#') {
-		for ( ; --lim > 0; w++)
-			if (!isalnum(*w = getch()) && *w != '_') {
+	// Handle text allowing for underscores and pre-processor control lines.
+	// Also, handle ignoring function names
+	if (isalpha(c) || c == '_' || c == '#')
+		for ( ; --lim > 0; w++) {
+			if (!isalnum(*w = getch()) && *w != '_' && *w != '.') {
 				ungetch(*w);
 				break;
 			}
@@ -286,6 +291,20 @@ static struct key *binsearch(char *word, struct key tab[], size_t n) {
 };
 
 /*
+ * any(): Returns the first location in string s[] where the character c occurs.
+ *        Returns -1 if no characters in c[] are found within s[]
+ */
+
+static int anychar(char *s, char c) {
+    char *sindex = s;
+    while (*sindex != '\0') {
+        if (*sindex++ == c)
+            return (int)(sindex - s - 1);
+    }
+    return NOTFOUND;
+}
+
+/*
  * main:  a little test program for getword()
  */
 
@@ -295,9 +314,13 @@ int main(int argc, char *argv[])  {
 	int           num = (--argc == 1 && *(++argv)[0] == '-') ? atoi(argv[0] + 1) : 6;
 	char          word[MAXWORDSIZE] = "";
 	bool          found = false;
+	char          c;
 
 	while (getword(word, MAXWORDSIZE) != EOF) {
-		if (isalpha(word[0]) && (int)strlen(word) >= num && binsearch(word, keytab, numkeys) == NULL)
+		if ((c = getch()) == '(')
+			continue;
+		ungetch(c); 
+		if (isalpha(word[0]) && (int)strlen(word) >= num && binsearch(word, keytab, numkeys) == NULL && anychar(word, '.') == NOTFOUND)
 			root = addtree(root, word, num, &found);
 		found = false;
 	}
