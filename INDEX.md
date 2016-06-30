@@ -18,10 +18,14 @@ int any(char *s,  char *c);
 	[2] any.c
 	[5] pointers/anyp.c
 
+int anychar(char *s, char c);
+	[6] getvars.c
+
 int binary_search(int x, int v[], size_t n);
 	[3] binsearch.c
 
 struct key *binsearch(char *word, struct key tab[], size_t n)
+	[6] getvars.c
 	[-] getkeywords.c
 
 unsigned bitcount(int x);
@@ -63,8 +67,12 @@ size_t casize(void);
 	[-] rpncalc/castack.c
 
 char comment(void);
+	[6] getvars.c
 	[6] getword.c
 	[-] getkeywords.c
+
+int compare(char *s, struct tnode *p, int num, bool *found);
+	[6] getvars.c
 
 void copy(char to[], char from[]);
 void copy(char *to,  char *from);
@@ -213,6 +221,7 @@ char getch(void);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] getvars.c
 	[6] getword.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
@@ -262,6 +271,7 @@ int gettoken(void);
 
 char getword(char *word, int lim);
 	[6] getword.c
+	[6] getvars.c
 	[-] getkeywords.c
 
 unsigned int htoi(char s[]);
@@ -325,6 +335,9 @@ double myatof(char s[]);
 double myatof(char *s);
 	[4] atof.c
 	[5] pointers/atofp.c
+
+char *mystrdup(char *s);
+	[6] getvars.c
 
 void myqsort(char *v[], int left, int right);
 	[5] readline.c
@@ -452,11 +465,20 @@ void swap(char *v[], int i, int j);
 	[5] readline.c
 	[5] readline2.c
 
-void swap(void *v[], int i, int j)
+void swap(void *v[], int i, int j);
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
 	[5] sort4.c
+
+struct tnode *talloc(void);
+	[6] getvars.c
+
+struct tnode *treeadd(struct tnode *p, char *w, int num, bool *found);
+	[6] getvars.c
+
+void treeprint(struct tnode *p);
+	[6] getvars.c
 
 bool typequal(void);
 	[5] dcl2.c
@@ -483,6 +505,7 @@ void ungetch(char ch);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] getvars.c
 	[6] getword.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c

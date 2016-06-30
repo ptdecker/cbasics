@@ -232,7 +232,7 @@ static char *mystrdup(char *s) {
  * addtree(): add a node to our tree
  */
 
-static struct tnode *addtree(struct tnode *p, char *w, int num, bool *found) {
+static struct tnode *treeadd(struct tnode *p, char *w, int num, bool *found) {
 
 	int cond;
 
@@ -243,9 +243,9 @@ static struct tnode *addtree(struct tnode *p, char *w, int num, bool *found) {
 		p->right = NULL;
 		p->left  = NULL;
 	} else if ((cond = compare(w, p, num, found)) < 0)
-		p->left  = addtree(p->left, w, num, found);
+		p->left  = treeadd(p->left, w, num, found);
 	else if (cond > 0)
-		p->right = addtree(p->right, w, num, found);
+		p->right = treeadd(p->right, w, num, found);
 
 	return p;
 }
@@ -321,7 +321,7 @@ int main(int argc, char *argv[])  {
 			continue;
 		ungetch(c); 
 		if (isalpha(word[0]) && (int)strlen(word) >= num && binsearch(word, keytab, numkeys) == NULL && anychar(word, '.') == NOTFOUND)
-			root = addtree(root, word, num, &found);
+			root = treeadd(root, word, num, &found);
 		found = false;
 	}
 
