@@ -131,11 +131,11 @@ int gettoken(void) {
 }
 
 /*
- * scompar(): implements strcmp in a way that is type compatible with bsearch
+ * scompare(): compares to strings (used by bsearch in notstopword)
  */
 
-int scompar(const void *str1, const void *str2) {
-	return strcmp(str1, str2);
+static int scompare(char **s, char **t) {
+	return strcmp(*s, *t);
 }
 
 /*
@@ -152,7 +152,12 @@ bool typequal(void) {
 	};
 	char *pt = token;
 
-	return (bsearch(&pt, typeq, sizeof(typeq)/sizeof(char *), sizeof(char *), scompar) != NULL);
+	char **result;
+
+	result = (char **)bsearch( (char *) &pt, (char *)typeq, sizeof(typeq)/sizeof(typeq[0]),
+                              sizeof( char * ), (int (*)(const void*, const void*))scompare);
+
+	return (result != NULL);
 }
 
 /*
@@ -176,8 +181,12 @@ bool typespec(void) {
 	};
 	char *pt = token;
 
-	return (bsearch(&pt, types, sizeof(types)/sizeof(char *), sizeof(char *), scompar) != NULL);
-}
+	char **result;
+
+	result = (char **)bsearch( (char *) &pt, (char *)types, sizeof(types)/sizeof(types[0]),
+                              sizeof( char * ), (int (*)(const void*, const void*))scompare);
+
+	return (result != NULL);}
 
 /*
  * dclspec(): interpret a declaration specification

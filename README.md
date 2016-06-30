@@ -163,6 +163,7 @@ The following test data files are provided to support manually testing the exerc
 * tabfun2.txt       - Tab test file of diagonal 'x's using spaces only
 * tabs.txt          - Basic tabs followed by 'x' chars
 * test1.txt         - Increasing number of characters per line with variations at the end
+* words.txt         - Some words used to test wordxref.c punctuation handling
 * zero.txt          - A totally empty file (no data)
 
 ##Style

@@ -4,10 +4,10 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
 DEPS =
-_OBJ = getvars.o getword.o
-_BIN = getvars getword
+_OBJ = getvars.o getword.o wordxref.o
+_BIN = getvars getword wordxref
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -33,6 +33,10 @@ getvars: $(ODIR)/getvars.o
 	cp -v $@ $(BIN)/$@
 
 getword: $(ODIR)/getword.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+wordxref: $(ODIR)/wordxref.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

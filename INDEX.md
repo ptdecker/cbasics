@@ -3,6 +3,9 @@ Index of Functions and Macros
 
 Provides a index of all the functions and macros implemented in one form or another by these exercises. The number in brackets indicates chapter number associated with the exercise that implemented the designated function or macro ('[-]' indicates extras not specifically called out as exercises).  When multiple implementations are implemented for a function, in some cases the implementation may vary where the chapters illustrated new concepts implemented in the fuction and macro.  As such, the last implementation (with the exception of extras indicated by [-]) usually represents the most advanced implementation of the function or macro.  For some functions, more than one signature is listed.  This occurs in the case where pointer-based versions of the signatures were illustrated later and the two signatures are equivalent.  If the signatures are not equivalent, the implmentations are listed separately.
 
+void addline(struct tnode *p, int linenum);
+	[6] wordxref.c
+
 struct point addpoint(struct point p1, const struct point p2);
 	[-] points.c
 
@@ -73,6 +76,7 @@ char comment(void);
 
 int compare(char *s, struct tnode *p, int num, bool *found);
 	[6] getvars.c
+	[6] wordxref.c
 
 void copy(char to[], char from[]);
 void copy(char *to,  char *from);
@@ -223,6 +227,7 @@ char getch(void);
 	[5] undcl.c
 	[6] getvars.c
 	[6] getword.c
+	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
 
@@ -272,6 +277,7 @@ int gettoken(void);
 char getword(char *word, int lim);
 	[6] getword.c
 	[6] getvars.c
+	[6] wordxref.c
 	[-] getkeywords.c
 
 unsigned int htoi(char s[]);
@@ -285,6 +291,9 @@ unsigned invert(unsigned x, unsigned  p, unsigned n);
 bool isleap(int year);
 	[5] datetools.c
 	[5] datetoolsp.c
+
+bool isnotstopword(char *w);
+	[6] wordxref.c
 
 bool isnottab(int pos, char *tabstop);
 	[5] detab2.c
@@ -306,8 +315,14 @@ void itob(int n, char *s, int b);
 	[3] itob.c
 	[5] pointers/itobp.c
 
+struct linklist *lalloc(void)
+	[6] wordxref.c
+
 char lower(char c);
 	[2] lower.c
+
+static void lowerstr(char *s);
+	[6] wordxref.c
 
 struct point makepoint(const int x, const int y);
 	[-] points.c
@@ -338,6 +353,7 @@ double myatof(char *s);
 
 char *mystrdup(char *s);
 	[6] getvars.c
+	[6] wordxref.c
 
 void myqsort(char *v[], int left, int right);
 	[5] readline.c
@@ -408,8 +424,9 @@ void reversesub(char *s, size_t start, size_t end)
 int rightrot(int x, unsigned n);
 	[2] rightrot.c
 
-int scompar(const void *str1, const void *str2);
+int scompare(char **s, char **t);
 	[5] dcl2.c
+	[6] wordxref.c
 
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 	[2] setbits.c
@@ -473,12 +490,15 @@ void swap(void *v[], int i, int j);
 
 struct tnode *talloc(void);
 	[6] getvars.c
+	[6] wordxref.c
 
 struct tnode *treeadd(struct tnode *p, char *w, int num, bool *found);
 	[6] getvars.c
+	[6] wordxref.c
 
 void treeprint(struct tnode *p);
 	[6] getvars.c
+	[6] wordxref.c
 
 bool typequal(void);
 	[5] dcl2.c
@@ -507,6 +527,7 @@ void ungetch(char ch);
 	[5] undcl.c
 	[6] getvars.c
 	[6] getword.c
+	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
 
