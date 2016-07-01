@@ -126,6 +126,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 6-02 - getvars.c             Prints variable names in a C program that are identical in the first 'X' characters (6 by default)
 * 6-03 - wordxref.c            Cross-references words from stdin by line number excluding stop words
 * 6-04 - wordfreq.c            Lists all the distinct words from stdin listed in decreasing frequency 
+* 6-05 - tablookup.c           Implements a hash table based table look-up set of functions
 
 ##Extras
 

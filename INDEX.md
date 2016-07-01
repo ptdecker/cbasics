@@ -281,10 +281,16 @@ char getword(char *word, int lim);
 	[6] wordxref.c
 	[-] getkeywords.c
 
+unsigned hash(char *s);
+	[6] tablookup.c
+
 unsigned int htoi(char s[]);
 unsigned int htoi(char *s);
 	[2] htoi.c
 	[5] pointers/htoip.c
+
+struct nlist *install(char *name, char *defn);
+	[6] tablookup.c
 
 unsigned invert(unsigned x, unsigned  p, unsigned n);
 	[2] invert.c
@@ -328,6 +334,9 @@ void listsort(void);
 void liststore(struct tnode *p);
 	[6] wordfreq.c
 
+struct nlist *lookup(char *s);
+	[6] tablookup.c
+
 char lower(char c);
 	[2] lower.c
 
@@ -364,6 +373,7 @@ double myatof(char *s);
 
 char *mystrdup(char *s);
 	[6] getvars.c
+	[6] tablookup.c
 	[6] wordfreq.c
 	[6] wordxref.c
 
@@ -519,6 +529,9 @@ bool typequal(void);
 
 bool typespec(void);
 	[5] dcl2.c
+
+void undef(char *s);
+	[6] tablookup.c
 
 void unescape(char source[], char target[]);
 void unescape(char *source,  char *target);
