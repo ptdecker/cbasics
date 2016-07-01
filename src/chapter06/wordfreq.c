@@ -13,15 +13,18 @@
 
 // Definitions
 
-#define MAXSTACK      10    // Maximum characters parser can undo
-#define MAXWORDSIZE   50    // Maximum number of characters in a word
+#define MAXSTACK      10     // Maximum characters parser can undo
+#define MAXWORDSIZE   50     // Maximum number of characters in a word
+#define MAXDISTINCT   100000 // Maximum number of distinctive words
 
 // Globals
 
-static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
-static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+static char   buffer[MAXSTACK];         // Array-based buffer of char-typed values
+static size_t bufferptr = 0;            // Buffer pointer--next free stack position
+static struct tnode *list[MAXDISTINCT]; // List of tnodes to support sorting results
+static int    listcount = 0;            // Total number of tnodes
 
-// Structures
+// Structure definitions
 
 struct tnode {
 	char *word;           // Points to the text stored in the node
@@ -147,17 +150,64 @@ static struct tnode *treeadd(struct tnode *p, char *w) {
 }
 
 /*
- * treeprint: traverse the tree in order and print node if p->match is true
+ * liststore(): store in list[] pointers to all the tree nodes
  */
 
-static void treeprint(struct tnode *p) {
-
+static void liststore(struct tnode *p) {
 	if (p != NULL) {
-		treeprint(p->left);
-		printf("%5d %s\n", p->count, p->word);
-		treeprint(p->right);
+		liststore(p->left);
+		if (listcount < MAXDISTINCT)
+			list[listcount++] = p;
+		else {
+			printf("error: too many distinct words\n");
+			exit(EXIT_FAILURE);
+		}
+		liststore(p->right);
 	}
+}
 
+/*
+ * listsort: sort the linked list (shell sort)
+ */
+
+static void listsort(void) {
+
+	int gap;
+	int i;
+	int j;
+	struct tnode *temp = NULL;
+
+	for (gap = listcount / 2; gap > 0; gap /= 2)
+		for (i = gap; i < listcount; i++)
+			for (j = i - gap; j >= 0; j -= gap) {
+				if ((list[j]->count) >= (list[j + gap]->count))
+					break;
+				temp = list[j];
+				list[j] = list[j + gap];
+				list[j + gap] = temp;
+			}
+}
+
+/*
+ * listprint: traverse the linked list and print nodes
+ */
+
+static void listprint(void) {
+
+	int i;
+
+	for (i = 0; i < listcount; i++)
+		printf("%5d %s\n", list[i]->count, list[i]->word);
+
+}
+
+/*
+ * lowerstr(): Converts a string to lower case
+ */
+
+static void lowerstr(char *s) {
+	for ( ; *s != '\0'; s++)
+		*s = tolower(*s);
 }
 
 /*
@@ -166,14 +216,18 @@ static void treeprint(struct tnode *p) {
 
 int main(void)  {
 
-	struct tnode *root = NULL;
+	struct tnode *troot = NULL;
 	char   word[MAXWORDSIZE] = "";
 
 	while (getword(word, MAXWORDSIZE) != EOF)
-		if (isalpha(word[0]))
-			root = treeadd(root, word);
+		if (isalpha(word[0])) {
+			lowerstr(word);
+			troot = treeadd(troot, word);
+		}
 
-	treeprint(root);
+	liststore(troot);
+	listsort();
+	listprint();
 
 	exit(EXIT_SUCCESS);
 }

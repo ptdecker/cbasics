@@ -226,6 +226,7 @@ char getch(void);
 	[5] undcl.c
 	[6] getvars.c
 	[6] getword.c
+	[6] wordfreq.c
 	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
@@ -276,6 +277,7 @@ int gettoken(void);
 char getword(char *word, int lim);
 	[6] getword.c
 	[6] getvars.c
+	[6] wordfreq.c
 	[6] wordxref.c
 	[-] getkeywords.c
 
@@ -317,10 +319,20 @@ void itob(int n, char *s, int b);
 struct linklist *lalloc(void)
 	[6] wordxref.c
 
+void listprint(void)
+	[6] wordfreq.c
+
+void listsort(void);
+	[6] wordfreq.c
+
+void liststore(struct tnode *p);
+	[6] wordfreq.c
+
 char lower(char c);
 	[2] lower.c
 
 static void lowerstr(char *s);
+	[6] wordfreq.c
 	[6] wordxref.c
 
 struct point makepoint(const int x, const int y);
@@ -352,6 +364,7 @@ double myatof(char *s);
 
 char *mystrdup(char *s);
 	[6] getvars.c
+	[6] wordfreq.c
 	[6] wordxref.c
 
 void myqsort(char *v[], int left, int right);
@@ -489,10 +502,12 @@ void swap(void *v[], int i, int j);
 
 struct tnode *talloc(void);
 	[6] getvars.c
+	[6] wordfreq.c
 	[6] wordxref.c
 
 struct tnode *treeadd(struct tnode *p, char *w, int num, bool *found);
 	[6] getvars.c
+	[6] wordfreq.c
 	[6] wordxref.c
 
 void treeprint(struct tnode *p);
@@ -526,6 +541,7 @@ void ungetch(char ch);
 	[5] undcl.c
 	[6] getvars.c
 	[6] getword.c
+	[6] wordfreq.c
 	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
