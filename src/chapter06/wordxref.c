@@ -92,14 +92,6 @@ static char getword(char *word, int lim) {
 }
 
 /*
- * compare()  compare words and update p->match
- */
-
-static int compare(char *s, struct tnode *p) {
-	return strncmp(s, p->word, MAXWORDSIZE);
-}
-
-/*
  * lalloc():  make a new linked list node
  */
 
@@ -187,7 +179,7 @@ static struct tnode *treeadd(struct tnode *p, char *w, int line) {
 		p->lines->next = NULL;
 		p->right = NULL;
 		p->left  = NULL;
-	} else if ((cond = compare(w, p)) == 0)
+	} else if ((cond = strncmp(w, p->word, MAXWORDSIZE)) == 0)
 		addline(p, line);
 	else if (cond < 0)
 		p->left  = treeadd(p->left, w, line);

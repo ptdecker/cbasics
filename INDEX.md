@@ -76,7 +76,6 @@ char comment(void);
 
 int compare(char *s, struct tnode *p, int num, bool *found);
 	[6] getvars.c
-	[6] wordxref.c
 
 void copy(char to[], char from[]);
 void copy(char *to,  char *from);
