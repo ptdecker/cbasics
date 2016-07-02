@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
 DEPS =
-_OBJ = getvars.o getword.o tablookup.o wordfreq.o wordxref.o
-_BIN = getvars getword tablookup wordfreq wordxref
+_OBJ = define.o getvars.o getword.o tablookup.o wordfreq.o wordxref.o
+_BIN = define getvars getword tablookup wordfreq wordxref
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -27,6 +27,10 @@ clean:
 		cd ..; \
 	done
 	rm -rv $(ODIR) $(_BIN)
+
+define: $(ODIR)/define.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
 
 getvars: $(ODIR)/getvars.o
 	$(CC) $(CFLAGS) $^ -o $@

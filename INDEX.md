@@ -177,6 +177,9 @@ void error(char *s);
 	[5] sort4.c
 	[5] tail2.c
 
+void error(int c, char *s);
+	[6] define.c
+
 void errmsg(char *msg);
 	[5] dcl.c
 	[5] dcl2.c
@@ -224,6 +227,7 @@ char getch(void);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] define.c
 	[6] getvars.c
 	[6] getword.c
 	[6] wordfreq.c
@@ -402,6 +406,9 @@ double origindist(const struct point pt);
 void parmdcl(void);
 	[5] dcl2.c
 
+char peekch();
+	[6] define.c
+
 void printbits(unsigned x);
 	[2] fastbitcount.c
 	[2] invert.c
@@ -552,6 +559,7 @@ void ungetch(char ch);
 	[5] getfloat.c
 	[5] getint.c
 	[5] undcl.c
+	[6] define.c
 	[6] getvars.c
 	[6] getword.c
 	[6] wordfreq.c
@@ -563,6 +571,7 @@ void ungets(char s[]);
 	[4] ungets.c
 	[4] ungetseof.c
 	[5] expr/lexer.c
+	[6] define.c
 
 unsigned wordlength(void);
 	[2] rightrot.c
