@@ -419,6 +419,9 @@ void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 	[5] sort3.c
 	[5] sort4.c
 
+int nextline(int num, int pos, int max);
+	[7] print.c
+
 int nexttoken(void);
 	[5] undcl.c
 

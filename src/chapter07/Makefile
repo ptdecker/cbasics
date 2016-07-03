@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
 DEPS =
-_OBJ = chngcase.o
-_BIN = chngcase
+_OBJ = chngcase.o print.o
+_BIN = chngcase print
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -36,6 +36,10 @@ chngcase: $(ODIR)/chngcase.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/upper
 	cp -v $@ $(BIN)/lower
+
+print: $(ODIR)/print.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
 	mkdir -pv $(ODIR)
