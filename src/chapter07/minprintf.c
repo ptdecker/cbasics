@@ -5,9 +5,18 @@
 *       includes it to illustrate variable arguments. 
 */
 
+// Neither split nor clang like having format string contents unkown at
+// complile time, override this concern for purposes of this exercise
+/*@ -formatconst */
+#pragma clang diagnostic ignored "-Wformat-security"
+
+#include <ctype.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#define LOCALFMT 100  // Maximum supported format string length
+#define MAXSTACK 100
 
 /*
  * minprintf(): minimal printf with variable argument list
@@ -18,7 +27,10 @@ static void minprintf(char *fmt, ...) {
 	va_list  ap;  // Points to each unnamed arg in turn
 	char    *p;
 	char    *sval;
+	char     localfmt[LOCALFMT];
+	int      i;
 	int      ival;
+	unsigned uval;
 	double   dval;
 
 	va_start(ap, fmt);
@@ -31,23 +43,46 @@ static void minprintf(char *fmt, ...) {
 			continue;
 		}
 
+		// handle the double '%'
+		if (*(p+1) == '%') {
+			(void)putchar(*(++p));
+			continue;
+		}
+
+		// build the format string to be passed on to the real printf
+		// from the format string passed to us
+		i = 0;
+		localfmt[i++] = '%';
+		while (*(p+1) != '\0' && !isalpha(*(p+1)))
+			localfmt[i++] = *++p;
+		localfmt[i++] = *(p+1);
+		localfmt[i] = '\0';
+
 		// otherwise, based upon the format code, format and handle
 		// the next argument
 		switch (*++p) {
 			case 'd':
+			case 'i':
 				ival = va_arg(ap, int);
-				printf("%d", ival);
+				printf(localfmt, ival);
+				break;
+			case 'x':
+			case 'X':
+			case 'u':
+			case 'o':
+				uval = va_arg(ap, unsigned);
+				printf(localfmt, uval);
 				break;
 			case 'f':
 				dval = va_arg(ap, double);
-				printf("%f", dval);
+				printf(localfmt, dval);
 				break;
 			case 's':
-				for (sval = va_arg(ap, char *); *sval != '\0'; sval++)
-					(void)putchar(*sval);
+				sval = va_arg(ap, char *);
+				printf(localfmt, sval);
 				break;
 			default:
-				(void)putchar(*p);
+				printf(localfmt);
 				break;
 		}
 	}
@@ -64,6 +99,8 @@ int main(void) {
 	minprintf("test of integer format ('%%d'): %d\n", 10);
 	minprintf("test of double  format ('%%f'): %f\n", 3.14);
 	minprintf("test of string  format ('%%s'): \"%s\"\n", "this is a string");
+	minprintf("test of hex     format ('%%x'): %x\n", 65534);
+	minprintf("test of complex format ('[%%-15.10s]'): [%-15.10s]\n", "hello world!");
 	minprintf("test of multiple args: %d, %f, \"%s\"\n", 10, 3.14, "this is a string");
 
 	exit(EXIT_SUCCESS);
