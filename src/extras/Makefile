@@ -4,10 +4,10 @@ SUBDIRS = rpncalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
+LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
 DEPS =
-_OBJ = echoargs.o getkeywords.o makebigline.o points.o saveasascii.o size.o testupcase.o
-_BIN = echoargs getkeywords makebigline points saveasascii size testupcase
+_OBJ = echoargs.o getkeywords.o makebigline.o points.o porterstem.o saveasascii.o size.o testupcase.o wordxrefstem.o
+_BIN = echoargs getkeywords makebigline points porterstem saveasascii size testupcase wordxrefstem
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -44,6 +44,10 @@ points: $(ODIR)/points.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
+porterstem: $(ODIR)/porterstem.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
 saveasascii: $(ODIR)/saveasascii.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
@@ -53,6 +57,10 @@ size: $(ODIR)/size.o
 	cp -v $@ $(BIN)/$@
 
 testupcase: $(ODIR)/testupcase.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+wordxrefstem: $(ODIR)/wordxrefstem.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

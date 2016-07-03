@@ -3,11 +3,19 @@ Index of Functions and Macros
 
 Provides a index of all the functions and macros implemented in one form or another by these exercises. The number in brackets indicates chapter number associated with the exercise that implemented the designated function or macro ('[-]' indicates extras not specifically called out as exercises).  When multiple implementations are implemented for a function, in some cases the implementation may vary where the chapters illustrated new concepts implemented in the fuction and macro.  As such, the last implementation (with the exception of extras indicated by [-]) usually represents the most advanced implementation of the function or macro.  For some functions, more than one signature is listed.  This occurs in the case where pointer-based versions of the signatures were illustrated later and the two signatures are equivalent.  If the signatures are not equivalent, the implmentations are listed separately.
 
+The routines leveraged by Martin Porter's stemmer in extras/porterstem.c and extras/wordxrefstem.c are not included in this index since they are strictly in support of his algorithm and not really a part of the K&R exercises body of work.
+
+--- START OF INDEX ---
+
 void addline(struct tnode *p, int linenum);
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 struct point addpoint(struct point p1, const struct point p2);
 	[-] points.c
+
+void addword(struct tnode *p, char *uw);
+	[-] wordxrefstem.c
 
 char *alloc(int n);
 	[5] readline.c
@@ -70,6 +78,7 @@ size_t casize(void);
 	[-] rpncalc/castack.c
 
 char comment(void);
+	[6] define.c
 	[6] getvars.c
 	[6] getword.c
 	[-] getkeywords.c
@@ -234,6 +243,10 @@ char getch(void);
 	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
+	[-] wordxrefstem.c
+
+void getdef(void);
+	[6] define.c
 
 int getdouble(double *pn);
 	[5] getfloat.c
@@ -279,13 +292,16 @@ int gettoken(void);
 	[5] undcl.c
 
 char getword(char *word, int lim);
+	[6] define.c
 	[6] getword.c
 	[6] getvars.c
 	[6] wordfreq.c
 	[6] wordxref.c
 	[-] getkeywords.c
+	[-] wordxrefstem.c
 
 unsigned hash(char *s);
+	[6] define.c
 	[6] tablookup.c
 
 unsigned int htoi(char s[]);
@@ -294,6 +310,7 @@ unsigned int htoi(char *s);
 	[5] pointers/htoip.c
 
 struct nlist *install(char *name, char *defn);
+	[6] define.c
 	[6] tablookup.c
 
 unsigned invert(unsigned x, unsigned  p, unsigned n);
@@ -305,6 +322,7 @@ bool isleap(int year);
 
 bool isnotstopword(char *w);
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 bool isnottab(int pos, char *tabstop);
 	[5] detab2.c
@@ -326,14 +344,21 @@ void itob(int n, char *s, int b);
 	[3] itob.c
 	[5] pointers/itobp.c
 
-struct linklist *lalloc(void)
+struct linklist *lalloc(void);
 	[6] wordxref.c
+	[-] wordxrefstem.c
+
+struct linkwords *lwalloc(void);
+	[-] wordxrefstem.c
 
 void listprint(void)
 	[6] wordfreq.c
 
 void listsort(void);
 	[6] wordfreq.c
+
+void listsort(struct linkwords *head, int num_nodes)
+	[-] wordxrefstem.c
 
 void liststore(struct tnode *p);
 	[6] wordfreq.c
@@ -347,6 +372,7 @@ char lower(char c);
 static void lowerstr(char *s);
 	[6] wordfreq.c
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 struct point makepoint(const int x, const int y);
 	[-] points.c
@@ -376,10 +402,12 @@ double myatof(char *s);
 	[5] pointers/atofp.c
 
 char *mystrdup(char *s);
+	[6] define.c
 	[6] getvars.c
 	[6] tablookup.c
 	[6] wordfreq.c
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 void myqsort(char *v[], int left, int right);
 	[5] readline.c
@@ -456,6 +484,7 @@ int rightrot(int x, unsigned n);
 int scompare(char **s, char **t);
 	[5] dcl2.c
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 	[2] setbits.c
@@ -465,6 +494,9 @@ void settabs(int argc, char *argv[], char *tabstop);
 	[5] detab3.c
 	[5] entab2.c
 	[5] entab3.c
+
+void skipblanks(void);
+	[6] define.c
 
 void strcat(char *leftstr, char *rightstr);
 	[5] strcat.c
@@ -521,15 +553,20 @@ struct tnode *talloc(void);
 	[6] getvars.c
 	[6] wordfreq.c
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 struct tnode *treeadd(struct tnode *p, char *w, int num, bool *found);
 	[6] getvars.c
 	[6] wordfreq.c
 	[6] wordxref.c
 
+struct tnode *treeadd(struct tnode *p, char *w, char *uw, int line) {
+	[-] wordxrefstem.c
+
 void treeprint(struct tnode *p);
 	[6] getvars.c
 	[6] wordxref.c
+	[-] wordxrefstem.c
 
 bool typequal(void);
 	[5] dcl2.c
@@ -538,6 +575,7 @@ bool typespec(void);
 	[5] dcl2.c
 
 void undef(char *s);
+	[6] define.c
 	[6] tablookup.c
 
 void unescape(char source[], char target[]);
@@ -566,6 +604,7 @@ void ungetch(char ch);
 	[6] wordxref.c
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
+	[-] wordxrefstem.c
 
 void ungets(char s[]);
 	[4] ungets.c

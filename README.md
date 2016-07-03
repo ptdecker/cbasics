@@ -133,14 +133,16 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 In many cases these are programs outlined in K&R which are useful or interesting but were not carried forward into an exercise. The other cases are test programs or experiments.
 
-* echoargs.c:    Echos passed arguments
-* getkeywords.c: Implements getkeywords program from section 6.3
-* makebigline.c: Outputs a 3001 character text line
-* points.c:      Implements 'points' examples from 6.1 and 6.2 of "structures" chapter
-* rpncalc/*.c:   Unadulterted (pre-exercise) RPN Calculator (rpncalc0)
-* saveasascii.c: Strips input of everything except regular values
-* size.c:        Counts the number of characters in the input
-* testupcase.c:  Tests a technique to convert uppercase ASCII letters to lowercase
+* echoargs.c:     Echos passed arguments
+* getkeywords.c:  Implements getkeywords program from section 6.3
+* makebigline.c:  Outputs a 3001 character text line
+* points.c:       Implements 'points' examples from 6.1 and 6.2 of "structures" chapter
+* porterstem.c:   Almost a straight port of Martin's implementation of Martin Porter's stemming algorithm with minor updates for coding styling, types (bool, size_t, char), comment expansion, partial splint compliance, big static buffer, etc.
+* rpncalc/*.c:    Unadulterted (pre-exercise) RPN Calculator (rpncalc0)
+* saveasascii.c:  Strips input of everything except regular values
+* size.c:         Counts the number of characters in the input
+* testupcase.c:   Tests a technique to convert uppercase ASCII letters to lowercase
+* wordxrefstem.c: An alternative implementation of wordxref.c (6-03) that leverages Martin Porter's stemming algorithm
 
 ##Test Files
 
@@ -177,6 +179,8 @@ See *STYLE.md* for notes on overall style and approach to the code I'm presentin
 ##License
 
 These solutions are copyright under the terms of the GNU GENERAL PUBLIC LICENSE v3 (see LICENSE) with the following exceptions:
+
+* While not at all specified by the exercises, in the extras is included an implementation of the word cross-reference program from exercise 6-03 that also stems the words.  It utilizes an imlementation of a Porter stemmer created by Martin Porter. As stated on his web site, the implementations provided on his site are free of charge (freeware).
 
 * The code used to implement the 'strlen()' function in selected exercises, including but possibly not limited to: itoa.c, itoaw.c, and itob.c are highly based upon the P.J. Plauger's wonderful work "The Standard C Library".  As such, per the terms outlined in the preface of this work (p. xii), I include the following verbiage:  "Portions of this work are derived from The Standard C Library, copyright (c) 1992 by P.J. Plauger, published by Prentice-Hall, and are used with permission."
 
