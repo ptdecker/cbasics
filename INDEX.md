@@ -392,6 +392,9 @@ void mathfun(char s[]);
 void minprintf(char *fmt, ...);
 	[7] minprintf.c
 
+void minscanf(char *fmt, ...);
+	[7] minscanf.c
+
 void month_day(int year, int yearday, int *pmonth, int *pday);
 	[5] datetoolsp.c
 	[5] datetools.c

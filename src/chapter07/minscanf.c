@@ -1,7 +1,7 @@
 /*
-* minprintf: minimal printf with variable argument list
+* minprintf: minimal scanf with variable argument list
 *
-* NOTE: This is really a mock printf since it leverages printf, but K&R
+* NOTE: This is really a mock scanf since it leverages scanf, but K&R
 *       includes it to illustrate variable arguments. 
 */
 
@@ -21,16 +21,16 @@
  * minprintf(): minimal printf with variable argument list
  */
 
-static void minprintf(char *fmt, ...) {
+static void minscanf(char *fmt, ...) {
 	
-	va_list  ap;  // Points to each unnamed arg in turn
-	char    *p;
-	char    *sval;
-	char     localfmt[LOCALFMT];
-	int      i;
-	int      ival;
-	unsigned uval;
-	double   dval;
+	va_list   ap;  // Points to each unnamed arg in turn
+	char     *p;
+	char     *sval;
+	char      localfmt[LOCALFMT];
+	int       i = 0;
+	int      *ival;
+	unsigned *uval;
+	double   *dval;
 
 	va_start(ap, fmt);
 	for (p = fmt; *p != '\0'; p++) {
@@ -38,19 +38,18 @@ static void minprintf(char *fmt, ...) {
 		// unless the current character in the format stream is an
 		// '%' then print the character and move on to the next
 		if (*p != '%') {
-			(void)putchar(*p);
+			localfmt[i++] = *p;
 			continue;
 		}
 
 		// handle the double '%'
 		if (*(p+1) == '%') {
-			(void)putchar(*(++p));
+			localfmt[i++] = *(++p);
 			continue;
 		}
 
 		// build the format string to be passed on to the real printf
 		// from the format string passed to us
-		i = 0;
 		localfmt[i++] = '%';
 		while (*(p+1) != '\0' && !isalpha(*(p+1)))
 			localfmt[i++] = *++p;
@@ -62,28 +61,29 @@ static void minprintf(char *fmt, ...) {
 		switch (*++p) {
 			case 'd':
 			case 'i':
-				ival = va_arg(ap, int);
-				printf(localfmt, ival);
+				ival = va_arg(ap, int *);
+				(void)scanf(localfmt, ival);
 				break;
 			case 'x':
 			case 'X':
 			case 'u':
 			case 'o':
-				uval = va_arg(ap, unsigned);
-				printf(localfmt, uval);
+				uval = va_arg(ap, unsigned *);
+				(void)scanf(localfmt, uval);
 				break;
 			case 'f':
-				dval = va_arg(ap, double);
-				printf(localfmt, dval);
+				dval = va_arg(ap, double *);
+				(void)scanf(localfmt, dval);
 				break;
 			case 's':
 				sval = va_arg(ap, char *);
-				printf(localfmt, sval);
+				(void)scanf(localfmt, sval);
 				break;
 			default:
-				printf(localfmt);
+				(void)scanf(localfmt);
 				break;
 		}
+		i = 0;
 	}
 	va_end(ap);
 }
@@ -93,14 +93,27 @@ static void minprintf(char *fmt, ...) {
  */
 
 int main(void) {
+
+	char     sval[100] = "";
+	int      ival = 0;
+	unsigned uval = 0;
+	double   dval = 0.0;
 	
-	minprintf("test of no format\n");
-	minprintf("test of integer format ('%%d'): %d\n", 10);
-	minprintf("test of double  format ('%%f'): %f\n", 3.14);
-	minprintf("test of string  format ('%%s'): \"%s\"\n", "this is a string");
-	minprintf("test of hex     format ('%%x'): %x\n", 65534);
-	minprintf("test of complex format ('[%%-15.10s]'): [%-15.10s]\n", "hello world!");
-	minprintf("test of multiple args: %d, %f, \"%s\"\n", 10, 3.14, "this is a string");
+	printf("test of integer input ('%%d'): ");
+	minscanf("%d", &ival);
+	printf("received: %d\n", ival);
+	
+	printf("test of double input ('%%f'): ");
+	minscanf("%f", &dval);
+	printf("received: %f\n", dval);
+	
+	printf("test of string input ('%%s'): ");
+	minscanf("%s", sval);
+	printf("received: %s\n", sval);
+	
+	printf("test of hex input ('%%x'): ");
+	minscanf("%x", &uval);
+	printf("received: %x\n", uval);
 
 	exit(EXIT_SUCCESS);
 }
