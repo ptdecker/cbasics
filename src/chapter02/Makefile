@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
 DEPS =
-_OBJ = any.o equivloop.o fastbitcount.o htoi.o invert.o lower.o rightrot.o setbits.o squeeze.o typelimits.o
-_BIN = any equivloop fastbitcount htoi invert lower rightrot setbits squeeze typelimits
+_OBJ = any.o equivloop.o fastbitcount.o htoi.o invert.o tolower.o rightrot.o setbits.o squeeze.o typelimits.o
+_BIN = any equivloop fastbitcount htoi invert tolower rightrot setbits squeeze typelimits
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -48,7 +48,7 @@ invert: $(ODIR)/invert.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
-lower: $(ODIR)/lower.o
+tolower: $(ODIR)/tolower.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

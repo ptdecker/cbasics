@@ -503,6 +503,7 @@ void strcat(char *leftstr, char *rightstr);
 
 int strindex(char s[], char t[]);
 	[4] strrindex.c
+	[7] chngcase.c
 
 int strrindex(char s[], char t[]);
 	[4] strrindex.c

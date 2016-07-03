@@ -48,7 +48,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 2-07 - invert.c:             Implements invert() which inverts the bits starting at a position
 * 2-08 - rightrot.c:           Implements rightrot() which returns the value of a rotated integer
 * 2-09 - fastbitcount.c:       Implements a faster bitcount() using a two's complement property
-* 2-10 - lower.c:              Implements a lower() using a trinary conditional
+* 2-10 - tolower.c:            Implements a lower() using a trinary conditional
 
 ### Chapter 3 - "Control Flow"
 
@@ -128,6 +128,10 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 6-04 - wordfreq.c            Lists all the distinct words from stdin listed in decreasing frequency 
 * 6-05 - tablookup.c           Implements a hash table based table look-up set of functions
 * 6-06 - define.c              Simple '#define' pre-processor
+
+### Chapter 7 - "Input and Output"
+
+* 7-01 - chngcase.c            Transforms input to all upper or lower case based upon name of program ('lower' or 'upper')
 
 ##Extras
 
