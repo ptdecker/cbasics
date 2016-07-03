@@ -1,6 +1,6 @@
 BIN = ../../bin
 ODIR = obj
-SUBDIRS =
+SUBDIRS = scancalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint

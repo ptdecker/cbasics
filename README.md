@@ -135,6 +135,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 7-02 - print.c               Prints a file with arbitrary contents in a reasonable way
 * 7-03 - minprintf.c           A minimal faux implementation of printf to demonstrate variable arguments
 * 7-04 - minscanf.c            A minimal faux implementation of scanf to introduce scanf
+* 7-05 - scancalc/*.c          A variation of whole line RPN calc from 4-10 that utilizes sscanf
 
 ##Extras
 
