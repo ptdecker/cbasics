@@ -389,6 +389,9 @@ void mathfun(char s[]);
 #define min(a, b)
 	[-] points.c
 
+void minprintf(char *fmt, ...);
+	[7] minprintf.c
+
 void month_day(int year, int yearday, int *pmonth, int *pday);
 	[5] datetoolsp.c
 	[5] datetools.c

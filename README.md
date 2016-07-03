@@ -133,6 +133,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 7-01 - chngcase.c            Transforms input to all upper or lower case based upon name of program ('lower' or 'upper')
 * 7-02 - print.c               Prints a file with arbitrary contents in a reasonable way
+* 7-03 - minprintf.c           A minimal faux implementation of printf to demonstrate variable arguments
 
 ##Extras
 

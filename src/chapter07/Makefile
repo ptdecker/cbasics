@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
 DEPS =
-_OBJ = chngcase.o print.o
-_BIN = chngcase print
+_OBJ = chngcase.o minprintf.o print.o
+_BIN = chngcase minprintf print
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -36,6 +36,10 @@ chngcase: $(ODIR)/chngcase.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/upper
 	cp -v $@ $(BIN)/lower
+
+minprintf: $(ODIR)/minprintf.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
 
 print: $(ODIR)/print.o
 	$(CC) $(CFLAGS) $^ -o $@

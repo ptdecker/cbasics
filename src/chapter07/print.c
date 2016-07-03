@@ -39,7 +39,6 @@ int main(void) {
 	int  len;     // Length of formatted output character string
 	char c;       // Temp character buffer
 	char s[MAXWORD];      // Formatted output character string
-	int max = 0;
 
 	while ((c = getchar()) != EOF) {
 
@@ -53,13 +52,10 @@ int main(void) {
 		else
 			len = snprintf(s, MAXWORD, " \\x%x ", (unsigned)c);
 
-		max = (len > max) ? len : max;
 		pos = nextline(len, pos, MAXCOLPOS);
 		printf("%s", s);
 
 	}
-
-	printf("max %d\n", max);
 
 	exit(EXIT_SUCCESS);
 }
