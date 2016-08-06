@@ -98,6 +98,7 @@ void daclear(void);
 	[4] rpncalc4-06/dastack.c
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
+	[7] scancalc/dastack.c
 
 void dadup(void);
 	[4] rpncalc4-04/dastack.c
@@ -105,6 +106,7 @@ void dadup(void);
 	[4] rpncalc4-06/dastack.c
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
+	[7] scancalc/dastack.c
 
 void dalist(void);
 	[4] rpncalc4-04/dastack.c
@@ -112,6 +114,7 @@ void dalist(void);
 	[4] rpncalc4-06/dastack.c
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
+	[7] scancalc/dastack.c
 
 double dapeek(void);
 	[4] rpncalc4-04/dastack.c
@@ -120,6 +123,7 @@ double dapeek(void);
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
 	[5] expr/dastack.c
+	[7] scancalc/dastack.c
 
 double dapop(void)
 	[4] rpncalc4-03/dastack.c
@@ -129,6 +133,7 @@ double dapop(void)
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
 	[5] expr/dastack.c
+	[7] scancalc/dastack.c
 	[-] rpncalc/dastack.c
 
 void dapush(double val);
@@ -139,6 +144,7 @@ void dapush(double val);
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
 	[5] expr/dastack.c
+	[7] scancalc/dastack.c
 	[-] rpncalc/dastack.c
 
 size_t dasize(void);
@@ -147,6 +153,7 @@ size_t dasize(void);
 	[4] rpncalc4-06/dastack.c
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
+	[7] scancalc/dastack.c
 
 void daswap(void);
 	[4] rpncalc4-04/dastack.c
@@ -154,6 +161,7 @@ void daswap(void);
 	[4] rpncalc4-06/dastack.c
 	[4] rpncalc4-10/dastack.c
 	[4] rpncalc4-11/dastack.c
+	[7] scancalc/dastack.c
 
 int day_of_year(int year, int month, int day);
 	[5] datetools.c
@@ -206,6 +214,9 @@ void expand(char *source,  char *target);
 
 size_t expandtab(size_t pos);
 	[1] fold.c
+
+void filecomp(FILE *fp1, FILE *fp2)
+	[7] mindiff.c
 
 size_t findblank(size_t pos);
 	[1] fold.c
@@ -275,6 +286,7 @@ size_t getline(char  *s, size_t lim);
 	[5] sort3.c
 	[5] sort4.c
 	[5] tail2.c
+	[7] scancalc/lexer.c
 
 char getop(char s[]);
 	[4] rpncalc4-03/lexer.c
@@ -285,6 +297,9 @@ char getop(char s[]);
 	[4] rpncalc4-11/lexer.c
 	[5] expr/lexer.c
 	[-] rpncalc/lexer.c
+
+char getop(char s[], double *val)
+	[7] scancalc/lexer.c
 
 int gettoken(void);
 	[5] dcl.c
@@ -382,6 +397,7 @@ void mathfun(char s[]);
 	[4] rpncacl4-06/rpncalc4.c
 	[4] rpncacl4-10/rpncalc5.c
 	[4] rpncacl4-11/rpncalc6.c
+	[7] scancalc/scancalc.c
 
 #define max(a, b)
 	[-] points.c

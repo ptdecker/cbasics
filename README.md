@@ -136,6 +136,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 7-03 - minprintf.c           A minimal faux implementation of printf to demonstrate variable arguments
 * 7-04 - minscanf.c            A minimal faux implementation of scanf to introduce scanf
 * 7-05 - scancalc/*.c          A variation of whole line RPN calc from 4-10 that utilizes sscanf
+* 7-06 - mindiff.c             A minimal file comparision utility - prints first line where two files differ
 
 ##Extras
 
@@ -159,7 +160,8 @@ The following test data files are provided to support manually testing the exerc
 * bigline.txt       - One really big single line of text (3001 chars)
 * bignegative.txt   - A big (out of range) negative integer
 * comment.txt       - A C program containing test scenarios for 'nocomment.c' and 'getword.c'
-* dcl.txt           - Tst file for 'dcl.c'
+* dcl.txt           - Test file for 'dcl.c'
+* dcl2.txt          - Differs from 'dcl.c' slightly.  Good test file for 'mincomp.c'
 * empty.txt         - One empty line (just a '\n')
 * extraspecials.txt - Contains embedded backspace, tabs, and backslashes
 * huckfinn.txt      - Project Gutenberg copy of Adventures of Huckleberry Finn by Mark Twain
