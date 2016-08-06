@@ -16,10 +16,11 @@
 #define MAXVARS  26 // Maximum number of variables (26 letters)
 #define NUMBER  '0' // Signal for a NUMBER
 #define NAME    'n' // Signal for a NAME
+#define ERROR   '~' // Signal for an ERROR
 
 // External declarations
 
-char   getop(char[]);
+char   getop(char[], double *);
 void   dapush(double);
 double dapop(void);
 double dapeek(void);
@@ -139,6 +140,7 @@ int main() {
 	double vars[MAXVARS];        // Variables
 	size_t i;                    // Array indexes
 	char   operator[MAXOP] = ""; // Operator
+	double value = 0;            // Value
 	char   optype;               // Operator type
 	double operand;              // Temporary operand
 	double lastvalue = 0;        // Last calculated value
@@ -156,10 +158,13 @@ int main() {
 
 	// Start the REPL (read, evaluate, and print loop)
 
-	while ((optype = getop(operator)) != (char)EOF) {
+	while ((optype = getop(operator, &value)) != (char)EOF) {
 		switch(optype) {
+			case ERROR:
+				printf("Invalid input\n");
+				break;
 			case NUMBER:
-				dapush(atof(operator));
+				dapush(value);
 				break;
 			case NAME:
 				mathfun(operator);
@@ -257,5 +262,6 @@ int main() {
 		lastop = optype;
 	} // while
 
+	(void)putchar('\n');
 	exit(EXIT_SUCCESS);
 }

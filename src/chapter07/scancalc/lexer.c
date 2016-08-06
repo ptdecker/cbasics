@@ -18,10 +18,11 @@
 
 #define NUMBER  '0'
 #define NAME    'n'
+#define ERROR   '~'
 #define MAXLINE 1000
 
-static size_t lineindex     = 0;
 static char   line[MAXLINE] = "";
+static char  *lineindex = line;
 
 /*
  * getline(): gets a whole line into string 's' and returns the length
@@ -49,74 +50,53 @@ static size_t getline(char s[], int maxlen) {
  *       a number 's' contains the number upon return.
  */
 
-char getop(char s[]) {
+char getop(char s[], double *val) {
 
-	size_t i;
-	char   c;
+	char token[MAXLINE] = "";
+	char *t = token;
 
-	// Read the next line of input
+	// Get a line (if needed)
 
-	if (line[lineindex] == '\0') {
+	if (*lineindex == '\0') {
 		if (getline(line, MAXLINE) == 0)
 			return EOF;
 		else
-			lineindex = 0;
+			lineindex = line;
 	}
 
-	// Get next character eating whitespace in the process
+	// Eat leading white space
 
-	while ((s[0] = c = line[lineindex++]) == ' ' || c == '\t')
-		; //Empty
+	while (isspace(*lineindex))
+		lineindex++;
 
-	s[1] = '\0';
-	i = 0;
+	// Get next token from the line
 
-	// If it is a lower-case character it is a command or name, read it in
+	while (*lineindex != '\0' && !isspace(*lineindex)) {
+		*t++ = *lineindex++;
+	}
+	*t = '\0';
 
-	if (islower(c)) {
-		while (islower(s[++i] = c = line[lineindex++]))
-			; // Empty
-		s[i] = '\0';
-		if (c != EOF)      // More to read so push back last read
-			lineindex--;
+	// End of line??
+
+	if (*token == '\n' || *token == '\0')
+		return '\n';
+
+	// Try to read in a number from the token.  If successful, return the value and a NUMBER token
+
+	if (sscanf(token, " %lf", val) == 1)
+		return NUMBER;
+
+	// Reading a number failed, try to read a string ... if it is a single character, return it; 
+	// otherwise, return a NAME token
+
+	if (sscanf(token, " %s", s) == 1) {
 		if (strlen(s) > 1)
-			return NAME;   // Length > 1? then we have a name
+			return NAME;
 		else
-			return s[0];      // Else a command
+			return s[0];
 	}
 
-	// If the character is not part of a number or command (i.e. is an operator), return it
+	// Otherwise error out
 
-	if (!isdigit(c) && c != '.' &&  c != '-')
-		return c;
-
-	// Otherwise it is a number, read in the full number
-
-	// Handle a negative sign
-	// Look at next character to determine if '-' is a negative sign or
-	// if it is the subtraction operator instead
-	if (c == '-') {
-		if (isdigit(c = line[lineindex++]) || c == '.')
-			s[++i] = c;
-		else {
-			if (c != (char)EOF)
-				lineindex--;
-			return '-';
-		}
-	}
-
-	// Read integer part
-	if (isdigit(c))
-		while (isdigit(s[++i] = c = line[lineindex++]))
-			; // Empty
-	// Read fractional part
-	if (c == '.')
-		while (isdigit(s[++i] = c = line[lineindex++]))
-			; // Empty
-	s[i] = '\0';
-
-	if (c != (char)EOF)
-		lineindex--;
-
-	return NUMBER;
+	return ERROR;
 }

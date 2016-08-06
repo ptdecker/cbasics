@@ -3,6 +3,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAXSTACK 100 // Maximum depth of stack
 
@@ -16,8 +17,10 @@ static double dstack[MAXSTACK]; // Array-based stack of double-typed values
 void dapush(double val) {
 	if (dstackptr < MAXSTACK)
 		dstack[dstackptr++] = val;
-	else
+	else {
 		printf("Stack is full\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 /*
