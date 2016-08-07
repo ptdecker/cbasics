@@ -138,6 +138,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 7-05 - scancalc/*.c          A variation of whole line RPN calc from 4-10 that utilizes sscanf
 * 7-06 - mindiff.c             Prints first line where two files differ
 * 7-07 - minfind.c             Searches files lines either matching, or not matching, a pattern optional line numbers
+* 7-08 - fprint.c              Prints a set of files with header, footer, page breaks, and page count
 
 ##Extras
 
