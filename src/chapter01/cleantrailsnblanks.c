@@ -11,7 +11,6 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLINE 1000 // Note: MAXLINE includes terminating newline and null characters
 
@@ -44,6 +43,6 @@ int main(void) {
         if (len > MAXLINE)
             printf("%s", line);
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }
 

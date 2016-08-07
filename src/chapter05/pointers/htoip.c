@@ -7,7 +7,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 static unsigned htoi(char *s) {
 
@@ -39,7 +38,6 @@ static unsigned htoi(char *s) {
 
 int main(void) {
 
-
     printf("FFFF converts to %u\n",   htoi("FFFF"));
     printf("0xFFFF converts to %u\n", htoi("0xFFFF"));
     printf("ABCD converts to %u\n",   htoi("ABCD"));
@@ -48,5 +46,5 @@ int main(void) {
     printf("0 converts to %u\n", htoi("0"));
     printf("0A converts to %u\n", htoi("0A"));
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

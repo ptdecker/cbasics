@@ -64,5 +64,5 @@ int main(void) {
 	s[i] = '\0';
 	printf("\t... result: \"%s\"\n", s);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

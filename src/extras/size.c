@@ -6,7 +6,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
 
@@ -18,5 +17,5 @@ int main(void) {
 
     printf("%d\n", size);
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

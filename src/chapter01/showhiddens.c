@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
 
@@ -19,6 +18,5 @@ int main(void) {
         else
             (void)putchar(c);
 
-    exit(EXIT_SUCCESS);
-
+    return 0;
 }

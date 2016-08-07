@@ -4,9 +4,13 @@
 * Adds error checking to day_of_year() and month_day()
 */
 
+// NOTE: The construct 'isleap(year) ? 1 : 0' could just be expressed as 'isleap(year)' however since isleap() is
+//       defined as a bool and arrays expect integer-based indexes, the later approach throws a type mismatch 
+//       warning in splint. The former construct clears this error and makes explicit which array index is used
+//       depending upon the return value of 'isleap()'
+
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 static char daytab[2][13] = {
 	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
@@ -29,11 +33,11 @@ static int day_of_year(int year, int month, int day) {
 
 	int i;
 
-	if ((year < 0) || (month < 1) || (month > 12) || (day < 1) || (day > daytab[isleap(year)][month]))
+	if ((year < 0) || (month < 1) || (month > 12) || (day < 1) || (day > daytab[isleap(year) ? 1 : 0][month]))
 		return -1;
 
 	for (i = 1; i < month; i++)
-		day += daytab[isleap(year)][i];
+		day += daytab[isleap(year) ? 1 : 0][i];
 
 	return day;
 }
@@ -52,8 +56,8 @@ static void month_day(int year, int yearday, int *pmonth, int *pday) {
 	    return;
 	}
 
-	for (i = 1; yearday > daytab[isleap(year)][i]; i++)
-		yearday -= daytab[isleap(year)][i];
+	for (i = 1; yearday > daytab[isleap(year) ? 1 : 0][i]; i++)
+		yearday -= daytab[isleap(year) ? 1 : 0][i];
 
 	*pmonth = i;
 	*pday   = yearday;
@@ -61,7 +65,8 @@ static void month_day(int year, int yearday, int *pmonth, int *pday) {
 
 int main(void) {
 
-	int month, day;
+	int month = 0;
+	int day = 0;
 
 	printf("Aug 05, 1966, is day %03d of the year\n", day_of_year(1966,  8,  5));
 	printf("Jan 01, 2000, is day %03d of the year\n", day_of_year(2000,  1,  1));
@@ -95,7 +100,6 @@ int main(void) {
 	printf("Day %03d occurs in month %02d on day %02d of year %04d\n", 366, month, day, 2004);
 	(void)putchar('\n');
 
-
 	month_day(  -1, 365, &month, &day);
 	printf("Attempting a negative year returns                                 : month %d, day %d\n", month, day);
 	month_day(2004,   0, &month, &day);
@@ -105,6 +109,5 @@ int main(void) {
 	month_day(2003, 366, &month, &day);
 	printf("Attempting a day number greater than 365 in a non-leap year returns: month %d, day %d\n", month, day);
 
-
-	exit(EXIT_SUCCESS);
+	return 0;
 }

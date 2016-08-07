@@ -135,5 +135,5 @@ int main(void) {
 	itob(n, s, b);
 	printf("Number %d converted to a string in base %d is: \"%s\"\n", n, b, s);
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

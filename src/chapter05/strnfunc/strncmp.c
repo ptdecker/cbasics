@@ -4,7 +4,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXSTR 1000
 
@@ -35,5 +34,5 @@ int main(void) {
     printf("Comparing the first 2 characters of \"%s\" to \"%s\" results in: %d\n", s3, s2, strncmp(s3, s2, 2));
     printf("Comparing the first 2 characters of \"%s\" to \"%s\" results in: %d\n", s4, s2, strncmp(s4, s2, 2));
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

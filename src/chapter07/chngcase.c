@@ -6,7 +6,6 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 // Definitions
@@ -49,5 +48,5 @@ int main(/*@unused@*/int argc, char *argv[]) {
 	while ((c = getchar()) != EOF)
 		(void)putchar(func(c));
 
-	exit(EXIT_SUCCESS);		
+	return 0;
 }

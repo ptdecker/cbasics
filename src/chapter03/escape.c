@@ -5,11 +5,12 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 static void escape(char source[], char target[]) {
+
 	size_t i;
 	size_t j;
+
 	for (i = 0, j = 0; source[i] != '\0'; i++)
     	switch (source[i]) {
         	case '\a':  // Alarm (Beep, bell character) (\a)
@@ -59,13 +60,18 @@ static void escape(char source[], char target[]) {
         	default:
             	target[j++] = source[i];
     	} // switch
+
     target[j] = '\0';
+
 } // escape()
 
 static void unescape(char source[], char target[]) {
+
 	size_t i;
 	size_t j;
+
 	for (i = 0, j = 0; source[i] != '\0'; i++) {
+
 		if (source[i] != '\\')
 			target[j++] = source[i];
 		else
@@ -103,17 +109,24 @@ static void unescape(char source[], char target[]) {
         		default:
         			target[j++] = source[i];
     		} // switch
+
     	target[j] = '\0';
 	} // for
+
 } // unescape()
 
 int main(void) {
+
 	char teststr1[100] = "This is a test string of special characters: \\a, \\b, \\f, \\n, \\r, \\t, \\v, \\', \\\", \\?";
 	char teststr2[100];
 	char teststr3[100];
+
 	unescape(teststr1, teststr2);
 	escape(teststr2, teststr3);
+
 	printf("Test String 1: %s\n", teststr1);
 	printf("Test String 2: %s\n", teststr2);
 	printf("Test String 3: %s\n", teststr3);
+
+	return 0;
 }

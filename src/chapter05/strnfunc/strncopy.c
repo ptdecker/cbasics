@@ -4,7 +4,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXSTR 1000
 
@@ -33,5 +32,5 @@ int main(void) {
 
     printf("\"%s\"\n", string1);
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

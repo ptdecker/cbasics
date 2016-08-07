@@ -27,7 +27,7 @@
 
 // Globals
 
-char *lineptr[MAXLINES];         // Pointers to text lines
+static char *lineptr[MAXLINES];         // Pointers to text lines
 
 /* getbigline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length
@@ -51,7 +51,7 @@ static size_t getline(char *s, size_t lim) {
  * swap(): interchanges v[i] and v[j]
  */
 
-void swap(char *v[], int i, int j) {
+static void swap(char *v[], int i, int j) {
 	char *temp;
 	temp = v[i];
 	v[i] = v[j];
@@ -62,7 +62,7 @@ void swap(char *v[], int i, int j) {
  * qsort(): sort v[left] to v[right] into increasing order
  */
 
-void myqsort(char *v[], int left, int right) {
+static void myqsort(char *v[], int left, int right) {
 	int i, last;
 
 	// Do nothing if the array contains fewer than two elements
@@ -86,7 +86,7 @@ void myqsort(char *v[], int left, int right) {
  * writelines(): outputs each string in the passed array of strings
  */
 
-void writelines(char *lineptr[], int nlines) {
+static void writelines(char *lineptr[], int nlines) {
 	int i;
 	for (i = 0; i < nlines; i++)
 		printf("%s\n", lineptr[i]);
@@ -96,13 +96,13 @@ void writelines(char *lineptr[], int nlines) {
  * readlines1(): read input lines
  */
 
-int  readlines(char *lineptr[], char *linestore, int maxlines) {
+static int readlines(char *lineptr[], char *linestore, int maxlines) {
 
-	int   len;
-	int   nlines = 0;
-	char  line[MAXLEN];
-	char *p = linestore;
-	char *linestop = line + ALLOCSIZE;
+	size_t len;
+	int    nlines = 0;
+	char   line[MAXLEN];
+	char  *p = linestore;
+	char  *linestop = line + ALLOCSIZE;
 
 	while ((len = getline(line, MAXLEN)) > 0) {
 		if (nlines >= maxlines || p + len > linestop)
@@ -128,10 +128,10 @@ int main(void) {
 	if ((nlines = readlines(lineptr, linestore, MAXLINES)) >= 0) {
 		myqsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
-		printf("Run time: %lu clock ticks\n", (clock() - start));
+		printf("Run time: %u clock ticks\n", (unsigned)(clock() - start));
 		exit(EXIT_SUCCESS);
 	}
 
 	printf("Error: Input is too big to sort");
-	exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
 }

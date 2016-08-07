@@ -4,7 +4,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 // Comment states
 
@@ -131,5 +130,5 @@ int main(void) {
     if (squote != 0)
         printf("Unmatched single quotes\n");
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

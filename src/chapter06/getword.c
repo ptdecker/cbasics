@@ -127,7 +127,7 @@ int main(void) {
 		if (isalnum(nextword[0]))
 			printf("%s\n", nextword);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }
 
 /* 

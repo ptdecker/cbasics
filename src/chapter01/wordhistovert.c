@@ -6,7 +6,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLEN   70  /* maximum word length to keep track of */
 #define MAXBAR   16  /* maximum bar width */
@@ -149,5 +148,5 @@ int main(void) {
         (void)putchar('s');
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

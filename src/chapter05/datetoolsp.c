@@ -4,9 +4,15 @@
 * Adds error checking to day_of_year() and month_day()
 */
 
+/*@ -unqualifiedtrans -mustfreefresh */
+
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
+
+// NOTE: The construct 'isleap(year) ? 1 : 0' could just be expressed as 'isleap(year)' however since isleap() is
+//       defined as a bool and arrays expect integer-based indexes, the later approach throws a type mismatch 
+//       warning in splint. The former construct clears this error and makes explicit which array index is used
+//       depending upon the return value of 'isleap()'
 
 static char daytab[2][13] = {
 	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
@@ -29,11 +35,11 @@ static int day_of_year(int year, int month, int day) {
 
 	char *p;
 
-	if ((year < 0) || (month < 1) || (month > 12) || (day < 1) || (day > daytab[isleap(year)][month]))
+	if ((year < 0) || (month < 1) || (month > 12) || (day < 1) || (day > daytab[isleap(year) ? 1 : 0][month]))
 		return -1;
 
-	p = daytab[isleap(year)];
-	while (--month)
+	p = daytab[isleap(year) ? 1 : 0];
+	while (--month > 0)
 		day += *++p;
 
 	return day;
@@ -53,11 +59,11 @@ static void month_day(int year, int yearday, int *pmonth, int *pday) {
 	    return;
 	}
 
-	p = daytab[isleap(year)];
+	p = daytab[isleap(year) ? 1 : 0];
 	while (yearday > *++p)
 		yearday -= *p;
 
-	*pmonth = p - *(daytab + isleap(year));
+	*pmonth = p - *(daytab + (isleap(year) ? 1 : 0));
 	*pday   = yearday;
 }
 
@@ -88,7 +94,8 @@ static void *month_name(int month) {
 
 int main(void) {
 
-	int month, day;
+	int month = 0;
+	int day = 0;
 
 	printf("Aug 05, 1966, is day %03d of the year\n", day_of_year(1966,  8,  5));
 	printf("Jan 01, 2000, is day %03d of the year\n", day_of_year(2000,  1,  1));
@@ -135,6 +142,5 @@ int main(void) {
 	printf("The month name of a month less than '1' is '%s'\n", month_name(0));
 	printf("The month name of a month greater than '12' is '%s'\n", month_name(13));
 
-
-	exit(EXIT_SUCCESS);
+	return 0;
 }

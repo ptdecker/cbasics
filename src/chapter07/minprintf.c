@@ -13,7 +13,6 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define LOCALFMT 100  // Maximum supported format string length
 
@@ -102,5 +101,5 @@ int main(void) {
 	minprintf("test of complex format ('[%%-15.10s]'): [%-15.10s]\n", "hello world!");
 	minprintf("test of multiple args: %d, %f, \"%s\"\n", 10, 3.14, "this is a string");
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

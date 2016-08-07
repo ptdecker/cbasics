@@ -200,7 +200,6 @@ void error(int c, char *s);
 void errmsg(char *msg);
 	[5] dcl.c
 	[5] dcl2.c
-	[5] undcl.c
 
 void escape(char source[], char target[]);
 void escape(char *source,  char *target);

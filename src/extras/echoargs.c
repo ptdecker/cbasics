@@ -3,7 +3,6 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main (int argc, char *argv[]) {
 
@@ -12,5 +11,5 @@ int main (int argc, char *argv[]) {
 
 	(void)putchar('\n');
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

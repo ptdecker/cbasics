@@ -16,7 +16,6 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
@@ -61,11 +60,14 @@ static void reverse(char s[]) {
 /* Main */
 
 int main(void) {
+
     char line[MAXLINE] = "";
+
     while (getline(line, MAXLINE) > 0) {
         reverse(line);
         printf("%s", line);
     }
     (void)putchar('\n');
-    exit(EXIT_SUCCESS);
+
+    return 0;
 }

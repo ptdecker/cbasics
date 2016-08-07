@@ -120,7 +120,9 @@ static int getint(int *pn) {
 }
 
 int main(void) {
+
 	int mynum = 0;
+
 	switch (getint(&mynum)) {
 		case EOF:
 			printf("Reached end of file, number is: %d\n", mynum);
@@ -140,5 +142,6 @@ int main(void) {
 	}
 	if (bufferptr > 0)
 		printf("Input buffer contains: '%s'\n", buffer);
-	exit(EXIT_SUCCESS);
+
+	return 0;
 }

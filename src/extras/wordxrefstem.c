@@ -997,5 +997,5 @@ int main(void)  {
 
 	treeprint(root);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

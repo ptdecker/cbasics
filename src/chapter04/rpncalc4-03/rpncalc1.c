@@ -63,5 +63,5 @@ int main() {
 		} // switch
 	} // while
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define TABSTOP 4
 
@@ -26,5 +25,5 @@ int main(void) {
         }
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

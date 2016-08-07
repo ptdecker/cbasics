@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
     printf("\\a: \a\n");
@@ -100,5 +99,6 @@ int main(void) {
     printf("\\.: \.\n");
     printf("\\?: \?\n");
     printf("\\/: \/\n");
-    exit(EXIT_SUCCESS);
+
+    return 0;
 }

@@ -4,7 +4,6 @@
 
 #include <math.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 // Constants
@@ -153,5 +152,5 @@ int main(void) {
 	printf("A non-canonical rectange example is defined by (%d, %d) and (%d, %d)\n", noncanon.p1.x, noncanon.p1.y, noncanon.p2.x, noncanon.p2.y);
 	printf("And it's canonical version is (%d, %d) and (%d, %d)\n", canon.p1.x, canon.p1.y, canon.p2.x, canon.p2.y);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

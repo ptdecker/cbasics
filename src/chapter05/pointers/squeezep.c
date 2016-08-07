@@ -6,7 +6,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 /*
  * squeezechar(): Deletes all 'c' from S[]
@@ -60,5 +59,5 @@ int main(void) {
     squeeze(string2, "aeiou");
     printf("\nNow, remvoing all lowercase vowels from \"This string contains a bunch of 's' characters\"\n\nResult: \"%s\"\n", string2);
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

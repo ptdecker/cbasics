@@ -109,4 +109,4 @@ undcl: $(ODIR)/undcl.o
 $(ODIR)/%.o: %.c $(DEPS)
 	mkdir -pv $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
-#	$(LINT) $(LINTFLAGS) $<
+	$(LINT) $(LINTFLAGS) $<

@@ -113,7 +113,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * entab3.c:                  Replaces converts spaces to tabs using command switches to set intervals
 * 5-13 - tail2.c               Displays the specified number of lines from the end of a file
 * 5-14 - sort1.c               Sorts input lines supporting reverse and numeric ordering using '-r' and '-n' switches
-* 5-15 - sort2.c               Extends sort1.c to also support '-f' switch to fold upper and lower case          
+* 5-15 - sort2.c               Extends sort1.c to also support '-f' switch to fold upper and lower case
 * 5-16 - sort3.c               Extends sort2.c to also support '-d' switch to sort by 'directory order'
 * 5-17 - sort4.c               Extends sort3.c to also support for searching a fixed position field ('+pos1', '-pos1')
 * 5-18 - dcl.c                 Parses a C language pointer declaration (with some error handling)
@@ -133,10 +133,11 @@ Kernighan and Ritchie The C Programming Language Code Examples
 
 * 7-01 - chngcase.c            Transforms input to all upper or lower case based upon name of program ('lower' or 'upper')
 * 7-02 - print.c               Prints a file with arbitrary contents in a reasonable way
-* 7-03 - minprintf.c           A minimal faux implementation of printf to demonstrate variable arguments
-* 7-04 - minscanf.c            A minimal faux implementation of scanf to introduce scanf
+* 7-03 - minprintf.c           Faux implementation of printf to demonstrate variable arguments
+* 7-04 - minscanf.c            Faux implementation of scanf to introduce scanf
 * 7-05 - scancalc/*.c          A variation of whole line RPN calc from 4-10 that utilizes sscanf
-* 7-06 - mindiff.c             A minimal file comparision utility - prints first line where two files differ
+* 7-06 - mindiff.c             Prints first line where two files differ
+* 7-07 - minfind.c             Searches files lines either matching, or not matching, a pattern optional line numbers
 
 ##Extras
 

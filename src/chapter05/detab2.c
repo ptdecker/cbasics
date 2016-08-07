@@ -14,7 +14,7 @@
  */
 
 static bool isnottab(int pos, char *tabstop) {
-    return (pos < (MAXLINE + 1)) && (tabstop[pos] == false);
+    return (pos < (MAXLINE + 1)) && (tabstop[pos] == 0);
 }
 
 /*
@@ -30,7 +30,7 @@ static void settabs(int argc, char *argv[], char *tabstop) {
 
     if (argc < 2) {
         for (i = 1; i <= MAXLINE; i++)
-            tabstop[i] = ((i % TABSTOPINC) == 0);
+            tabstop[i] = ((i % TABSTOPINC) == 0) ? 1 : 0;
         return;
     }
 
@@ -44,7 +44,7 @@ static void settabs(int argc, char *argv[], char *tabstop) {
     while (--argc > 0) {
         i = atoi(*++argv);
         if (0 < i && i <= MAXLINE)
-            tabstop[i] = true;
+            tabstop[i] = 1;
     }
 
 }
@@ -66,7 +66,10 @@ static void detab(char *tabstop) {
             while (isnottab(pos++, tabstop));
         else {
             (void)putchar(c);
-            pos = (c == '\n') ? 1 : ++pos;
+            if (c == '\n')
+                pos = 1;
+            else
+                pos++;
         }
 }
 
@@ -81,5 +84,5 @@ int main(int argc, char *argv[]) {
     settabs(argc, argv, tabstop);
     detab(tabstop);
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

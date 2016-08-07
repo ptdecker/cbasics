@@ -659,5 +659,5 @@ int main(int argc, char *argv[]) {
         stemfile(f);
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

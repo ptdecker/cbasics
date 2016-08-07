@@ -191,5 +191,5 @@ int main(void) {
 		if (p->count > 0)
 			printf("%4d %s\n", p->count, p->word);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

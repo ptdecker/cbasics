@@ -10,7 +10,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define MAXSTRING 256
@@ -96,8 +95,7 @@ int main(void) {
 	expand(shortened, expanded);
 	printf("Shortened: %s, Expanded: %s\n", shortened, expanded);
 
-	
-	exit(EXIT_SUCCESS);
+	return 0;
 }
 
 /*

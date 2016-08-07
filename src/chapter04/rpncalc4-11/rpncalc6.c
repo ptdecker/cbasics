@@ -257,5 +257,5 @@ int main() {
 		lastop = optype;
 	} // while
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

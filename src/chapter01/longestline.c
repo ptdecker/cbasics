@@ -11,7 +11,6 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 
@@ -67,5 +66,5 @@ int main(void) {
         printf("The %slongest line is: %s\n", (maxlen > MAXLINE) ? "first part of the " : "", longest);
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

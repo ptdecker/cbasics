@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 static unsigned int htoi(char s[]) {
 
@@ -50,5 +49,5 @@ int main(void) {
     printf("0xFFFFFFFF converts to %u\n", htoi("0xFFFFFFFF"));
     printf("converting an empty string yields %u\n", htoi(""));
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

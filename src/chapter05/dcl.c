@@ -22,24 +22,24 @@ enum { NAME, PARENS, BRACKETS };
 
 // Globals
 
-int    tokentype;          // Type of last token
-char   token[MAXTOKEN];    // Last token string
-char   name[MAXTOKEN];     // Identifier name
-char   datatype[MAXTOKEN]; // Data type ('char', 'int', etc)
-char   out[MAXOUTSTR];     // Output string
-char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
-size_t bufferptr = 0;      // Buffer pointer--next free stack position
-bool   prevtoken = false;  // Indicates if there is a previous token
+static int    tokentype;          // Type of last token
+static char   token[MAXTOKEN];    // Last token string
+static char   name[MAXTOKEN];     // Identifier name
+static char   datatype[MAXTOKEN]; // Data type ('char', 'int', etc)
+static char   out[MAXOUTSTR];     // Output string
+static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
+static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+static bool   prevtoken = false;  // Indicates if there is a previous token
 
 // Forward declarations
 
-void dcl(void);
+static void dcl(void);
 
 /*
  * errmsg(): prints an error message
  */
 
-void errmsg(char *msg) {
+static void errmsg(char *msg) {
 	printf("%s", msg);
 	prevtoken = true;
 }
@@ -70,7 +70,7 @@ static void ungetch(int c) {
  * gettoken(): get a token
  */
 
-int gettoken(void) {
+static int gettoken(void) {
 
 	int   c;
 	char *p = token;
@@ -134,7 +134,7 @@ int gettoken(void) {
  * dirdcl(): parse a direct declarator
  */
 
-void dirdcl(void) {
+static void dirdcl(void) {
 
 	int type;
 
@@ -161,7 +161,7 @@ void dirdcl(void) {
  * dcl(): parse a declarator
  */
 
-void dcl(void) {
+static void dcl(void) {
 
 	int ns; // number of asterisks
 
@@ -191,5 +191,5 @@ int main(void) {
 		printf("%s: %s %s\n", name, out, datatype);
 	}
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

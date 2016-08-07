@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLTRS  26  /* number of letters */
 #define MAXBAR   18  /* maximum bar size */
@@ -68,5 +67,5 @@ int main(void) {
         (void)putchar('s');
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

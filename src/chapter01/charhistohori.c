@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXBAR  60 /* maximum bar width */
 #define NUMLTRS 26 /* number of letters (english) */
@@ -60,5 +59,5 @@ int main(void) {
         (void)putchar('s');
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

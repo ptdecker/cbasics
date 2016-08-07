@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define IN  1 /* inside a set of blanks */
 #define OUT 0 /* outside a set of blanks */
@@ -23,5 +22,5 @@ int main(void) {
         (void)putchar(c);
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

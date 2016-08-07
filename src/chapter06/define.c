@@ -346,5 +346,5 @@ int main(void) {
 		else
 			ungets(np->defn);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

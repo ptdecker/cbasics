@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define BIGSIZE 3000
 
@@ -12,7 +11,7 @@ int main(void) {
 
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+	return 0;
 }
 
 

@@ -7,7 +7,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 static unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y) {
 
@@ -37,5 +36,5 @@ int main(void) {
     printbits(setbits(0xFFFF, 7, 3, 0x0000));
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

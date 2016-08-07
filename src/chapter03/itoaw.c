@@ -80,6 +80,7 @@ static void itoa(int n, char s[], int w) {
 }
 
 int main(void) {
+
 	int n;
 	int w = 12;
 	char s[MAXSTRING] = "";
@@ -96,5 +97,5 @@ int main(void) {
 	itoa(n, s, w);
 	printf("Number %d converted to a string of width %d is: \"%s\"\n", n, w, s);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

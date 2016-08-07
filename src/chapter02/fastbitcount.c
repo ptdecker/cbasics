@@ -43,7 +43,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define FAST 1  // Comment out to compile the slow version
 
@@ -116,5 +115,5 @@ int main(void) {
 
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

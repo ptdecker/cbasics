@@ -6,6 +6,8 @@
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
 
+/*@ -branchstate */
+
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
@@ -39,7 +41,7 @@ static size_t getline(char *s, size_t lim) {
  * error(): print error messages
  */
 
-void error(char *s) {
+static void error(char *s) {
 	printf("%s\n", s);
 	exit(EXIT_FAILURE);
 }
@@ -52,17 +54,17 @@ int main(int argc, char *argv[]) {
 
 	// Define variables
 
-	char *buf;            // Buffer
-	char *p;              // Current position in the buffer
-	char *bufend;         // End of the buffer
-	char  line[MAXLEN];   // Current input line
-	char *lineptr[LINES]; // Lines read
-	int   first;          // Index of first line
-	int   last = 0;       // Index of last line read
-	int   len;            // Length of line returned by getline
-	int   n = DEFLINES;   // Number of lines to print
-	int   nlines = 0;     // Number of lines read
-	int   i;              // Loop index
+	char  *buf;            // Buffer
+	char  *p;              // Current position in the buffer
+	char  *bufend;         // End of the buffer
+	char   line[MAXLEN];   // Current input line
+	char  *lineptr[LINES]; // Lines read
+	int    first;          // Index of first line
+	int    last = 0;       // Index of last line read
+	size_t len;            // Length of line returned by getline
+	int    n = DEFLINES;   // Number of lines to print
+	int    nlines = 0;     // Number of lines read
+	int    i;              // Loop index
 
 	// Read arguments
 
@@ -128,5 +130,5 @@ int main(int argc, char *argv[]) {
 	for (i = first; n-- > 0; i = (i + 1) % LINES)
 		printf("%s", lineptr[i]);
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 /* Fahrenheit-Celsius conversion */
 
@@ -23,6 +22,6 @@ int main(void) {
     for (fahr = lower; fahr <= upper; fahr += step)
         printf("%d\t%d\n", fahr, ftoc(fahr));
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }
 

@@ -4,7 +4,6 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 // Definitions
 
@@ -57,5 +56,5 @@ int main(void) {
 
 	}
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

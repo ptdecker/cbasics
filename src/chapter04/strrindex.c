@@ -6,7 +6,6 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #define NOT_FOUND -1
@@ -90,5 +89,5 @@ int main(void) {
 	printf("The leftmost  occurrence of \"%s\" is at position %d.\n", t, strindex(s, t));
 	printf("The rightmost occurrence of \"%s\" is at position %d.\n", t, strrindex(s, t));
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

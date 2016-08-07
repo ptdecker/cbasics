@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 /*
  * lower(): Converts a character to lower space
@@ -20,5 +19,5 @@ int main(void) {
     (void)putchar(lower('t'));
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

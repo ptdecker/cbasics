@@ -13,7 +13,6 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define LOCALFMT 100  // Maximum supported format string length
 
@@ -115,5 +114,5 @@ int main(void) {
 	minscanf("%x", &uval);
 	printf("received: %x\n", uval);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

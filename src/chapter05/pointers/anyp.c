@@ -7,7 +7,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define NOTFOUND -1
 
@@ -55,5 +54,5 @@ int main(void) {
     } else
         printf("\n\nNot found!\n\n");
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

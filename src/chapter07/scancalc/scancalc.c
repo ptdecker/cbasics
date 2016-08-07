@@ -263,5 +263,7 @@ int main() {
 	} // while
 
 	(void)putchar('\n');
-	exit(EXIT_SUCCESS);
+
+	return 0;
+
 }

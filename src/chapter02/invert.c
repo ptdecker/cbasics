@@ -28,9 +28,12 @@ static void printbits(unsigned x) {
 }
 
 int main(void) {
+
     printbits(0xA5A5);
     (void)putchar('\n');
+
     printbits(invert(0xA5A5, 7, 5));
     (void)putchar('\n');
-    exit(EXIT_SUCCESS);
+
+    return 0;
 }

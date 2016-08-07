@@ -10,7 +10,6 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 #define BIGLINE 80   /* Defines the minimum size of a line that will be printed */
@@ -46,7 +45,7 @@ int main(void) {
 
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }
 
 

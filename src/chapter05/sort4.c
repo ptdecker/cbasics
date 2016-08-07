@@ -7,6 +7,8 @@
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
 
+/*@ -statictrans  -mustfreefresh */
+
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
@@ -24,16 +26,15 @@
 
 // Globals
 
-static char allocbuf[ALLOCSIZE]; // Storage for alloc
-static char *allocp = allocbuf;  // Next free position in alloc
-
-char *lineptr[MAXLINES]; // Pointers to text lines
-int   pos1;              // Starting position of sort field
-int   pos2;              // Ending position of sort field
-bool  numeric = false;   // 'true' if numeric sort
-bool  descend = false;   // 'true' if descending output
-bool  fold    = false;   // 'true' if case insensitive sort
-bool  dir     = false;   // 'true' if directory order sort
+static char   allocbuf[ALLOCSIZE]; // Storage for alloc
+static char  *allocp = allocbuf;   // Next free position in alloc
+static char  *lineptr[MAXLINES];   // Pointers to text lines
+static size_t pos1;                // Starting position of sort field
+static size_t pos2;                // Ending position of sort field
+static bool   numeric = false;     // 'true' if numeric sort
+static bool   descend = false;     // 'true' if descending output
+static bool   fold    = false;     // 'true' if case insensitive sort
+static bool   dir     = false;     // 'true' if directory order sort
 
 /*
  * alloc(): rudimentary storage allocator
@@ -72,20 +73,21 @@ static size_t getline(char *s, size_t lim) {
 
 static int readlines(char *lineptr[], int maxlines) {
 
-	int len;
-	int nlines;
-	char *p;
-	char line[MAXLEN];
+	size_t len;
+	int    nlines;
+	char  *p;
+	char   line[MAXLEN];
 
 	nlines = 0;
 	while ((len = getline(line, MAXLEN)) > 0) {
 
-		if (nlines >= maxlines || (p = alloc(len)) == NULL)
+		if ((p = alloc((int)len)) == NULL || nlines >= maxlines)
 			return -1;
 
 		line[len - 1] = '\0';
 		strcpy(p, line);
 		lineptr[nlines++] = p;
+
 	}
 
 	return nlines;
@@ -120,15 +122,15 @@ static void error(char *s) {
 
 static void substr(const char *s, char *str) {
 
-	int i;
-	int j;
-	int len;
+	size_t i;
+	size_t j;
+	size_t len;
 
 	len = strlen(s);
 
-	if (0 < pos2 && pos2 < len)
+	if (pos2 != 0 && pos2 < len)
 		len = pos2;
-	else if (0 < pos2 && len < pos2)
+	else if (pos2 != 0 && len < pos2)
 		error("substr: string is too short");
 
 	for (j = 0, i = pos1; i < len; i++, j++)
@@ -180,9 +182,9 @@ static int numcmp(const char *s1, const char *s2) {
 
 static int foldcmp(const char *s, const char *t) {
 
-	int  i = pos1;
-	int  j = pos1;
-	int  endpos;
+	size_t  i = pos1;
+	size_t  j = pos1;
+	size_t  endpos;
 
 	if (pos2 > 0)
 		endpos = pos2;
@@ -202,11 +204,11 @@ static int foldcmp(const char *s, const char *t) {
 
 static int dircmp(const char *s, const char *t) {
 
-	char a;
-	char b;
-	int  i = pos1;
-	int  j = pos1;
-	int  endpos;
+	char   a;
+	char   b;
+	size_t i = pos1;
+	size_t j = pos1;
+	size_t endpos;
 
 	if (pos2 > 0)
 		endpos = pos2;
@@ -239,15 +241,15 @@ static int dircmp(const char *s, const char *t) {
 static int folddircmp(const char *s, const char *t) {
 
 	char a;
-	int  i = pos1;
-	int  j = pos1;
-	int  endpos;
+	char b;
+	size_t i = pos1;
+	size_t j = pos1;
+	size_t endpos;
 
 	if (pos2 > 0)
 		endpos = pos2;
 	else if ((endpos = strlen(s)) > strlen(t))
 		endpos = strlen(t);
-	char b;
 
 	do {
 
@@ -318,12 +320,11 @@ static void readargs(int argc, char *argv[]) {
 					default:
 						printf("sort: illegal option %c\n", c);
 						exit(EXIT_FAILURE);
-						break;
 				}
 		else if (c == '-')
-			pos2 = atoi(argv[0]+1);
-		else if ((pos1 = atoi(argv[0]+1)) < 0)
-	    	error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
+			pos2 = (size_t)atoi(argv[0]+1);
+		else
+			pos1 = (size_t)atoi(argv[0]+1);
 
     if ((argc == 0) || (pos1 > pos2))
 	    error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
@@ -391,5 +392,5 @@ int main(int argc, char *argv[]) {
 
 	writelines(lineptr, nlines, descend);
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

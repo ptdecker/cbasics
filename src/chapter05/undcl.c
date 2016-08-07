@@ -22,21 +22,12 @@ enum { NAME, PARENS, BRACKETS };
 
 // Globals
 
-int    tokentype;          // Type of last token
-char   token[MAXTOKEN];    // Last token string
-char   out[MAXOUTSTR];     // Output string
-char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
-size_t bufferptr = 0;      // Buffer pointer--next free stack position
-bool   prevtoken = false;  // Indicates if there is a previous token
-
-/*
- * errmsg(): prints an error message
- */
-
-void errmsg(char *msg) {
-	printf("%s", msg);
-	prevtoken = true;
-}
+static int    tokentype;          // Type of last token
+static char   token[MAXTOKEN];    // Last token string
+static char   out[MAXOUTSTR];     // Output string
+static char   buffer[MAXSTACK];   // Array-based buffer of char-typed values
+static size_t bufferptr = 0;      // Buffer pointer--next free stack position
+static bool   prevtoken = false;  // Indicates if there is a previous token
 
 /*
  * getch(): gets a character from the buffer
@@ -64,7 +55,7 @@ static void ungetch(int c) {
  * gettoken(): get a token
  */
 
-int gettoken(void) {
+static int gettoken(void) {
 
 	int   c;
 	char *p = token;
@@ -128,10 +119,9 @@ int gettoken(void) {
  * nexttoken():  look ahead to the next token then push it back
  */
 
-int nexttoken(void) {
+static int nexttoken(void) {
 
 	int type;
-	int prevtoken;
 
 	type = gettoken();
 	prevtoken = true;
@@ -155,17 +145,17 @@ int main(void) {
 				strcat(out, token);
 			else if (type == '*') {
 				if ((type = nexttoken()) == PARENS || type == BRACKETS)
-					sprintf(temp, "(*%s)", out);
+					(void)snprintf(temp, MAXTOKEN, "(*%s)", out);
 				else
-					sprintf(temp, "*%s", out);
+					(void)snprintf(temp, MAXTOKEN, "*%s", out);
 				strcpy(out, temp);
 			} else if (type == NAME) {
-				sprintf(temp, "%s %s", token, out);
+				(void)snprintf(temp, MAXTOKEN, "%s %s", token, out);
 				strcpy(out, temp);
 			} else
 				printf("invalid input at %s\n", token);
 		printf("%s\n", out);
 	}
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

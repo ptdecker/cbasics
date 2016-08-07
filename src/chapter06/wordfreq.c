@@ -229,5 +229,5 @@ int main(void)  {
 	listsort();
 	listprint();
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

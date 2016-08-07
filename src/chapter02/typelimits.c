@@ -6,7 +6,6 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
 
@@ -24,10 +23,10 @@ int main(void) {
     printf("\tlong              : %li < x < %li\n", LONG_MIN, LONG_MAX);
     printf("\tunsigned long     : %lu < x < %lu\n", (unsigned long)0, (unsigned long)ULONG_MAX);
 
-/*@ignore@*/ // because splint doesn't like 'long long', LLONG_MIN, LLONG_MAX, _ULLONG_MAX
+    /*@ignore@*/ // because splint doesn't like 'long long', LLONG_MIN, LLONG_MAX, _ULLONG_MAX
     printf("\tlong long         : %lli < x < %lli\n", (long long)LLONG_MIN, (long long)LLONG_MAX);
     printf("\tunsigned long long: %llu < x < %llu\n", (unsigned long long)0, (unsigned long long)ULLONG_MAX);
-/*@end@*/
+    /*@end@*/
 
     // Floating point from headers
 
@@ -51,5 +50,5 @@ int main(void) {
     printf("\tunsigned long : %llu < x < %llu\n", (unsigned long long)0, (unsigned long long) ~0);
 /*@end@*/
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

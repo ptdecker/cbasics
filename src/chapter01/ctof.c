@@ -4,7 +4,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
 
@@ -22,5 +21,5 @@ int main(void) {
         celsius = celsius + step;
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
  }

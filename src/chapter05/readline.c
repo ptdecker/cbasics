@@ -6,6 +6,8 @@
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
 
+/*@ -statictrans  -mustfreefresh */
+
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
@@ -26,8 +28,7 @@
 
 static char allocbuf[ALLOCSIZE]; // Storage for alloc
 static char *allocp = allocbuf;  // Next free position in alloc
-
-char *lineptr[MAXLINES];         // Pointers to text lines
+static char *lineptr[MAXLINES];  // Pointers to text lines
 
 /*
  * alloc(): rudimentary storage allocator
@@ -63,7 +64,7 @@ static size_t getline(char *s, size_t lim) {
  * swap(): interchanges v[i] and v[j]
  */
 
-void swap(char *v[], int i, int j) {
+static void swap(char *v[], int i, int j) {
 	char *temp;
 	temp = v[i];
 	v[i] = v[j];
@@ -74,7 +75,7 @@ void swap(char *v[], int i, int j) {
  * qsort(): sort v[left] to v[right] into increasing order
  */
 
-void myqsort(char *v[], int left, int right) {
+static void myqsort(char *v[], int left, int right) {
 	int i, last;
 
 	// Do nothing if the array contains fewer than two elements
@@ -98,7 +99,7 @@ void myqsort(char *v[], int left, int right) {
  * writelines(): outputs each string in the passed array of strings
  */
 
-void writelines(char *lineptr[], int nlines) {
+static void writelines(char *lineptr[], int nlines) {
 	int i;
 	for (i = 0; i < nlines; i++)
 		printf("%s\n", lineptr[i]);
@@ -108,20 +109,22 @@ void writelines(char *lineptr[], int nlines) {
  * readlines1(): read input lines
  */
 
-int readlines(char *lineptr[], int maxlines) {
-	int   len;
-	int   nlines = 0;
-	char *p;
-	char  line[MAXLEN];
+static int readlines(char *lineptr[], int maxlines) {
+
+	size_t len;
+	int    nlines = 0;
+	char  *p;
+	char   line[MAXLEN];
 
 	while ((len = getline(line, MAXLEN)) > 0) {
 
-		if (nlines >= maxlines || (p = alloc(len)) == NULL)
+		if ((p = alloc((int)len)) == NULL || nlines >= maxlines)
 			return -1;
 
 		line[len - 1] = '\0';  // Delete newline
 		strcpy(p, line);
 		lineptr[nlines++] = p;
+
 	}
 
 	return nlines;
@@ -137,10 +140,10 @@ int main(void) {
 	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
 		myqsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
-		printf("Run time: %lu clock ticks\n", (clock() - start));
+		printf("Run time: %u clock ticks\n", (unsigned)(clock() - start));
 		exit(EXIT_SUCCESS);
 	}
 
 	printf("Error: Input is too big to sort");
-	exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
 }

@@ -6,6 +6,8 @@
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
 
+/*@ -statictrans  -mustfreefresh */
+
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
@@ -25,7 +27,7 @@
 
 static char allocbuf[ALLOCSIZE]; // Storage for alloc
 static char *allocp = allocbuf;  // Next free position in alloc
-char *lineptr[MAXLINES];  // Pointers to text lines
+static char *lineptr[MAXLINES];  // Pointers to text lines
 
 /*
  * alloc(): rudimentary storage allocator
@@ -64,20 +66,21 @@ static size_t getline(char *s, size_t lim) {
 
 static int readlines(char *lineptr[], int maxlines) {
 
-	int len;
-	int nlines;
-	char *p;
-	char line[MAXLEN];
+	size_t len;
+	int    nlines;
+	char  *p;
+	char   line[MAXLEN];
 
 	nlines = 0;
 	while ((len = getline(line, MAXLEN)) > 0) {
 
-		if (nlines >= maxlines || (p = alloc(len)) == NULL)
+		if ((p = alloc((int)len)) == NULL || nlines >= maxlines)
 			return -1;
 
 		line[len - 1] = '\0';
 		strcpy(p, line);
 		lineptr[nlines++] = p;
+
 	}
 
 	return nlines;
@@ -249,7 +252,6 @@ int main(int argc, char *argv[]) {
 				default:
 					printf("sort: illegal option %c\n", c);
 					exit(EXIT_FAILURE);
-					break;
 			}
 
     if (argc == 0) {
@@ -306,5 +308,5 @@ int main(int argc, char *argv[]) {
 
 	writelines(lineptr, nlines, descend);
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

@@ -157,5 +157,5 @@ int main(void) {
 	if (bufferptr > 0)
 		printf("Input buffer contains: '%s'\n", buffer);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

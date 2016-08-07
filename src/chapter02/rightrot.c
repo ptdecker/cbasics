@@ -10,7 +10,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 /*
  * wordlength(): Helper fuction to determine the word length of the host
@@ -101,5 +100,5 @@ int main(void) {
     }
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

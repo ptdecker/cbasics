@@ -8,7 +8,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define LINEWIDTH  20
 #define TABSIZE    4
@@ -98,5 +97,5 @@ int main(void) {
         }
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

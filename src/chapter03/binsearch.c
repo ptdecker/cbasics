@@ -7,7 +7,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #define KEY_NOT_FOUND EOF
 
@@ -51,5 +50,5 @@ int main(void) {
 	key = 110;
 	printf("Key '%d' was found in position '%d'\n", key, binary_search(key, sorted, len));
 
-	exit(EXIT_SUCCESS);
+	return 0;
 } 

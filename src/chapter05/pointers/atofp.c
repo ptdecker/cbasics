@@ -6,7 +6,6 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 /*
  * atofp(): Converts a string to a double with scientific notation
@@ -82,5 +81,5 @@ int main(void) {
 	printf("String \"-.1282e4\" converted to a double is: %.16g\n", myatof("-.1282e4"));
 	printf("String \"+67.345e+2\" converted to a double is: %.16g\n", myatof("+67.345e+2"));
 
-	exit(EXIT_SUCCESS);
+    return 0;
 }

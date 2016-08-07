@@ -19,6 +19,8 @@ Style and Approach Notes
 
 * Following Plauger's advice, standard library #includes are ordered alphabetically.
 
+* 'exit()' is used to terminate 'main()' only when file operations are used.  Otherwise, 'return' is utilized.  This avoids the extra overhead performed by exit (attempting to run atexit funcitons, and closing files) and it avoids the inclusion of <stdlib.h> when otherwise not needed. Note that the situation is a bit differnt in C++, c.f. http://stackoverflow.com/questions/461449/return-statement-vs-exit-in-main. 'exit()' is also used to terminate on hard failures outside of 'main()'. See also (K&R) pp. 26, 164.
+
 ## Source
 
 (K&R) "The C Programming Language, 2nd Edition", Brian W. Kernighan, Dennis M. Ritchie.

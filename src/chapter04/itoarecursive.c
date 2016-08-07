@@ -50,6 +50,7 @@ static void itoa(int n, char s[]) {
 }
 
 int main(void) {
+
 	int n;
 	char s[MAXSTRING] = "";
 
@@ -65,5 +66,5 @@ int main(void) {
 	itoa(n, s);
 	printf("Number %d converted to a string is: \"%s\"\n", n, s);
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

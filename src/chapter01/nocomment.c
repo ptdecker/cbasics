@@ -4,7 +4,6 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 // Comment states
 
@@ -76,5 +75,5 @@ int main(void) {
         current = next;
     }
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

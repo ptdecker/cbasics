@@ -179,5 +179,5 @@ int main(void) {
 	printf("Looking up 'name': %s\n", (np == NULL) ? "Not found" : np->defn);
 
 
-	exit(EXIT_SUCCESS);
+	return 0;
 }

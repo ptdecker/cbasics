@@ -5,7 +5,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void) {
 
@@ -28,5 +27,5 @@ int main(void) {
 
     (void)putchar('\n');
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }
