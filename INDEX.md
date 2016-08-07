@@ -197,6 +197,10 @@ void error(char *s);
 void error(int c, char *s);
 	[6] define.c
 
+void error(char *fmt, ...)
+    [7] mincat.c
+    [7] mincat2.c
+
 void errmsg(char *msg);
 	[5] dcl.c
 	[5] dcl2.c
@@ -217,6 +221,15 @@ size_t expandtab(size_t pos);
 void filecomp(FILE *fp1, FILE *fp2)
 	[7] mindiff.c
 
+void filecopy(int ifd, int ofd)
+	[8] mincat.c
+
+void filecopy(FILE *ifp, FILE *ofp)
+	[8] mincat2.c
+
+void fileprint(FILE *fp, char *fname)
+	[7] fprint.c
+
 size_t findblank(size_t pos);
 	[1] fold.c
 
@@ -231,6 +244,9 @@ int foldcmp(const char *s, const char *t);
 int folddircmp(const char *s, const char *t) 
 	[5] sort3.c
 	[5] sort4.c
+
+void footer(void)
+	[7] fprint.c
 
 int ftoc(int ftemp);
 	[1] ftoc-func.c
@@ -320,6 +336,9 @@ char getword(char *word, int lim);
 unsigned hash(char *s);
 	[6] define.c
 	[6] tablookup.c
+
+int header(char *fname, int pageno)
+	[7] fprint.c
 
 unsigned int htoi(char s[]);
 unsigned int htoi(char *s);

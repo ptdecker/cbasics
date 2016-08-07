@@ -140,6 +140,13 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 7-07 - minfind.c             Searches files lines either matching, or not matching, a pattern optional line numbers
 * 7-08 - fprint.c              Prints a set of files with header, footer, page breaks, and page count
 
+### Chapter 8 - "The UNIX System Interface"
+
+* 8-01                         A minimal impact of cat which concatinates files using low-level OS calls
+  * mincat.c                     First version of mincat that uses low-level OS calls (c.f. sections 8.2, 8.3)
+  * mincat2.c                    Alternate version for exercise 8-01 using stdio calls--compare timings with 'mincat.c'
+
+
 ##Extras
 
 In many cases these are programs outlined in K&R which are useful or interesting but were not carried forward into an exercise. The other cases are test programs or experiments.
