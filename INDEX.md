@@ -221,6 +221,9 @@ void filecomp(FILE *fp1, FILE *fp2)
 size_t findblank(size_t pos);
 	[1] fold.c
 
+void findpat(FILE *fp, char *fname, char *pattern, bool except, bool number);
+	[7] minfind.c
+
 int foldcmp(const char *s, const char *t);
 	[5] sort2.c
 	[5] sort3.c
