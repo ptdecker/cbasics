@@ -5,6 +5,10 @@
 // NOTE: By using low-level OS system calls, 'mincat' is more than twice as fast as 'mincat2'
 //       (~5,000 clock ticks for 'mincat' vs ~12,500 ticks for 'mincat2')
 
+// NOTE: For information on OS X (OS X 10.11.6) versions of <fcntl.h> and <unistd.h> see:
+//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/unistd.h
+//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/fcntl.h
+
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdio.h>

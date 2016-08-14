@@ -145,7 +145,9 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 8-01                         A minimal impact of cat which concatinates files using low-level OS calls
   * mincat.c                     First version of mincat that uses low-level OS calls (c.f. sections 8.2, 8.3)
   * mincat2.c                    Alternate version for exercise 8-01 using stdio calls--compare timings with 'mincat.c'
-
+* 8-06 - calloc.c              A minimal implimentation of malloc() and free() plus a version of calloc()
+* 8-07 - malloc2.c             Adds some error checking to malloc() routines
+* 8-08 - bfree.c               Adds bfree() to malloc()
 
 ##Extras
 
