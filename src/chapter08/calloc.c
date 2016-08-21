@@ -1,3 +1,5 @@
+/*@ -nullassign -mustdefine -usedef -branchstate -onlytrans -compmempass -unrecog -statictrans -globstate -type -immediatetrans -noret -mustfreefresh -exportlocal -nullderef */
+
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"	
 #define DEBUG
 
@@ -93,7 +95,7 @@ static Header *morecore(unsigned long nu) {
 void *malloc(unsigned long nbytes) {
 
 	Header *p;
-	Header *prevp;
+	Header *prevp = NULL;
 	unsigned long nunits;
 
 #ifdef DEBUG

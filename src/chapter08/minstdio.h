@@ -1,46 +1,60 @@
-/*@ -mutrep  -incondefs -type -macrounrecog */
+// NOTE: For information on OS X (OS X 10.11.6) versions of <fcntl.h> and <unistd.h> see:
+//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/unistd.h
+//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/fcntl.h
 
-#define BUFSIZ    1024   // size of buffer
-#define EOF       (-1)   // end-of-file sentinel value
-#define NULL         0   // NULL sentinel value
-#define OPEN_MAX    20   // maximum number of open files
-#define EXIT_SUCCESS 0   // Include EXIT_SUCCESS so <stdlib.h> isn't needed
-#define EXIT_FAILURE 1   // Include EXIT_FAILURE so <stdlib.h> isn't needed
+// NOTE: For inforation on OSMalloc see:
+//           - https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/vm/vm.html#//apple_ref/doc/uid/TP30000905-CH210-CHDHIIJF
+
+/*@ -incondefs -type -macrostmt -macrounrecog -mutrep -redef -retvalother -retvalint -exportlocal -globuse */
+
+
+//# define NULL 0      // Not required--defiend in unistd.h
+#define EOF      (-1)  // End-of-file indicator
+#define BUFSIZ   1024  // Buffer size
+#define OPEN_MAX 20    // Maximum number of files open at once
 
 typedef struct _iobuf {
-	int   cnt;  // characters remaining in buffer
-	char *ptr;  // next character position
-	char *base; // location of buffer
-	int   flag; // mode of file access
-	int   fd;   // file descriptor
+	int   cnt;            // Characters remaining in buffer
+	char *ptr;            // Position of next character in buffer
+	char *base;           // Buffer location
+	int   flag;           // Mode of file access
+	int   fd;             // File descriptor
 } FILE;
 
-extern FILE _iob[OPEN_MAX];
+FILE _iob[OPEN_MAX];
 
-#define stdin  (&_iob[0])
-#define stdout (&_iob[1])
-#define stderr (&_iob[2])
+#define stdin  (&_iob[STDIN_FILENO])
+#define stdout (&_iob[STDOUT_FILENO])
+#define stderr (&_iob[STDERR_FILENO])
 
 enum _flags {
-	_READ  =  01, // file open for reading
-	_WRITE =  02, // file open for writing
-	_UNBUF =  04, // file is unbuffered
-	_EOF   = 010, // EOF has occurred on this file
-	_ERR   = 020  // An error has occured on this file
+	_READ  = 001,  // File open for reading flag bit
+	_WRITE = 002,  // File open for writing flag bit
+	_UNBUF = 004,  // Unbuffered file flag bit
+	_EOF   = 010,  // End-of-file condition indicator flag bit
+	_ERR   = 020   // Error condition indicator flag bit
 };
 
-int _fillbuff(FILE *);
-int _flushbuff(int, FILE *);
+int _fillbuf(FILE *);
+int _flushbuf(int, FILE *);
 
-#define feof(p)   (((p)->flag & _EOF) != 0)
-#define ferror(p) (((p)->flag & _ERR) != 0)
-#define fileno(p) ((p)->fd)
+/*@notfunction@*/
+#define feof(p)    (((p)->flag & _EOF) != 0)
 
-#define getc(p)   (--(p)->cnt >= 0 ? (unsigned char) *(p)->ptr++ : _fillbuff(p))
-#define putc(x,p) (--(p)->cnt >= 0 ? *(p)->ptr++ = (x)           : _flushbuff((x),p))
+/*@notfunction@*/
+#define ferror(p)  (((p)->flag & _ERR) != 0)
 
+/*@notfunction@*/
+#define fileno(p)  ((p)->fd)
+
+/*@notfunction@*/
+#define getc(p)    ((--(p)->cnt >= 0 ? (unsigned char) *(p)->ptr++ : _fillbuf(p)))
+
+/*@notfunction@*/
+#define putc(x,p)  ((--(p)->cnt >= 0 ? *(p)->ptr++ = (x) : _flushbuf((x),p)))
+
+/*@notfunction@*/
 #define getchar()  getc(stdin)
-#define putchar(x) putc((x),stdout)
 
-FILE *fopen(char *name, char *mode);
-void fprint(FILE *, char *);
+/*@notfunction@*/
+#define putchar(x) putc((x), stdout)
