@@ -203,7 +203,7 @@ The following test data files are provided to support manually testing the exerc
 
 ##Style
 
-See *STYLE.md* for notes on overall style and approach to the code
+See *[STYLE.md](cbasics/STYLE.md)* for notes on overall style and approach to the code
 
 ##License
 
