@@ -6,8 +6,8 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate +posixlib
 DEPS =
-_OBJ = bfree.o calloc.o calloc2.o mincat.o mincat2.o minstdio3.o
-_BIN = bfree calloc calloc2 mincat mincat2 minstdio3
+_OBJ = bfree.o calloc.o calloc2.o mincat.o mincat2.o minstdio.o minstdiotest.o stdiobits minstdio0.o
+_BIN = bfree calloc calloc2 mincat mincat2 minstdiotest stdiobits
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -48,7 +48,11 @@ mincat2: $(ODIR)/mincat2.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 
-minstdio3: $(ODIR)/minstdio3.o
+minstdiotest: $(ODIR)/minstdiotest.o minstdio.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+stdiobits: $(ODIR)/stdiobits.o minstdio0.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

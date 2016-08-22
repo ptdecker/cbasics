@@ -5,7 +5,8 @@
 // NOTE: For inforation on OSMalloc see:
 //           - https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/vm/vm.html#//apple_ref/doc/uid/TP30000905-CH210-CHDHIIJF
 
-/*@ -incondefs -type -macrostmt -macrounrecog -mutrep -redef -retvalother -retvalint -exportlocal -globuse */
+// The approach taken with the 'minstdio0' based upon bit fields is slower (142 clock ticks vs 129) and the compiled
+// binary is larger (9,976 bytes vs 9,968) than the approach taken by 'minstdio' which uses bit manipulation
 
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"	
 
@@ -13,14 +14,14 @@
 #include <stdlib.h> // form malloc, free
 #include <unistd.h> // equivalent to (K&R) #include "syscalls.h"
 
-#include "minstdio.h"
+#include "minstdio0.h"
 
 #define PERMS 0666  // Read-write permissions for owner, group, others
 
 FILE _iob[OPEN_MAX] = {
-	{ 0, (char *) NULL, (char *) NULL, _READ,           STDIN_FILENO},
-	{ 0, (char *) NULL, (char *) NULL, _WRITE,          STDOUT_FILENO},
-	{ 0, (char *) NULL, (char *) NULL, _WRITE | _UNBUF, STDERR_FILENO }
+	{ 0, (char *) NULL, (char *) NULL, { 1, 0, 0, 1, 0, 0}, STDIN_FILENO  },
+	{ 0, (char *) NULL, (char *) NULL, { 0, 1, 0, 1, 0, 0}, STDOUT_FILENO },
+	{ 0, (char *) NULL, (char *) NULL, { 0, 1, 1, 0, 0, 0}, STDERR_FILENO }
 };
 
 /*
@@ -40,7 +41,7 @@ FILE *fopen(char *name, char *mode) {
 	// Find a free slot in the file pointer array and, if we do not
 	// find one, then bail out
 	for (fp = _iob; fp < _iob + OPEN_MAX; fp++)
-		if ((fp->flag & (_READ | _WRITE)) == 0)
+		if (fp->flags.is_read == 0 && fp->flags.is_write == 0)
 			break;
 	if (fp >= _iob + OPEN_MAX)
 		return NULL;
@@ -60,11 +61,22 @@ FILE *fopen(char *name, char *mode) {
 		return NULL;
 
 	// Populate the file pointer
+	fp->fd   = fd;
 	fp->cnt  = 0;        // Initially, no characters are buffered and...
 	fp->base = NULL;     // a buffer to hold such has not been initialized
 	fp->ptr  = NULL;     // so we certainly cannot be pointing at any contents
-	fp->flag = (*mode == 'r') ? _READ : _WRITE;
-	fp->fd   = fd;
+
+	fp->flags.is_unbuf = 0;
+	fp->flags.is_buf   = 1;
+	fp->flags.is_eof   = 0;
+	fp->flags.is_err   = 0;
+	if (*mode == 'r') {
+		fp->flags.is_read  = 1;
+		fp->flags.is_write = 0;
+	} else {
+		fp->flags.is_read  = 0;
+		fp->flags.is_write = 1;
+	}
 
 	return fp;
 }
@@ -79,12 +91,12 @@ int _fillbuf(FILE *fp) {
 
 	// Make sure we are in read mode and neither EOF nor ERR indicators have been set.
 	// If not the case, then politely return EOF condition
-	if ((fp->flag & (_READ | _EOF | _ERR)) != _READ)
+	if (fp->flags.is_read == 0 | fp->flags.is_eof == 1 | fp->flags.is_err == 1)
 		return EOF;
 
 	// Calculate buffer size and attempt to allocate it.  If unable to allocate,
 	// return EOF condition
-	bufsize = (fp->flag & _UNBUF) ? 1 : BUFSIZ;
+	bufsize = (fp->flags.is_unbuf == 1) ? 1 : BUFSIZ;
 	if (fp->base == NULL)
 		if ((fp->base = (char *)malloc(bufsize)) == NULL)
 			return EOF;
@@ -96,9 +108,9 @@ int _fillbuf(FILE *fp) {
 	// Handle if either an end of file or error condition occurred
 	if (--fp->cnt < 0) {
 		if (fp->cnt == -1)
-			fp->flag |= _EOF;
+			fp->flags.is_eof = 1;
 		else
-			fp->flag |= _ERR;
+			fp->flags.is_err = 1;
 		fp->cnt = 0;
 		return EOF;
 	}
@@ -119,11 +131,11 @@ int _flushbuf(int x, FILE *fp) {
 	// and that we are in write mode.  If not the case, politely return EOF condition
 	if (fp < _iob || fp >= _iob + OPEN_MAX)
 		return EOF;
-	if ((fp->flag & (_WRITE | _ERR)) != _WRITE)
+	if (fp->flags.is_read || fp->flags.is_err)
 		return EOF;
 
 	// Set buffer size
-	bufsize = (fp->flag & _UNBUF) ? 1 : BUFSIZ;
+	bufsize = fp->flags.is_unbuf ? 1 : BUFSIZ;
 
 	// Check to see if a buffer has been allocated and act accordingly
 	if (fp->base == NULL) {
@@ -131,7 +143,7 @@ int _flushbuf(int x, FILE *fp) {
 		// No buffer has been allocated yet, so attempt to allocate one. If we
 		// cannot, set ERR indicator and return EOF condition; otherwise
 		if ((fp->base = (char *)malloc(bufsize)) == NULL) {
-			fp->flag |= _ERR;
+			fp->flags.is_err = 1;
 			return EOF;
 		}
 
@@ -141,7 +153,7 @@ int _flushbuf(int x, FILE *fp) {
 		// deal with any consequences
 		nc = fp->ptr - fp->base;
 		if (write(fp->fd, fp->base, nc) != nc) {
-			fp->flag |= _ERR;
+			fp->flags.is_err = 1;
 			return EOF;
 		}
 		
@@ -167,11 +179,11 @@ int fflush(FILE *fp) {
 	if (fp < _iob || fp >= _iob + OPEN_MAX)
 		return EOF;
 
-	if (fp->flag & _WRITE)
+	if (fp->flags.is_write == 1)
 		rc = _flushbuf(0, fp);
 
 	fp->ptr = fp->base;
-	fp->cnt = (fp->flag & _UNBUF) ? 1 : BUFSIZ;
+	fp->cnt = fp->flags.is_unbuf == 1 ? 1 : BUFSIZ;
 
 	return rc;
 }
@@ -189,7 +201,8 @@ int fclose(FILE *fp) {
 		fp->ptr = NULL;
 		fp->cnt = 0;
 		fp->base = NULL;
-		fp->flag &= ~(_READ | _WRITE);
+		fp->flags.is_read  = 0;
+		fp->flags.is_write = 0;
 	}
 
 	return rc;
@@ -213,29 +226,3 @@ void putstring(char *str) {
 		putchar(*str++);
 }
 
-int main(void) {
-
-	FILE *fp;
-	char x;
-
-	putstring("Hello World!\n");
-	fflush(stdout);
-
-	fp = fopen("results.txt", "w");
-	puts("Hello World!", fp);
-	fclose(fp);
-
-	fp = fopen("results.txt", "a");
-	puts(" (Wow! Deja vu!)\n", fp);
-	fclose(fp);
-
-	fp = fopen("results.txt", "r");
-	while ((x = getc(fp)) != EOF)
-		if (x != '\0')
-			putchar(x);
-	fclose(fp);
-	fflush(stdout);
-
-	// Get out of Dodge City, Kansas
-	return 0;
-}

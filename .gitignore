@@ -2,3 +2,5 @@ obj/
 bin/
 cbasics.sublime-project
 cbasics.sublime-workspace
+
+*.o

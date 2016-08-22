@@ -145,6 +145,14 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 8-01                         A minimal impact of cat which concatinates files using low-level OS calls
   * mincat.c                     First version of mincat that uses low-level OS calls (c.f. sections 8.2, 8.3)
   * mincat2.c                    Alternate version for exercise 8-01 using stdio calls--compare timings with 'mincat.c'
+* 8-02                         A version of minimal stdio functions implemented with fields instead of bits. Compare timings and size with minstdiotest.c.
+  * stdiobits.c                  Test program that excercises 'minstdio0'. Compare timings and size with 'minstdiotest.c'.   Execution time in ticks is returned as the exit status (view with 'echo $?' after running).
+  * minstdio0.h                  Header for a minimal implementation of some 'stdio' library functions using bit fields
+  * minstdio0.c                  Minimal implementation of some 'stdio' library functions using bit fields
+* 8-03 - minstdiotest.c        Implements _flushbuf(), fflush(), and fclose().
+  * minstdiotest.c               Test program that excercises 'minstdio'. Execution time in ticks is returned as the exit status (view with 'echo $?' after running).
+  * minstdio.h                   Header for a minimal implementation of some 'stdio' library functions bit functions
+  * minstdio.c                   Minimal implementation of some 'stdio' library functions using bit functions
 * 8-06 - calloc.c              A minimal implimentation of malloc() and free() plus a version of calloc()
 * 8-07 - malloc2.c             Adds some error checking to malloc() routines
 * 8-08 - bfree.c               Adds bfree() to malloc()

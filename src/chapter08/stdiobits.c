@@ -5,11 +5,14 @@
 // NOTE: For inforation on OSMalloc see:
 //           - https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/vm/vm.html#//apple_ref/doc/uid/TP30000905-CH210-CHDHIIJF
 
-/*@ -retvalint -type */
+// The approach taken with the 'minstdio0' based upon bit fields is slower (142 clock ticks vs 129) and the compiled
+// binary is larger (9,976 bytes vs 9,968) than the approach taken by 'minstdio' which uses bit manipulation
+
+/*@ -retvalint -type -retvalother */
 
 #include <time.h>   // used to time process
 
-#include "minstdio.h"
+#include "minstdio0.h"
 
 int main(void) {
 

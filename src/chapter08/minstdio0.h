@@ -16,11 +16,21 @@
 #define BUFSIZ   1024  // Buffer size
 #define OPEN_MAX 20    // Maximum number of files open at once
 
+
+
+
 typedef struct _iobuf {
 	int   cnt;            // Characters remaining in buffer
 	char *ptr;            // Position of next character in buffer
 	char *base;           // Buffer location
-	int   flag;           // Mode of file access
+	struct _flags {
+		unsigned int is_read  : 1;
+		unsigned int is_write : 1;
+		unsigned int is_unbuf : 1;
+		unsigned int is_buf   : 1;
+		unsigned int is_eof   : 1;
+		unsigned int is_err   : 1;
+	} flags;
 	int   fd;             // File descriptor
 } FILE;
 
@@ -30,22 +40,14 @@ FILE _iob[OPEN_MAX];
 #define stdout (&_iob[STDOUT_FILENO])
 #define stderr (&_iob[STDERR_FILENO])
 
-enum _flags {
-	_READ  = 001,  // File open for reading flag bit
-	_WRITE = 002,  // File open for writing flag bit
-	_UNBUF = 004,  // Unbuffered file flag bit
-	_EOF   = 010,  // End-of-file condition indicator flag bit
-	_ERR   = 020   // Error condition indicator flag bit
-};
-
 int _fillbuf(FILE *);
 int _flushbuf(int, FILE *);
 
 /*@notfunction@*/
-#define feof(p)    (((p)->flag & _EOF) != 0)
+#define feof(p)    ((p)->flag.is_eof)
 
 /*@notfunction@*/
-#define ferror(p)  (((p)->flag & _ERR) != 0)
+#define ferror(p)  ((p)->flag.is_err)
 
 /*@notfunction@*/
 #define fileno(p)  ((p)->fd)
