@@ -16,9 +16,6 @@
 #define BUFSIZ   1024  // Buffer size
 #define OPEN_MAX 20    // Maximum number of files open at once
 
-
-
-
 typedef struct _iobuf {
 	int   cnt;            // Characters remaining in buffer
 	char *ptr;            // Position of next character in buffer

@@ -1,10 +1,3 @@
-// NOTE: For information on OS X (OS X 10.11.6) versions of <fcntl.h> and <unistd.h> see:
-//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/unistd.h
-//           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/fcntl.h
-
-// NOTE: For inforation on OSMalloc see:
-//           - https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/vm/vm.html#//apple_ref/doc/uid/TP30000905-CH210-CHDHIIJF
-
 /*@ -retvalint -type */
 
 #include <time.h>   // used to time process

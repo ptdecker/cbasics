@@ -32,10 +32,13 @@ int any(char *s,  char *c);
 int anychar(char *s, char c);
 	[6] getvars.c
 
+unsigned long bfree(char *p, unsigned long n);
+	[8] bfree.c
+
 int binary_search(int x, int v[], size_t n);
 	[3] binsearch.c
 
-struct key *binsearch(char *word, struct key tab[], size_t n)
+struct key *binsearch(char *word, struct key tab[], size_t n);
 	[6] getvars.c
 	[-] getkeywords.c
 
@@ -49,6 +52,11 @@ bool caempty(void);
 	[4] rpncalc4-06/castack.c
 	[5] expr/castack.c
 	[-] rpncalc/castack.c
+
+void *calloc(unsigned long n, unsigned long size);
+	[8] bfree.c
+	[8] calloc.c
+	[8] calloc2.c
 
 static struct rect canonrect(const struct rect r);
 	[-] points.c
@@ -125,7 +133,7 @@ double dapeek(void);
 	[5] expr/dastack.c
 	[7] scancalc/dastack.c
 
-double dapop(void)
+double dapop(void);
 	[4] rpncalc4-03/dastack.c
 	[4] rpncalc4-04/dastack.c
 	[4] rpncalc4-05/dastack.c
@@ -197,7 +205,7 @@ void error(char *s);
 void error(int c, char *s);
 	[6] define.c
 
-void error(char *fmt, ...)
+void error(char *fmt, ...);
     [7] mincat.c
     [7] mincat2.c
 
@@ -218,17 +226,41 @@ void expand(char *source,  char *target);
 size_t expandtab(size_t pos);
 	[1] fold.c
 
-void filecomp(FILE *fp1, FILE *fp2)
+int fclose(FILE *fp);
+	[8] minstdio.c
+	[8] minstdio0.c
+
+#define feof(p)
+	[8] minstdio.h
+	[8] minstdio0.h
+
+#define ferror(p)
+	[8] minstdio.h
+	[8] minstdio0.h
+
+#define fileno(p)
+	[8] minstdio.h
+	[8] minstdio0.h
+
+int fflush(FILE *fp);
+	[8] minstdio.c
+	[8] minstdio0.c
+
+void filecomp(FILE *fp1, FILE *fp2);
 	[7] mindiff.c
 
-void filecopy(int ifd, int ofd)
+void filecopy(int ifd, int ofd);
 	[8] mincat.c
 
-void filecopy(FILE *ifp, FILE *ofp)
+void filecopy(FILE *ifp, FILE *ofp);
 	[8] mincat2.c
 
-void fileprint(FILE *fp, char *fname)
+void fileprint(FILE *fp, char *fname);
 	[7] fprint.c
+
+int _fillbuf(FILE *fp);
+	[8] minstdio.c
+	[8] minstdio0.c
 
 size_t findblank(size_t pos);
 	[1] fold.c
@@ -236,20 +268,37 @@ size_t findblank(size_t pos);
 void findpat(FILE *fp, char *fname, char *pattern, bool except, bool number);
 	[7] minfind.c
 
+int _flushbuf(int x, FILE *fp);
+	[8] minstdio.c
+	[8] minstdio0.c
+
 int foldcmp(const char *s, const char *t);
 	[5] sort2.c
 	[5] sort3.c
 	[5] sort4.c
 
-int folddircmp(const char *s, const char *t) 
+int folddircmp(const char *s, const char *t);
 	[5] sort3.c
 	[5] sort4.c
 
-void footer(void)
+FILE *fopen(char *name, char *mode);
+	[8] minstdio.c
+	[8] minstdio0.c
+
+void footer(void);
 	[7] fprint.c
+
+void free(void *ap);
+	[8] bfree.c
+	[8] calloc.c
+	[8] calloc2.c
 
 int ftoc(int ftemp);
 	[1] ftoc-func.c
+
+#define getc(p);
+	[8] minstdio.h
+	[8] minstdio0.h
 
 char getch(void);
 	[4] rpncalc4-03/lexer.c
@@ -273,6 +322,10 @@ char getch(void);
 	[-] rpncalc/lexer.c
 	[-] getkeywords.c
 	[-] wordxrefstem.c
+
+#define getchar()
+	[8] minstdio.h
+	[8] minstdio0.h
 
 void getdef(void);
 	[6] define.c
@@ -316,7 +369,7 @@ char getop(char s[]);
 	[5] expr/lexer.c
 	[-] rpncalc/lexer.c
 
-char getop(char s[], double *val)
+char getop(char s[], double *val);
 	[7] scancalc/lexer.c
 
 int gettoken(void);
@@ -337,7 +390,7 @@ unsigned hash(char *s);
 	[6] define.c
 	[6] tablookup.c
 
-int header(char *fname, int pageno)
+int header(char *fname, int pageno);
 	[7] fprint.c
 
 unsigned int htoi(char s[]);
@@ -387,13 +440,13 @@ struct linklist *lalloc(void);
 struct linkwords *lwalloc(void);
 	[-] wordxrefstem.c
 
-void listprint(void)
+void listprint(void);
 	[6] wordfreq.c
 
 void listsort(void);
 	[6] wordfreq.c
 
-void listsort(struct linkwords *head, int num_nodes)
+void listsort(struct linkwords *head, int num_nodes);
 	[-] wordxrefstem.c
 
 void liststore(struct tnode *p);
@@ -412,6 +465,11 @@ static void lowerstr(char *s);
 
 struct point makepoint(const int x, const int y);
 	[-] points.c
+
+void *malloc(unsigned long nbytes);
+	[8] bfree.c
+	[8] calloc.c
+	[9] calloc2.c
 
 void mathfun(char s[]);
 	[4] rpncacl4-05/rpncalc3.c
@@ -439,6 +497,11 @@ void month_day(int year, int yearday, int *pmonth, int *pday);
 void *month_name(int month);
 	[5] datetools.c
 
+Header *morecore(unsigned long nu);
+	[8] bfree.c
+	[8] calloc.c
+	[8] calloc2.c
+
 double myatof(char s[]);
 double myatof(char *s);
 	[4] atof.c
@@ -456,7 +519,7 @@ void myqsort(char *v[], int left, int right);
 	[5] readline.c
 	[5] readline2.c
 
-void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
+void myqsort(void *v[], int left, int right, int (*comp)(void *, void *));
 	[5] sort1.c
 	[5] sort2.c
 	[5] sort3.c
@@ -495,6 +558,22 @@ void printline(size_t pos);
 bool ptinrect(const struct point p, struct rect r);
 	[-] points.c
 
+#define putc(x,p)
+	[8] minstdio.h
+	[8] minstdio0.h
+
+#define putchar(x)
+	[8] minstdio.h
+	[8] minstdio0.h
+
+void puts(char *str, FILE *fp);
+	[8] minstdio.c
+	[8] minstdio0.c
+
+void putstring(char *str);
+	[8] minstdio.c
+	[8] minstdio0.c
+
 void readargs(int argc, char *argv[]);
 	[5] sort4.c
 
@@ -519,8 +598,8 @@ void reverse(char *s);
 	[5] pointers/reversep.c
 	[5] pointers/reverserecursivep.c
 
-void reversesub(char s[], size_t start, size_t end)
-void reversesub(char *s, size_t start, size_t end)
+void reversesub(char s[], size_t start, size_t end);
+void reversesub(char *s, size_t start, size_t end);
 	[4] reverserecursive.c
 	[5] pointers/reverserecursivep.c
 
@@ -564,7 +643,7 @@ size_t strlen(const char *s);
 void strncat(char *leftstr, char *rightstr, size_t rcount);
 	[5] strnfunc/strncat.c
 
-int strncmp(char *s1, char *s2, size_t count) 
+int strncmp(char *s1, char *s2, size_t count);
 	[5] strnfunc/strncmp.c
 
 void strncopy(char *dest, char *source, size_t count);
