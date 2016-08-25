@@ -157,6 +157,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * fseektest.c:  Test program that exercises fseek()
   * minstdio1.h:  Header for a minimal 'stdio' library that includes the addition of fseek()
   * minstdio1.c:  Minimal implementation of 'stdio' library inlcuding the addition of fseek()
+* 8-05 - fileinfo.c:  Returns information (name, last modified, size) of files in a directory recursing down the directory chain
 * 8-06 - calloc.c:  A minimal implimentation of malloc() and free() plus a version of calloc()
 * 8-07 - malloc2.c:  Adds some error checking to malloc() routines
 * 8-08 - bfree.c:  Adds bfree() to malloc()

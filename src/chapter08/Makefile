@@ -6,8 +6,9 @@ CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate +posixlib
 DEPS =
-_OBJ = bfree.o calloc.o calloc2.o mincat.o mincat2.o minstdio.o minstdiotest.o stdiobits.o minstdio0.o minstdio1.o fseektest.o
-_BIN = bfree calloc calloc2 mincat mincat2 minstdiotest stdiobits fseektest
+_OBJ = bfree.o calloc.o calloc2.o mincat.o mincat2.o minstdio.o minstdiotest.o stdiobits.o \
+       minstdio0.o minstdio1.o fseektest.o fileinfo.o
+_BIN = bfree calloc calloc2 mincat mincat2 minstdiotest stdiobits fseektest fileinfo
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -27,6 +28,7 @@ clean:
 		cd ..; \
 	done
 	rm -rv $(ODIR) $(_BIN)
+	rm minstdio.o minstdio0.o minstdio1.o
 
 bfree: $(ODIR)/bfree.o
 	$(CC) $(CFLAGS) $^ -o $@
@@ -57,6 +59,10 @@ stdiobits: $(ODIR)/stdiobits.o minstdio0.o
 	cp -v $@ $(BIN)/$@
 
 fseektest: $(ODIR)/fseektest.o minstdio1.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp -v $@ $(BIN)/$@
+
+fileinfo: $(ODIR)/fileinfo.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp -v $@ $(BIN)/$@
 

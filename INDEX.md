@@ -190,6 +190,9 @@ void dirdcl(void);
 	[5] dcl.c
 	[5] dcl2.c
 
+void dirwalk(char *dir, void (*fcn)(char *));
+	[8] fileinfo.c
+
 void eatchar(void);
 	[1] minilint.c
 	[1] nocomment.c
@@ -229,6 +232,7 @@ size_t expandtab(size_t pos);
 int fclose(FILE *fp);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 #define feof(p)
 	[8] minstdio.h
@@ -245,6 +249,7 @@ int fclose(FILE *fp);
 int fflush(FILE *fp);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 void filecomp(FILE *fp1, FILE *fp2);
 	[7] mindiff.c
@@ -261,6 +266,7 @@ void fileprint(FILE *fp, char *fname);
 int _fillbuf(FILE *fp);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 size_t findblank(size_t pos);
 	[1] fold.c
@@ -268,9 +274,13 @@ size_t findblank(size_t pos);
 void findpat(FILE *fp, char *fname, char *pattern, bool except, bool number);
 	[7] minfind.c
 
+void finfo(char *name);
+	[8] fileinfo.c
+
 int _flushbuf(int x, FILE *fp);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 int foldcmp(const char *s, const char *t);
 	[5] sort2.c
@@ -284,6 +294,7 @@ int folddircmp(const char *s, const char *t);
 FILE *fopen(char *name, char *mode);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 void footer(void);
 	[7] fprint.c
@@ -292,6 +303,9 @@ void free(void *ap);
 	[8] bfree.c
 	[8] calloc.c
 	[8] calloc2.c
+
+int fseek(FILE *fp, long offset, int origin);
+	[8] minstdio1.c
 
 int ftoc(int ftemp);
 	[1] ftoc-func.c
@@ -569,10 +583,12 @@ bool ptinrect(const struct point p, struct rect r);
 void puts(char *str, FILE *fp);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 void putstring(char *str);
 	[8] minstdio.c
 	[8] minstdio0.c
+	[8] minstdio1.c
 
 void readargs(int argc, char *argv[]);
 	[5] sort4.c
