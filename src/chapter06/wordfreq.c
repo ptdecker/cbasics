@@ -5,6 +5,8 @@
 *        from here:  http://www.geeksforgeeks.org/quicksort-on-singly-linked-list/
 */
 
+/*@ -compdef -mustfreeonly -temptrans -nullret -nullpass -mustfreefresh */
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>

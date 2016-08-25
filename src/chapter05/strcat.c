@@ -2,6 +2,8 @@
  * strcat.c
  */
 
+/*@ -shadow */
+ 
 #include <stdbool.h>
 #include <stdio.h>
 

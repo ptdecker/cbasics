@@ -2,6 +2,8 @@
 * wordxref(): cross-reference all words in a document listing the line number upon which each occurs
 */
 
+/*@ -compdef -mustfreeonly -nullstate -temptrans -nullret -nullpass -mustfreefresh */
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>

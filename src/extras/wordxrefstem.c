@@ -10,7 +10,7 @@
 //TODO: Fix splint overrides
 //TODO: Refactor stemmer including dropping globals
 
-/*@ -nullderef -branchstate -usedef -exportlocal */
+/*@ -nullderef -branchstate -usedef -exportlocal -nullstate -temptrans -nullret -nullpass -compdef -mustfreeonly */
 
 #include <ctype.h>
 #include <stdbool.h>

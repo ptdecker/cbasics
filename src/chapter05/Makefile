@@ -4,7 +4,7 @@ SUBDIRS = expr pointers strnfunc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
 _OBJ = datetools.o datetoolsp.o dcl.o dcl2.o detab2.o detab3.o entab2.o entab3.o getfloat.o getint.o \
        readline.o readline2.o sort1.o sort2.o sort3.o sort4.o strcat.o tail2.o undcl.o
@@ -28,85 +28,85 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 datetools: $(ODIR)/datetools.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 datetoolsp: $(ODIR)/datetoolsp.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 dcl: $(ODIR)/dcl.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 dcl2: $(ODIR)/dcl2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 detab2: $(ODIR)/detab2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 detab3: $(ODIR)/detab3.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 entab2: $(ODIR)/entab2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 entab3: $(ODIR)/entab3.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 getfloat: $(ODIR)/getfloat.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 getint: $(ODIR)/getint.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 readline: $(ODIR)/readline.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 readline2: $(ODIR)/readline2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 sort1: $(ODIR)/sort1.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 sort2: $(ODIR)/sort2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 sort3: $(ODIR)/sort3.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 sort4: $(ODIR)/sort4.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 strcat: $(ODIR)/strcat.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 tail2: $(ODIR)/tail2.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 undcl: $(ODIR)/undcl.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
-	mkdir -pv $(ODIR)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

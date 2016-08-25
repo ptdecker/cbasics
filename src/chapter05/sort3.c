@@ -6,7 +6,7 @@
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
 
-/*@ -statictrans  -mustfreefresh */
+/*@ -statictrans  -mustfreefresh  -nullret -compdef */
 
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L

@@ -4,7 +4,7 @@ SUBDIRS = rpncalc4-03 rpncalc4-04 rpncalc4-05 rpncalc4-06 rpncalc4-10 rpncalc4-1
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
 _OBJ = atof.o itoarecursive.o reverserecursive.o singlegetch.o strrindex.o swapmacro.o \
        ungets.o ungetseof.o

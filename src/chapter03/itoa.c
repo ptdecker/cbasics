@@ -8,26 +8,9 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAXSTRING 256
-
-/*
- * strlen(): returns the lenght of a string
- *
- * NOTE: Yes, I know, we could have used strlen() from the standard
- *       <string.h> C library... but, heck why import the whole library
- *       for one function? (Yes, true, if the compiler is good it should
- *       optimize all the stuff we shouldn't need)
- *
- * Source: "The Standard C Library", P.J. Plauger, p.403
- */
-
-static size_t strlen(const char *s) {
-	const char *sc;
-	for (sc = s; *sc != '\0'; ++sc)
-		; // Empty
-	return (size_t)(sc - s);
-}
 
 /*
  * reverse(): reverse string 's' in place

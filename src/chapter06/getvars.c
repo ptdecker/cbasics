@@ -2,6 +2,7 @@
 * getvars(): gets the variables from a C program
 */
 
+/*@ -compdef -mustfreeonly -temptrans -nullret -nullpass -mustfreefresh */
 
 #include <ctype.h>
 #include <stdbool.h>

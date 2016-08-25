@@ -7,6 +7,8 @@
 
 #define MAXSTR 1000
 
+/*@ -shadow */
+
 /*
  * strncmp(): Compares the fist 'count' characters of 'source' string to 'dest' string.
  *

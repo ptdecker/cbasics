@@ -1,4 +1,4 @@
-/*@ -retvalint -type */
+/*@ -retvalint -type -nullpass */
 
 #include <time.h>   // used to time process
 

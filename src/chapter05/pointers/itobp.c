@@ -7,6 +7,8 @@
  * by P.J. Plauger, published by Prentice-Hall, and are used with permission."
  */
 
+/*@ -shadow */
+
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>

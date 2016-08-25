@@ -4,7 +4,7 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = +quiet +skip-sys-headers +charint
 DEPS =
 _OBJ = strncat.o strncopy.o strncmp.o
 _BIN = strncat strncopy strncmp
@@ -26,21 +26,21 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 strncat: $(ODIR)/strncat.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 strncopy: $(ODIR)/strncopy.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 strncmp: $(ODIR)/strncmp.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
-	mkdir -pv $(ODIR)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

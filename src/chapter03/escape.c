@@ -4,6 +4,9 @@
  * Converts special characters in a string to and from escape sequences
  */
 
+/*@ignore@*/  // Disable splint for this exercise
+
+
 #include <stdio.h>
 
 static void escape(char source[], char target[]) {
@@ -130,3 +133,5 @@ int main(void) {
 
 	return 0;
 }
+
+/*@end@*/

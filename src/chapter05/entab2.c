@@ -2,6 +2,8 @@
  * Replaces tabs with spaces up to set tab stops
  */
 
+/*@ -compdef */
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -2,7 +2,7 @@
 * tablookup(): Hash table look-up routines
 */
 
-/*@ -unqualifiedtrans -nullderef -mustfreefresh -onlytrans -kepttrans */
+/*@ -unqualifiedtrans -nullderef -mustfreefresh -onlytrans -kepttrans -nullret */
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -3,7 +3,7 @@ ODIR = obj
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
 _OBJ = scancalc.o lexer.o dastack.o
 _BIN = scancalc
@@ -25,12 +25,12 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 scancalc: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 	$(LINT) $(LINTFLAGS) $@.c
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
 	mkdir -pv $(ODIR)

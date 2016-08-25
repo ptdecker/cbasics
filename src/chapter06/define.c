@@ -3,7 +3,7 @@
 *         simple substitution defines
 */
 
-/*@ -unqualifiedtrans -nullderef -mustfreefresh -onlytrans -kepttrans */
+/*@ -unqualifiedtrans -nullderef -mustfreefresh -onlytrans -kepttrans -nullret */
 
 #include <ctype.h>
 #include <stdio.h>

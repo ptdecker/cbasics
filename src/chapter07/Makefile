@@ -4,7 +4,7 @@ SUBDIRS = scancalc
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass -nullstate
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
 _OBJ = chngcase.o fprint.o mindiff.o minfind.o minprintf.o minscanf.o print.o
 _BIN = chngcase fprint mindiff minfind minprintf minscanf print
@@ -26,40 +26,40 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 define: $(ODIR)/define.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 chngcase: $(ODIR)/chngcase.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/upper
-	cp -v $@ $(BIN)/lower
+	cp $@ $(BIN)/upper
+	cp $@ $(BIN)/lower
 
 fprint: $(ODIR)/fprint.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 mindiff: $(ODIR)/mindiff.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 minfind: $(ODIR)/minfind.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 minprintf: $(ODIR)/minprintf.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 minscanf: $(ODIR)/minscanf.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 print: $(ODIR)/print.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
 	mkdir -pv $(ODIR)

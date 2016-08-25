@@ -2,6 +2,8 @@
  * getkeywords: counts the number of key words utilized within a C program
 */
 
+/*@ -temptrans -nullret */
+
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>

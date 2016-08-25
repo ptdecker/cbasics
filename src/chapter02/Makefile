@@ -4,7 +4,7 @@ SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc -mustfreeonly -temptrans -nullret -nullpass
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc 
 DEPS =
 _OBJ = any.o equivloop.o fastbitcount.o htoi.o invert.o tolower.o rightrot.o setbits.o squeeze.o typelimits.o
 _BIN = any equivloop fastbitcount htoi invert tolower rightrot setbits squeeze typelimits
@@ -26,49 +26,49 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 any: $(ODIR)/any.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 equivloop: $(ODIR)/equivloop.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 fastbitcount: $(ODIR)/fastbitcount.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 htoi: $(ODIR)/htoi.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 invert: $(ODIR)/invert.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 tolower: $(ODIR)/tolower.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 rightrot: $(ODIR)/rightrot.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 setbits: $(ODIR)/setbits.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 squeeze: $(ODIR)/squeeze.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 typelimits: $(ODIR)/typelimits.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
-	mkdir -pv $(ODIR)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

@@ -1,7 +1,7 @@
 // The approach taken with the 'minstdio0' based upon bit fields is slower (142 clock ticks vs 129) and the compiled
 // binary is larger (9,976 bytes vs 9,968) than the approach taken by 'minstdio' which uses bit manipulation
 
-/*@ -retvalint -type -retvalother */
+/*@ -retvalint -type -retvalother -nullpass */
 
 #include <time.h>   // used to time process
 

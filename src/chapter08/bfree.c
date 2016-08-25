@@ -1,4 +1,4 @@
-/*@ -nullassign -mustdefine -usedef -branchstate -onlytrans -compmempass -unrecog -statictrans -globstate -type -immediatetrans -noret -mustfreefresh -exportlocal */
+/*@ -nullassign -mustdefine -usedef -branchstate -onlytrans -compmempass -unrecog -statictrans -globstate -type -immediatetrans -noret -mustfreefresh -exportlocal -mustfreeonly -nullret -compdef -temptrans -nullpass */
 
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"	
 #define DEBUG

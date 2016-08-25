@@ -5,6 +5,8 @@
 * Timing compared: readline2 is 7.5% faster than readline.
 */
 
+/*@ -compdef */
+
 // The following definition change is needed to allow the use of getline() in this
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x

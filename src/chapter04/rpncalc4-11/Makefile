@@ -3,7 +3,7 @@ ODIR = obj
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
-LINTFLAGS = -compdef +quiet +skip-sys-headers +charintliteral +charint -shadow -preproc
+LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
 _OBJ = rpncalc6.o lexer.o dastack.o
 _BIN = rpncalc6
@@ -25,14 +25,14 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 rpncalc6: $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 	$(LINT) $(LINTFLAGS) $@.c
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
-	mkdir -pv $(ODIR)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

@@ -650,9 +650,6 @@ int strrindex(char s[], char t[]);
 	[4] strrindex.c
 
 size_t strlen(const char *s);
-	[3] itoa.c
-	[3] itoaw.c
-	[3] itob.c
 	[5] pointers/itoawp.c
 	[5] pointers/itobp.c
 
