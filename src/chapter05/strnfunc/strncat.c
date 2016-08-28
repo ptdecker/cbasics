@@ -4,8 +4,12 @@
 
 /*@ -shadow */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define MAXSTR 1000
 
@@ -23,6 +27,7 @@ static void strncat(char *leftstr, char *rightstr, size_t rcount) {
     *leftstr = '\0';
 }
 
+/* Main */
 
 int main(void) {
 

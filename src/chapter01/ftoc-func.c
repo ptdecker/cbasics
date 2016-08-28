@@ -2,6 +2,8 @@
  * Print Fahrenheit-Celsius table using a function
  */
 
+// Includes
+
 #include <stdio.h>
 
 /* Fahrenheit-Celsius conversion */

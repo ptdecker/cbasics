@@ -1,11 +1,13 @@
 /*
-* wordfreq(): Lists all the distinct words from stdin listed in decreasing frequency
-*
-* NOTE:  This solution leverages an implementation of sorting a singly linked list
-*        from here:  http://www.geeksforgeeks.org/quicksort-on-singly-linked-list/
-*/
+ * wordfreq(): Lists all the distinct words from stdin listed in decreasing frequency
+ *
+ * NOTE:  This solution leverages an implementation of sorting a singly linked list
+ *        from here:  http://www.geeksforgeeks.org/quicksort-on-singly-linked-list/
+ */
 
 /*@ -compdef -mustfreeonly -temptrans -nullret -nullpass -mustfreefresh */
+
+// Includes
 
 #include <ctype.h>
 #include <stdbool.h>
@@ -29,10 +31,10 @@ static int    listcount = 0;            // Total number of tnodes
 // Structure definitions
 
 struct tnode {
-	char *word;           // Points to the text stored in the node
-	int  count;           // Number of occurances of the word
-	struct tnode *left;   // Left child
-	struct tnode *right;  // Right child
+    char *word;           // Points to the text stored in the node
+    int  count;           // Number of occurances of the word
+    struct tnode *left;   // Left child
+    struct tnode *right;  // Right child
 };
 
 /*
@@ -40,7 +42,7 @@ struct tnode {
  */
 
 static char getch(void) {
-	return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
+    return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
 }
 
 /*
@@ -49,12 +51,12 @@ static char getch(void) {
 
 static void ungetch(char c) {
 
-	if (bufferptr >= MAXSTACK) {
-		printf("ungetch(): buffer overflow\n");
-		exit(EXIT_FAILURE);
-	}
-	
-	buffer[bufferptr++] = c;
+    if (bufferptr >= MAXSTACK) {
+        printf("ungetch(): buffer overflow\n");
+        exit(EXIT_FAILURE);
+    }
+
+    buffer[bufferptr++] = c;
 }
 
 /*
@@ -63,34 +65,34 @@ static void ungetch(char c) {
 
 static char getword(char *word, int lim) {
 
-	int   c;
-	char *w = word;
+    int   c;
+    char *w = word;
 
-	// Eat white space excepting line breaks
-	while (isspace(c = getch()))
-		;
+    // Eat white space excepting line breaks
+    while (isspace(c = getch()))
+        ;
 
-	// Add character to the word buffer if we are not yet at EOF
-	if (c != EOF)
-		*w++ = c;
+    // Add character to the word buffer if we are not yet at EOF
+    if (c != EOF)
+        *w++ = c;
 
-	// If the character is not an word, then return it to the caller along with an empty word buffer
-	if (!isalpha(c)) {
-		*w = '\0';
-		return c;
-	}
+    // If the character is not an word, then return it to the caller along with an empty word buffer
+    if (!isalpha(c)) {
+        *w = '\0';
+        return c;
+    }
 
-	// Otherwise, read in characters until we have completed our word or our buffer limit is reached
-	// Allow for single quotes and hyphens within the word.
-	for ( ; --lim > 0; w++)
-		if (!isalnum(*w = getch()) && *w != '\'' && *w != '-') {
-			ungetch(*w);
-			break;
-		}
+    // Otherwise, read in characters until we have completed our word or our buffer limit is reached
+    // Allow for single quotes and hyphens within the word.
+    for ( ; --lim > 0; w++)
+        if (!isalnum(*w = getch()) && *w != '\'' && *w != '-') {
+            ungetch(*w);
+            break;
+        }
 
-	// Terminate our word buffer and return the first character
-	*w = '\0';
-	return word[0];
+    // Terminate our word buffer and return the first character
+    *w = '\0';
+    return word[0];
 
 }
 
@@ -100,15 +102,15 @@ static char getword(char *word, int lim) {
 
 static struct tnode *talloc(void) {
 
-	struct tnode *p = (struct tnode *)malloc(sizeof(struct tnode));
+    struct tnode *p = (struct tnode *)malloc(sizeof(struct tnode));
 
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	return p;
-} 
+    return p;
+}
 
 /*
  * strdup(): make a duplicate copy of s
@@ -116,15 +118,15 @@ static struct tnode *talloc(void) {
 
 static char *mystrdup(char *s) {
 
-	char *p = (char *)malloc(strlen(s) + 1);
+    char *p = (char *)malloc(strlen(s) + 1);
 
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	strcpy(p, s);
-	return p;
+    strcpy(p, s);
+    return p;
 }
 
 /*
@@ -133,22 +135,22 @@ static char *mystrdup(char *s) {
 
 static struct tnode *treeadd(struct tnode *p, char *w) {
 
-	int cond;
+    int cond;
 
-	if (p == NULL) {
-		p = talloc();
-		p->word  = mystrdup(w);
-		p->count = 1;
-		p->right = NULL;
-		p->left  = NULL;
-	} else if ((cond = strncmp(w, p->word, MAXWORDSIZE)) == 0)
-		p->count++;
-	else if (cond < 0)
-		p->left  = treeadd(p->left, w);
-	else
-		p->right = treeadd(p->right, w);
+    if (p == NULL) {
+        p = talloc();
+        p->word  = mystrdup(w);
+        p->count = 1;
+        p->right = NULL;
+        p->left  = NULL;
+    } else if ((cond = strncmp(w, p->word, MAXWORDSIZE)) == 0)
+        p->count++;
+    else if (cond < 0)
+        p->left  = treeadd(p->left, w);
+    else
+        p->right = treeadd(p->right, w);
 
-	return p;
+    return p;
 }
 
 /*
@@ -156,16 +158,16 @@ static struct tnode *treeadd(struct tnode *p, char *w) {
  */
 
 static void liststore(struct tnode *p) {
-	if (p != NULL) {
-		liststore(p->left);
-		if (listcount < MAXDISTINCT)
-			list[listcount++] = p;
-		else {
-			printf("error: too many distinct words\n");
-			exit(EXIT_FAILURE);
-		}
-		liststore(p->right);
-	}
+    if (p != NULL) {
+        liststore(p->left);
+        if (listcount < MAXDISTINCT)
+            list[listcount++] = p;
+        else {
+            printf("error: too many distinct words\n");
+            exit(EXIT_FAILURE);
+        }
+        liststore(p->right);
+    }
 }
 
 /*
@@ -174,20 +176,20 @@ static void liststore(struct tnode *p) {
 
 static void listsort(void) {
 
-	int gap;
-	int i;
-	int j;
-	struct tnode *temp = NULL;
+    int gap;
+    int i;
+    int j;
+    struct tnode *temp = NULL;
 
-	for (gap = listcount / 2; gap > 0; gap /= 2)
-		for (i = gap; i < listcount; i++)
-			for (j = i - gap; j >= 0; j -= gap) {
-				if ((list[j]->count) >= (list[j + gap]->count))
-					break;
-				temp = list[j];
-				list[j] = list[j + gap];
-				list[j + gap] = temp;
-			}
+    for (gap = listcount / 2; gap > 0; gap /= 2)
+        for (i = gap; i < listcount; i++)
+            for (j = i - gap; j >= 0; j -= gap) {
+                if ((list[j]->count) >= (list[j + gap]->count))
+                    break;
+                temp = list[j];
+                list[j] = list[j + gap];
+                list[j + gap] = temp;
+            }
 }
 
 /*
@@ -196,10 +198,10 @@ static void listsort(void) {
 
 static void listprint(void) {
 
-	int i;
+    int i;
 
-	for (i = 0; i < listcount; i++)
-		printf("%5d %s\n", list[i]->count, list[i]->word);
+    for (i = 0; i < listcount; i++)
+        printf("%5d %s\n", list[i]->count, list[i]->word);
 
 }
 
@@ -208,8 +210,8 @@ static void listprint(void) {
  */
 
 static void lowerstr(char *s) {
-	for ( ; *s != '\0'; s++)
-		*s = tolower(*s);
+    for ( ; *s != '\0'; s++)
+        *s = tolower(*s);
 }
 
 /*
@@ -218,18 +220,18 @@ static void lowerstr(char *s) {
 
 int main(void)  {
 
-	struct tnode *troot = NULL;
-	char   word[MAXWORDSIZE] = "";
+    struct tnode *troot = NULL;
+    char   word[MAXWORDSIZE] = "";
 
-	while (getword(word, MAXWORDSIZE) != EOF)
-		if (isalpha(word[0])) {
-			lowerstr(word);
-			troot = treeadd(troot, word);
-		}
+    while (getword(word, MAXWORDSIZE) != EOF)
+        if (isalpha(word[0])) {
+            lowerstr(word);
+            troot = treeadd(troot, word);
+        }
 
-	liststore(troot);
-	listsort();
-	listprint();
+    liststore(troot);
+    listsort();
+    listprint();
 
-	return 0;
+    return 0;
 }

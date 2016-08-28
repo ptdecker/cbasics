@@ -12,13 +12,15 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Constants
+// Definitions
 
 #define ALLOCSIZE 10000000  // Maximum available storage (simulated)
 #define MAXLEN        1000  // Maximum length of any input line
@@ -41,11 +43,11 @@ static bool   dir     = false;     // 'true' if directory order sort
  */
 
 static char *alloc(int n) {
-	if (allocbuf + ALLOCSIZE - allocp >= n) { // it fits
-		allocp += n;
-		return allocp - n; // old p
-	}
-	return 0; // not enough room
+    if (allocbuf + ALLOCSIZE - allocp >= n) { // it fits
+        allocp += n;
+        return allocp - n; // old p
+    }
+    return 0; // not enough room
 }
 
 /* getline: read an aribitrarily long line placing as much as
@@ -73,24 +75,24 @@ static size_t getline(char *s, size_t lim) {
 
 static int readlines(char *lineptr[], int maxlines) {
 
-	size_t len;
-	int    nlines;
-	char  *p;
-	char   line[MAXLEN];
+    size_t len;
+    int    nlines;
+    char  *p;
+    char   line[MAXLEN];
 
-	nlines = 0;
-	while ((len = getline(line, MAXLEN)) > 0) {
+    nlines = 0;
+    while ((len = getline(line, MAXLEN)) > 0) {
 
-		if ((p = alloc((int)len)) == NULL || nlines >= maxlines)
-			return -1;
+        if ((p = alloc((int)len)) == NULL || nlines >= maxlines)
+            return -1;
 
-		line[len - 1] = '\0';
-		strcpy(p, line);
-		lineptr[nlines++] = p;
+        line[len - 1] = '\0';
+        strcpy(p, line);
+        lineptr[nlines++] = p;
 
-	}
+    }
 
-	return nlines;
+    return nlines;
 }
 
 /*
@@ -98,13 +100,13 @@ static int readlines(char *lineptr[], int maxlines) {
  */
 
 static void writelines(char *lineptr[], int nlines, bool descend) {
-	int i;
-	if (descend)
-		for (i = nlines - 1; i > -1; i--)
-			printf("%s\n", lineptr[i]);
-	else
-		for (i = 0; i < nlines; i++)
-			printf("%s\n", lineptr[i]);
+    int i;
+    if (descend)
+        for (i = nlines - 1; i > -1; i--)
+            printf("%s\n", lineptr[i]);
+    else
+        for (i = 0; i < nlines; i++)
+            printf("%s\n", lineptr[i]);
 }
 
 /*
@@ -112,8 +114,8 @@ static void writelines(char *lineptr[], int nlines, bool descend) {
  */
 
 static void error(char *s) {
-	printf("%s\n", s);
-	exit(EXIT_FAILURE);
+    printf("%s\n", s);
+    exit(EXIT_FAILURE);
 }
 
 /*
@@ -122,21 +124,21 @@ static void error(char *s) {
 
 static void substr(const char *s, char *str) {
 
-	size_t i;
-	size_t j;
-	size_t len;
+    size_t i;
+    size_t j;
+    size_t len;
 
-	len = strlen(s);
+    len = strlen(s);
 
-	if (pos2 != 0 && pos2 < len)
-		len = pos2;
-	else if (pos2 != 0 && len < pos2)
-		error("substr: string is too short");
+    if (pos2 != 0 && pos2 < len)
+        len = pos2;
+    else if (pos2 != 0 && len < pos2)
+        error("substr: string is too short");
 
-	for (j = 0, i = pos1; i < len; i++, j++)
-		str[j] = str[i];
+    for (j = 0, i = pos1; i < len; i++, j++)
+        str[j] = str[i];
 
-	str[j] = '\0';
+    str[j] = '\0';
 
 }
 
@@ -145,10 +147,10 @@ static void substr(const char *s, char *str) {
  */
 
 static void swap(void *v[], int i, int j) {
-	void *temp;
-	temp = v[i];
-	v[i] = v[j];
-	v[j] = temp;
+    void *temp;
+    temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
 }
 
 /*
@@ -157,23 +159,23 @@ static void swap(void *v[], int i, int j) {
 
 static int numcmp(const char *s1, const char *s2) {
 
-	double v1;
-	double v2;
-	char   str[1000];
+    double v1;
+    double v2;
+    char   str[1000];
 
-	substr(s1, str);
-	v1 = atof(s1);
+    substr(s1, str);
+    v1 = atof(s1);
 
-	substr(s2, str);
-	v2 = atof(s2);
+    substr(s2, str);
+    v2 = atof(s2);
 
 
-	if (v1 < v2)
-		return -1;
-	else if (v1 > v2)
-		return 1;
-	else
-		return 0;
+    if (v1 < v2)
+        return -1;
+    else if (v1 > v2)
+        return 1;
+    else
+        return 0;
 }
 
 /*
@@ -182,20 +184,20 @@ static int numcmp(const char *s1, const char *s2) {
 
 static int foldcmp(const char *s, const char *t) {
 
-	size_t  i = pos1;
-	size_t  j = pos1;
-	size_t  endpos;
+    size_t  i = pos1;
+    size_t  j = pos1;
+    size_t  endpos;
 
-	if (pos2 > 0)
-		endpos = pos2;
-	else if ((endpos = strlen(s)) > strlen(t))
-		endpos = strlen(t);
+    if (pos2 > 0)
+        endpos = pos2;
+    else if ((endpos = strlen(s)) > strlen(t))
+        endpos = strlen(t);
 
-	for ( ; tolower(s[i]) == tolower(t[j]) && i < endpos && j < endpos; i++, j++)
-		if (s[i] == '\0')
-			return 0;
+    for ( ; tolower(s[i]) == tolower(t[j]) && i < endpos && j < endpos; i++, j++)
+        if (s[i] == '\0')
+            return 0;
 
-	return tolower(s[i]) - tolower(t[j]);
+    return tolower(s[i]) - tolower(t[j]);
 }
 
 /*
@@ -204,33 +206,33 @@ static int foldcmp(const char *s, const char *t) {
 
 static int dircmp(const char *s, const char *t) {
 
-	char   a;
-	char   b;
-	size_t i = pos1;
-	size_t j = pos1;
-	size_t endpos;
+    char   a;
+    char   b;
+    size_t i = pos1;
+    size_t j = pos1;
+    size_t endpos;
 
-	if (pos2 > 0)
-		endpos = pos2;
-	else if ((endpos = strlen(s)) > strlen(t))
-		endpos = strlen(t);
+    if (pos2 > 0)
+        endpos = pos2;
+    else if ((endpos = strlen(s)) > strlen(t))
+        endpos = strlen(t);
 
-	do {
+    do {
 
-		while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
-			i++;
-		while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
-			j++;
+        while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
+            i++;
+        while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
+            j++;
 
-		a = s[i++];
-		b = t[j++];
+        a = s[i++];
+        b = t[j++];
 
-		if (a == '\0' && b == '\0')
-			return 0;
+        if (a == '\0' && b == '\0')
+            return 0;
 
-	} while (a == b && i < endpos && j < endpos);
+    } while (a == b && i < endpos && j < endpos);
 
-	return a - b;
+    return a - b;
 
 }
 
@@ -240,33 +242,33 @@ static int dircmp(const char *s, const char *t) {
 
 static int folddircmp(const char *s, const char *t) {
 
-	char a;
-	char b;
-	size_t i = pos1;
-	size_t j = pos1;
-	size_t endpos;
+    char a;
+    char b;
+    size_t i = pos1;
+    size_t j = pos1;
+    size_t endpos;
 
-	if (pos2 > 0)
-		endpos = pos2;
-	else if ((endpos = strlen(s)) > strlen(t))
-		endpos = strlen(t);
+    if (pos2 > 0)
+        endpos = pos2;
+    else if ((endpos = strlen(s)) > strlen(t))
+        endpos = strlen(t);
 
-	do {
+    do {
 
-		while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
-			i++;
-		while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
-			j++;
+        while (i < endpos && !isalnum(s[i]) && s[i] != ' ' && s[i] != '\0')
+            i++;
+        while (j < endpos && !isalnum(t[j]) && t[j] != ' ' && t[j] != '\0')
+            j++;
 
-		a = tolower(s[i++]);
-		b = tolower(t[j++]);
+        a = tolower(s[i++]);
+        b = tolower(t[j++]);
 
-		if (a == '\0' && b == '\0')
-			return 0;
+        if (a == '\0' && b == '\0')
+            return 0;
 
-	} while (a == b && i < endpos && j < endpos);
+    } while (a == b && i < endpos && j < endpos);
 
-	return a - b;
+    return a - b;
 
 }
 
@@ -276,20 +278,20 @@ static int folddircmp(const char *s, const char *t) {
 
 static void myqsort(void *v[], int left, int right, int (*comp)(void *, void *)) {
 
-	int i;
-	int last; 
+    int i;
+    int last;
 
-	if (left >= right)
-		return;
+    if (left >= right)
+        return;
 
-	swap(v, left, (left + right) / 2);
-	last = left;
-	for (i = left + 1; i <= right; i++)
-		if ((*comp)(v[i], v[left]) < 0)
-			swap(v, ++last, i);
-	swap(v, left, last);
-	myqsort(v, left, last - 1,  comp);
-	myqsort(v, last + 1, right, comp);	
+    swap(v, left, (left + right) / 2);
+    last = left;
+    for (i = left + 1; i <= right; i++)
+        if ((*comp)(v[i], v[left]) < 0)
+            swap(v, ++last, i);
+    swap(v, left, last);
+    myqsort(v, left, last - 1,  comp);
+    myqsort(v, last + 1, right, comp);
 
 }
 
@@ -299,35 +301,35 @@ static void myqsort(void *v[], int left, int right, int (*comp)(void *, void *))
 
 static void readargs(int argc, char *argv[]) {
 
-	int c;
+    int c;
 
-	while (--argc > 0 && ((c = (*++argv)[0]) == '-' || c == '+'))
-		if (c == '-' && !isdigit(*(argv[0]+1)))
-			while ((c = *++argv[0]) != '\0')
-				switch (c) {
-					case 'n':
-						numeric = true;
-						break;
-					case 'r':
-						descend = true;
-						break;
-					case 'f':
-						fold = true;
-						break;
-					case 'd':
-						dir = true;
-						break;
-					default:
-						printf("sort: illegal option %c\n", c);
-						exit(EXIT_FAILURE);
-				}
-		else if (c == '-')
-			pos2 = (size_t)atoi(argv[0]+1);
-		else
-			pos1 = (size_t)atoi(argv[0]+1);
+    while (--argc > 0 && ((c = (*++argv)[0]) == '-' || c == '+'))
+        if (c == '-' && !isdigit(*(argv[0]+1)))
+            while ((c = *++argv[0]) != '\0')
+                switch (c) {
+                    case 'n':
+                        numeric = true;
+                        break;
+                    case 'r':
+                        descend = true;
+                        break;
+                    case 'f':
+                        fold = true;
+                        break;
+                    case 'd':
+                        dir = true;
+                        break;
+                    default:
+                        printf("sort: illegal option %c\n", c);
+                        exit(EXIT_FAILURE);
+                }
+        else if (c == '-')
+            pos2 = (size_t)atoi(argv[0]+1);
+        else
+            pos1 = (size_t)atoi(argv[0]+1);
 
     if ((argc == 0) || (pos1 > pos2))
-	    error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
+        error("usage: sort -dnfr [+pos1] [-pos2] [FILE]");
 
 }
 
@@ -337,60 +339,60 @@ static void readargs(int argc, char *argv[]) {
 
 int main(int argc, char *argv[]) {
 
-	int  nlines;          // Number of input lines to read
+    int  nlines;          // Number of input lines to read
 
-	// Evaluate arguments
+    // Evaluate arguments
 
-	readargs(argc, argv);
+    readargs(argc, argv);
 
-	// Read in the lines into memory
+    // Read in the lines into memory
 
-	if ((nlines = readlines(lineptr, MAXLINES)) < 0) {
-		printf("Input is too big to sort\n");
-		exit(EXIT_FAILURE);
-	}
+    if ((nlines = readlines(lineptr, MAXLINES)) < 0) {
+        printf("Input is too big to sort\n");
+        exit(EXIT_FAILURE);
+    }
 
-	// Sort
+    // Sort
 
-	if (numeric)
-		myqsort(
-				(void **) lineptr,
-				0,
-				nlines - 1,
-				(int (*)(void*, void*))numcmp
-			);
-	else if (fold && dir)
-		myqsort(
-				(void **) lineptr,
-				0,
-				nlines - 1,
-				(int (*)(void*, void*))folddircmp
-			);
-	else if (fold)
-		myqsort(
-				(void **) lineptr,
-				0,
-				nlines - 1,
-				(int (*)(void*, void*))foldcmp
-			);
-	else if (dir)
-		myqsort(
-				(void **) lineptr,
-				0,
-				nlines - 1,
-				(int (*)(void*, void*))dircmp
-			);
-	else
-		myqsort(
-				(void **) lineptr,
-				0,
-				nlines - 1,
-				(int (*)(void*, void*))strcmp
-			);
+    if (numeric)
+        myqsort(
+                (void **) lineptr,
+                0,
+                nlines - 1,
+                (int (*)(void*, void*))numcmp
+            );
+    else if (fold && dir)
+        myqsort(
+                (void **) lineptr,
+                0,
+                nlines - 1,
+                (int (*)(void*, void*))folddircmp
+            );
+    else if (fold)
+        myqsort(
+                (void **) lineptr,
+                0,
+                nlines - 1,
+                (int (*)(void*, void*))foldcmp
+            );
+    else if (dir)
+        myqsort(
+                (void **) lineptr,
+                0,
+                nlines - 1,
+                (int (*)(void*, void*))dircmp
+            );
+    else
+        myqsort(
+                (void **) lineptr,
+                0,
+                nlines - 1,
+                (int (*)(void*, void*))strcmp
+            );
 
-	// Write out the results
+    // Write out the results
 
-	writelines(lineptr, nlines, descend);
+    writelines(lineptr, nlines, descend);
 
     return 0;
 }

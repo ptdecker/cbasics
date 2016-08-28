@@ -2,10 +2,16 @@
 * Array-based char-type (floating point) stack (last in, first out "LIFO")
 */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
+// Definitions
+
 #define MAXSTACK 100 // Maximum depth of stack
+
+// Globals
 
 static size_t cstackptr = 0;    // Stack pointer--next free stack position
 static char   cstack[MAXSTACK]; // Array-based stack of char-typed values
@@ -15,10 +21,10 @@ static char   cstack[MAXSTACK]; // Array-based stack of char-typed values
  */
 
 void capush(char val) {
-	if (cstackptr < MAXSTACK)
-		cstack[cstackptr++] = val;
-	else
-		printf("Error: Stack is full--Cannot add (push) value '%c' on to it\n", val);
+    if (cstackptr < MAXSTACK)
+        cstack[cstackptr++] = val;
+    else
+        printf("Error: Stack is full--Cannot add (push) value '%c' on to it\n", val);
 }
 
 /*
@@ -26,10 +32,10 @@ void capush(char val) {
  */
 
 char capop(void) {
-	if (cstackptr > 0)
-		return cstack[--cstackptr];
-	printf("Error: Stack is empty--nothing to remove (pop) from it\n");
-	return '\0';
+    if (cstackptr > 0)
+        return cstack[--cstackptr];
+    printf("Error: Stack is empty--nothing to remove (pop) from it\n");
+    return '\0';
 }
 
 /*
@@ -37,7 +43,7 @@ char capop(void) {
  */
 
 static size_t casize(void) {
-	return cstackptr;
+    return cstackptr;
 }
 
 /*
@@ -45,5 +51,5 @@ static size_t casize(void) {
  */
 
 bool caempty(void) {
-	return (casize() == 0);
+    return (casize() == 0);
 }

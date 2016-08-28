@@ -4,9 +4,13 @@
 
 /*@ -compdef */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+// Definitions
 
 #define TABSTOPINC 4    // Default tab size
 #define MAXLINE    250  // Maximum supported line length
@@ -75,9 +79,7 @@ static void detab(char *tabstop) {
         }
 }
 
-/*
- * Main
- */
+/* Main */
 
 int main(int argc, char *argv[]) {
 

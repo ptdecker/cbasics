@@ -4,15 +4,24 @@
  * Inverts the bits starting at a specified position
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * invert(): invert the bits
+ */
+
 static unsigned invert(unsigned x, unsigned  p, unsigned n) {
+
     unsigned adjusted;  // Adjusted position (accounting for size)
     unsigned mask;      // Mask [of sze n]
+
     adjusted = (p + 1 - n);
     mask = ~(~(unsigned)0 << n);  //results in a 000...000xxxx 32-bit mask with n number of x
+
     return x ^ (mask << adjusted);
 }
 
@@ -21,11 +30,15 @@ static unsigned invert(unsigned x, unsigned  p, unsigned n) {
  */
 
 static void printbits(unsigned x) {
+
     unsigned i;
+
     printf("0b");
     for(i = (unsigned)(8 * sizeof(int)); i > 0; i--)
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
+
+/* Main */
 
 int main(void) {
 

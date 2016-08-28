@@ -3,9 +3,13 @@
  */
 
 /*@ -shadow */
- 
+
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define MAXSTR 1000
 
@@ -19,7 +23,7 @@ static void strcat(char *leftstr, char *rightstr) {
     while (*leftstr != '\0')
         leftstr++;
     while ((*leftstr++ = *rightstr++) != '\0')
-        ; // Empty  
+        ; // Empty
 }
 
 

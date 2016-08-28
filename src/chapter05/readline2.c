@@ -1,9 +1,9 @@
 /*
-* Exercise 5-07: Speed comparision of 'readline' variations
-*
-* Version that stores in an array provided by readline.
-* Timing compared: readline2 is 7.5% faster than readline.
-*/
+ * Exercise 5-07: Speed comparision of 'readline' variations
+ *
+ * Version that stores in an array provided by readline.
+ * Timing compared: readline2 is 7.5% faster than readline.
+ */
 
 /*@ -compdef */
 
@@ -14,14 +14,14 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
-// Library includes
+// Includes
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-// Constants
+// Definitions
 
 #define ALLOCSIZE 100000  // Maximum available storage (simulated)
 #define MAXLEN      1000  // Maximum length of any input line
@@ -54,10 +54,10 @@ static size_t getline(char *s, size_t lim) {
  */
 
 static void swap(char *v[], int i, int j) {
-	char *temp;
-	temp = v[i];
-	v[i] = v[j];
-	v[j] = temp;
+    char *temp;
+    temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
 }
 
 /*
@@ -65,23 +65,23 @@ static void swap(char *v[], int i, int j) {
  */
 
 static void myqsort(char *v[], int left, int right) {
-	int i, last;
+    int i, last;
 
-	// Do nothing if the array contains fewer than two elements
-	if (left >= right)
-		return;
+    // Do nothing if the array contains fewer than two elements
+    if (left >= right)
+        return;
 
-	swap(v, left, (left + right) / 2);
+    swap(v, left, (left + right) / 2);
 
-	last = left;
-	for (i = left + 1; i <= right; i++)
-		if (strcmp(v[i], v[left]) < 0)
-			swap(v, ++last, i);
+    last = left;
+    for (i = left + 1; i <= right; i++)
+        if (strcmp(v[i], v[left]) < 0)
+            swap(v, ++last, i);
 
-	swap(v, left, last);
+    swap(v, left, last);
 
-	myqsort(v, left, last - 1);
-	myqsort(v, last + 1, right);
+    myqsort(v, left, last - 1);
+    myqsort(v, last + 1, right);
 }
 
 /*
@@ -89,9 +89,9 @@ static void myqsort(char *v[], int left, int right) {
  */
 
 static void writelines(char *lineptr[], int nlines) {
-	int i;
-	for (i = 0; i < nlines; i++)
-		printf("%s\n", lineptr[i]);
+    int i;
+    for (i = 0; i < nlines; i++)
+        printf("%s\n", lineptr[i]);
 }
 
 /*
@@ -100,40 +100,41 @@ static void writelines(char *lineptr[], int nlines) {
 
 static int readlines(char *lineptr[], char *linestore, int maxlines) {
 
-	size_t len;
-	int    nlines = 0;
-	char   line[MAXLEN];
-	char  *p = linestore;
-	char  *linestop = line + ALLOCSIZE;
+    size_t len;
+    int    nlines = 0;
+    char   line[MAXLEN];
+    char  *p = linestore;
+    char  *linestop = line + ALLOCSIZE;
 
-	while ((len = getline(line, MAXLEN)) > 0) {
-		if (nlines >= maxlines || p + len > linestop)
-			return -1;
+    while ((len = getline(line, MAXLEN)) > 0) {
+        if (nlines >= maxlines || p + len > linestop)
+            return -1;
 
-		line[len - 1] = '\0';  // Delete newline
-		strcpy(p, line);
-		lineptr[nlines++] = p;
-		p += len;
-	}
+        line[len - 1] = '\0';  // Delete newline
+        strcpy(p, line);
+        lineptr[nlines++] = p;
+        p += len;
+    }
 
-	return nlines;
+    return nlines;
 }
 
+/* Main */
 
 int main(void) {
 
-	int     nlines;
-	clock_t start;
-	char    linestore[ALLOCSIZE];
+    int     nlines;
+    clock_t start;
+    char    linestore[ALLOCSIZE];
 
-	start = clock();
-	if ((nlines = readlines(lineptr, linestore, MAXLINES)) >= 0) {
-		myqsort(lineptr, 0, nlines - 1);
-		writelines(lineptr, nlines);
-		printf("Run time: %u clock ticks\n", (unsigned)(clock() - start));
-		exit(EXIT_SUCCESS);
-	}
+    start = clock();
+    if ((nlines = readlines(lineptr, linestore, MAXLINES)) >= 0) {
+        myqsort(lineptr, 0, nlines - 1);
+        writelines(lineptr, nlines);
+        printf("Run time: %u clock ticks\n", (unsigned)(clock() - start));
+        exit(EXIT_SUCCESS);
+    }
 
-	printf("Error: Input is too big to sort");
+    printf("Error: Input is too big to sort");
     return EXIT_FAILURE;
 }

@@ -2,9 +2,15 @@
  * Replaces tabs with spaces
  */
 
+// Includes
+
 #include <stdio.h>
 
+// Definitions
+
 #define TABSTOP 4
+
+/* Main */
 
 int main(void) {
 

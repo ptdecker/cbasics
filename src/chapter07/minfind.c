@@ -1,7 +1,7 @@
 /*
-* minfind: print lines that match a pattern passed in the first argument with
-*          optional line numbering
-*/
+ * minfind: print lines that match a pattern passed in the first argument with
+ *          optional line numbering
+ */
 
 // The following definition change is needed to allow the use of getline() in this
 // example without having to call it something else.
@@ -10,12 +10,14 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Constants
+// Definitions
 
 #define MAXLINE 1000
 
@@ -25,84 +27,84 @@
 
 static void findpat(FILE *fp, char *fname, char *pattern, bool except, bool number) {
 
-	char     line[MAXLINE] = "";
-	unsigned lineno = 0;
+    char     line[MAXLINE] = "";
+    unsigned lineno = 0;
 
-	// Search for pattern, or non-pattern, adding line numbers if appropriate
+    // Search for pattern, or non-pattern, adding line numbers if appropriate
 
-	while (fgets(line, MAXLINE, fp) != NULL) {
-		lineno++;
-		if ((strstr(line, pattern) != NULL) ^ except) {
-			if (*fname != '\0')
-				printf("%s - ", fname);
-			if (number)
-				printf("%u: ", lineno);
-			printf("%s", line);
-		}
-	}
+    while (fgets(line, MAXLINE, fp) != NULL) {
+        lineno++;
+        if ((strstr(line, pattern) != NULL) ^ except) {
+            if (*fname != '\0')
+                printf("%s - ", fname);
+            if (number)
+                printf("%u: ", lineno);
+            printf("%s", line);
+        }
+    }
 }
 
-// Main
+/* Main */
 
 int main(int argc, char *argv[]) {
 
-	char  pattern[MAXLINE];
-	int   c;
-	bool  except = false;
-	bool  number = false;
-	FILE *fp;
+    char  pattern[MAXLINE];
+    int   c;
+    bool  except = false;
+    bool  number = false;
+    FILE *fp;
 
-	// Evaluate optional switch arguments
+    // Evaluate optional switch arguments
 
-	while (--argc > 0 && (*++argv)[0] == '-')
-		while ((c = *++argv[0]) != '\0')
-			switch (c) {
-				case 'x':
-					except = true;
-					break;
-				case 'n':
-					number = true;
-					break;
-				default:
-					fprintf(stderr, "minfind: illegal option %c\n", c);
-					exit(EXIT_FAILURE);
-			}
+    while (--argc > 0 && (*++argv)[0] == '-')
+        while ((c = *++argv[0]) != '\0')
+            switch (c) {
+                case 'x':
+                    except = true;
+                    break;
+                case 'n':
+                    number = true;
+                    break;
+                default:
+                    fprintf(stderr, "minfind: illegal option %c\n", c);
+                    exit(EXIT_FAILURE);
+            }
 
-	// Check for valid usage (at least a pattern argument should still remain)
+    // Check for valid usage (at least a pattern argument should still remain)
 
-	if (argc < 1) {
-		fprintf(stderr, "Usage: minfind [-x] [-n] pattern [file ...]\n");
-		exit(EXIT_FAILURE);
-	}
+    if (argc < 1) {
+        fprintf(stderr, "Usage: minfind [-x] [-n] pattern [file ...]\n");
+        exit(EXIT_FAILURE);
+    }
 
-	// Save search pattern
+    // Save search pattern
 
-	strcpy(pattern, *argv);
+    strcpy(pattern, *argv);
 
-	// If no more arguments remain, read from standard input
+    // If no more arguments remain, read from standard input
 
-	if (argc == 1) {
-		findpat(stdin, "", pattern, except, number);
-		exit(EXIT_SUCCESS);
-	}
+    if (argc == 1) {
+        findpat(stdin, "", pattern, except, number);
+        exit(EXIT_SUCCESS);
+    }
 
-	// Arguments do remain, so try to process them as if they are file names
-	// searching each in turn for the pattern
+    // Arguments do remain, so try to process them as if they are file names
+    // searching each in turn for the pattern
 
-	while (--argc > 0) {
+    while (--argc > 0) {
 
-		// Attempt to open the file
+        // Attempt to open the file
 
-		if ((fp = fopen(*++argv, "r")) == NULL) {
-			fprintf(stderr, "minfind: cannot open %s\n", *argv);
-			exit(EXIT_FAILURE);
-		}
+        if ((fp = fopen(*++argv, "r")) == NULL) {
+            fprintf(stderr, "minfind: cannot open %s\n", *argv);
+            exit(EXIT_FAILURE);
+        }
 
-		// Search the file
+        // Search the file
 
-		findpat(fp, *argv, pattern, except, number);
-		(void)fclose(fp);
-	}
+        findpat(fp, *argv, pattern, except, number);
+        (void)fclose(fp);
+    }
 
-	exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }

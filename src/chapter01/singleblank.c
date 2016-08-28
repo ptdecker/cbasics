@@ -2,10 +2,16 @@
  * Colapse two or more blanks with a single blank
  */
 
+// Includes
+
 #include <stdio.h>
 
-#define IN  1 /* inside a set of blanks */
-#define OUT 0 /* outside a set of blanks */
+// Definitions
+
+#define IN  1 // inside a set of blanks
+#define OUT 0 // outside a set of blanks
+
+/* Main */
 
 int main(void) {
 

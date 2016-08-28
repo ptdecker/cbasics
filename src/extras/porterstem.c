@@ -36,13 +36,19 @@
        steps after step1ab unless k > k0.
 */
 
+// Includes
+
 #include <stdbool.h>
 #include <string.h>  // for memmove
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 
+// Definitions
+
 #define BUFFERSIZE 1024 // size of buffer
+
+// Global
 
 /* The main part of the stemming algorithm starts here. b is a buffer
    holding a word to be stemmed. The letters are in b[k0], b[k0+1] ...
@@ -137,7 +143,7 @@ static bool vowelinstem() {
     for (i = k0; i <= j; i++)
         if (! cons(i))
             return true;
-  
+
     return false;
 }
 
@@ -173,7 +179,7 @@ static bool cvc(size_t i) {
     ch = b[i];
     if (ch == 'w' || ch == 'x' || ch == 'y')
         return false;
-   
+
     return true;
 }
 
@@ -637,7 +643,7 @@ static void stemfile(FILE *f) {
             }
         }
         s[i] = '\0';
-        
+
         s[stem(s, 0, i - 1) + 1] = '\0'; // Call stemmer then zero terminate string
         printf("%s",s);
 
@@ -645,6 +651,8 @@ static void stemfile(FILE *f) {
 
     free((void *)s);
 }
+
+/* Main */
 
 int main(int argc, char *argv[]) {
 

@@ -2,10 +2,16 @@
  * Print a vertical histogram of letter frequencies
  */
 
+// Includes
+
 #include <stdio.h>
 
-#define MAXLTRS  26  /* number of letters */
-#define MAXBAR   18  /* maximum bar size */
+// Definitions
+
+#define MAXLTRS  26  // number of letters
+#define MAXBAR   18  // maximum bar size
+
+/* Main */
 
 int main(void) {
 

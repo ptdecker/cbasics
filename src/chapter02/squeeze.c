@@ -2,6 +2,8 @@
  * squeeze.c
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -37,7 +39,7 @@ static void squeeze(char s[], char delete[]) {
 
         size_t k;
         bool   keep;
-        
+
         for (keep = true, k = 0; delete[k] != '\0' && keep; k++)
             keep = (s[i] != delete[k]);
         if (keep)
@@ -47,8 +49,7 @@ static void squeeze(char s[], char delete[]) {
     s[j] = '\0';
 }
 
-
-
+/* Main */
 
 int main(void) {
 

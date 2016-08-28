@@ -12,6 +12,8 @@
 
 /*@ -nullderef -branchstate -usedef -exportlocal -nullstate -temptrans -nullret -nullpass -compdef -mustfreeonly */
 
+// Includes
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -41,24 +43,24 @@ static size_t  j;   // j is a general offset into the string
 
 // Singlely linked list of line numbers
 struct linklist {
-	int linenum;           // Line number
-	struct linklist *next; // Next item in linked list
+    int linenum;           // Line number
+    struct linklist *next; // Next item in linked list
 };
 
 // Singlely linked list of words
 struct linkwords {
-	char *word;              // Unstemmed word
-	struct linkwords *next;  // Next item in the linked word list
+    char *word;              // Unstemmed word
+    struct linkwords *next;  // Next item in the linked word list
 };
 
 // Tree node structure
 struct tnode {
-	char *word;               // Points to the stemmed word upon which we use to xreference
-	int wordcount;            // Number of words in the unstemmed word list
-	struct linkwords *words;  // First entry in a linked list of unstemmed words
-	struct linklist  *lines;  // First entry in a linked list of line numbers
-	struct tnode     *left;   // Left child
-	struct tnode     *right;  // Right child
+    char *word;               // Points to the stemmed word upon which we use to xreference
+    int wordcount;            // Number of words in the unstemmed word list
+    struct linkwords *words;  // First entry in a linked list of unstemmed words
+    struct linklist  *lines;  // First entry in a linked list of line numbers
+    struct tnode     *left;   // Left child
+    struct tnode     *right;  // Right child
 };
 
 /************** START OF MARTIN PORTER'S STEMMER CODE **************/
@@ -151,7 +153,7 @@ static bool vowelinstem() {
     for (i = k0; i <= j; i++)
         if (! cons(i))
             return true;
-  
+
     return false;
 }
 
@@ -187,7 +189,7 @@ static bool cvc(size_t i) {
     ch = b[i];
     if (ch == 'w' || ch == 'x' || ch == 'y')
         return false;
-   
+
     return true;
 }
 
@@ -207,7 +209,7 @@ static bool ends(char *s) {
         return false;
 
     // Below differs from Martin Porter's code in that he was using ints which can
-    // go negative and he allows 'j' to do so here in some cases.  Switching to 
+    // go negative and he allows 'j' to do so here in some cases.  Switching to
     // unsigned 'size_t' type (for array indexes) breaks when the negative attempt
     // is made resulting in a segmentation fault occuring inside 'm()'.  The hack
     // below forces 'j' to zero in this case and addresses the issue.
@@ -313,7 +315,7 @@ static void step2() {
 
         case 'a':
             if (ends("\07" "ational")) {
-            	r("\03" "ate");
+                r("\03" "ate");
                 break;
             }
             if (ends("\06" "tional")) {
@@ -628,7 +630,7 @@ static size_t stem(char *p, size_t i, size_t j) {
  */
 
 static char getch(void) {
-	return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
+    return (bufferptr > 0) ? buffer[--bufferptr] : getchar();
 }
 
 /*
@@ -637,12 +639,12 @@ static char getch(void) {
 
 static void ungetch(char c) {
 
-	if (bufferptr >= MAXSTACK) {
-		printf("ungetch(): buffer overflow\n");
-		exit(EXIT_FAILURE);
-	}
-	
-	buffer[bufferptr++] = c;
+    if (bufferptr >= MAXSTACK) {
+        printf("ungetch(): buffer overflow\n");
+        exit(EXIT_FAILURE);
+    }
+
+    buffer[bufferptr++] = c;
 }
 
 /*
@@ -651,34 +653,34 @@ static void ungetch(char c) {
 
 static char getword(char *word, int lim) {
 
-	int   c;
-	char *w = word;
+    int   c;
+    char *w = word;
 
-	// Eat white space excepting line breaks
-	while (isspace(c = getch()) && c != '\n')
-		;
+    // Eat white space excepting line breaks
+    while (isspace(c = getch()) && c != '\n')
+        ;
 
-	// Add character to the word buffer if we are not yet at EOF
-	if (c != EOF)
-		*w++ = c;
+    // Add character to the word buffer if we are not yet at EOF
+    if (c != EOF)
+        *w++ = c;
 
-	// If the character is not an word, then return it to the caller along with an empty word buffer
-	if (!isalpha(c)) {
-		*w = '\0';
-		return c;
-	}
+    // If the character is not an word, then return it to the caller along with an empty word buffer
+    if (!isalpha(c)) {
+        *w = '\0';
+        return c;
+    }
 
-	// Otherwise, read in characters until we have completed our word or our buffer limit is reached
-	// Allow for single quotes and hyphens within the word.
-	for ( ; --lim > 0; w++)
-		if (!isalnum(*w = getch()) && *w != '\'' && *w != '-') {
-			ungetch(*w);
-			break;
-		}
+    // Otherwise, read in characters until we have completed our word or our buffer limit is reached
+    // Allow for single quotes and hyphens within the word.
+    for ( ; --lim > 0; w++)
+        if (!isalnum(*w = getch()) && *w != '\'' && *w != '-') {
+            ungetch(*w);
+            break;
+        }
 
-	// Terminate our word buffer and return the first character
-	*w = '\0';
-	return word[0];
+    // Terminate our word buffer and return the first character
+    *w = '\0';
+    return word[0];
 
 }
 
@@ -689,14 +691,14 @@ static char getword(char *word, int lim) {
 
 static char *mystrdup(char *s) {
 
-	char *p = (char *)malloc(strlen(s) + 1);
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    char *p = (char *)malloc(strlen(s) + 1);
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	strcpy(p, s);
-	return p;
+    strcpy(p, s);
+    return p;
 }
 
 /*
@@ -705,13 +707,13 @@ static char *mystrdup(char *s) {
 
 static struct linklist *lalloc(void) {
 
-	struct linklist *p = (struct linklist *)malloc(sizeof(struct linklist));
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    struct linklist *p = (struct linklist *)malloc(sizeof(struct linklist));
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	return p;
+    return p;
 }
 
 /*
@@ -720,18 +722,18 @@ static struct linklist *lalloc(void) {
 
 static void addline(struct tnode *p, int linenum) {
 
-	struct linklist *temp = p->lines;
+    struct linklist *temp = p->lines;
 
-	// Walk down the linked list looking for the end or the line number
-	while (temp->next != NULL && temp->linenum != linenum)
-		temp = temp->next;
+    // Walk down the linked list looking for the end or the line number
+    while (temp->next != NULL && temp->linenum != linenum)
+        temp = temp->next;
 
-	// If we found the end then add the line number to the list
-	if (temp->linenum != linenum) {
-		temp->next = lalloc();
-		temp->next->linenum = linenum;
-		temp->next->next = NULL;
-	}
+    // If we found the end then add the line number to the list
+    if (temp->linenum != linenum) {
+        temp->next = lalloc();
+        temp->next->linenum = linenum;
+        temp->next->next = NULL;
+    }
 
 }
 
@@ -741,13 +743,13 @@ static void addline(struct tnode *p, int linenum) {
 
 static struct linkwords *lwalloc(void) {
 
-	struct linkwords *p = (struct linkwords *)malloc(sizeof(struct linkwords));
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    struct linkwords *p = (struct linkwords *)malloc(sizeof(struct linkwords));
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	return p;
+    return p;
 }
 
 /*
@@ -756,19 +758,19 @@ static struct linkwords *lwalloc(void) {
 
 static void addword(struct tnode *p, char *uw) {
 
-	struct linkwords *temp = p->words;
+    struct linkwords *temp = p->words;
 
-	// Walk down the linked list looking for the end or the word
-	while (temp->next != NULL && strcmp(temp->word, uw) != 0)
-		temp = temp->next;
+    // Walk down the linked list looking for the end or the word
+    while (temp->next != NULL && strcmp(temp->word, uw) != 0)
+        temp = temp->next;
 
-	// If we found the end then add the word to the list
-	if (strcmp(temp->word, uw) != 0) {
-		temp->next = lwalloc();
-		temp->next->word = mystrdup(uw);
-		temp->next->next = NULL;
-		p->wordcount++;
-	}
+    // If we found the end then add the word to the list
+    if (strcmp(temp->word, uw) != 0) {
+        temp->next = lwalloc();
+        temp->next->word = mystrdup(uw);
+        temp->next->next = NULL;
+        p->wordcount++;
+    }
 
 }
 
@@ -778,14 +780,14 @@ static void addword(struct tnode *p, char *uw) {
 
 static struct tnode *talloc(void) {
 
-	struct tnode *p = (struct tnode *)malloc(sizeof(struct tnode));
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    struct tnode *p = (struct tnode *)malloc(sizeof(struct tnode));
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	return p;
-} 
+    return p;
+}
 
 /*
  * treeadd(): add a node to our tree
@@ -793,33 +795,33 @@ static struct tnode *talloc(void) {
 
 static struct tnode *treeadd(struct tnode *p, char *w, char *uw, int line) {
 
-	int cond;
+    int cond;
 
-	if (p == NULL) {
-		// Create new tnode
-		p = talloc();
-		p->word  = mystrdup(w);
-		p->words = lwalloc();
-		p->words->word = mystrdup(uw);
-		p->words->next = NULL;
-		p->wordcount = 1;
-		p->lines = lalloc();
-		p->lines->linenum = line;
-		p->lines->next = NULL;
-		p->right = NULL;
-		p->left  = NULL;
-	} else if ((cond = strncmp(w, p->word, MAXWORDSIZE)) == 0) {
-		// Update existing tnode
-		addword(p, uw);
-		addline(p, line);
-	} else if (cond < 0)
-		// Traverse left-hand side of tree
-		p->left  = treeadd(p->left, w, uw, line);
-	else
-		// Traverse right-hand side of tree
-		p->right = treeadd(p->right, w, uw, line);
+    if (p == NULL) {
+        // Create new tnode
+        p = talloc();
+        p->word  = mystrdup(w);
+        p->words = lwalloc();
+        p->words->word = mystrdup(uw);
+        p->words->next = NULL;
+        p->wordcount = 1;
+        p->lines = lalloc();
+        p->lines->linenum = line;
+        p->lines->next = NULL;
+        p->right = NULL;
+        p->left  = NULL;
+    } else if ((cond = strncmp(w, p->word, MAXWORDSIZE)) == 0) {
+        // Update existing tnode
+        addword(p, uw);
+        addline(p, line);
+    } else if (cond < 0)
+        // Traverse left-hand side of tree
+        p->left  = treeadd(p->left, w, uw, line);
+    else
+        // Traverse right-hand side of tree
+        p->right = treeadd(p->right, w, uw, line);
 
-	return p;
+    return p;
 }
 
 /*
@@ -831,7 +833,7 @@ static void listsort(struct linkwords *head, int num_nodes) {
     struct linkwords *current;
     struct linkwords *next;
     struct linkwords *previous;
-	int i;
+    int i;
 
     for (i = 0; i < num_nodes; i++) {
 
@@ -847,10 +849,10 @@ static void listsort(struct linkwords *head, int num_nodes) {
                 else
                     previous->next = next;
                 current->next = next->next;
-                next->next = current; 
+                next->next = current;
                 previous = next;
                 next = current->next;
-            } else { 
+            } else {
                 previous = current;
                 current = current->next;
                 next = current->next;
@@ -865,42 +867,42 @@ static void listsort(struct linkwords *head, int num_nodes) {
 
 static void treeprint(struct tnode *p) {
 
-	struct linkwords *temp1;
-	struct linklist  *temp2;
+    struct linkwords *temp1;
+    struct linklist  *temp2;
 
-	int pos;
+    int pos;
 
-	if (p != NULL) {
+    if (p != NULL) {
 
-		// Traverse left side of tree
-		treeprint(p->left);
+        // Traverse left side of tree
+        treeprint(p->left);
 
-		// Sort the unstemmed words on the current node
-		listsort(p->words, p->wordcount);
+        // Sort the unstemmed words on the current node
+        listsort(p->words, p->wordcount);
 
-		// Print out the words
-		for (temp1 = p->words; temp1 != NULL; temp1 = temp1->next) {
-			printf("%s", temp1->word);
-			if (temp1->next != NULL)
-				printf(", ");
-		}
-		(void)putchar('\n');
+        // Print out the words
+        for (temp1 = p->words; temp1 != NULL; temp1 = temp1->next) {
+            printf("%s", temp1->word);
+            if (temp1->next != NULL)
+                printf(", ");
+        }
+        (void)putchar('\n');
 
-		// Print out the line numbers adjusting for rough right margin
-		pos = printf("\t");
-		for (temp2 = p->lines; temp2 != NULL; temp2 = temp2->next) {
-			pos += printf("%d", temp2->linenum);
-			if (temp2->next != NULL)
-				pos += printf(", ");
-			if (pos > RIGHTMARGIN && temp2->next != NULL) {
-				(void)putchar('\n');
-				pos = printf("\t");
-			}
-		}
-		(void)putchar('\n');
+        // Print out the line numbers adjusting for rough right margin
+        pos = printf("\t");
+        for (temp2 = p->lines; temp2 != NULL; temp2 = temp2->next) {
+            pos += printf("%d", temp2->linenum);
+            if (temp2->next != NULL)
+                pos += printf(", ");
+            if (pos > RIGHTMARGIN && temp2->next != NULL) {
+                (void)putchar('\n');
+                pos = printf("\t");
+            }
+        }
+        (void)putchar('\n');
 
-		treeprint(p->right);
-	}
+        treeprint(p->right);
+    }
 
 }
 
@@ -909,8 +911,8 @@ static void treeprint(struct tnode *p) {
  */
 
 static void lowerstr(char *s) {
-	for ( ; *s != '\0'; s++)
-		*s = tolower(*s);
+    for ( ; *s != '\0'; s++)
+        *s = tolower(*s);
 }
 
 /*
@@ -918,7 +920,7 @@ static void lowerstr(char *s) {
  */
 
 static int scompare(char **s, char **t) {
-	return strcmp(*s, *t);
+    return strcmp(*s, *t);
 }
 
 /*
@@ -931,27 +933,27 @@ static int scompare(char **s, char **t) {
 
 static bool isnotstopword(char *w) {
 
-	static char *stopwords[] = {
-		"a","about","above","after","again","against","all","am","an","and","any","are","aren't","as","at","be",
-		"because","been","before","being","below","between","both","but","by","can't","cannot","could","couldn't",
-		"did","didn't","do","does","doesn't","doing","don't","down","during","each","few","for","from","further",
-		"had","hadn't","has","hasn't","have","haven't","having","he","he'd","he'll","he's","her","here","here's",
-		"hers","herself","him","himself","his","how","how's","i","i'd","i'll","i'm","i've","if","in","into","is",
-		"isn't","it","it's","its","itself","let's","me","more","most","mustn't","my","myself","no","nor","not","of",
-		"off","on","once","only","or","other","ought","our","ours","ourselves","out","over","own","same","shan't",
-		"she","she'd","she'll","she's","should","shouldn't","so","some","such","than","that","that's","the","their",
-		"theirs","them","themselves","then","there","there's","these","they","they'd","they'll","they're","they've",
-		"this","those","through","to","too","under","until","up","very","was","wasn't","we","we'd","we'll","we're",
-		"we've","were","weren't","what","what's","when","when's","where","where's","which","while","who","who's",
-		"whom","why","why's","with","won't","would","wouldn't","you","you'd","you'll","you're","you've","your",
-		"yours","yourself","yourselves"
-	};
-	char **result;
+    static char *stopwords[] = {
+        "a","about","above","after","again","against","all","am","an","and","any","are","aren't","as","at","be",
+        "because","been","before","being","below","between","both","but","by","can't","cannot","could","couldn't",
+        "did","didn't","do","does","doesn't","doing","don't","down","during","each","few","for","from","further",
+        "had","hadn't","has","hasn't","have","haven't","having","he","he'd","he'll","he's","her","here","here's",
+        "hers","herself","him","himself","his","how","how's","i","i'd","i'll","i'm","i've","if","in","into","is",
+        "isn't","it","it's","its","itself","let's","me","more","most","mustn't","my","myself","no","nor","not","of",
+        "off","on","once","only","or","other","ought","our","ours","ourselves","out","over","own","same","shan't",
+        "she","she'd","she'll","she's","should","shouldn't","so","some","such","than","that","that's","the","their",
+        "theirs","them","themselves","then","there","there's","these","they","they'd","they'll","they're","they've",
+        "this","those","through","to","too","under","until","up","very","was","wasn't","we","we'd","we'll","we're",
+        "we've","were","weren't","what","what's","when","when's","where","where's","which","while","who","who's",
+        "whom","why","why's","with","won't","would","wouldn't","you","you'd","you'll","you're","you've","your",
+        "yours","yourself","yourselves"
+    };
+    char **result;
 
-	result = (char **)bsearch( (char *) &w, (char *)stopwords, sizeof(stopwords)/sizeof(stopwords[0]),
+    result = (char **)bsearch( (char *) &w, (char *)stopwords, sizeof(stopwords)/sizeof(stopwords[0]),
                               sizeof( char * ), (int (*)(const void*, const void*))scompare);
 
-	return result == NULL;
+    return result == NULL;
 }
 
 /*
@@ -972,30 +974,28 @@ static void squeezechar(char *s, char c) {
     *squeezed = '\0';
 }
 
-/*
- * main
- */
+/* Main */
 
 int main(void)  {
 
-	struct tnode *root            = NULL;
-	char   word[MAXWORDSIZE]      = "";
-	char   unstemmed[MAXWORDSIZE] = "";
-	int    line                   = 1;
+    struct tnode *root            = NULL;
+    char   word[MAXWORDSIZE]      = "";
+    char   unstemmed[MAXWORDSIZE] = "";
+    int    line                   = 1;
 
-	while (getword(word, MAXWORDSIZE) != EOF)
-		if (isalpha(word[0])) {
-			lowerstr(word);
-			if (isnotstopword(word)) {
-				strncpy(unstemmed, word, MAXWORDSIZE);
-				squeezechar(word, '\'');
-				word[stem(word, 0, strlen(word) - 1) + 1] = '\0'; 
-				root = treeadd(root, word, unstemmed, line);
-			}
-		} else if (word[0] == '\n')
-			line++;
+    while (getword(word, MAXWORDSIZE) != EOF)
+        if (isalpha(word[0])) {
+            lowerstr(word);
+            if (isnotstopword(word)) {
+                strncpy(unstemmed, word, MAXWORDSIZE);
+                squeezechar(word, '\'');
+                word[stem(word, 0, strlen(word) - 1) + 1] = '\0';
+                root = treeadd(root, word, unstemmed, line);
+            }
+        } else if (word[0] == '\n')
+            line++;
 
-	treeprint(root);
+    treeprint(root);
 
-	return 0;
+    return 0;
 }

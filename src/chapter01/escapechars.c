@@ -1,12 +1,18 @@
-/*
- * Attempts to print escape characters not listed in chapter one
+/* Exercise 1-2: Print possible alternate escape characters
+ *
+ * Experiment to find out what happens when printf's argument string contains
+ * \c, where c is some character not listed above.
  */
+
+// Includes
 
 #include <stdio.h>
 
+/* Main */
+
 int main(void) {
+
     printf("\\a: \a\n");
-//    printf("\\b: \b\n"); // chapter one control character
     printf("\\c: \c\n");
     printf("\\d: \d\n");
     printf("\\e: \e\n");
@@ -18,17 +24,13 @@ int main(void) {
     printf("\\k: \k\n");
     printf("\\l: \l\n");
     printf("\\m: \m\n");
-//    printf("\\n: \n\n"); // chapter one control character
     printf("\\o: \o\n");
     printf("\\p: \p\n");
     printf("\\q: \q\n");
     printf("\\r: \r\n");
     printf("\\s: \s\n");
-//    printf("\\t: \t\n"); // chapter one control character
-//    printf("\\u: \u\n"); // causes a compiler error
     printf("\\v: \v\n");
     printf("\\w: \w\n");
-//    printf("\\x: \x\n"); // causes a compiler error
     printf("\\y: \y\n");
     printf("\\z: \z\n");
     printf("\\0: \0\n");
@@ -61,7 +63,6 @@ int main(void) {
     printf("\\R: \R\n");
     printf("\\S: \S\n");
     printf("\\T: \T\n");
-//    printf("\\U: \U\n"); // causes a compiler error
     printf("\\V: \V\n");
     printf("\\W: \W\n");
     printf("\\X: \X\n");
@@ -73,7 +74,6 @@ int main(void) {
     printf("\\@: \@\n");
     printf("\\#: \#\n");
     printf("\\$: \$\n");
-//    printf("\\%: \%\n"); // causes a linter warning
     printf("\\^: \^\n");
     printf("\\&: \&\n");
     printf("\\*: \*\n");
@@ -88,10 +88,8 @@ int main(void) {
     printf("\\}: \}\n");
     printf("\\]: \]\n");
     printf("\\|: \|\n");
-//    printf("\\\: \\\n"); // chapter one control character
     printf("\\:: \:\n");
     printf("\\;: \;\n");
-//    printf("\\\": \"\n"); // chapter one control character
     printf("\\': \'\n");
     printf("\\<: \<\n");
     printf("\\,: \,\n");

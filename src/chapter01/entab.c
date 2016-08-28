@@ -2,10 +2,16 @@
  * Replaces tabs with spaces up to set tab stops
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
+// Definitions
+
 #define TABSTOP 4
+
+/* Main */
 
 int main(void) {
 

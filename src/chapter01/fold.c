@@ -6,11 +6,17 @@
  *       able to figure this one out from scratch myself.
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
+// Definitions
+
 #define LINEWIDTH  20
 #define TABSIZE    4
+
+// Globals
 
 static char line[LINEWIDTH];
 
@@ -77,6 +83,8 @@ static size_t squish(size_t pos) {
     }
     return i;
 }
+
+/* Main */
 
 int main(void) {
 

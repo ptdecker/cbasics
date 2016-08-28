@@ -1,13 +1,11 @@
 BIN = ../../bin
 ODIR = obj
-SUBDIRS = 
+SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
 LINTFLAGS = +quiet +skip-sys-headers +charint -preproc
 DEPS =
-#_OBJ = binsearch.o expand.o itoa.o itoaw.o itob.o
-#_BIN = binsearch expand itoa itoaw itob
 _OBJ = binsearch.o escape.o expand.o itoa.o itoaw.o itob.o
 _BIN = binsearch escape expand itoa itoaw itob
 
@@ -36,16 +34,16 @@ binsearch: $(ODIR)/binsearch.o
 
 # escape.c follows a different pattern because splint chokes with an
 # internal error on it and a messsage to report it as a bug to them.
-# I have submitted such a bug but, so far, to no effect. So we'll 
+# I have submitted such a bug but, so far, to no effect. So we'll
 # ignore linting on this one.
-escape:
-	$(CC) $(CFLAGS) escape.c -o $@
-	cp -v $@ $(BIN)/$@
-	rm -r escape.dSYM
+#escape:
+#	$(CC) $(CFLAGS) escape.c -o $@
+#	cp -v $@ $(BIN)/$@
+#	rm -r escape.dSYM
 
-#escape: $(ODIR)/escape.o
-#	$(CC) $(CFLAGS) $^ -o $@
-#	cp $@ $(BIN)/$@
+escape: $(ODIR)/escape.o
+	$(CC) $(CFLAGS) $^ -o $@
+	cp $@ $(BIN)/$@
 
 expand: $(ODIR)/expand.o
 	$(CC) $(CFLAGS) $^ -o $@

@@ -4,7 +4,11 @@
  * Tests an approach to converting uppercase characters to lowercase
  */
 
+// Includes
+
 #include <stdio.h>
+
+/* Main */
 
 int main(void) {
 

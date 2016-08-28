@@ -1,10 +1,16 @@
 /*
-* Array-based double-type (floating point) stack (last in, first out "LIFO")
-*/
+ * Array-based double-type (floating point) stack (last in, first out "LIFO")
+ */
+
+// Includes
 
 #include <stdio.h>
 
+// Definitions
+
 #define MAXSTACK 100 // Maximum depth of stack
+
+// Globals
 
 static size_t dstackptr = 0;    // Stack pointer--next free stack position
 static double dstack[MAXSTACK]; // Array-based stack of double-typed values
@@ -14,10 +20,10 @@ static double dstack[MAXSTACK]; // Array-based stack of double-typed values
  */
 
 void dapush(double val) {
-	if (dstackptr < MAXSTACK)
-		dstack[dstackptr++] = val;
-	else
-		printf("Stack is full\n");
+    if (dstackptr < MAXSTACK)
+        dstack[dstackptr++] = val;
+    else
+        printf("Stack is full\n");
 }
 
 /*
@@ -25,10 +31,10 @@ void dapush(double val) {
  */
 
 double dapop(void) {
-	if (dstackptr > 0)
-		return dstack[--dstackptr];
-	printf("Empty stack\n");
-	return 0.0L;
+    if (dstackptr > 0)
+        return dstack[--dstackptr];
+    printf("Empty stack\n");
+    return 0.0L;
 }
 
 /*
@@ -36,10 +42,10 @@ double dapop(void) {
  */
 
 double dapeek(void) {
-	if (dstackptr > 0)
-		return dstack[(dstackptr - 1)];
-	printf("Empty stack\n");
-	return 0.0L;
+    if (dstackptr > 0)
+        return dstack[(dstackptr - 1)];
+    printf("Empty stack\n");
+    return 0.0L;
 }
 
 /*
@@ -47,14 +53,14 @@ double dapeek(void) {
  */
 
 void dadup(void) {
-	if (dstackptr == 0)
-		printf("Empty stack\n");
-	else if (dstackptr == MAXSTACK)
-		printf("Stack is full\n");
-	else {
-		double temp = dstack[dstackptr - 1];
-		dstack[dstackptr++] = temp;
-	}
+    if (dstackptr == 0)
+        printf("Empty stack\n");
+    else if (dstackptr == MAXSTACK)
+        printf("Stack is full\n");
+    else {
+        double temp = dstack[dstackptr - 1];
+        dstack[dstackptr++] = temp;
+    }
 }
 
 /*
@@ -62,14 +68,14 @@ void dadup(void) {
  */
 
 void daswap(void) {
-	if (dstackptr < 2)
-		printf("Less than two items are on the stack\n");
-	else {
-		double temp;
-		temp = dstack[dstackptr - 1];
-		dstack[dstackptr - 1] = dstack[dstackptr - 2];
-		dstack[dstackptr - 2] = temp;
-	}
+    if (dstackptr < 2)
+        printf("Less than two items are on the stack\n");
+    else {
+        double temp;
+        temp = dstack[dstackptr - 1];
+        dstack[dstackptr - 1] = dstack[dstackptr - 2];
+        dstack[dstackptr - 2] = temp;
+    }
 
 }
 
@@ -78,17 +84,17 @@ void daswap(void) {
  */
 
 void dalist(void) {
-	size_t i;
-	for (i = 0; i < dstackptr; i++)
-		printf("%.8g\n", dstack[i]);
+    size_t i;
+    for (i = 0; i < dstackptr; i++)
+        printf("%.8g\n", dstack[i]);
 }
 
 /*
- * daclear(): Clears the stack 
+ * daclear(): Clears the stack
  */
 
 void daclear(void) {
-	dstackptr = 0;
+    dstackptr = 0;
 }
 
 /*
@@ -96,5 +102,5 @@ void daclear(void) {
  */
 
 size_t dasize(void) {
-	return dstackptr;
+    return dstackptr;
 }

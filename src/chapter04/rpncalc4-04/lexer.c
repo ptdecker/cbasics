@@ -1,12 +1,16 @@
 /*
-* lexer.c
-* 
-* A trivial lexer that gets and operator or operand from standard input
-*/
+ * lexer.c
+ *
+ * A trivial lexer that gets and operator or operand from standard input
+ */
+
+// Includes
 
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define NUMBER '0'
 
@@ -16,17 +20,16 @@ void capush(char);
 char capop(void);
 bool caempty(void);
 
-
 /* getch(): gets a character either from the buffer or from stdin if buffer is empty */
 
 static char getch(void) {
-	return (caempty()) ? (char)getchar() : capop();
+    return (caempty()) ? (char)getchar() : capop();
 }
 
 /* ungetch(): pushes a character onto the buffer */
 
 static void ungetch(char ch) {
-	capush(ch);
+    capush(ch);
 }
 
 /* getop(): gets the integer value of the next operator or numeric operand
@@ -37,49 +40,49 @@ static void ungetch(char ch) {
 
 char getop(char s[]) {
 
-	size_t i;
-	char   c;
+    size_t i;
+    char   c;
 
-	// Get next character eating whitespace in the process
+    // Get next character eating whitespace in the process
 
-	while ((s[0] = c = getch()) == ' ' || c == '\t')
-		; //Empty
+    while ((s[0] = c = getch()) == ' ' || c == '\t')
+        ; //Empty
 
-	s[1] = '\0';
-	i = 0;
+    s[1] = '\0';
+    i = 0;
 
-	// If the character is not part of a number (i.e. is an operator), return it
+    // If the character is not part of a number (i.e. is an operator), return it
 
-	if (!isdigit(c) && c != '.' &&  c != '-')
-		return c;
+    if (!isdigit(c) && c != '.' &&  c != '-')
+        return c;
 
-	// Otherwise, read in the full number
+    // Otherwise, read in the full number
 
-	// Handle a negative sign
-	// Look at next character to determine if '-' is a negative sign or
-	// if it is the subtraction operator instead
-	if (c == '-') {
-		if (isdigit(c = getch()) || c == '.')
-			s[++i] = c;
-		else {
-			if (c != (char)EOF)
-				ungetch(c);
-			return '-';
-		}
-	}
+    // Handle a negative sign
+    // Look at next character to determine if '-' is a negative sign or
+    // if it is the subtraction operator instead
+    if (c == '-') {
+        if (isdigit(c = getch()) || c == '.')
+            s[++i] = c;
+        else {
+            if (c != (char)EOF)
+                ungetch(c);
+            return '-';
+        }
+    }
 
-	// Read integer part
-	if (isdigit(c))
-		while (isdigit(s[++i] = c = getch()))
-			; // Empty
-	// Read fractional part
-	if (c == '.')
-		while (isdigit(s[++i] = c = getch()))
-			; // Empty
-	s[i] = '\0';
+    // Read integer part
+    if (isdigit(c))
+        while (isdigit(s[++i] = c = getch()))
+            ; // Empty
+    // Read fractional part
+    if (c == '.')
+        while (isdigit(s[++i] = c = getch()))
+            ; // Empty
+    s[i] = '\0';
 
-	if (c != (char)EOF)
-		ungetch(c);
+    if (c != (char)EOF)
+        ungetch(c);
 
-	return NUMBER;
+    return NUMBER;
 }

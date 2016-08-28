@@ -4,9 +4,13 @@
 
 /*@ -compdef */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+// Definitions
 
 #define TABSTOPINC 4    // Default tab size
 #define MAXLINE    250  // Maximum supported line length
@@ -67,7 +71,7 @@ static void entab(char *tab) {
 
         // when the next character is a space ...
         //     if we are at a tab stop then we do not need any spaces and
-        //     can use a tab; otherwise, will need a space.  Either way, 
+        //     can use a tab; otherwise, will need a space.  Either way,
         //     move on to the next character
 
         if (c == ' ') {
@@ -104,6 +108,8 @@ static void entab(char *tab) {
     }
 
 }
+
+/* Main */
 
 int main(int argc, char *argv[]) {
 

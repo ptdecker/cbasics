@@ -2,21 +2,22 @@
  * Perform rudimentary syntax checks on a C program
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
-// Comment states
+// Definitions
 
 #define NOCOMM 0  // Current character is not within a comment
 #define BLOCK  1  // Current character is within a block comment
 #define LINE   2  // Current character is within a line comment
 
-// Globals to track prior, current, and next characters
-// read from the input stream
+// Globals
 
-static char prior = '\0';
-static char current;
-static char next;
+static char prior = '\0';  // Prior character read from stream
+static char current;       // Current character
+static char next;          // Next character
 
 /*
  * eatchar()

@@ -2,18 +2,22 @@
  * strncmp.c
  */
 
+/*@ -shadow */
+
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
-#define MAXSTR 1000
+// Definitions
 
-/*@ -shadow */
+#define MAXSTR 1000
 
 /*
  * strncmp(): Compares the fist 'count' characters of 'source' string to 'dest' string.
  *
  * NOTE: A terminating '\0' *is not* appended!
- * 
+ *
  * NOTE: It is assumed that 'leftstring' is big enough to hold the combined text
  */
 
@@ -24,6 +28,7 @@ static int strncmp(char *s1, char *s2, size_t count) {
     return *s1 - *s2;
 }
 
+/* Main */
 
 int main(void) {
 

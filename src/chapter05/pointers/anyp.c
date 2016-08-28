@@ -5,8 +5,12 @@
  * If none of the characters in the other string are found, it returns '-1'.
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define NOTFOUND -1
 
@@ -25,6 +29,8 @@ static int any(char *s, char *c) {
     }
     return NOTFOUND;
 }
+
+/* Main */
 
 int main(void) {
 

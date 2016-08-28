@@ -4,6 +4,8 @@
  * Pointer version
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -45,8 +47,7 @@ static void squeeze(char *s, char *delete) {
     *squeezed = '\0';
 }
 
-
-
+/* Main */
 
 int main(void) {
 

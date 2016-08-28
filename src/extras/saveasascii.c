@@ -5,7 +5,11 @@
  *       requirements of linter (splint)
  */
 
+// Includes
+
 #include <stdio.h>
+
+/* Main */
 
 int main(void) {
 

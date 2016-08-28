@@ -1,8 +1,13 @@
-/*
- * Print a Fehrenheit to Celsius table
+/* Exercise 1-3: Print a Fehrenheit to Celsius table
+ *
+ * "Modify the temperature conversion program to print a heading above the table."
  */
 
+// Includes
+
 #include <stdio.h>
+
+/* Main */
 
 int main(void) {
 

@@ -1,9 +1,13 @@
-/*
- * Print Celsius-Fahrenheit table with headings
- * for fahr = 0, 20, ..., 300
+/* Exercise 1-4: Print Celsius-Fahrenheit table with headings for fahr = 0, 20, ..., 300
+ *
+ * Write a program to print the corresponding Celsius to Fahrenheit table.
  */
 
+// Includes
+
 #include <stdio.h>
+
+/* Main */
 
 int main(void) {
 

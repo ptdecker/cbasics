@@ -5,8 +5,14 @@
  * starting at position p, have been set to the right most bits in another value.
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
+
+/*
+ * setbits(): set bits
+ */
 
 static unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y) {
 
@@ -30,6 +36,8 @@ static void printbits(unsigned x) {
     for(i = (unsigned)(8 * sizeof(int)); i > 0; i--)
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
+
+/* Main */
 
 int main(void) {
 

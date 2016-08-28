@@ -2,7 +2,7 @@
  * Remove trailing blanks and tabs from each line of inputh (up to MAXLINE characters)
  */
 
-    
+
 // The following definition change is needed to allow the use of getline() in this
 // example without having to call it something else.
 // c.f. http://stackoverflow.com/questions/37474117/how-to-implement-custom-versions-of-the-getline-function-in-stdio-h-clang-os-x
@@ -10,7 +10,11 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <stdio.h>
+
+// Definitions
 
 #define MAXLINE 1000 // Note: MAXLINE includes terminating newline and null characters
 

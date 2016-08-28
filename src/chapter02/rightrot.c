@@ -8,6 +8,8 @@
  *       right most bit becomes the left most bit in the result.
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -56,6 +58,8 @@ static void printbits(unsigned x) {
     for(i = (unsigned)(8 * sizeof(int)); i > 0; i--)
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
+
+/* Main */
 
 int main(void) {
 

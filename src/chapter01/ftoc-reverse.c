@@ -1,12 +1,20 @@
-/*
- *  Print Fahrenheit-Celsius Table in Reverse
+/* Exercise 1-5: Print Fahrenheit-Celsius Table in Reverse
+ *
+ * "Modfiy the temperature conversion program to print the table in reverse
+ *  order, that is, from 300 degrees to 0."
  */
 
+// Includes
+
 #include <stdio.h>
+
+// Definitions
 
 #define LOWER   0  // lower limit of table
 #define UPPER 300  // upper limit
 #define STEP   20  // step size
+
+/* Main */
 
 int main(void) {
 

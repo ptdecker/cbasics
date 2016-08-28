@@ -2,10 +2,16 @@
  * Output one word per line
  */
 
+// Includes
+
 #include <stdio.h>
 
-#define IN  1  /* inside a word */
-#define OUT 0  /* outside a word */
+// Definitions
+
+#define IN  1  // inside a word
+#define OUT 0  // outside a word
+
+/* Main */
 
 int main(void) {
 

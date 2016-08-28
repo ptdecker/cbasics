@@ -2,9 +2,15 @@
  * Hexidecimal to integer converter (good to 32 bits)
  */
 
+// Includes
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+/*
+ * htoi(): Converts a hexadecimal string to an integer
+ */
 
 static unsigned int htoi(char s[]) {
 

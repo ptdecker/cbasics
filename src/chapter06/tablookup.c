@@ -1,23 +1,25 @@
 /*
-* tablookup(): Hash table look-up routines
-*/
+ * tablookup(): Hash table look-up routines
+ */
 
 /*@ -unqualifiedtrans -nullderef -mustfreefresh -onlytrans -kepttrans -nullret */
+
+// Includes
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Constant definitions
+// Definitions
 
 #define HASHSIZE 101
 
 // Structures
 
 struct nlist {
-	struct nlist *next;
-	char *name;
-	char *defn;
+    struct nlist *next;
+    char *name;
+    char *defn;
 };
 
 // Globals
@@ -30,15 +32,15 @@ static struct nlist *hashtab[HASHSIZE]; // Pointer table
 
 static char *mystrdup(char *s) {
 
-	char *p = (char *)malloc(strlen(s) + 1);
+    char *p = (char *)malloc(strlen(s) + 1);
 
-	if (p == NULL) {
-		printf("Error: ran out of memory");
-		exit(EXIT_FAILURE);
-	}
+    if (p == NULL) {
+        printf("Error: ran out of memory");
+        exit(EXIT_FAILURE);
+    }
 
-	strcpy(p, s);
-	return p;
+    strcpy(p, s);
+    return p;
 }
 
 /*
@@ -47,12 +49,12 @@ static char *mystrdup(char *s) {
 
 static unsigned hash(char *s) {
 
-	unsigned hashval;
+    unsigned hashval;
 
-	for (hashval = 0; *s != '\0'; s++)
-		hashval = *s + 31 * hashval;
+    for (hashval = 0; *s != '\0'; s++)
+        hashval = *s + 31 * hashval;
 
-	return hashval % HASHSIZE;
+    return hashval % HASHSIZE;
 }
 
 /*
@@ -61,13 +63,13 @@ static unsigned hash(char *s) {
 
 static struct nlist *lookup(char *s) {
 
-	struct nlist *np;
+    struct nlist *np;
 
-	for (np = hashtab[hash(s)]; np != NULL; np = np->next)
-		if (strcmp(s, np->name) == 0)
-			return np;  // Found
+    for (np = hashtab[hash(s)]; np != NULL; np = np->next)
+        if (strcmp(s, np->name) == 0)
+            return np;  // Found
 
-	return NULL; // Not found
+    return NULL; // Not found
 }
 
 /*
@@ -76,32 +78,32 @@ static struct nlist *lookup(char *s) {
 
 static struct nlist *install(char *name, char *defn) {
 
-	struct nlist *np;
+    struct nlist *np;
 
-	if ((np = lookup(name)) == NULL) {
+    if ((np = lookup(name)) == NULL) {
 
-		// Value not found in hash table so add it
+        // Value not found in hash table so add it
 
-		unsigned hashval;
+        unsigned hashval;
 
-		if ((np = (struct nlist *)malloc(sizeof(*np))) == NULL) {
-			printf("Error: ran out of memory");
-			exit(EXIT_FAILURE);
-		}
-		hashval  = hash(name);
-		np->name = mystrdup(name);
-		np->next = hashtab[hashval];
-		hashtab[hashval] = np;
+        if ((np = (struct nlist *)malloc(sizeof(*np))) == NULL) {
+            printf("Error: ran out of memory");
+            exit(EXIT_FAILURE);
+        }
+        hashval  = hash(name);
+        np->name = mystrdup(name);
+        np->next = hashtab[hashval];
+        hashtab[hashval] = np;
 
-	} else
+    } else
 
-		// Value found so free up the previous value (to be replaced with the new)
+        // Value found so free up the previous value (to be replaced with the new)
 
-		free((void *)np->defn);
+        free((void *)np->defn);
 
-	np->defn = mystrdup(defn);
+    np->defn = mystrdup(defn);
 
-	return np;
+    return np;
 }
 
 /*
@@ -110,29 +112,29 @@ static struct nlist *install(char *name, char *defn) {
 
 static void undef(char *s) {
 
-	unsigned h;
-	struct nlist *prior;
-	struct nlist *np;
+    unsigned h;
+    struct nlist *prior;
+    struct nlist *np;
 
-	prior = NULL;
-	h = hash(s);
+    prior = NULL;
+    h = hash(s);
 
-	for (np = hashtab[h]; np != NULL; np = np->next) {
-		if (strcmp(s, np->name) == 0)
-			break;
-		prior = np;
-	}
+    for (np = hashtab[h]; np != NULL; np = np->next) {
+        if (strcmp(s, np->name) == 0)
+            break;
+        prior = np;
+    }
 
-	if (np != NULL) {
-		if (prior == NULL)
-			hashtab[h] = np->next;
-		else
-			prior->next = np->next;
+    if (np != NULL) {
+        if (prior == NULL)
+            hashtab[h] = np->next;
+        else
+            prior->next = np->next;
 
-		free((void *)np->name);
-		free((void *)np->defn);
-		free((void *)np);
-	}
+        free((void *)np->name);
+        free((void *)np->defn);
+        free((void *)np);
+    }
 
 }
 
@@ -142,42 +144,42 @@ static void undef(char *s) {
 
 int main(void) {
 
-	struct nlist *np;
+    struct nlist *np;
 
-	printf("The hash value for 'P. Todd Decker' is: %u\n", hash("P. Todd Decker"));
-
-
-	printf("Installing some key-value pairs...\n");
-	(void)install("name",    "P. Todd Decker");
-	(void)install("street",  "15203 Maple Street");
-	(void)install("city",    "Overland Park");
-	(void)install("state",   "Kansas");
-	(void)install("zipcode", "66223");
-
-	np = lookup("name");
-	printf("Looking up 'name'   : %s\n", (np == NULL) ? "Not found" : np->defn);
-	np = lookup("street");
-	printf("Looking up 'street' : %s\n", (np == NULL) ? "Not found" : np->defn);
-	np = lookup("city");
-	printf("Looking up 'city'   : %s\n", (np == NULL) ? "Not found" : np->defn);
-	np = lookup("state");
-	printf("Looking up 'state'  : %s\n", (np == NULL) ? "Not found" : np->defn);
-	np = lookup("zipcode");
-	printf("Looking up 'zipcode': %s\n", (np == NULL) ? "Not found" : np->defn);
-	np = lookup("phone");
-	printf("Looking up 'phone'  : %s\n", (np == NULL) ? "Not found" : np->defn);
-
-	printf("Changing 'zipcode'...\n");
-	(void)install("zipcode", "64063");
-
-	np = lookup("zipcode");
-	printf("Looking up 'zipcode': %s\n", (np == NULL) ? "Not found" : np->defn);
-
-	printf("Uninstalling 'name'\n");
-	undef("name");
-	np = lookup("name");
-	printf("Looking up 'name': %s\n", (np == NULL) ? "Not found" : np->defn);
+    printf("The hash value for 'P. Todd Decker' is: %u\n", hash("P. Todd Decker"));
 
 
-	return 0;
+    printf("Installing some key-value pairs...\n");
+    (void)install("name",    "P. Todd Decker");
+    (void)install("street",  "15203 Maple Street");
+    (void)install("city",    "Overland Park");
+    (void)install("state",   "Kansas");
+    (void)install("zipcode", "66223");
+
+    np = lookup("name");
+    printf("Looking up 'name'   : %s\n", (np == NULL) ? "Not found" : np->defn);
+    np = lookup("street");
+    printf("Looking up 'street' : %s\n", (np == NULL) ? "Not found" : np->defn);
+    np = lookup("city");
+    printf("Looking up 'city'   : %s\n", (np == NULL) ? "Not found" : np->defn);
+    np = lookup("state");
+    printf("Looking up 'state'  : %s\n", (np == NULL) ? "Not found" : np->defn);
+    np = lookup("zipcode");
+    printf("Looking up 'zipcode': %s\n", (np == NULL) ? "Not found" : np->defn);
+    np = lookup("phone");
+    printf("Looking up 'phone'  : %s\n", (np == NULL) ? "Not found" : np->defn);
+
+    printf("Changing 'zipcode'...\n");
+    (void)install("zipcode", "64063");
+
+    np = lookup("zipcode");
+    printf("Looking up 'zipcode': %s\n", (np == NULL) ? "Not found" : np->defn);
+
+    printf("Uninstalling 'name'\n");
+    undef("name");
+    np = lookup("name");
+    printf("Looking up 'name': %s\n", (np == NULL) ? "Not found" : np->defn);
+
+
+    return 0;
 }

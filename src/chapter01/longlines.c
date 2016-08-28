@@ -9,10 +9,14 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <stdio.h>
 
-#define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
-#define BIGLINE 80   /* Defines the minimum size of a line that will be printed */
+// Definitions
+
+#define MAXLINE 10000 // Note: MAXLINE includes terminating newline and null characters
+#define BIGLINE 80    // Defines the minimum size of a line that will be printed
 
 /* getbigline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length

@@ -2,8 +2,12 @@
  * strncopy.c
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define MAXSTR 1000
 
@@ -11,7 +15,7 @@
  * strncopy(): Copies at most 'count' characters of 'source' string to 'dest' string.
  *
  * NOTE: A terminating '\0' *is not* appended!
- * 
+ *
  * NOTE: It is assumed that 'leftstring' is big enough to hold the combined text
  */
 
@@ -20,6 +24,7 @@ static void strncopy(char *dest, char *source, size_t count) {
         ; // Empty
 }
 
+/* Main */
 
 int main(void) {
 

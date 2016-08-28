@@ -1,6 +1,6 @@
 /*
-* Reverses input lines one at a time
-*/
+ * Reverses input lines one at a time
+ */
 
 // The following definition change is needed to allow the use of getline() in this
 // example without having to call it something else.
@@ -9,13 +9,17 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <stdio.h>
+
+// Definitions
 
 #define MAXLINE 10000 /* Note: MAXLINE includes terminating newline and null characters */
 
 /*
-* swap macro: swaps two values of a specified type
-*/
+ * swap macro: swaps two values of a specified type
+ */
 
 #define swap(t, x, y) \
     {                 \
@@ -24,7 +28,7 @@
         x = y;        \
         y = _temp;    \
     }
-    
+
 
 /* getbigline: read an aribitrarily long line placing as much as
  * possible into 's' and returning the full length

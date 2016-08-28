@@ -125,7 +125,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
 * 6-01 - getword.c:  Gets next key word or character handling underscore, string constants, comments, and preprocessor control lines
 * 6-02 - getvars.c:  Prints variable names in a C program that are identical in the first 'X' characters (6 by default)
 * 6-03 - wordxref.c:  Cross-references words from stdin by line number excluding stop words
-* 6-04 - wordfreq.c:  Lists all the distinct words from stdin listed in decreasing frequency 
+* 6-04 - wordfreq.c:  Lists all the distinct words from stdin listed in decreasing frequency
 * 6-05 - tablookup.c:  Implements a hash table based table look-up set of functions
 * 6-06 - define.c:  Simple '#define' pre-processor
 
@@ -149,7 +149,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * stdiobits.c:  Test program that excercises 'minstdio0'. Compare timings and size with 'minstdiotest.c'.   Execution time in ticks is returned as the exit status (view with 'echo $?' after running).
   * minstdio0.h:  Header for a minimal implementation of some 'stdio' library functions using bit fields
   * minstdio0.c:  Minimal implementation of some 'stdio' library functions using bit fields
-* 8-03 - minstdiotest.c  Implements _flushbuf(), fflush(), and fclose().
+* 8-03 Implements _flushbuf(), fflush(), and fclose().
   * minstdiotest.c:  Test program that excercises 'minstdio'. Execution time in ticks is returned as the exit status (view with 'echo $?' after running).
   * minstdio.h:  Header for a minimal implementation of some 'stdio' library functions bit functions
   * minstdio.c:  Minimal implementation of some 'stdio' library functions using bit functions
@@ -159,7 +159,7 @@ Kernighan and Ritchie The C Programming Language Code Examples
   * minstdio1.c:  Minimal implementation of 'stdio' library inlcuding the addition of fseek()
 * 8-05 - fileinfo.c:  Returns information (name, last modified, size) of files in a directory recursing down the directory chain
 * 8-06 - calloc.c:  A minimal implimentation of malloc() and free() plus a version of calloc()
-* 8-07 - malloc2.c:  Adds some error checking to malloc() routines
+* 8-07 - calloc2.c:  Adds some error checking to malloc() routines
 * 8-08 - bfree.c:  Adds bfree() to malloc()
 
 ##Extras

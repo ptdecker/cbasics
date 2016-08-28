@@ -1,5 +1,6 @@
-/*
- * fileinfo():  return size and last modified date of files in a directory recursing through the directories
+/* Exercise 8-05:  return size and last modified date of files in a directory recursing through the directories
+ *
+ * "Modify the fsize program to print the other information contained in the inode entry."
  */
 
 // NOTE: K&R implements custom versions of opendir(), readdir(), and closedir().  At this point, I'm to lazy to
@@ -7,6 +8,8 @@
 //       an exercise to future students.  :-)
 
 /*@ -modobserver */
+
+// Includes
 
 #include <dirent.h>     // for opendir(), readdir(), and closedir()
 #include <limits.h>     // for PATH_MAX
@@ -22,29 +25,29 @@
 
 static void dirwalk(char *dir, void (*fcn)(char *)) {
 
-	char name[PATH_MAX];
-	struct dirent *dp;
-	DIR *dfd;
+    char name[PATH_MAX];
+    struct dirent *dp;
+    DIR *dfd;
 
-	if ((dfd = opendir(dir)) == NULL) {
-		fprintf(stderr, "dirwalk: cannot open %s\n", dir);
-		return;
-	}
+    if ((dfd = opendir(dir)) == NULL) {
+        fprintf(stderr, "dirwalk: cannot open %s\n", dir);
+        return;
+    }
 
-	while ((dp = readdir(dfd)) != NULL) {
+    while ((dp = readdir(dfd)) != NULL) {
 
-		if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0 || dp->d_name[0] == '.')
-			continue;
+        if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0 || dp->d_name[0] == '.')
+            continue;
 
-		if (strlen(dir) + strlen(dp->d_name) + 2 > sizeof(name))
-			fprintf(stderr, "dirwalk: name %s/%s too long\n", dir, dp->d_name);
-		else {
-			(void)snprintf(name, PATH_MAX, "%s/%s", dir, dp->d_name);
-			(*fcn)(name);
-		}
-	}
+        if (strlen(dir) + strlen(dp->d_name) + 2 > sizeof(name))
+            fprintf(stderr, "dirwalk: name %s/%s too long\n", dir, dp->d_name);
+        else {
+            (void)snprintf(name, PATH_MAX, "%s/%s", dir, dp->d_name);
+            (*fcn)(name);
+        }
+    }
 
-	(void)closedir(dfd);
+    (void)closedir(dfd);
 }
 
 /*
@@ -53,36 +56,34 @@ static void dirwalk(char *dir, void (*fcn)(char *)) {
 
 static void finfo(char *name) {
 
-	struct stat stbuf;
-	time_t filetime;
-	char *timestr;
+    struct stat stbuf;
+    time_t filetime;
+    char *timestr;
 
-	if (stat(name, &stbuf) == -1) {
-		fprintf(stderr, "finfo: cannot access %s\n", name);
-		return;
-	}
+    if (stat(name, &stbuf) == -1) {
+        fprintf(stderr, "finfo: cannot access %s\n", name);
+        return;
+    }
 
-	if ((stbuf.st_mode & S_IFMT) == S_IFDIR)
-		dirwalk(name, finfo);
+    if ((stbuf.st_mode & S_IFMT) == S_IFDIR)
+        dirwalk(name, finfo);
 
-	filetime = stbuf.st_mtime;
-	timestr = ctime(&filetime);
-	timestr[strlen(timestr)-1] = '\0'; // erase terminating '\n' that ctime() auto adds
+    filetime = stbuf.st_mtime;
+    timestr = ctime(&filetime);
+    timestr[strlen(timestr)-1] = '\0'; // erase terminating '\n' that ctime() auto adds
 
-	printf("%8lld %s (modified %s)\n", (long long)stbuf.st_size, name, timestr);
+    printf("%8lld %s (modified %s)\n", (long long)stbuf.st_size, name, timestr);
 }
 
-/*
- * main
- */
+/* Main */
 
 int main(int argc, char **argv) {
 
-	if (argc == 1)
-		finfo(".");
-	else
-		while (--argc > 0)
-			finfo(*++argv);
+    if (argc == 1)
+        finfo(".");
+    else
+        while (--argc > 0)
+            finfo(*++argv);
 
-	exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }

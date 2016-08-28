@@ -4,15 +4,21 @@
  * Utilizes a finite state machine to count words
  */
 
+// Includes
+
 #include <stdbool.h>
 #include <stdio.h>
 
-#define MAXLEN   18  /* maximum word length to keep track of */
-#define MAXBAR   60  /* maximum bar width */
-#define NONWORD   0  /* "not in a word" state */
-#define COUNTLTR  1  /* counting letters in a word state */
-#define COUNTWRD  2  /* counting word lengths state */
-#define CONTRACT  3  /* handling a contraction state */
+// Definitions
+
+#define MAXLEN   18  // maximum word length to keep track of
+#define MAXBAR   60  // maximum bar width
+#define NONWORD   0  // "not in a word" state
+#define COUNTLTR  1  // counting letters in a word state
+#define COUNTWRD  2  // counting word lengths state
+#define CONTRACT  3  // handling a contraction state
+
+/* Main */
 
 int main(void) {
 
@@ -25,7 +31,7 @@ int main(void) {
     int    max   = 0;
     int    scale = 1;
     int    nlen[MAXLEN];
- 
+
     for (i = 0; i < MAXLEN; ++i)
         nlen[i] = 0;
 

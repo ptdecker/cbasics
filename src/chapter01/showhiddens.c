@@ -2,7 +2,11 @@
  * Show tabs, backspaces, and backslashes
  */
 
+// Includes
+
 #include <stdio.h>
+
+/* Main */
 
 int main(void) {
 

@@ -1,8 +1,8 @@
 /*
-*  dcl(): parses a C-style declartion
-*/
+ *  dcl(): parses a C-style declartion
+ */
 
-// Library inclusions
+// Includes
 
 #include <ctype.h>
 #include <stdbool.h>
@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Definitinos
+// Definitions
 
 #define MAXOUTSTR 1000  // Maximum output string
 #define MAXSTACK    10  // Maximum characters parser can undo
@@ -34,7 +34,7 @@ static bool   prevtoken = false;  // Indicates if there is a previous token
  */
 
 static int getch(void) {
-	return (bufferptr > 0) ? (int)buffer[--bufferptr] : getchar();
+    return (bufferptr > 0) ? (int)buffer[--bufferptr] : getchar();
 }
 
 /*
@@ -43,12 +43,12 @@ static int getch(void) {
 
 static void ungetch(int c) {
 
-	if (bufferptr >= MAXSTACK) {
-		printf("ungetch(): buffer overflow\n");
-		exit(EXIT_FAILURE);
-	}
-	
-	buffer[bufferptr++] = (char)c;
+    if (bufferptr >= MAXSTACK) {
+        printf("ungetch(): buffer overflow\n");
+        exit(EXIT_FAILURE);
+    }
+
+    buffer[bufferptr++] = (char)c;
 }
 
 /*
@@ -57,62 +57,62 @@ static void ungetch(int c) {
 
 static int gettoken(void) {
 
-	int   c;
-	char *p = token;
+    int   c;
+    char *p = token;
 
-	// Recover from error by returning prior token
+    // Recover from error by returning prior token
 
-	if (prevtoken) {
-		prevtoken = false;
-		return tokentype;
-	}
+    if (prevtoken) {
+        prevtoken = false;
+        return tokentype;
+    }
 
-	// Eat white space
+    // Eat white space
 
-	while ((c = getch()) == ' ' || c == '\t')
-		;
+    while ((c = getch()) == ' ' || c == '\t')
+        ;
 
-	// If character is and open parentheses '(' then handle parentheses
+    // If character is and open parentheses '(' then handle parentheses
 
-	if (c == '(') {
+    if (c == '(') {
 
-		// Check and see if we have a close parentheses ')'
+        // Check and see if we have a close parentheses ')'
 
-		if ((c = getch()) == ')') {
-			strcpy(token, "()");
-			return (tokentype = PARENS);
-		}
-		
-		ungetch(c);
-		return (tokentype = '(');
-	}
+        if ((c = getch()) == ')') {
+            strcpy(token, "()");
+            return (tokentype = PARENS);
+        }
 
-	// If character is an open bracket '[' then handle brackets
+        ungetch(c);
+        return (tokentype = '(');
+    }
 
-	if (c == '[') {
+    // If character is an open bracket '[' then handle brackets
 
-		// Copy characters from input to output until a closed bracket is reached
-		for (*p++ = c; (*p++ = getch()) != ']'; )
-			;
-		*p = '\0';
+    if (c == '[') {
 
-		return (tokentype = BRACKETS);
-	}
-	
-	// If character is an alphanumeric character
+        // Copy characters from input to output until a closed bracket is reached
+        for (*p++ = c; (*p++ = getch()) != ']'; )
+            ;
+        *p = '\0';
 
-	if (isalpha(c)) {
+        return (tokentype = BRACKETS);
+    }
 
-		// Copy characters while we have letters and numbers
-		for (*p++ = c; isalnum(c = getch()); )
-			*p++ = c;
-		*p = '\0';
+    // If character is an alphanumeric character
 
-		ungetch(c);
-		return (tokentype = NAME);
-	}
+    if (isalpha(c)) {
 
-	return (tokentype = c);
+        // Copy characters while we have letters and numbers
+        for (*p++ = c; isalnum(c = getch()); )
+            *p++ = c;
+        *p = '\0';
+
+        ungetch(c);
+        return (tokentype = NAME);
+    }
+
+    return (tokentype = c);
 }
 
 /*
@@ -121,12 +121,12 @@ static int gettoken(void) {
 
 static int nexttoken(void) {
 
-	int type;
+    int type;
 
-	type = gettoken();
-	prevtoken = true;
+    type = gettoken();
+    prevtoken = true;
 
-	return type;
+    return type;
 }
 
 /*
@@ -135,27 +135,27 @@ static int nexttoken(void) {
 
 int main(void) {
 
-	int type;
-	char temp[MAXTOKEN];
+    int type;
+    char temp[MAXTOKEN];
 
-	while (gettoken() != EOF) {
-		strcpy(out, token);
-		while ((type = gettoken()) != '\n')
-			if (type == PARENS || type == BRACKETS)
-				strcat(out, token);
-			else if (type == '*') {
-				if ((type = nexttoken()) == PARENS || type == BRACKETS)
-					(void)snprintf(temp, MAXTOKEN, "(*%s)", out);
-				else
-					(void)snprintf(temp, MAXTOKEN, "*%s", out);
-				strcpy(out, temp);
-			} else if (type == NAME) {
-				(void)snprintf(temp, MAXTOKEN, "%s %s", token, out);
-				strcpy(out, temp);
-			} else
-				printf("invalid input at %s\n", token);
-		printf("%s\n", out);
-	}
+    while (gettoken() != EOF) {
+        strcpy(out, token);
+        while ((type = gettoken()) != '\n')
+            if (type == PARENS || type == BRACKETS)
+                strcat(out, token);
+            else if (type == '*') {
+                if ((type = nexttoken()) == PARENS || type == BRACKETS)
+                    (void)snprintf(temp, MAXTOKEN, "(*%s)", out);
+                else
+                    (void)snprintf(temp, MAXTOKEN, "*%s", out);
+                strcpy(out, temp);
+            } else if (type == NAME) {
+                (void)snprintf(temp, MAXTOKEN, "%s %s", token, out);
+                strcpy(out, temp);
+            } else
+                printf("invalid input at %s\n", token);
+        printf("%s\n", out);
+    }
 
     return 0;
 }

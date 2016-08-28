@@ -1,3 +1,7 @@
+/*
+ * Header for a minimal implementation of the 'stdio' standard C library
+ */
+
 // NOTE: For information on OS X (OS X 10.11.6) versions of <fcntl.h> and <unistd.h> see:
 //           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/unistd.h
 //           - http://opensource.apple.com/source/xnu/xnu-3248.60.10/bsd/sys/fcntl.h
@@ -7,11 +11,14 @@
 
 /*@ -incondefs -type -mutrep */
 
+// Includes
+
 #include <fcntl.h>
 #include <stdlib.h> // form malloc, free
 #include <unistd.h> // equivalent to (K&R) #include "syscalls.h"
 
-//# define NULL 0      // Not required--defiend in unistd.h
+// Definitions
+
 #define EOF      (-1)  // End-of-file indicator
 #define BUFSIZ   1024  // Buffer size
 #define OPEN_MAX 20    // Maximum number of files open at once

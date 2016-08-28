@@ -1,8 +1,8 @@
 /*
-* lexer.c
-* 
-* A trivial lexer that gets and operator or operand from standard input
-*/
+ * lexer.c
+ *
+ * A trivial lexer that gets and operator or operand from standard input
+ */
 
 // The following definition change is needed to allow the use of getline() in this
 // example without having to call it something else.
@@ -11,15 +11,21 @@
 #undef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 
+// Includes
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
+// Definitions
+
 #define NUMBER  '0'
 #define NAME    'n'
 #define ERROR   '~'
 #define MAXLINE 1000
+
+// Globals
 
 static char   line[MAXLINE] = "";
 static char  *lineindex = line;
@@ -30,18 +36,18 @@ static char  *lineindex = line;
 
 static size_t getline(char s[], int maxlen) {
 
-	int    c;
-	size_t i = 0;
+    int    c;
+    size_t i = 0;
 
-	while (--maxlen > 0 && (c = getchar()) != EOF && c != '\n')
-		s[i++] = (char)c;
+    while (--maxlen > 0 && (c = getchar()) != EOF && c != '\n')
+        s[i++] = (char)c;
 
-	if (c == (int)'\n')
-		s[i++] = (char)c;
+    if (c == (int)'\n')
+        s[i++] = (char)c;
 
-	s[i] = '\0';
+    s[i] = '\0';
 
-	return i;
+    return i;
 }
 
 /* getop(): gets the integer value of the next operator or numeric operand
@@ -52,51 +58,51 @@ static size_t getline(char s[], int maxlen) {
 
 char getop(char s[], double *val) {
 
-	char token[MAXLINE] = "";
-	char *t = token;
+    char token[MAXLINE] = "";
+    char *t = token;
 
-	// Get a line (if needed)
+    // Get a line (if needed)
 
-	if (*lineindex == '\0') {
-		if (getline(line, MAXLINE) == 0)
-			return EOF;
-		else
-			lineindex = line;
-	}
+    if (*lineindex == '\0') {
+        if (getline(line, MAXLINE) == 0)
+            return EOF;
+        else
+            lineindex = line;
+    }
 
-	// Eat leading white space
+    // Eat leading white space
 
-	while (isspace(*lineindex))
-		lineindex++;
+    while (isspace(*lineindex))
+        lineindex++;
 
-	// Get next token from the line
+    // Get next token from the line
 
-	while (*lineindex != '\0' && !isspace(*lineindex)) {
-		*t++ = *lineindex++;
-	}
-	*t = '\0';
+    while (*lineindex != '\0' && !isspace(*lineindex)) {
+        *t++ = *lineindex++;
+    }
+    *t = '\0';
 
-	// End of line??
+    // End of line??
 
-	if (*token == '\n' || *token == '\0')
-		return '\n';
+    if (*token == '\n' || *token == '\0')
+        return '\n';
 
-	// Try to read in a number from the token.  If successful, return the value and a NUMBER token
+    // Try to read in a number from the token.  If successful, return the value and a NUMBER token
 
-	if (sscanf(token, " %lf", val) == 1)
-		return NUMBER;
+    if (sscanf(token, " %lf", val) == 1)
+        return NUMBER;
 
-	// Reading a number failed, try to read a string ... if it is a single character, return it; 
-	// otherwise, return a NAME token
+    // Reading a number failed, try to read a string ... if it is a single character, return it;
+    // otherwise, return a NAME token
 
-	if (sscanf(token, " %s", s) == 1) {
-		if (strlen(s) > 1)
-			return NAME;
-		else
-			return s[0];
-	}
+    if (sscanf(token, " %s", s) == 1) {
+        if (strlen(s) > 1)
+            return NAME;
+        else
+            return s[0];
+    }
 
-	// Otherwise error out
+    // Otherwise error out
 
-	return ERROR;
+    return ERROR;
 }

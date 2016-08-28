@@ -1,6 +1,12 @@
+// Includes
+
 #include <stdio.h>
 
+// Definitions
+
 #define BIGSIZE 3000
+
+/* Main */
 
 int main(void) {
 
@@ -11,7 +17,7 @@ int main(void) {
 
     (void)putchar('\n');
 
-	return 0;
+    return 0;
 }
 
 

@@ -31,26 +31,30 @@
  *
  *      Let's try a negative number of -532.  532 is '0x0000001000010100'.  It's negative value in two's
  *      complement is 0x1111110111101100'. Therefore:
- *      
+ *
  *                    x: 0b1111110111101100 (-532)
  *                x - 1: 0b1111110111101011 (-533)
  *                       ------------------
  *          x & (x - 1): 0b1111110111101000
  *
  *       Which has also deleted the right most bit of 'x'
- * 
+ *
  */
+
+// Includes
 
 #include <stdbool.h>
 #include <stdio.h>
+
+// Definitions
 
 #define FAST 1  // Comment out to compile the slow version
 
 /*
  * bitcount(): Returns the number of 1 bits in the integer 'x'
  *
- * NOTE: The slower version is included for comparision. In the worst case 
- *       condition where all bits of 'x' are one, the fast version will 
+ * NOTE: The slower version is included for comparision. In the worst case
+ *       condition where all bits of 'x' are one, the fast version will
  *       take the same amount of time as the slow version. In all other
  *       cases, it will take less for it only requires as many iterations
  *       as are bits where as the slow version requires as many shifts as
@@ -92,6 +96,8 @@ static void printbits(unsigned x) {
     for(i = (unsigned)(8 * sizeof(int)); i > 0; i--)
         (bool)(x & (1 << (i - 1))) ? putchar('1') : putchar('0');
 }
+
+/* Main */
 
 int main(void) {
 
