@@ -8,6 +8,10 @@ the book.
 
 Kernighan and Ritchie The C Programming Language Code Examples
 
+### Cross-Platform Testing
+
+So far, the code in this repository has only been complied and tested on Apple OS X El Capitan v10.11 using the clang compiler [Apple LLVM version 7.3.0 (clang-703.0.31)].  Additionally, I utilized the 'splint' linter (v3.1.2).  If you want to compile these without splint, the Makefiles will need to be modified accordingly.
+
 ### Chapter 1 - "A Tutorial Introduction"
 
 * 1-01 - helloworld.c:  Hello World
@@ -216,7 +220,7 @@ These solutions are copyright under the terms of the GNU GENERAL PUBLIC LICENSE 
 
 * While not at all specified by the exercises, in the extras is included an implementation of the word cross-reference program from exercise 6-03 that also stems the words.  It utilizes an imlementation of a Porter stemmer created by Martin Porter. As stated on his web site, the implementations provided on his site are free of charge (freeware).
 
-* The code used to implement the 'strlen()' function in selected exercises, including but possibly not limited to: itoa.c, itoaw.c, and itob.c are highly based upon the P.J. Plauger's wonderful work "The Standard C Library".  As such, per the terms outlined in the preface of this work (p. xii), I include the following verbiage:  "Portions of this work are derived from The Standard C Library, copyright (c) 1992 by P.J. Plauger, published by Prentice-Hall, and are used with permission."
+* Initially, I included an implementation of the 'strlen()' function in selected exercises, including but possibly not limited to: itoa.c, itoaw.c, and itob.c are highly based upon the P.J. Plauger's wonderful work "The Standard C Library".  As such, per the terms outlined in the preface of this work (p. xii), I include the following verbiage:  "Portions of this work are derived from The Standard C Library, copyright (c) 1992 by P.J. Plauger, published by Prentice-Hall, and are used with permission."  However, I have since modified these programs to use the strlen from the standard library.
 
 * In addition, some of the solutions presented draw from Tondo and Gimpel's most helpful "The C Answer Book." In several cases, I worked out my own solutions then found better optimizations and cleaner ways of handling things based upon Tondo and Gimpel's work. This work is a bit dated and even in the places where their solutions were drawn from the code presented here has been updated closer to the c99 standard. In addition, many suggestions driven by the 'splint' linter have been incorporated causing further shift away from "The C Answer Book." THe Tondo and Gimple book I drew from has a copyright of 1989. I have not researched if it has been renewed or expired.
 
