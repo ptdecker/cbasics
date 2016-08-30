@@ -32,15 +32,6 @@ binsearch: $(ODIR)/binsearch.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp $@ $(BIN)/$@
 
-# escape.c follows a different pattern because splint chokes with an
-# internal error on it and a messsage to report it as a bug to them.
-# I have submitted such a bug but, so far, to no effect. So we'll
-# ignore linting on this one.
-#escape:
-#	$(CC) $(CFLAGS) escape.c -o $@
-#	cp -v $@ $(BIN)/$@
-#	rm -r escape.dSYM
-
 escape: $(ODIR)/escape.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp $@ $(BIN)/$@

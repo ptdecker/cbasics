@@ -28,41 +28,41 @@ clean:
 		make clean; \
 		cd ..; \
 	done
-	rm -rv $(ODIR) $(_BIN)
+	rm -r $(ODIR) $(_BIN)
 
 atof: $(ODIR)/atof.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 itoarecursive: $(ODIR)/itoarecursive.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 reverserecursive: $(ODIR)/reverserecursive.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 singlegetch: $(ODIR)/singlegetch.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 strrindex: $(ODIR)/strrindex.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 swapmacro: $(ODIR)/swapmacro.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 ungets: $(ODIR)/ungets.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 ungetseof: $(ODIR)/ungetseof.o
 	$(CC) $(CFLAGS) $^ -o $@
-	cp -v $@ $(BIN)/$@
+	cp $@ $(BIN)/$@
 
 $(ODIR)/%.o: %.c $(DEPS)
-	mkdir -pv $(ODIR)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(LINT) $(LINTFLAGS) $<

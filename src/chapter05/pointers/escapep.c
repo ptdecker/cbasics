@@ -1,5 +1,5 @@
 /*
- * escape.c
+ * escapep.c
  *
  * Pointer version
  *
@@ -114,9 +114,10 @@ static void unescape(char *source, char *target) {
 
 int main(void) {
 
-    char teststr1[100] = "This is a test string of special characters: \\a, \\b, \\f, \\n, \\r, \\t, \\v, \\', \\\", \\?";
-    char teststr2[100];
-    char teststr3[100];
+    // NOTE: \x5C\x22 is used below to avoid a known bug in splint where it chokes on \\\"
+    char teststr1[100] = "This is a test string of special characters: \\a, \\b, \\f, \\n, \\r, \\t, \\v, \\', \x5C\x22, \\?";
+    char teststr2[100] = "";
+    char teststr3[100] = "";
 
     unescape(teststr1, teststr2);
     escape(teststr2, teststr3);

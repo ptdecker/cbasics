@@ -1,6 +1,6 @@
 BIN = ../../../bin
 ODIR = obj
-SUBDIRS = 
+SUBDIRS =
 CC = cc
 CFLAGS = -std=c99 -Wall -g -I.
 LINT = splint
@@ -42,13 +42,8 @@ cleantrailsnblanksp: $(ODIR)/cleantrailsnblanksp.o
 	$(CC) $(CFLAGS) $^ -o $@
 	cp $@ $(BIN)/$@
 
-# escape.c follows a different pattern because splint chokes with an
-# internal error on it and a messsage to report it as a bug to them.
-# I have submitted such a bug but, so far, to no effect. So we'll 
-# ignore linting on this one.
-escapep:
-	$(CC) $(CFLAGS) escapep.c -o $@
-	rm -r escapep.dSYM
+escapep: $(ODIR)/escapep.o
+	$(CC) $(CFLAGS) $^ -o $@
 	cp $@ $(BIN)/$@
 
 expandp: $(ODIR)/expandp.o
