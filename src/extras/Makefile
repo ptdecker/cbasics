@@ -41,7 +41,7 @@ makebigline: $(ODIR)/makebigline.o
 	cp $@ $(BIN)/$@
 
 points: $(ODIR)/points.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lm
 	cp $@ $(BIN)/$@
 
 porterstem: $(ODIR)/porterstem.o

@@ -28,7 +28,7 @@ clean:
 	rm -r $(ODIR) $(_BIN)
 
 rpncalc5: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(LINT) $(LINTFLAGS) $@.c
 	cp $@ $(BIN)/$@
 
