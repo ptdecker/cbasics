@@ -49,7 +49,7 @@ void free(void *ap) {
     Header *p;
 
 #ifdef DEBUG
-    fprintf(stderr, "free(): freeing up allocated memory at %x\n", (unsigned int)ap);
+    fprintf(stderr, "free(): freeing up allocated memory at %px\n", ap);
 #endif
 
     // Point to block header
@@ -180,18 +180,18 @@ int main(void) {
     void *memptr;
 
     memptr = malloc(1024);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     if (memptr != NULL)
         free(memptr);
 
     memptr = calloc(5, sizeof(double));
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     if (memptr != NULL)
         free(memptr);
 
     // This next allocation should push us over the limit
     memptr = calloc(1024, 1024);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     if (memptr != NULL)
         free(memptr);
 

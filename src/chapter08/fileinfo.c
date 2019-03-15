@@ -19,6 +19,10 @@
 #include <sys/stat.h>   // for stat()
 #include <time.h>
 
+#ifndef PATH_MAX
+#define PATH_MAX (4*1024)
+#endif
+
 /*
  * dirwalk:  apply fcn to all files in a directory
  */
@@ -65,7 +69,7 @@ static void finfo(char *name) {
         return;
     }
 
-    if ((stbuf.st_mode & S_IFMT) == S_IFDIR)
+    if (S_ISDIR(stbuf.st_mode))
         dirwalk(name, finfo);
 
     filetime = stbuf.st_mtime;
