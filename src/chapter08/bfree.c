@@ -15,6 +15,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <fcntl.h>
+
+#define __USE_XOPEN_EXTENDED
 #include <unistd.h> // equivalent to (K&R) #include "syscalls.h"
 
 // Definitions
@@ -51,7 +53,7 @@ void free(void *ap) {
     Header *p;
 
 #ifdef DEBUG
-    fprintf(stderr, "free(): freeing up allocated memory at %x\n", (unsigned int)ap);
+    fprintf(stderr, "free(): freeing up allocated memory at %px\n", ap);
 #endif
 
     // Bail of there is nothing to return
@@ -203,7 +205,7 @@ unsigned long bfree(char *p, unsigned long n) {
     Header *hp;
 
 #ifdef DEBUG
-    fprintf(stderr, "bfree(): attempting to free block at %x of %lu bytes\n", (unsigned int)p, n);
+    fprintf(stderr, "bfree(): attempting to free block at %px of %lu bytes\n", p, n);
 #endif
 
     if (n < sizeof(Header))
@@ -227,16 +229,16 @@ int main(void) {
     fprintf(stderr, "%s\n", "hello");
 
     memptr = malloc(10);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
     memptr = calloc(5, sizeof(double));
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
     // This next allocation should push us over the limit
     memptr = calloc(10, 128);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
     // Test bfree()

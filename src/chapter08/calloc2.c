@@ -15,6 +15,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <fcntl.h>
+
+#define __USE_XOPEN_EXTENDED
 #include <unistd.h> // equivalent to (K&R) #include "syscalls.h"
 
 // Definitions
@@ -51,7 +53,7 @@ void free(void *ap) {
     Header *p;
 
 #ifdef DEBUG
-    fprintf(stderr, "free(): freeing up allocated memory at %x\n", (unsigned int)ap);
+    fprintf(stderr, "free(): freeing up allocated memory at %px\n", ap);
 #endif
 
     // Bail of there is nothing to return
@@ -201,16 +203,16 @@ int main(void) {
     void *memptr;
 
     memptr = malloc(10);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
     memptr = calloc(5, sizeof(double));
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
     // This next allocation should push us over the limit
     memptr = calloc(1024, 1024);
-    fprintf(stdout, "main(): memory allocated at %x\n", (unsigned int)memptr);
+    fprintf(stdout, "main(): memory allocated at %px\n", memptr);
     free(memptr);
 
 }

@@ -28,7 +28,7 @@ clean:
 	rm -r $(ODIR) $(_BIN)
 
 scancalc: $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(LINT) $(LINTFLAGS) $@.c
 	cp $@ $(BIN)/$@
 

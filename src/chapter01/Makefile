@@ -75,7 +75,7 @@ eofvalue: $(ODIR)/eofvalue.o
 escapechars:
 	$(CC) -std=c99 -w -g -I. escapechars.c -o $@
 	cp $@ $(BIN)/$@
-	rm -r escapechars.dSYM
+	rm -f -r escapechars.dSYM
 
 fold: $(ODIR)/fold.o
 	$(CC) $(CFLAGS) $^ -o $@
